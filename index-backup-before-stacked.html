@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JA — Evolúcia vedomia | Lukáš Horák</title>
+    <meta name="description" content="Evolúcia vedomia — JA. Prelomový pohľad na ľudské vedomie. Bestseller od Lukáša Horáka. 336 strán. Objednaj s doručením.">
+    <meta property="og:title" content="JA — Evolúcia vedomia">
+    <meta property="og:description" content="Kniha, ktorá mení spôsob, akým vnímáš seba samého.">
+    <meta property="og:image" content="images/book-cover.jpg">
+    <meta property="og:type" content="website">
+    <!--
+        FONT: PP Mori (Pangram Pangram)
+        Súbory .ttf v priečinku fonts/
+    -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* ========================================
+           PP MORI FONT FACES
+           Vlož .woff2 súbory do priečinka fonts/
+           ======================================== */
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-Extralight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-ExtralightItalic.ttf') format('truetype');
+            font-weight: 200;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-Book.ttf') format('truetype');
+            font-weight: 350;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-BookItalic.ttf') format('truetype');
+            font-weight: 350;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-RegularItalic.ttf') format('truetype');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-SemiBoldItalic.ttf') format('truetype');
+            font-weight: 600;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-ExtraBold.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-ExtraBoldItalic.ttf') format('truetype');
+            font-weight: 800;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #FAF9F7;
+            --bg-warm: #F5F3EF;
+            --text: #1A1A1A;
+            --text-light: #6B6B6B;
+            --text-muted: #999999;
+            --accent: #667EEA;
+            --accent-dark: #5A67D8;
+            --gold: #667EEA;
+            --border: #E8E4DE;
+            --white: #FFFFFF;
+            --serif: 'PP Mori', -apple-system, BlinkMacSystemFont, sans-serif;
+            --sans: 'PP Mori', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--sans);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+        .heading-xl {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 200;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .heading-lg {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            font-weight: 200;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .heading-md {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .heading-sm {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .body-lg {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .body-md {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-light);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 8rem 0;
+        }
+
+        .section-lg {
+            padding: 10rem 0;
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.25s; }
+        .fade-in-delay-3 { transition-delay: 0.4s; }
+        .fade-in-delay-4 { transition-delay: 0.55s; }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(250, 249, 247, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.9rem 2.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo svg {
+            height: 22px;
+            width: auto;
+        }
+
+        .nav-logo-text {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        /* Desktop links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--text);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.65rem 1.6rem;
+            border: 1px solid var(--text);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: none;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            z-index: 1002;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            background: var(--text);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .nav-hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(4.5px, 4.5px);
+        }
+
+        .nav-hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(4.5px, -4.5px);
+        }
+
+        /* Mobile menu overlay */
+        .nav-mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(250, 249, 247, 0.98);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 1001;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .nav-mobile-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .nav-mobile-overlay a {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-mobile-overlay a:hover {
+            opacity: 0.5;
+        }
+
+        .nav-mobile-overlay .nav-cta {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            padding: 0.8rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav.scrolled {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero-subtitle {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        /* Scrollable Photo Testimonial Gallery */
+        .hero-gallery-wrap {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+        }
+
+        .hero-cards {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0;
+            scrollbar-width: none;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .hero-cards.is-dragging {
+            cursor: grabbing;
+            scroll-snap-type: none;
+        }
+
+        .hero-cards::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            min-width: 280px;
+            width: 280px;
+            aspect-ratio: 3 / 4;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            border-radius: 0;
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.7);
+            pointer-events: none;
+            transform: translateZ(0);
+        }
+
+        /* Bottom gradient — always visible, never changes */
+        .hero-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.88) 0%,
+                rgba(0, 0, 0, 0.5) 35%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+        }
+
+        /* Dark layer that fades in on hover via opacity (perfectly smooth) */
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Ensure text sits above the dark layer */
+        .hero-card-overlay {
+            z-index: 2;
+        }
+
+        .hero-card-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-card-author {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Text — default: 3 lines. On hover: slides open smoothly */
+        .hero-card-text {
+            font-size: 0.78rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.75);
+            overflow: hidden;
+            max-height: 3.65rem;
+            transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-card:hover .hero-card-text {
+            max-height: 20rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero-card {
+                min-width: 240px;
+                width: 240px;
+            }
+            .hero-card-overlay {
+                padding: 1.1rem;
+            }
+            .hero-card-author {
+                font-size: 0.9rem;
+            }
+            .hero-card-text {
+                font-size: 0.72rem;
+            }
+        }
+
+        /* ========================================
+           OBLASTI / TICKER CARDS
+           ======================================== */
+        .oblasti {
+            background: var(--text);
+            padding: 5rem 0 4.5rem;
+            overflow: hidden;
+        }
+
+        .oblasti-header {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .oblasti-divider {
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .oblasti-title {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 400;
+            color: #fff;
+            line-height: 1.15;
+        }
+
+        .ticker-viewport {
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        .ticker-track {
+            display: flex;
+            gap: 1px;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .ticker-card {
+            flex-shrink: 0;
+            width: 280px;
+            height: 340px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ticker-card-icon {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: rgba(0, 0, 0, 0.35);
+        }
+
+        .ticker-card-bottom {
+            margin-top: auto;
+        }
+
+        .ticker-card-name {
+            font-family: var(--sans);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.85);
+            line-height: 1.25;
+            margin-bottom: 0.5rem;
+            min-height: 3.25rem;
+        }
+
+        .ticker-card-count {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 640px) {
+            .oblasti {
+                padding: 3.5rem 0 3rem;
+            }
+            .ticker-card {
+                width: 220px;
+                height: 280px;
+                padding: 1.5rem;
+            }
+            .ticker-card-name {
+                font-size: 1.1rem;
+                min-height: 2.75rem;
+            }
+        }
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: var(--text);
+            color: var(--bg);
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-light);
+            letter-spacing: 0.03em;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.25rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        .btn-secondary:hover {
+            color: var(--text);
+            border-bottom-color: var(--text);
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.1rem 3rem;
+            background: var(--accent);
+            color: var(--white);
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--white);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-gold:hover {
+            transform: scale(1.03);
+            background: var(--text);
+        }
+
+        .btn-gold:active {
+            transform: scale(0.98);
+        }
+
+        /* ========================================
+           DIVIDER
+           ======================================== */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent);
+            margin: 3rem auto;
+        }
+
+        .divider-left {
+            margin: 2rem 0;
+        }
+
+        /* ========================================
+           INTRODUCTION SECTION
+           ======================================== */
+        .intro {
+            background: var(--white);
+        }
+
+        .intro-content {
+            text-align: center;
+        }
+
+        .intro-content .heading-lg {
+            margin-bottom: 2rem;
+        }
+
+        .intro-content p {
+            max-width: 650px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* ========================================
+           THEMES SECTION
+           ======================================== */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .theme-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            background: var(--white);
+        }
+
+        .theme-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+        }
+
+        .theme-number {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .theme-title {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .theme-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           IMAGE GALLERY
+           ======================================== */
+        .gallery {
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .gallery-strip {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 2rem;
+            scrollbar-width: none;
+        }
+
+        .gallery-strip::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 350px;
+            height: 450px;
+            scroll-snap-align: start;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        /* Lazy load fade-in */
+        img.lazy {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        img.lazy.loaded {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ========================================
+           AUTHOR SECTION
+           ======================================== */
+        .author-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .author-portrait {
+            aspect-ratio: 3/4;
+            background: var(--bg-warm);
+            overflow: hidden;
+        }
+
+        .author-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-portrait-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--serif);
+            font-size: 4rem;
+            color: var(--accent);
+            font-weight: 300;
+        }
+
+        .author-text .heading-sm {
+            margin-bottom: 1.5rem;
+        }
+
+        .author-text .heading-lg {
+            margin-bottom: 2rem;
+        }
+
+        /* ========================================
+           TESTIMONIALS
+           ======================================== */
+        .testimonials {
+            background: var(--text);
+            color: var(--white);
+        }
+
+        .testimonials .heading-sm {
+            color: var(--accent);
+        }
+
+        .testimonials .heading-lg {
+            color: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+
+        .testimonial-quote {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-family: var(--serif);
+            font-size: 3rem;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.05em;
+        }
+
+        /* ========================================
+           BOOK DETAILS
+           ======================================== */
+        .details {
+            background: var(--white);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .detail-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-value {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        /* ========================================
+           ORDER / CHECKOUT SECTION
+           ======================================== */
+        .order-section {
+            background: var(--bg-warm);
+        }
+
+        .order-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .order-info .heading-lg {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-price {
+            font-family: var(--serif);
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 2rem 0;
+        }
+
+        .order-price .price-original {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 300;
+            margin-left: 0.5rem;
+        }
+
+        .order-price .price-label {
+            display: block;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        .order-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .order-features li {
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .order-features li::before {
+            content: '—';
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Order Form */
+        .order-form {
+            background: var(--white);
+            padding: 3rem;
+            border: 1px solid var(--border);
+        }
+
+        .order-form h3 {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Promo Code */
+        .promo-section {
+            margin: 1.5rem 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .promo-toggle {
+            font-size: 0.85rem;
+            color: var(--accent-dark);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: var(--sans);
+            padding: 0;
+            transition: color 0.3s;
+        }
+
+        .promo-toggle:hover {
+            color: var(--text);
+        }
+
+        .promo-field {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .promo-field.active {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .promo-field input {
+            flex: 1;
+        }
+
+        .promo-apply {
+            padding: 0.85rem 1.5rem;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .promo-apply:hover {
+            background: var(--text);
+            color: var(--white);
+            border-color: var(--text);
+        }
+
+        .promo-message {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .promo-message.success {
+            color: #4a8c5c;
+            display: block;
+        }
+
+        .promo-message.error {
+            color: #c44;
+            display: block;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .order-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+
+        .order-summary-row.total {
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding-top: 0.8rem;
+            margin-top: 0.4rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .discount-row {
+            color: #4a8c5c;
+            display: none;
+        }
+
+        .order-form .btn-gold {
+            width: 100%;
+            justify-content: center;
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .secure-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .secure-note svg {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+            margin-right: 0.25rem;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.4);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: rgba(255,255,255,0.6);
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--white);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========================================
+           MODAL
+           ======================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: var(--white);
+            max-width: 500px;
+            width: 90%;
+            padding: 3rem;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        /* ========================================
+           SUCCESS STATE
+           ======================================== */
+        .order-success {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .order-success.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #4a8c5c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .success-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .themes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .author-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .order-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .details-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section {
+                padding: 5rem 0;
+            }
+
+            .section-lg {
+                padding: 6rem 0;
+            }
+
+            .themes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .order-form {
+                padding: 2rem;
+            }
+
+            .gallery-item {
+                width: 280px;
+                height: 360px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* ========================================
+           LOADING ANIMATION
+           ======================================== */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text);
+            opacity: 0;
+            animation: loaderFade 1.2s ease forwards;
+        }
+
+        @keyframes loaderFade {
+            0% { opacity: 0; transform: translateY(10px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+
+        /* ========================================
+           SPEKTRUM VEDOMIA — TABLE LAYOUT
+           ======================================== */
+        .spektrum {
+            background: var(--bg-warm);
+        }
+
+        .spektrum-table-wrap {
+            margin-top: 3rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .spektrum-table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .spektrum-table thead th {
+            padding: 1.25rem 1rem;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            text-align: left;
+            border-bottom: 2px solid var(--text);
+            vertical-align: bottom;
+        }
+
+        .spektrum-table thead th:first-child {
+            font-size: 1.3rem;
+            font-weight: 600;
+            width: 160px;
+            min-width: 140px;
+        }
+
+        .spektrum-table thead .th-percent {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+            font-family: var(--sans);
+        }
+
+        .spektrum-table tbody td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            vertical-align: top;
+            color: var(--text);
+        }
+
+        .spektrum-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .spektrum-table tbody td:first-child {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        /* Alternating row backgrounds */
+        .spektrum-table tbody tr:nth-child(even) {
+            background: rgba(0,0,0,0.015);
+        }
+
+        /* Vyššie ja column accent */
+        .spektrum-table thead th:last-child {
+            color: var(--accent);
+        }
+
+        .spektrum-table tbody td:last-child {
+            color: var(--accent-dark);
+        }
+
+        /* Hover */
+        .spektrum-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .spektrum-table tbody tr:hover {
+            background: rgba(0,0,0,0.03);
+        }
+
+        /* Mobile: card view */
+        .spektrum-mobile {
+            display: none;
+        }
+
+        .spektrum-mobile-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .spektrum-mobile-tab {
+            padding: 0.6rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .spektrum-mobile-tab.active {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+
+        .spektrum-mobile-card {
+            display: none;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .spektrum-mobile-card.active {
+            display: block;
+        }
+
+        .spektrum-mobile-card .mobile-row {
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .spektrum-mobile-card .mobile-row:last-child {
+            border-bottom: none;
+        }
+
+        .spektrum-mobile-card .mobile-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+        }
+
+        .spektrum-mobile-card .mobile-value {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.4;
+            margin-top: 0.15rem;
+        }
+
+        @media (max-width: 899px) {
+            .spektrum-table-wrap {
+                display: none;
+            }
+            .spektrum-mobile {
+                display: block;
+                margin-top: 2rem;
+            }
+        }
+
+    </style>
+    </head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <span class="loader-text">JA</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="mainNav">
+        <div class="nav-left">
+            <a href="#" class="nav-logo">
+                <svg viewBox="0 0 160 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Evolvium logomark: abstract evolution spiral -->
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M12 2C7.6 2 4 5.6 4 10c0 2.8 1.4 5.2 3.6 6.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                    <!-- EVOLVIUM text -->
+                    <text x="30" y="16.5" font-family="'PP Mori', -apple-system, sans-serif" font-size="12" font-weight="600" letter-spacing="3" fill="currentColor">EVOLVIUM</text>
+                </svg>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="#intro" class="nav-link">O knihe</a>
+            <a href="#spektrum" class="nav-link">Spektrum</a>
+            <a href="#autor" class="nav-link">Autor</a>
+            <a href="#ohlasy" class="nav-link">Ohlasy</a>
+            <a href="#objednat" class="nav-cta">Objednať</a>
+        </div>
+        <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="nav-mobile-overlay" id="mobileMenu">
+        <a href="#intro" onclick="closeMobileMenu()">O knihe</a>
+        <a href="#spektrum" onclick="closeMobileMenu()">Spektrum</a>
+        <a href="#autor" onclick="closeMobileMenu()">Autor</a>
+        <a href="#ohlasy" onclick="closeMobileMenu()">Ohlasy</a>
+        <a href="#objednat" class="nav-cta" onclick="closeMobileMenu()">Objednať knihu</a>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-inner fade-in">
+                <span class="heading-sm hero-label">Evolúcia vedomia – JA</span>
+                <h1 class="heading-xl hero-title">Niektoré knihy zabávajú.<br>Iné zmenia to, ako vidíme&nbsp;realitu.</h1>
+                <p class="hero-subtitle">Cesta rozvoja vedomia a&nbsp;sebapoznania.</p>
+                <div class="hero-actions">
+                    <a href="#objednat" class="btn-primary">Kúpiť knihu</a>
+                    <button class="btn-secondary" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">Zistiť viac ↓</button>
+                </div>
+            </div>
+            <div class="hero-gallery-wrap fade-in fade-in-delay-2">
+                <div class="hero-cards" id="heroGallery">
+                    <div class="hero-card">
+                        <img src="images/photo-1.jpg" alt="Recenzia" loading="lazy">
+                        <div class="hero-card-overlay">
+                            <span class="hero-card-label">Recenzia</span>
+                            <span class="hero-card-author">David</span>
+                            <p class="hero-card-text">Predstavte si, že hráte hru, v ktorej ste hlavným hrdinom Vy. Tá hra sa volá Život. Potom náhodou natrafíte na manuál — a zrazu Vám to všetko začne do seba postupne zapadať. Kniha JA presne takým manuálom je. Odporúčam každému, kto chce pochopiť, prečo sa mu v živote dejú veci, ktoré sa mu dejú.</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <img src="images/photo-2.jpg" alt="Recenzia" loading="lazy">
+                        <div class="hero-card-overlay">
+                            <span class="hero-card-label">Recenzia</span>
+                            <span class="hero-card-author">Martina</span>
+                            <p class="hero-card-text">Mám pocit, akoby som neprečítala jednu, ale desať kníh. Niektoré myšlienky vo mne zarezonovali veľmi silno. Nie je to čítanie na jeden dych, skôr kniha, ktorá si vyžaduje čas, ticho a premýšľanie. Momentálne ju čítam znova.</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <img src="images/photo-3.jpg" alt="Recenzia" loading="lazy">
+                        <div class="hero-card-overlay">
+                            <span class="hero-card-label">Recenzia</span>
+                            <span class="hero-card-author">Ema Horváthová</span>
+                            <p class="hero-card-text">Skvelo napísaná kniha, ktorá prepája vedu a sebapoznanie bez zbytočných slniečkárskych omáčok. Autor ide do hĺbky, ale stále zrozumiteľne. Odporúčam každému, kto nechce čítať len motivačné frázy.</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <img src="images/photo-4.jpg" alt="Recenzia" loading="lazy">
+                        <div class="hero-card-overlay">
+                            <span class="hero-card-label">Recenzia</span>
+                            <span class="hero-card-author">Sebastián Svit</span>
+                            <p class="hero-card-text">Hlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet. Kniha ďaleko prekračuje psychologické koncepty.</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <img src="images/photo-5.jpg" alt="Recenzia" loading="lazy">
+                        <div class="hero-card-overlay">
+                            <span class="hero-card-label">Recenzia</span>
+                            <span class="hero-card-author">Timea</span>
+                            <p class="hero-card-text">Autor rozložil emócie na malé súčiastky a podrobne vysvetlil mechanizmy za každodenným správaním. Začala som sa úplne inak pozerať na seba aj ľudí z mojho blízkeho okolia. V niektorých opísaných vzorcoch som sa nemilo našla.</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <img src="images/photo-6.jpg" alt="Recenzia" loading="lazy">
+                        <div class="hero-card-overlay">
+                            <span class="hero-card-label">Recenzia</span>
+                            <span class="hero-card-author">Dominika</span>
+                            <p class="hero-card-text">Túto knihu úprimne odporúčam každému, kto hľadá hlbšie pochopenie seba samého. Kniha nie je ľahká na čítanie, ale práve vďaka tomu má silu posunúť človeka ďalej. Verím, že môže pomôcť veľa ľuďom začať sa pozerať na život z celkom novej perspektívy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INTRODUCTION ===== -->
+    <section class="section intro" id="intro">
+        <div class="container-narrow">
+            <div class="intro-content fade-in">
+                <span class="heading-sm">O knihe</span>
+                <div class="divider"></div>
+                <h2 class="heading-lg">Rozvoj vedomia je pre väčšinu ľudí neznámy&nbsp;pojem.</h2>
+                <p class="body-lg">Mnohí si myslia, že snažiť sa o&nbsp;vysoký stav vedomia je vhodné iba pre ľudí žijúcich v&nbsp;rozpore s&nbsp;moderným spôsobom života. Opak je pravdou. Neexistuje nič, čo by modernému človeku prinieslo viac benefitov ako zvýšenie úrovne vedomia.</p>
+                <p class="body-lg">Ľudia zo všetkých spoločenských vrstiev — vrátane tých bohatých a&nbsp;navonok „úspešných" — ostávajú uväznení v&nbsp;nízkom stave vedomia, kde zažívajú nespokojnosť, frustráciu, konflikty, prázdnotu a&nbsp;závislosti. To, čo sa nám v&nbsp;živote deje, nie je výsledkom náhod.</p>
+                <p class="body-lg" style="color: var(--text); font-weight: 600;">Moderný výskum odhaľuje, že je to práve náš stav vedomia, ktorý ovplyvňuje všetko, čo v&nbsp;živote prežívame.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OBLASTI / TICKER ===== -->
+    <section class="oblasti">
+        <div class="oblasti-header">
+            <div class="oblasti-divider"></div>
+            <h2 class="oblasti-title">Oblasti, ktoré<br>kniha prepája</h2>
+        </div>
+        <div class="ticker-viewport">
+            <div class="ticker-track" id="tickerTrack">
+                <div class="ticker-card" style="background: #C4B5FD;">
+                    <div class="ticker-card-icon">○</div>
+                    <div class="ticker-card-bottom">
+                        <div class="ticker-card-name">Systémová<br>teória</div>
+                        <div class="ticker-card-count">56 tém</div>
+                    </div>
+                </div>
+                <div class="ticker-card" style="background: #F9A8D4;">
+                    <div class="ticker-card-icon">◇</div>
+                    <div class="ticker-card-bottom">
+                        <div class="ticker-card-name">Neurovedecké<br>výskumy</div>
+                        <div class="ticker-card-count">91 tém</div>
+                    </div>
+                </div>
+                <div class="ticker-card" style="background: #6EE7B7;">
+                    <div class="ticker-card-icon">✦</div>
+                    <div class="ticker-card-bottom">
+                        <div class="ticker-card-name">Výskum<br>vedomia</div>
+                        <div class="ticker-card-count">63 tém</div>
+                    </div>
+                </div>
+                <div class="ticker-card" style="background: #93C5FD;">
+                    <div class="ticker-card-icon">□</div>
+                    <div class="ticker-card-bottom">
+                        <div class="ticker-card-name">Duchovný rast<br>a&nbsp;spiritualita</div>
+                        <div class="ticker-card-count">53 tém</div>
+                    </div>
+                </div>
+                <div class="ticker-card" style="background: #FCA5A5;">
+                    <div class="ticker-card-icon">△</div>
+                    <div class="ticker-card-bottom">
+                        <div class="ticker-card-name">Evolučná<br>biológia</div>
+                        <div class="ticker-card-count">47 tém</div>
+                    </div>
+                </div>
+                <div class="ticker-card" style="background: #FCD34D;">
+                    <div class="ticker-card-icon">◎</div>
+                    <div class="ticker-card-bottom">
+                        <div class="ticker-card-name">Psychológia<br>a&nbsp;emócie</div>
+                        <div class="ticker-card-count">78 tém</div>
+                    </div>
+                </div>
+                <div class="ticker-card" style="background: #D4B896;">
+                    <div class="ticker-card-icon">⬡</div>
+                    <div class="ticker-card-bottom">
+                        <div class="ticker-card-name">Meditácia<br>a&nbsp;mindfulness</div>
+                        <div class="ticker-card-count">42 tém</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KEY THEMES ===== -->
+    <section class="section" id="temy">
+        <div class="container">
+            <div style="text-align:center;" class="fade-in">
+                <span class="heading-sm">Čo sa dozviete</span>
+                <div class="divider"></div>
+                <h2 class="heading-lg">Táto kniha nie je povrchnou motivačnou publikáciou</h2>
+                <p class="body-md" style="max-width: 680px; margin: 1rem auto 3rem; color: var(--text-muted);">Je to výsledok dôkladného skúmania vedomia, jeho mechanizmov a&nbsp;dosahu na život jednotlivca i&nbsp;spoločnosti — opierajúc sa o&nbsp;najnovšie poznatky neurovedy, evolučnej biológie, psychológie a&nbsp;systémovej teórie.</p>
+            </div>
+            <div class="themes-grid">
+                <div class="theme-card fade-in fade-in-delay-1">
+                    <div class="theme-number">01</div>
+                    <h3 class="theme-title">Skryté mechanizmy</h3>
+                    <p class="theme-desc">Aký základný biologický mechanizmus skryto riadi naše životy? Prečo túžime po sláve, uznaní a&nbsp;materiálnom úspechu?</p>
+                </div>
+                <div class="theme-card fade-in fade-in-delay-2">
+                    <div class="theme-number">02</div>
+                    <h3 class="theme-title">Deštruktívne vzorce</h3>
+                    <p class="theme-desc">Čo stojí za žiarlivosťou, závisťou a neustálym súperením? Kde sa formujú zlozvyky, ktoré nám ničia život — a&nbsp;ako ich prekonať?</p>
+                </div>
+                <div class="theme-card fade-in fade-in-delay-3">
+                    <div class="theme-number">03</div>
+                    <h3 class="theme-title">Stíšenie mysle</h3>
+                    <p class="theme-desc">Ako je možné utíšiť vlastnú myseľ a&nbsp;dosiahnuť výnimočný, slovami neopísateľný vnútorný pokoj? Bez toho, aby ste opustili realitu každodenného života.</p>
+                </div>
+                <div class="theme-card fade-in fade-in-delay-4">
+                    <div class="theme-number">04</div>
+                    <h3 class="theme-title">Evolúcia a&nbsp;prebudenie</h3>
+                    <p class="theme-desc">Ako pokročiť v&nbsp;evolučnom vývoji a&nbsp;dosiahnuť najvyšší stav vedomia, ktorý sa v&nbsp;histórii zvykol nazývať „prebudenie" alebo „osvietenie"?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="section gallery">
+        <div class="gallery-strip">
+            <!-- NAHRAĎ: vlož cesty k tvojim fotkám knihy -->
+            <div class="gallery-item"><img class="lazy" src="images/photo-1.jpg" alt="JA kniha" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)'"></div>
+            <div class="gallery-item"><img class="lazy" src="images/photo-2.jpg" alt="JA kniha" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)'"></div>
+            <div class="gallery-item"><img class="lazy" src="images/photo-3.jpg" alt="JA kniha" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)'"></div>
+            <div class="gallery-item"><img class="lazy" src="images/photo-4.jpg" alt="JA kniha" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)'"></div>
+            <div class="gallery-item"><img class="lazy" src="images/photo-5.jpg" alt="JA kniha" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)'"></div>
+        </div>
+    </section>
+
+    <!-- ===== SPEKTRUM VEDOMIA ===== -->
+    <section class="section spektrum" id="spektrum">
+        <div class="container">
+            <div style="text-align:center;" class="fade-in">
+                <span class="heading-sm">Z knihy</span>
+                <div class="divider"></div>
+                <h2 class="heading-lg">Spektrum vedomia</h2>
+                <p class="body-md" style="max-width: 720px; margin: 1.5rem auto 0; color: var(--text-light);">Spektrum vedomia poskytuje užitočný rámec pre pochopenie troch základných úrovní ľudského vedomia — „Primitívne ja", „Rozumové ja" a&nbsp;„Vyššie ja". Predstavuje komplexný pohľad na psychologický a&nbsp;evolučný vývoj jedinca od základnej inštinktívnej úrovne po vysoko vedomé stavy bytia.</p>
+                <p class="body-md" style="max-width: 720px; margin: 1rem auto 0; color: var(--text-light);">Ukazuje, ako rôzne aspekty jednotlivých úrovní ovplyvňujú naše vnímanie a&nbsp;interakcie so svetom, a&nbsp;zdôrazňuje dôležitosť rozvoja smerom k&nbsp;vyšším úrovniam vedomia.</p>
+                <p class="body-md" style="max-width: 720px; margin: 1rem auto 0.5rem; color: var(--text); font-weight: 600;">Spektrum vedomia je mapou a&nbsp;nástrojom, ktoré čitateľom umožnia rozpoznať, z&nbsp;akej úrovne vedomia pristupujú k&nbsp;jednotlivým životným situáciám — a&nbsp;celý tento koncept je detailne rozobratý v&nbsp;knihe.</p>
+            </div>
+
+            <!-- Desktop: table like PDF -->
+            <div class="spektrum-table-wrap fade-in">
+                <table class="spektrum-table">
+                    <thead>
+                        <tr>
+                            <th>Spektrum<br>vedomia</th>
+                            <th>Primitívne ja<span class="th-percent">70 % populácie</span></th>
+                            <th>Rozumové ja<span class="th-percent">29 % populácie</span></th>
+                            <th>Vyššie ja<span class="th-percent">&lt; 1 % populácie</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sebaidentifikácia</td><td>Fyzické telo</td><td>Myseľ</td><td>Vedomie</td></tr>
+                        <tr><td>Zameranie</td><td>Stav vlastnenia (čo mám)</td><td>Stav konania (čo robím)</td><td>Stav bytia (kým som)</td></tr>
+                        <tr><td>Prevládajúci systém</td><td>Staré štruktúry mozgu</td><td>Nové štruktúry mozgu</td><td>Energetické pole vedomia</td></tr>
+                        <tr><td>Správanie</td><td>Inštinktívne, sebecké, detinské, nemorálne, konfliktné až agresívne</td><td>Inteligentné, logické, selektívne, morálne, kreatívne, zmysluplné</td><td>Uvedomelé, zmierlivé, nezaujaté, vysoko kreatívne, nezištné a láskyplné</td></tr>
+                        <tr><td>Vyhľadáva</td><td>Drámu, neustále aktivity, konflikty, súťaženie, kritiku a psychologický zisk</td><td>Myšlienkové koncepty, vedomosti, názory, postoje, ciele, význam a zmysel</td><td>Pokoj, mier, radosť, lásku, úprimnosť, harmóniu, zámer, porozumenie</td></tr>
+                        <tr><td>Riešenie konfliktov</td><td>Útok (agresívna konfrontácia) alebo útek</td><td>Diskusia, argumentácia, kompromis</td><td>Hlboké pochopenie, empatia, hľadanie spoločného základu</td></tr>
+                        <tr><td>Kognitívna otvorenosť</td><td>Uzavretá myseľ, dogmatizmus, nízka tolerancia neznámeho</td><td>Otvorenosť novým názorom, holistické až adaptívne myslenie</td><td>Transracionálne myslenie, prijímanie paradoxov až plne vedomé vnímanie</td></tr>
+                        <tr><td>Vnímanie reality</td><td>Uväznenie v ilúziách a sebaklamoch</td><td>Schopnosť prijímať nové a zložité informácie</td><td>Túžba po hlbokej pravde a prijímanie reality, aká „je"</td></tr>
+                        <tr><td>Porozumenie svetu</td><td>Veľmi obmedzené, jednoduché až primitívne</td><td>Obmedzené, lineárne, kauzálne a dualistické</td><td>Transcendentné, nelineárne a nedualistické</td></tr>
+                        <tr><td>Vplyv na svet</td><td>Ja a moja svorka</td><td>Lokálny až globálny</td><td>Neobmedzený</td></tr>
+                        <tr><td>Ostatných vníma ako</td><td>Konkurenciu, ohrozenie, nepriateľov</td><td>Súčasť celku, pomocníkov a spolupracovníkov</td><td>Súčasť jednotného a dokonalého celku</td></tr>
+                        <tr><td>Prevládajúce emócie</td><td>Nízke a negatívne (prázdnota, beznádej, vina, frustrácia, žiarlivosť, strach, hnev, osobné túžby, pýcha)</td><td>Neutrálne a pozitívne (nádej, vďačnosť, úcta, akceptácia, odvaha, spokojnosť, zištná láska)</td><td>Vyššie až transcendentné (bezpodmienečná láska, empatia, súcit, radosť, blaženosť, mier, jednota)</td></tr>
+                        <tr><td>Názor na život</td><td>Náročný až tragický</td><td>Zmysluplný</td><td>Harmonický až dokonalý</td></tr>
+                        <tr><td>Zmysel života</td><td>Prežitie a získavanie</td><td>Poznanie, zážitky a úspech</td><td>Čistá existencia a jednota</td></tr>
+                        <tr><td>Kvalita života</td><td>Nízka a neuspokojivá</td><td>Uspokojivá a rastúca</td><td>Mimoriadna</td></tr>
+                        <tr><td>Fyzické a mentálne zdravie</td><td>Slabé, náchylné na zdravotné problémy, ochorenia a úrazy</td><td>Dobré až výborné fyzické a mentálne zdravie, emocionálna regulácia</td><td>Optimálne fyzické, mentálne a duševné zdravie, emocionálna stabilita</td></tr>
+                        <tr><td>Spoločenská zodpovednosť</td><td>Sebectvo a malý záujem o iných ľudí</td><td>Neutrálna angažovanosť až prosociálne správanie</td><td>Každodenné láskavosti a silné altruistické správanie</td></tr>
+                        <tr><td>Duchovný proces</td><td>Nezáujem a skepticizmus</td><td>Exploratívny záujem</td><td>Duchovný rast a osvietenie</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile: tabs + cards -->
+            <div class="spektrum-mobile fade-in">
+                <div class="spektrum-mobile-tabs">
+                    <button class="spektrum-mobile-tab active" onclick="switchMobileLevel(this, 'primitiv')">Primitívne ja</button>
+                    <button class="spektrum-mobile-tab" onclick="switchMobileLevel(this, 'rozum')">Rozumové ja</button>
+                    <button class="spektrum-mobile-tab" onclick="switchMobileLevel(this, 'vyssie')">Vyššie ja</button>
+                </div>
+                <div class="spektrum-mobile-card active" id="mob-primitiv">
+                    <div class="mobile-row"><div class="mobile-label">Sebaidentifikácia</div><div class="mobile-value">Fyzické telo</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Zameranie</div><div class="mobile-value">Stav vlastnenia (čo mám)</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Správanie</div><div class="mobile-value">Inštinktívne, sebecké, konfliktné až agresívne</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Vyhľadáva</div><div class="mobile-value">Drámu, konflikty, súťaženie, kritiku</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Prevládajúce emócie</div><div class="mobile-value">Prázdnota, beznádej, vina, frustrácia, žiarlivosť, strach, hnev, pýcha</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Názor na život</div><div class="mobile-value">Náročný až tragický</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Kvalita života</div><div class="mobile-value">Nízka a neuspokojivá</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Duchovný proces</div><div class="mobile-value">Nezáujem a skepticizmus</div></div>
+                </div>
+                <div class="spektrum-mobile-card" id="mob-rozum">
+                    <div class="mobile-row"><div class="mobile-label">Sebaidentifikácia</div><div class="mobile-value">Myseľ</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Zameranie</div><div class="mobile-value">Stav konania (čo robím)</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Správanie</div><div class="mobile-value">Inteligentné, logické, morálne, kreatívne</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Vyhľadáva</div><div class="mobile-value">Vedomosti, názory, ciele, význam a zmysel</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Prevládajúce emócie</div><div class="mobile-value">Nádej, vďačnosť, úcta, akceptácia, odvaha, spokojnosť</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Názor na život</div><div class="mobile-value">Zmysluplný</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Kvalita života</div><div class="mobile-value">Uspokojivá a rastúca</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Duchovný proces</div><div class="mobile-value">Exploratívny záujem</div></div>
+                </div>
+                <div class="spektrum-mobile-card" id="mob-vyssie">
+                    <div class="mobile-row"><div class="mobile-label">Sebaidentifikácia</div><div class="mobile-value">Vedomie</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Zameranie</div><div class="mobile-value">Stav bytia (kým som)</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Správanie</div><div class="mobile-value">Uvedomelé, zmierlivé, nezištné a láskyplné</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Vyhľadáva</div><div class="mobile-value">Pokoj, mier, radosť, lásku, harmóniu</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Prevládajúce emócie</div><div class="mobile-value">Bezpodmienečná láska, súcit, radosť, blaženosť, mier, jednota</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Názor na život</div><div class="mobile-value">Harmonický až dokonalý</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Kvalita života</div><div class="mobile-value">Mimoriadna</div></div>
+                    <div class="mobile-row"><div class="mobile-label">Duchovný proces</div><div class="mobile-value">Duchovný rast a osvietenie</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AUTHOR ===== -->
+    <section class="section" id="autor">
+        <div class="container">
+            <div class="author-grid">
+                <div class="author-portrait fade-in">
+                    <!-- NAHRAĎ: vlož cestu k autorskej fotke -->
+                    <img class="lazy" src="images/author.jpg" alt="Lukáš Horák" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="author-portrait-placeholder" style="display:none;">LH</div>
+                </div>
+                <div class="author-text fade-in fade-in-delay-2">
+                    <span class="heading-sm">Predslov autora</span>
+                    <div class="divider divider-left"></div>
+                    <h2 class="heading-lg">Lukáš Horák</h2>
+                    <p class="body-lg" style="margin-bottom: 1.5rem;">Mnohí z&nbsp;nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s&nbsp;negatívnymi emocionálnymi stavmi a&nbsp;vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a&nbsp;mier.</p>
+                    <p class="body-md" style="margin-bottom: 1.5rem;">Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a&nbsp;prichádza natoľko výnimočný, slovami neopísateľný a&nbsp;nezabudnuteľný stav, že by ho človek nevymenil za nič na svete.</p>
+                    <p class="body-md" style="color: var(--text); font-weight: 600; font-style: italic;">Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s&nbsp;ničím menším.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section testimonials" id="ohlasy">
+        <div class="container">
+            <div style="text-align:center;" class="fade-in">
+                <span class="heading-sm">Ohlasy čitateľov</span>
+                <div class="divider" style="background: var(--accent);"></div>
+                <h2 class="heading-lg">Slová tých, ktorí čítali</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in fade-in-delay-1">
+                    <p class="testimonial-quote">Predstavte si, že hráte hru, v ktorej ste hlavným hrdinom Vy. Tá hra sa volá Život. Potom náhodou natrafíte na manuál — a zrazu Vám to všetko začne do seba postupne zapadať. Kniha JA presne takým manuálom je.</p>
+                    <span class="testimonial-author">— David · Martinus.sk</span>
+                </div>
+                <div class="testimonial-card fade-in fade-in-delay-2">
+                    <p class="testimonial-quote">Mám pocit, akoby som neprečítala jednu, ale desať kníh. Niektoré myšlienky vo mne zarezonovali veľmi silno. Nie je to čítanie na jeden dych, skôr kniha, ktorá si vyžaduje čas, ticho a premýšľanie. Momentálne ju čítam znova.</p>
+                    <span class="testimonial-author">— Martina · Martinus.sk</span>
+                </div>
+                <div class="testimonial-card fade-in fade-in-delay-3">
+                    <p class="testimonial-quote">Skvelo napísaná kniha, ktorá prepája vedu a sebapoznanie bez zbytočných slniečkárskych omáčok. Autor ide do hĺbky, ale stále zrozumiteľne. Odporúčam každému, kto nechce čítať len motivačné frázy.</p>
+                    <span class="testimonial-author">— Ema Horváthová · Martinus.sk</span>
+                </div>
+            </div>
+            <div class="testimonials-grid" style="margin-top: 2rem;">
+                <div class="testimonial-card fade-in fade-in-delay-1">
+                    <p class="testimonial-quote">Hlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet. Kniha ďaleko prekračuje psychologické koncepty.</p>
+                    <span class="testimonial-author">— Sebastián Svit · Martinus.sk</span>
+                </div>
+                <div class="testimonial-card fade-in fade-in-delay-2">
+                    <p class="testimonial-quote">Autor rozložil emócie na malé súčiastky a podrobne vysvetlil mechanizmy za každodenným správaním. Začala som sa úplne inak pozerať na seba aj ľudí z mojho blízkeho okolia. V niektorých opísaných vzorcoch som sa nemilo našla.</p>
+                    <span class="testimonial-author">— Timea · Martinus.sk</span>
+                </div>
+                <div class="testimonial-card fade-in fade-in-delay-3">
+                    <p class="testimonial-quote">Túto knihu úprimne odporúčam každému, kto hľadá hlbšie pochopenie seba samého. Kniha nie je ľahká na čítanie, ale práve vďaka tomu má silu posunúť človeka ďalej. Verím, že môže pomôcť veľa ľuďom začať sa pozerať na život z celkom novej perspektívy.</p>
+                    <span class="testimonial-author">— Dominika · Martinus.sk</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BOOK DETAILS ===== -->
+    <section class="section details">
+        <div class="container">
+            <div style="text-align:center;" class="fade-in">
+                <span class="heading-sm">Detaily knihy</span>
+                <div class="divider"></div>
+            </div>
+            <div class="details-grid fade-in">
+                <div class="detail-item">
+                    <div class="detail-label">Formát</div>
+                    <div class="detail-value">Paperback</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Počet strán</div>
+                    <div class="detail-value">336</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Jazyk</div>
+                    <div class="detail-value">Slovenčina</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Vydavateľstvo</div>
+                    <div class="detail-value">Evolvium, s.r.o.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ORDER SECTION ===== -->
+    <section class="section-lg order-section" id="objednat">
+        <div class="container">
+            <div class="order-grid">
+                <div class="order-info fade-in">
+                    <span class="heading-sm">Objednávka</span>
+                    <div class="divider divider-left"></div>
+                    <h2 class="heading-lg">Získaj svoju kópiu</h2>
+                    <div class="order-price">
+                        <span id="displayPrice">33,00 €</span>
+                        <span class="price-label">vrátane DPH · poštovné zdarma</span>
+                    </div>
+                    <ul class="order-features">
+                        <li>Paperback s prémiovým zrkadlovým obalom</li>
+                        <li>Osobne podpísaný autorom</li>
+                        <li>Doručenie do 3–5 pracovných dní</li>
+                        <li>Bezpečná platba cez Stripe</li>
+                    </ul>
+                </div>
+                <div class="order-form-wrapper fade-in fade-in-delay-2">
+                    <form class="order-form" id="orderForm">
+                        <h3>Doručovacie údaje</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">Meno</label>
+                                <input class="form-input" type="text" id="firstName" name="firstName" placeholder="Meno" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">Priezvisko</label>
+                                <input class="form-input" type="text" id="lastName" name="lastName" placeholder="Priezvisko" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-input" type="email" id="email" name="email" placeholder="tvoj@email.sk" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Telefón</label>
+                            <input class="form-input" type="tel" id="phone" name="phone" placeholder="+421 ...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="address">Ulica a číslo</label>
+                            <input class="form-input" type="text" id="address" name="address" placeholder="Ulica a číslo domu" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="city">Mesto</label>
+                                <input class="form-input" type="text" id="city" name="city" placeholder="Mesto" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="zip">PSČ</label>
+                                <input class="form-input" type="text" id="zip" name="zip" placeholder="PSČ" required>
+                            </div>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="promo-section">
+                            <button type="button" class="promo-toggle" onclick="togglePromo()">
+                                + Mám zľavový kód
+                            </button>
+                            <div class="promo-field" id="promoField">
+                                <input class="form-input" type="text" id="promoCode" placeholder="Zadaj kód" style="text-transform: uppercase;">
+                                <button type="button" class="promo-apply" onclick="applyPromo()">Použiť</button>
+                            </div>
+                            <div class="promo-message" id="promoMessage"></div>
+                        </div>
+
+                        <!-- Order Summary -->
+                        <div class="order-summary">
+                            <div class="order-summary-row">
+                                <span>JA — Evolúcia vedomia</span>
+                                <span id="itemPrice">33,00 €</span>
+                            </div>
+                            <div class="order-summary-row">
+                                <span>Poštovné</span>
+                                <span>Zdarma</span>
+                            </div>
+                            <div class="order-summary-row discount-row" id="discountRow">
+                                <span id="discountLabel">Zľava</span>
+                                <span id="discountAmount">- 0,00 €</span>
+                            </div>
+                            <div class="order-summary-row total">
+                                <span>Celkom</span>
+                                <span id="totalPrice">33,00 €</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-gold">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            Zaplatiť a objednať
+                        </button>
+                        <div class="secure-note">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            Bezpečná platba · SSL šifrovanie · Stripe
+                        </div>
+                    </form>
+
+                    <!-- Success State -->
+                    <div class="order-success" id="orderSuccess">
+                        <div class="success-icon">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h3 class="heading-md" style="margin-bottom: 1rem;">Ďakujeme za objednávku!</h3>
+                        <p class="body-md">Potvrdenie ti príde na email. Kniha bude na ceste do 3–5 pracovných dní.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#intro">O knihe</a>
+                <a href="#spektrum">Spektrum</a>
+                <a href="#autor">Autor</a>
+                <a href="#objednat">Objednávka</a>
+                <a href="mailto:lukas@plat4m.com">Kontakt</a>
+            </div>
+            <p>&copy; 2025 Evolvium, s.r.o. Všetky práva vyhradené.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ===== CONFIG =====
+        const CONFIG = {
+            // STRIPE: Publishable key sa načíta automaticky
+            // V Vercel Environment Variables nastav STRIPE_SECRET_KEY
+            stripePublishableKey: 'SEM_VLOZ_SVOJ_PK_LIVE_KLUC',
+
+            // Cena v centoch (3300 = 33,00 €)
+            basePrice: 3300,
+            currency: 'eur',
+
+            // INFLUENCER KÓDY: kód -> { discount: %, name: 'meno influencera' }
+            promoCodes: {
+                'PETER10':   { discount: 10, name: 'Peter' },
+                'MARIA15':   { discount: 15, name: 'Mária' },
+                'JANO20':    { discount: 20, name: 'Jano' },
+                'ZUZKA10':   { discount: 10, name: 'Zuzka' },
+                'FRIEND25':  { discount: 25, name: 'Friend' },
+                // Pridaj ďalšie kódy tu...
+            },
+
+            // Email na prijímanie objednávok (pre server-side)
+            orderEmail: 'lukas@plat4m.com'
+        };
+
+        // ===== STATE =====
+        let appliedCode = null;
+        let currentDiscount = 0;
+
+        // ===== MOBILE MENU =====
+        window.toggleMobileMenu = function() {
+            var hamburger = document.getElementById('navHamburger');
+            var menu = document.getElementById('mobileMenu');
+            hamburger.classList.toggle('open');
+            menu.classList.toggle('open');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        };
+
+        window.closeMobileMenu = function() {
+            var hamburger = document.getElementById('navHamburger');
+            var menu = document.getElementById('mobileMenu');
+            hamburger.classList.remove('open');
+            menu.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+
+        // ===== SPEKTRUM TABS (mobile) =====
+        window.switchMobileLevel = function(btn, level) {
+            document.querySelectorAll('.spektrum-mobile-tab').forEach(function(t) { t.classList.remove('active'); });
+            btn.classList.add('active');
+            document.querySelectorAll('.spektrum-mobile-card').forEach(function(c) { c.classList.remove('active'); });
+            document.getElementById('mob-' + level).classList.add('active');
+        };
+
+        // ===== OBLASTI TICKER =====
+        (function() {
+            var track = document.getElementById('tickerTrack');
+            if (!track) return;
+            var cards = Array.from(track.children);
+            var cardWidth = cards[0].offsetWidth + 1; // 1px gap
+            var index = 0;
+
+            // Duplicate cards for seamless infinite loop
+            cards.forEach(function(card) {
+                track.appendChild(card.cloneNode(true));
+            });
+
+            setInterval(function() {
+                index++;
+                track.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                track.style.transform = 'translateX(-' + (index * cardWidth) + 'px)';
+
+                // When we've scrolled through all originals, reset seamlessly
+                if (index >= cards.length) {
+                    setTimeout(function() {
+                        track.style.transition = 'none';
+                        index = 0;
+                        track.style.transform = 'translateX(0)';
+                    }, 750);
+                }
+            }, 3000);
+        })();
+
+        // ===== HERO GALLERY DRAG-TO-SCROLL =====
+        (function() {
+            var gallery = document.getElementById('heroGallery');
+            if (!gallery) return;
+            var isDown = false, startX, scrollLeft, moved;
+
+            gallery.addEventListener('mousedown', function(e) {
+                isDown = true;
+                moved = false;
+                gallery.classList.add('is-dragging');
+                startX = e.pageX;
+                scrollLeft = gallery.scrollLeft;
+                e.preventDefault();
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (!isDown) return;
+                isDown = false;
+                gallery.classList.remove('is-dragging');
+                // Re-enable snap after drag
+                setTimeout(function() { gallery.style.scrollSnapType = ''; }, 50);
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isDown) return;
+                e.preventDefault();
+                var dx = e.pageX - startX;
+                if (Math.abs(dx) > 3) moved = true;
+                gallery.scrollLeft = scrollLeft - dx;
+            });
+
+            // Prevent click on cards after drag
+            gallery.addEventListener('click', function(e) {
+                if (moved) e.preventDefault();
+            }, true);
+        })();
+
+        // ===== LAZY LOADING IMAGES =====
+        var lazyImages = document.querySelectorAll('img.lazy');
+        if ('IntersectionObserver' in window) {
+            var imgObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var img = entry.target;
+                        if (img.complete) {
+                            img.classList.add('loaded');
+                        } else {
+                            img.addEventListener('load', function() {
+                                img.classList.add('loaded');
+                            });
+                        }
+                        imgObserver.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '100px' });
+            lazyImages.forEach(function(img) { imgObserver.observe(img); });
+        } else {
+            lazyImages.forEach(function(img) { img.classList.add('loaded'); });
+        }
+
+        // ===== PAGE LOADER =====
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('pageLoader').classList.add('hidden');
+            }, 800);
+        });
+
+        // ===== SCROLL ANIMATIONS =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+            observer.observe(el);
+        });
+
+        // ===== NAVBAR SCROLL =====
+        var lastScroll = 0;
+        window.addEventListener('scroll', function() {
+            var nav = document.getElementById('mainNav');
+            var scrollY = window.pageYOffset;
+
+            if (scrollY > 80) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            lastScroll = scrollY;
+        });
+
+        // ===== PROMO CODE SYSTEM =====
+        window.togglePromo = function() {
+            var field = document.getElementById('promoField');
+            field.classList.toggle('active');
+            if (field.classList.contains('active')) {
+                document.getElementById('promoCode').focus();
+            }
+        };
+
+        window.applyPromo = function() {
+            var codeInput = document.getElementById('promoCode');
+            var code = codeInput.value.trim().toUpperCase();
+            var msgEl = document.getElementById('promoMessage');
+
+            if (!code) {
+                msgEl.className = 'promo-message error';
+                msgEl.textContent = 'Zadaj prosím kód.';
+                return;
+            }
+
+            var promo = CONFIG.promoCodes[code];
+
+            if (promo) {
+                appliedCode = code;
+                currentDiscount = promo.discount;
+
+                // Update UI
+                msgEl.className = 'promo-message success';
+                msgEl.textContent = 'Kód "' + code + '" aplikovaný! Zľava ' + promo.discount + '%.';
+
+                // Update prices
+                updatePrices();
+
+                // Track influencer (for analytics)
+                trackInfluencer(code, promo.name);
+            } else {
+                appliedCode = null;
+                currentDiscount = 0;
+                msgEl.className = 'promo-message error';
+                msgEl.textContent = 'Neplatný kód. Skús to znova.';
+                updatePrices();
+            }
+        };
+
+        function updatePrices() {
+            var basePrice = CONFIG.basePrice / 100;
+            var discountAmount = (basePrice * currentDiscount) / 100;
+            var finalPrice = basePrice - discountAmount;
+
+            document.getElementById('totalPrice').textContent = formatPrice(finalPrice);
+
+            var discountRow = document.getElementById('discountRow');
+            if (currentDiscount > 0) {
+                discountRow.style.display = 'flex';
+                document.getElementById('discountLabel').textContent = 'Zľava (' + currentDiscount + '%)';
+                document.getElementById('discountAmount').textContent = '- ' + formatPrice(discountAmount);
+            } else {
+                discountRow.style.display = 'none';
+            }
+        }
+
+        function formatPrice(amount) {
+            return amount.toFixed(2).replace('.', ',') + ' €';
+        }
+
+        function trackInfluencer(code, name) {
+            // Ulož do localStorage pre tracking
+            try {
+                var tracking = JSON.parse(localStorage.getItem('ja_influencer_tracking') || '[]');
+                tracking.push({
+                    code: code,
+                    influencer: name,
+                    timestamp: new Date().toISOString(),
+                    page: window.location.href
+                });
+                localStorage.setItem('ja_influencer_tracking', JSON.stringify(tracking));
+            } catch(e) {}
+
+            console.log('[Influencer Tracking] Code:', code, '| Influencer:', name);
+        }
+
+        // ===== ORDER FORM =====
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var form = this;
+            var submitBtn = form.querySelector('.btn-gold');
+            var originalText = submitBtn.innerHTML;
+
+            // Collect data
+            var orderData = {
+                firstName: form.firstName.value,
+                lastName: form.lastName.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                address: form.address.value,
+                city: form.city.value,
+                zip: form.zip.value,
+                promoCode: appliedCode,
+                discount: currentDiscount,
+                finalPrice: (CONFIG.basePrice - (CONFIG.basePrice * currentDiscount / 100)),
+                currency: CONFIG.currency,
+                timestamp: new Date().toISOString()
+            };
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Spracovávam...</span>';
+
+            // ===== STRIPE CHECKOUT =====
+            // DÔLEŽITÉ: V produkcii musíš mať backend endpoint,
+            // ktorý vytvorí Stripe Checkout Session.
+            // Toto je ukážka klient-side flow:
+
+            initiateStripeCheckout(orderData)
+                .catch(function(err) {
+                    console.error('Stripe error:', err);
+                    // Fallback: show success for demo
+                    showOrderSuccess(orderData);
+                })
+                .finally(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                });
+        });
+
+        async function initiateStripeCheckout(orderData) {
+            try {
+                var stripe = Stripe(CONFIG.stripePublishableKey);
+
+                var response = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+
+                if (!response.ok) {
+                    var errorData = await response.json();
+                    throw new Error(errorData.error || 'Server error');
+                }
+
+                var session = await response.json();
+                var result = await stripe.redirectToCheckout({ sessionId: session.sessionId });
+
+                if (result.error) {
+                    throw new Error(result.error.message);
+                }
+            } catch (err) {
+                console.error('Stripe checkout error:', err);
+                alert('Chyba pri platbe: ' + err.message + '\nSkúste to prosím znova.');
+                var submitBtn = document.querySelector('.order-form button[type="submit"]');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Objednať s platbou';
+                }
+            }
+        }
+
+        function showOrderSuccess(orderData) {
+            document.getElementById('orderForm').style.display = 'none';
+            var successEl = document.getElementById('orderSuccess');
+            successEl.classList.add('active');
+
+            // Log order (v produkcii posielaj na backend)
+            console.log('[ORDER]', JSON.stringify(orderData, null, 2));
+
+            // Scroll to success message
+            successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // ===== URL PROMO CODE =====
+        // Podporuje ?code=PETER10 v URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlCode = urlParams.get('code') || urlParams.get('promo');
+        if (urlCode) {
+            document.getElementById('promoCode').value = urlCode.toUpperCase();
+            // Auto-otvoriť promo field
+            document.getElementById('promoField').classList.add('active');
+            // Auto-aplikovať po načítaní
+            setTimeout(function() {
+                window.applyPromo();
+            }, 1000);
+        }
+
+        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+    })();
+    </script>
+
+</body>
+</html>

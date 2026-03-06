@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ďakujeme za objednávku | JA — Evolúcia vedomia</title>
+    <style>
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-Extralight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Mori';
+            src: url('fonts/PPMori-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PP Mori', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAF9F6;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .checkmark svg {
+            width: 36px;
+            height: 36px;
+            stroke: #FAF9F6;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.6s ease-out 0.3s forwards;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 200;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .gold {
+            color: #C4A96A;
+        }
+
+        .order-id {
+            font-size: 0.85rem;
+            color: #999;
+            background: rgba(0,0,0,0.03);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-family: monospace;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #1a1a1a;
+            color: #FAF9F6;
+            text-decoration: none;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="checkmark">
+            <svg viewBox="0 0 24 24">
+                <polyline points="6 12 10 16 18 8"></polyline>
+            </svg>
+        </div>
+        <h1>Ďakujeme za<br>tvoju objednávku<span class="gold">.</span></h1>
+        <p>Platba prebehla úspešne. Knihu <strong>JA — Evolúcia vedomia</strong> ti odošleme čo najskôr. Potvrdzujúci email je na ceste do tvojej schránky.</p>
+        <div class="order-id" id="sessionId"></div>
+        <br><br>
+        <a href="/" class="back-link">Späť na hlavnú stránku</a>
+    </div>
+
+    <script>
+        // Show session ID if available
+        var params = new URLSearchParams(window.location.search);
+        var sessionId = params.get('session_id');
+        var el = document.getElementById('sessionId');
+        if (sessionId) {
+            el.textContent = 'ID objednávky: ' + sessionId.substring(0, 20) + '...';
+        } else {
+            el.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
