@@ -13,82 +13,16 @@
         FONT: PP Mori (Pangram Pangram)
         Súbory .ttf v priečinku fonts/
     -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
     <style>
         /* ========================================
            PP MORI FONT FACES
            Vlož .woff2 súbory do priečinka fonts/
            ======================================== */
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-Extralight.ttf') format('truetype');
-            font-weight: 200;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-ExtralightItalic.ttf') format('truetype');
-            font-weight: 200;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-Book.ttf') format('truetype');
-            font-weight: 350;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-BookItalic.ttf') format('truetype');
-            font-weight: 350;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-Regular.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-RegularItalic.ttf') format('truetype');
-            font-weight: 400;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-SemiBold.ttf') format('truetype');
-            font-weight: 600;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-SemiBoldItalic.ttf') format('truetype');
-            font-weight: 600;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-ExtraBold.ttf') format('truetype');
-            font-weight: 800;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'PP Mori';
-            src: url('fonts/PPMori-ExtraBoldItalic.ttf') format('truetype');
-            font-weight: 800;
-            font-style: italic;
-            font-display: swap;
-        }
 
         /* ========================================
            RESET & BASE
@@ -111,12 +45,13 @@
             --border: #E8E4DE;
             --white: #FFFFFF;
             --serif: 'PP Mori', -apple-system, BlinkMacSystemFont, sans-serif;
-            --sans: 'PP Mori', -apple-system, BlinkMacSystemFont, sans-serif;
+            --sans: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         html {
             scroll-behavior: smooth;
             font-size: 16px;
+            overflow-x: hidden;
         }
 
         body {
@@ -1617,7 +1552,11 @@
             }
         }
 
-    </style>
+    
+        .ac-item { padding:0.6rem 1rem; cursor:pointer; font-size:0.9rem; border-bottom:1px solid rgba(0,0,0,0.05); transition:background 0.15s; }
+        .ac-item:hover,.ac-item.active { background:rgba(102,126,234,0.08); }
+        .ac-item:last-child { border-bottom:none; }
+        </style>
     </head>
 <body>
     <!-- Page Loader -->
@@ -2008,12 +1947,12 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" data-i18n="order.street">Ulica a číslo</label>
-                            <input class="form-input" type="text" id="address" name="address" placeholder="Ulica a číslo domu" data-i18n-placeholder="order.ph.street" required>
+                            <div style="position:relative"><input class="form-input" type="text" id="address" name="address" placeholder="Ulica a číslo domu" data-i18n-placeholder="order.ph.street" required autocomplete="off"><div id="address-suggestions" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid var(--border);border-top:none;max-height:200px;overflow-y:auto;z-index:100;border-radius:0 0 8px 8px;box-shadow:0 4px 12px rgba(0,0,0,0.1)"></div></div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label" data-i18n="order.city">Mesto</label>
-                                <input class="form-input" type="text" id="city" name="city" placeholder="Mesto" data-i18n-placeholder="order.ph.city" required>
+                                <div style="position:relative"><input class="form-input" type="text" id="city" name="city" placeholder="Mesto" data-i18n-placeholder="order.ph.city" required autocomplete="off"><div id="city-suggestions" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid var(--border);border-top:none;max-height:200px;overflow-y:auto;z-index:100;border-radius:0 0 8px 8px;box-shadow:0 4px 12px rgba(0,0,0,0.1)"></div></div>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" data-i18n="order.zip">PSČ</label>
@@ -2693,5 +2632,14 @@
     })();
     </script>
 
+<script>
+(function(){
+const cities=['Bratislava','Košice','Prešov','Žilina','Banská Bystrica','Nitra','Trnava','Trenčín','Martin','Poprad','Piešťany','Zvolen','Považská Bystrica','Michalovce','Nové Zámky','Spišská Nová Ves','Komárno','Humenné','Levice','Bardejov','Liptovský Mikuláš','Ružomberok','Topoľčany','Dubnica nad Váhom','Čadca','Rimavská Sobota','Lučenec','Pezinok','Hlohovec','Malacky','Partizánske','Skalica','Šaľa','Dunajská Streda','Senica','Galanta','Senec','Brezno','Snina','Dolný Kubín','Detva','Stará Ľubovňa','Kežmarok','Bánovce nad Bebravou','Tvrdošín','Námestovo','Svidník','Rožňava','Trebišov','Vranov nad Topľou','Sabinov','Handlová','Myjava','Púchov','Žiar nad Hronom','Kysucké Nové Mesto','Revúca','Stropkov','Krupina','Turčianske Teplice','Zlaté Moravce','Šamorín','Stupava','Svit','Sereď','Veľký Krtíš','Gelnica','Fiľakovo','Medzilaborce','Sobrance','Moldava nad Bodvou','Tornaľa','Leopoldov','Modra','Rajec','Tisovec','Ilava','Nemšová','Bytča','Turzovka','Štúrovo','Holíč','Gbely','Vráble','Hurbanovo'];
+const streets=['Hlavná','Dlhá','Krátka','Školská','Záhradná','Nová','Družstevná','Športová','Kvetná','Hviezdoslavova','Štúrova','Námestie slobody','Mierová','Partizánska','Jánošíkova','Kukučínova','Bernolákova','Tajovského','Vajanského','Masarykova','Jesenského','Slnečná','Lesná','Lúčna','Poľná','Severná','Južná','Východná','Západná','Lipová','Dubová','Jedľová','Smreková','Brezová','Javorová','Agátová','Topoľová','Gaštanová','Ružová','Tulipánová','Konvalinková','Fialková','Narcisová','Jarmočná','Trhová','Obchodná','Priemyselná','Továrenská','Železničná','Staničná','Letná','Zimná','Jarná','Jesenná','Potočná','Riečna','Vodná','Mlynská','Hradná','Zámocká','Kostolná','Farská','Cintorínska','Múzejná','Divadelná','Tichá','Veselá','Vysoká','Široká','Rovná','Okružná','Priečna','Hraničná','Vinohradnícka','Sídlisková','Stavbárska','Bajkalská','Pribinova','Karadžičova','Mlynské nivy','Prievozská','Ružinovská','Galvaniho','Miletičova','Metodova'];
+function setup(iid,sid,list){var inp=document.getElementById(iid),box=document.getElementById(sid);if(!inp||!box)return;var ai=-1;inp.addEventListener('input',function(){var v=this.value.toLowerCase().trim();box.innerHTML='';ai=-1;if(v.length<1){box.style.display='none';return;}var m=list.filter(function(x){return x.toLowerCase().startsWith(v)||x.toLowerCase().includes(v)}).slice(0,8);if(!m.length){box.style.display='none';return;}m.forEach(function(x){var d=document.createElement('div');d.className='ac-item';d.textContent=x;d.addEventListener('mousedown',function(e){e.preventDefault();inp.value=x;box.style.display='none';});box.appendChild(d);});box.style.display='block';});inp.addEventListener('keydown',function(e){var items=box.querySelectorAll('.ac-item');if(!items.length)return;if(e.key==='ArrowDown'){e.preventDefault();ai=Math.min(ai+1,items.length-1);items.forEach(function(el,i){el.classList.toggle('active',i===ai);});}else if(e.key==='ArrowUp'){e.preventDefault();ai=Math.max(ai-1,0);items.forEach(function(el,i){el.classList.toggle('active',i===ai);});}else if(e.key==='Enter'&&ai>=0){e.preventDefault();inp.value=items[ai].textContent;box.style.display='none';}});inp.addEventListener('blur',function(){setTimeout(function(){box.style.display='none';},150);});}
+setup('address','address-suggestions',streets);
+setup('city','city-suggestions',cities);
+})();
+</script>
 </body>
 </html>
