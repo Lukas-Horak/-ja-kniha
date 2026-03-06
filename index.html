@@ -55,6 +55,10 @@
         }
 
         body {
+            overflow-x: hidden;
+        }
+
+        body {
             font-family: var(--sans);
             background-color: var(--bg);
             color: var(--text);
@@ -296,6 +300,9 @@
             border-color: var(--text);
         }
 
+        .mobile-menu-close { position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; font-size:2rem; color:var(--text); cursor:pointer; width:44px; height:44px; display:flex; align-items:center; justify-content:center; z-index:1003; }
+        .mobile-menu-close:hover { opacity:0.5; }
+
         /* Hamburger */
         .nav-hamburger {
             display: none;
@@ -443,6 +450,7 @@
             width: 100vw;
             margin-left: calc(-50vw + 50%);
             overflow: hidden;
+            max-width: 100vw;
         }
 
         .hero-cards {
@@ -1553,7 +1561,7 @@
         }
 
     
-        .ac-item { padding:0.6rem 1rem; cursor:pointer; font-size:0.9rem; border-bottom:1px solid rgba(0,0,0,0.05); transition:background 0.15s; }
+        .ac-item { padding:0.7rem 1rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-size:0.9rem; border-bottom:1px solid rgba(0,0,0,0.05); transition:background 0.15s; }
         .ac-item:hover,.ac-item.active { background:rgba(102,126,234,0.08); }
         .ac-item:last-child { border-bottom:none; }
         </style>
@@ -1580,7 +1588,7 @@
         </div>
         <div class="nav-links">
             <a href="#intro" class="nav-link" data-i18n="nav.about" data-i18n="foot.about">O knihe</a>
-            <a href="#spektrum" class="nav-link" data-i18n="nav.spectrum" data-i18n="foot.spectrum">Spektrum</a>
+            <a href="#spektrum" class="nav-link" data-i18n="nav.spectrum" data-i18n="foot.spectrum">Spektrum vedomia</a>
             <a href="#autor" class="nav-link" data-i18n="nav.author" data-i18n="foot.author">Autor</a>
             <a href="#ohlasy" class="nav-link" data-i18n="nav.reviews">Ohlasy</a>
             <a href="#objednat" class="nav-cta" data-i18n="nav.order">Objednať</a>
@@ -1595,8 +1603,9 @@
 
     <!-- Mobile menu overlay -->
     <div class="nav-mobile-overlay" id="mobileMenu">
+            <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('open');document.querySelector('.nav-hamburger').classList.remove('open');" aria-label="Close">&times;</button>
         <a href="#intro" onclick="closeMobileMenu()" data-i18n="nav.about" data-i18n="foot.about">O knihe</a>
-        <a href="#spektrum" onclick="closeMobileMenu()" data-i18n="nav.spectrum" data-i18n="foot.spectrum">Spektrum</a>
+        <a href="#spektrum" onclick="closeMobileMenu()" data-i18n="nav.spectrum" data-i18n="foot.spectrum">Spektrum vedomia</a>
         <a href="#autor" onclick="closeMobileMenu()" data-i18n="nav.author" data-i18n="foot.author">Autor</a>
         <a href="#ohlasy" onclick="closeMobileMenu()" data-i18n="nav.reviews">Ohlasy</a>
         <a href="#objednat" class="nav-cta" onclick="closeMobileMenu()" data-i18n="nav.orderBook">Objednať knihu</a>
@@ -1918,10 +1927,10 @@
                         <span class="price-label" data-i18n="order.priceNote">vrátane DPH · poštovné zdarma</span>
                     </div>
                     <ul class="order-features">
-                        <li data-i18n="order.f1">Paperback s prémiovým zrkadlovým obalom</li>
-                        <li data-i18n="order.f2">Osobne podpísaný autorom</li>
-                        <li data-i18n="order.f3">Doručenie do 3–5 pracovných dní</li>
-                        <li data-i18n="order.f4">Bezpečná platba cez Stripe</li>
+                        <li data-i18n="order.f1">Brožovaná väzba, 336 strán, 156×220 mm</li>
+                        <li data-i18n="order.f2">ISBN 9788097501341, vydavateľstvo Evolvium</li>
+                        <li data-i18n="order.f3">Doručenie do 3–5 pracovných dní po celom SR</li>
+                        <li data-i18n="order.f4">Bezpečná platba · SSL šifrovanie</li>
                     </ul>
                 </div>
                 <div class="order-form-wrapper fade-in fade-in-delay-2">
@@ -2020,7 +2029,7 @@
         <div class="container">
             <div class="footer-links">
                 <a href="#intro" data-i18n="foot.about">O knihe</a>
-                <a href="#spektrum" data-i18n="foot.spectrum">Spektrum</a>
+                <a href="#spektrum" data-i18n="foot.spectrum">Spektrum vedomia</a>
                 <a href="#autor" data-i18n="foot.author">Autor</a>
                 <a href="#objednat" data-i18n="foot.order">Objednávka</a>
                 <a href="mailto:lukas@plat4m.com" data-i18n="foot.contact">Kontakt</a>
@@ -2296,8 +2305,8 @@
             };
 
             // Disable button
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Spracovávam...</span>';
+            submitBtn.style.background = '#555';
+// submitBtn.innerHTML = '<span>Spracovávam...</span>';
 
             // ===== STRIPE CHECKOUT =====
             // DÔLEŽITÉ: V produkcii musíš mať backend endpoint,
@@ -2634,11 +2643,85 @@
 
 <script>
 (function(){
-const cities=['Bratislava','Košice','Prešov','Žilina','Banská Bystrica','Nitra','Trnava','Trenčín','Martin','Poprad','Piešťany','Zvolen','Považská Bystrica','Michalovce','Nové Zámky','Spišská Nová Ves','Komárno','Humenné','Levice','Bardejov','Liptovský Mikuláš','Ružomberok','Topoľčany','Dubnica nad Váhom','Čadca','Rimavská Sobota','Lučenec','Pezinok','Hlohovec','Malacky','Partizánske','Skalica','Šaľa','Dunajská Streda','Senica','Galanta','Senec','Brezno','Snina','Dolný Kubín','Detva','Stará Ľubovňa','Kežmarok','Bánovce nad Bebravou','Tvrdošín','Námestovo','Svidník','Rožňava','Trebišov','Vranov nad Topľou','Sabinov','Handlová','Myjava','Púchov','Žiar nad Hronom','Kysucké Nové Mesto','Revúca','Stropkov','Krupina','Turčianske Teplice','Zlaté Moravce','Šamorín','Stupava','Svit','Sereď','Veľký Krtíš','Gelnica','Fiľakovo','Medzilaborce','Sobrance','Moldava nad Bodvou','Tornaľa','Leopoldov','Modra','Rajec','Tisovec','Ilava','Nemšová','Bytča','Turzovka','Štúrovo','Holíč','Gbely','Vráble','Hurbanovo'];
-const streets=['Hlavná','Dlhá','Krátka','Školská','Záhradná','Nová','Družstevná','Športová','Kvetná','Hviezdoslavova','Štúrova','Námestie slobody','Mierová','Partizánska','Jánošíkova','Kukučínova','Bernolákova','Tajovského','Vajanského','Masarykova','Jesenského','Slnečná','Lesná','Lúčna','Poľná','Severná','Južná','Východná','Západná','Lipová','Dubová','Jedľová','Smreková','Brezová','Javorová','Agátová','Topoľová','Gaštanová','Ružová','Tulipánová','Konvalinková','Fialková','Narcisová','Jarmočná','Trhová','Obchodná','Priemyselná','Továrenská','Železničná','Staničná','Letná','Zimná','Jarná','Jesenná','Potočná','Riečna','Vodná','Mlynská','Hradná','Zámocká','Kostolná','Farská','Cintorínska','Múzejná','Divadelná','Tichá','Veselá','Vysoká','Široká','Rovná','Okružná','Priečna','Hraničná','Vinohradnícka','Sídlisková','Stavbárska','Bajkalská','Pribinova','Karadžičova','Mlynské nivy','Prievozská','Ružinovská','Galvaniho','Miletičova','Metodova'];
-function setup(iid,sid,list){var inp=document.getElementById(iid),box=document.getElementById(sid);if(!inp||!box)return;var ai=-1;inp.addEventListener('input',function(){var v=this.value.toLowerCase().trim();box.innerHTML='';ai=-1;if(v.length<1){box.style.display='none';return;}var m=list.filter(function(x){return x.toLowerCase().startsWith(v)||x.toLowerCase().includes(v)}).slice(0,8);if(!m.length){box.style.display='none';return;}m.forEach(function(x){var d=document.createElement('div');d.className='ac-item';d.textContent=x;d.addEventListener('mousedown',function(e){e.preventDefault();inp.value=x;box.style.display='none';});box.appendChild(d);});box.style.display='block';});inp.addEventListener('keydown',function(e){var items=box.querySelectorAll('.ac-item');if(!items.length)return;if(e.key==='ArrowDown'){e.preventDefault();ai=Math.min(ai+1,items.length-1);items.forEach(function(el,i){el.classList.toggle('active',i===ai);});}else if(e.key==='ArrowUp'){e.preventDefault();ai=Math.max(ai-1,0);items.forEach(function(el,i){el.classList.toggle('active',i===ai);});}else if(e.key==='Enter'&&ai>=0){e.preventDefault();inp.value=items[ai].textContent;box.style.display='none';}});inp.addEventListener('blur',function(){setTimeout(function(){box.style.display='none';},150);});}
-setup('address','address-suggestions',streets);
-setup('city','city-suggestions',cities);
+  const DB=[
+    {c:'Bratislava',p:'811 01',s:['Obchodná','Štúrova','Laurinská','Panská','Ventúrska','Michalovská','Grösslingová','Dostojevského rad','Šancová','Bajkalská','Ružinovská','Prievozská','Mlynské nivy','Karadžičova','Tomášikova','Drieňová','Galvaniho','Plynárenská','Trnavská cesta','Kučučínova','Račianska','Vajnorská','Ďumbierska','Pekná cesta','Stromová']},
+    {c:'Košice',p:'040 01',s:['Hlavná','Mlynská','Alžbetina','Moyzes','Štúrova','Kováčska','Domin. nám.','Hviezdoslavova','Masarykova','Letná','Trieda SNP','Južná trieda']},
+    {c:'Prešov',p:'080 01',s:['Hlavná','Masarykova','Slovenská','Jarková','Levočská','Sabinovská','Mukačevská']},
+    {c:'Žilina',p:'010 01',s:['Mariánske nám.','Národná','Horný val','Dolný val','Sasinkova','Hollého','Kálov']},
+    {c:'Nitra',p:'949 01',s:['Štefánikova','Farská','Mostná','Štúrova','Kupecká']},
+    {c:'Banská Bystrica',p:'974 01',s:['Nám. SNP','Dolná','Horná','Kapitul. ','Lazovná','Národná']},
+    {c:'Trnava',p:'917 01',s:['Hlavná','Trojičné nám.','Štefánikova','Hollého','Hviezdoslavova']},
+    {c:'Martin',p:'036 01',s:['Divadelná','Kohútova','Mudroňova','Národná','Vajanského nám.']},
+    {c:'Trenčín',p:'911 01',s:['Mierové nám.','Hviezdoslavova','Palackého','Štúrovo nám.','Legionárska']},
+    {c:'Poprad',p:'058 01',s:['Nám. sv. Egídia','Štefánikova','Hviezdoslavova','Levočská']},
+    {c:'Zvolen',p:'960 01',s:['Nám. SNP','Šoltésovej','Divadelná','Tajovského']},
+    {c:'Považská Bystrica',p:'017 01',s:['Nám. A. Hlinku','Kučučínova','Štúrova']},
+    {c:'Piešťany',p:'921 01',s:['Winterova','Nám. SNP','Štefánikova']},
+    {c:'Michalovce',p:'071 01',s:['Nám. osloboditeľov','Masarykova','Hviezdoslavova']},
+    {c:'Nové Zámky',p:'940 02',s:['Hlavné nám.','Komárňanská','Štefánikova']},
+    {c:'Spisská Nová Ves',p:'052 01',s:['Radničné nám.','Letná','Zimná']},
+    {c:'Humenné',p:'066 01',s:['Nám. slobody','Štefánikova','Lipová']},
+    {c:'Levice',p:'934 01',s:['Nám. hrdinov','Komenského','Saratovská']},
+    {c:'Komárno',p:'945 01',s:['Nám. gen. Klapku','Palatínova']},
+    {c:'Bardejov',p:'085 01',s:['Radničné nám.','Dlhý rad']},
+    {c:'Lučenec',p:'984 01',s:['Nám. republiky','Masarykova']},
+    {c:'Ružomberok',p:'034 01',s:['Nám. A. Hlinku','Mostová']},
+    {c:'Liptovský Mikuláš',p:'031 01',s:['Nám. osloboditeľov','Štúrova']},
+    {c:'Topoľčany',p:'955 01',s:['Nám. M.R. Štefánika','Stummerova']},
+    {c:'Dunajská Streda',p:'929 01',s:['Hlavná','Galantská cesta']},
+    {c:'Dolný Kubín',p:'026 01',s:['Hviezdoslavovo nám.','Radlinského']},
+    {c:'Čadca',p:'022 01',s:['Nám. slobody','Palárikova']},
+    {c:'Pezinok',p:'902 01',s:['Radničné nám.','Holubyho','Štefánikova']},
+    {c:'Senec',p:'903 01',s:['Nám. 1. mája','Lichnerova']},
+    {c:'Senica',p:'905 01',s:['Nám. oslobodenia','Štefánikova']},
+    {c:'Malacky',p:'901 01',s:['Záhorácka','Nám. SNP']},
+    {c:'Galanta',p:'924 01',s:['Hlavná','Mierové nám.']},
+    {c:'Prievidza',p:'971 01',s:['Nám. slobody','Bojnická cesta']},
+    {c:'Brezno',p:'977 01',s:['Nám. M.R. Štefánika']},
+    {c:'Skalica',p:'909 01',s:['Nám. slobody']},
+    {c:'Trebišov',p:'075 01',s:['M.R. Štefánika']},
+    {c:'Kežmarok',p:'060 01',s:['Hlavné nám.']},
+    {c:'Stará Ľubovňa',p:'064 01',s:['Nám. sv. Mikuláša']}
+  ];
+  function setup(iid,sid,type){
+    var inp=document.getElementById(iid),box=document.getElementById(sid);
+    if(!inp||!box)return;
+    var ai=-1;
+    inp.addEventListener('input',function(){
+      var v=this.value.toLowerCase().trim();box.innerHTML='';ai=-1;
+      if(v.length<1)return;
+      var m=[];
+      if(type==='city'){
+        DB.forEach(function(d){if(d.c.toLowerCase().indexOf(v)>-1&&m.length<8)m.push({l:d.c,s:d.p,city:d.c,psc:d.p});});
+      }else{
+        DB.forEach(function(d){d.s.forEach(function(st){if(st.toLowerCase().indexOf(v)>-1&&m.length<8)m.push({l:st,s:d.c+' '+d.p,city:d.c,psc:d.p});});});
+      }
+      if(!m.length)return;
+      m.forEach(function(item){
+        var div=document.createElement('div');div.className='ac-item';
+        div.innerHTML='<strong>'+item.l+'</strong><span style="float:right;color:#999;font-size:0.82rem">'+item.s+'</span>';
+        div.addEventListener('mousedown',function(e){
+          e.preventDefault();inp.value=item.l;box.innerHTML='';
+          var ci=document.getElementById('city'),zi=document.getElementById('zip');
+          if(type==='address'){if(ci)ci.value=item.city;if(zi)zi.value=item.psc;}
+          if(type==='city'&&zi)zi.value=item.psc;
+        });
+        box.appendChild(div);
+      });
+    });
+    inp.addEventListener('keydown',function(e){
+      var items=box.querySelectorAll('.ac-item');if(!items.length)return;
+      if(e.key==='ArrowDown'){e.preventDefault();ai=Math.min(ai+1,items.length-1);}
+      else if(e.key==='ArrowUp'){e.preventDefault();ai=Math.max(ai-1,0);}
+      else if(e.key==='Enter'&&ai>=0){e.preventDefault();items[ai].dispatchEvent(new MouseEvent('mousedown'));}
+      else return;
+      items.forEach(function(it,i){it.classList.toggle('active',i===ai);});
+    });
+    inp.addEventListener('blur',function(){setTimeout(function(){box.innerHTML='';},150);});
+    inp.addEventListener('focus',function(){if(this.value.length>=1)this.dispatchEvent(new Event('input'));});
+  }
+  setup('address','address-suggestions','address');
+  setup('city','city-suggestions','city');
 })();
 </script>
 </body>
