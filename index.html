@@ -454,6 +454,14 @@
             overflow: hidden;
         }
 
+        @media (max-width: 768px) {
+            .hero-gallery-wrap {
+                margin-left: -2rem;
+                margin-right: -2rem;
+                width: calc(100% + 4rem);
+            }
+        }
+
         .hero-cards {
             display: flex;
             gap: 0;
@@ -1496,6 +1504,11 @@
             gap: 0.5rem;
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
+            position: sticky;
+            top: 56px;
+            z-index: 10;
+            background: var(--bg);
+            padding: 1rem 0;
         }
 
         .spektrum-mobile-tab {
@@ -1949,11 +1962,11 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" data-i18n="order.email">Email</label>
-                            <input class="form-input" type="text" id="email" name="email" placeholder="tvoj@email.sk" data-i18n-placeholder="order.ph.email" required>
+                            <input class="form-input" type="email" id="email" name="email" inputmode="email" autocapitalize="off" placeholder="tvoj@email.sk" data-i18n-placeholder="order.ph.email" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label" data-i18n="order.phone">Telefón</label>
-                            <input class="form-input" type="tel" id="phone" name="phone" placeholder="+421 ...">
+                            <input class="form-input" type="tel" id="phone" inputmode="tel" name="phone" placeholder="+421 ...">
                         </div>
                         <div class="form-group">
                             <label class="form-label" data-i18n="order.street">Ulica a číslo</label>
@@ -1966,7 +1979,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" data-i18n="order.zip">PSČ</label>
-                                <input class="form-input" type="text" id="zip" name="zip" placeholder="PSČ" data-i18n-placeholder="order.ph.zip" required>
+                                <input class="form-input" type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9 ]*" placeholder="PSČ" data-i18n-placeholder="order.ph.zip" required>
                             </div>
                         </div>
 
