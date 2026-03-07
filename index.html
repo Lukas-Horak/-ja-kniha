@@ -875,19 +875,29 @@
         }
 
         .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+            display: flex;
+            gap: 1.5rem;
             margin-top: 4rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 1rem;
         }
+        .testimonials-grid::-webkit-scrollbar { display: none; }
 
         .testimonials .testimonial-card {
             padding: 2.5rem 2rem;
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 2px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-width: 380px;
+            max-width: 420px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
         }
 
         .testimonial-quote {
@@ -913,6 +923,31 @@
             font-size: 0.85rem;
             color: rgba(255,255,255,0.5);
             letter-spacing: 0.05em;
+        }
+
+        .testimonials-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .testimonials-nav button {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .testimonials-nav button:hover {
+            border-color: rgba(255,255,255,0.5);
+            color: #fff;
         }
 
         /* ========================================
@@ -1317,8 +1352,10 @@
             }
 
             .testimonials-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1rem;
+            }
+            .testimonials .testimonial-card {
+                min-width: 300px;
             }
 
             .order-grid {
@@ -1790,6 +1827,16 @@
                     <h3 class="theme-title" data-i18n="themes.t4">Evolúcia a&nbsp;prebudenie</h3>
                     <p class="theme-desc" data-i18n="themes.d4">Ako pokročiť v&nbsp;evolučnom vývoji a&nbsp;dosiahnuť najvyšší stav vedomia, ktorý sa v&nbsp;histórii zvykol nazývať „prebudenie" alebo „osvietenie"?</p>
                 </div>
+                <div class="theme-card fade-in fade-in-delay-5">
+                    <div class="theme-number">05</div>
+                    <h3 class="theme-title" data-i18n="themes.t5">Prekonanie inštinktov</h3>
+                    <p class="theme-desc" data-i18n="themes.d5">Ako prekonať inštinktívne mechanizmy, ktoré nás neustále ťahajú späť k utrpeniu? Objavte cestu od automatických reakcií k vedomému životu.</p>
+                </div>
+                <div class="theme-card fade-in fade-in-delay-6">
+                    <div class="theme-number">06</div>
+                    <h3 class="theme-title" data-i18n="themes.t6">Evolučné emócie</h3>
+                    <p class="theme-desc" data-i18n="themes.d6">Aké emócie sa objavili len nedávno v evolúcii a sú dostupné menej ako 1% populácie? Spoznajte stav hlbokej blaženosti a súcitu.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1904,6 +1951,10 @@
                     <span class="testimonial-author" data-i18n="test.a3">— Ema Horváthová · Martinus.sk</span>
                 </div>
             </div>
+                <div class="testimonials-nav">
+                    <button onclick="document.querySelector('.testimonials-grid').scrollBy({left:-400,behavior:'smooth'})" aria-label="Previous">←</button>
+                    <button onclick="document.querySelector('.testimonials-grid').scrollBy({left:400,behavior:'smooth'})" aria-label="Next">→</button>
+                </div>
             <div class="testimonials-grid" style="margin-top: 2rem;">
                 <div class="testimonial-card fade-in fade-in-delay-1">
                     <p class="testimonial-quote" data-i18n="test.q4">Hlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet. Kniha ďaleko prekračuje psychologické koncepty.</p>
