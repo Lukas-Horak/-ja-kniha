@@ -51,11 +51,11 @@
         html {
             scroll-behavior: smooth;
             font-size: 16px;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
@@ -1403,6 +1403,7 @@
 
         .spektrum-table-wrap {
             margin-top: 3rem;
+            overflow-x: auto;
         }
 
         .spektrum-table {
@@ -1421,10 +1422,6 @@
             letter-spacing: -0.02em;
             text-align: left;
             vertical-align: bottom;
-            position: sticky;
-            top: 56px;
-            z-index: 10;
-            background: var(--bg-warm);
             border-bottom: none;
             box-shadow: inset 0 -2px 0 0 var(--text);
         }
@@ -2765,5 +2762,65 @@
   setup('city','city-suggestions','city');
 })();
 </script>
+
+    <!-- Sticky Table Header JS -->
+    <script>
+    (function() {
+        var table = document.querySelector('.spektrum-table');
+        if (!table) return;
+        var thead = table.querySelector('thead');
+        var nav = document.querySelector('.nav');
+        var navH = nav ? nav.offsetHeight : 56;
+
+        // Create fixed clone
+        var fixedWrap = document.createElement('div');
+        fixedWrap.id = 'spektrum-sticky-clone';
+        fixedWrap.style.cssText = 'position:fixed;top:' + navH + 'px;left:0;right:0;z-index:100;display:none;pointer-events:none;';
+
+        var inner = document.createElement('div');
+        inner.style.cssText = 'max-width:1200px;margin:0 auto;padding:0 2rem;';
+
+        var cloneTable = document.createElement('table');
+        cloneTable.style.cssText = 'width:100%;border-collapse:collapse;font-size:0.85rem;line-height:1.5;';
+        var cloneThead = thead.cloneNode(true);
+        cloneThead.querySelectorAll('th').forEach(function(th) {
+            th.style.background = 'var(--bg-warm, #f5f3ef)';
+            th.style.boxShadow = 'inset 0 -2px 0 0 var(--text, #1a1a1a)';
+        });
+        cloneTable.appendChild(cloneThead);
+        inner.appendChild(cloneTable);
+        fixedWrap.appendChild(inner);
+        document.body.appendChild(fixedWrap);
+
+        function syncWidths() {
+            var origThs = thead.querySelectorAll('th');
+            var cloneThs = cloneThead.querySelectorAll('th');
+            origThs.forEach(function(t, i) {
+                if (cloneThs[i]) cloneThs[i].style.width = t.offsetWidth + 'px';
+            });
+        }
+        syncWidths();
+
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    var tRect = table.getBoundingClientRect();
+                    var hRect = thead.getBoundingClientRect();
+                    if (hRect.top < navH && tRect.bottom > navH + 60) {
+                        fixedWrap.style.display = 'block';
+                    } else {
+                        fixedWrap.style.display = 'none';
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, {passive: true});
+
+        window.addEventListener('resize', syncWidths);
+    })();
+    </script>
+
 </body>
 </html>
