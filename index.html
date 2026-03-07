@@ -1837,28 +1837,7 @@
         </div>
     </section>
 
-    <!-- ===== AUTHOR ===== -->
-    <section class="section" id="autor">
-        <div class="container">
-            <div class="author-grid">
-                <div class="author-portrait fade-in">
-                    <!-- NAHRAĎ: vlož cestu k autorskej fotke -->
-                    <img class="lazy" src="images/author.jpg" alt="Lukáš Horák" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="author-portrait-placeholder" style="display:none;">LH</div>
-                </div>
-                <div class="author-text fade-in fade-in-delay-2">
-                    <span class="heading-sm" data-i18n="author.label">Predslov autora</span>
-                    <div class="divider divider-left"></div>
-                    <h2 class="heading-lg" data-i18n="author.name">Lukáš Horák</h2>
-                    <p class="body-lg" style="margin-bottom: 1.5rem;" data-i18n="author.p1">Mnohí z&nbsp;nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s&nbsp;negatívnymi emocionálnymi stavmi a&nbsp;vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a&nbsp;mier.</p>
-                    <p class="body-md" style="margin-bottom: 1.5rem;" data-i18n="author.p2">Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a&nbsp;prichádza natoľko výnimočný, slovami neopísateľný a&nbsp;nezabudnuteľný stav, že by ho človek nevymenil za nič na svete.</p>
-                    <p class="body-md" style="color: var(--text); font-weight: 600; font-style: italic;" data-i18n="author.p3">Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s&nbsp;ničím menším.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== TESTIMONIALS ===== -->
+        <!-- ===== TESTIMONIALS ===== -->
     <section class="section testimonials" id="ohlasy">
         <div class="container">
             <div style="text-align:center;" class="fade-in">
@@ -2042,6 +2021,27 @@
                         <h3 class="heading-md" style="margin-bottom: 1rem;" data-i18n="order.successTitle">Ďakujeme za objednávku!</h3>
                         <p class="body-md" data-i18n="order.successMsg">Potvrdenie ti príde na email. Kniha bude na ceste do 3–5 pracovných dní.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AUTHOR ===== -->
+    <section class="section" id="autor">
+        <div class="container">
+            <div class="author-grid">
+                <div class="author-portrait fade-in">
+                    <!-- NAHRAĎ: vlož cestu k autorskej fotke -->
+                    <img class="lazy" src="images/author.jpg" alt="Lukáš Horák" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="author-portrait-placeholder" style="display:none;">LH</div>
+                </div>
+                <div class="author-text fade-in fade-in-delay-2">
+                    <span class="heading-sm" data-i18n="author.label">Predslov autora</span>
+                    <div class="divider divider-left"></div>
+                    <h2 class="heading-lg" data-i18n="author.name">Lukáš Horák</h2>
+                    <p class="body-lg" style="margin-bottom: 1.5rem;" data-i18n="author.p1">Mnohí z&nbsp;nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s&nbsp;negatívnymi emocionálnymi stavmi a&nbsp;vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a&nbsp;mier.</p>
+                    <p class="body-md" style="margin-bottom: 1.5rem;" data-i18n="author.p2">Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a&nbsp;prichádza natoľko výnimočný, slovami neopísateľný a&nbsp;nezabudnuteľný stav, že by ho človek nevymenil za nič na svete.</p>
+                    <p class="body-md" style="color: var(--text); font-weight: 600; font-style: italic;" data-i18n="author.p3">Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s&nbsp;ničím menším.</p>
                 </div>
             </div>
         </div>
@@ -2770,7 +2770,7 @@
         if (!table) return;
         var thead = table.querySelector('thead');
         var nav = document.querySelector('.nav');
-        var navH = nav ? nav.offsetHeight : 56;
+        var navH = nav ? Math.round(nav.getBoundingClientRect().bottom) : 56;
 
         // Create fixed clone
         var fixedWrap = document.createElement('div');
