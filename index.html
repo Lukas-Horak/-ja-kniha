@@ -866,10 +866,21 @@
             color: var(--white);
         }
 
+        .testimonials .container {
+            max-width: none;
+            padding: 0;
+        }
+
+        .testimonials .fade-in {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
             margin-top: 4rem;
         }
 
@@ -2775,7 +2786,7 @@
         // Create fixed clone
         var fixedWrap = document.createElement('div');
         fixedWrap.id = 'spektrum-sticky-clone';
-        fixedWrap.style.cssText = 'position:fixed;top:' + navH + 'px;left:0;right:0;z-index:100;display:none;pointer-events:none;';
+        fixedWrap.style.cssText = 'position:fixed;top:' + navH + 'px;left:0;right:0;z-index:100;display:none;pointer-events:none;margin-top:-1px;box-shadow:0 2px 8px rgba(0,0,0,0.06);';
 
         var inner = document.createElement('div');
         inner.style.cssText = 'max-width:1200px;margin:0 auto;padding:0 2rem;';
@@ -2807,9 +2818,11 @@
         window.addEventListener('scroll', function() {
             if (!ticking) {
                 requestAnimationFrame(function() {
+                    var currentNavH = nav ? Math.round(nav.getBoundingClientRect().bottom) : navH;
+                    fixedWrap.style.top = currentNavH + 'px';
                     var tRect = table.getBoundingClientRect();
                     var hRect = thead.getBoundingClientRect();
-                    if (hRect.top < navH && tRect.bottom > navH + 60) {
+                    if (hRect.top < currentNavH && tRect.bottom > currentNavH + 60) {
                         fixedWrap.style.display = 'block';
                     } else {
                         fixedWrap.style.display = 'none';
