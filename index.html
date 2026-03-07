@@ -609,10 +609,15 @@
                 font-size: 0.9rem;
             }
             .hero-card-text {
-                font-size: 0.72rem;
-                max-height: none;
-                overflow: visible;
+                font-size: 0.85rem;
+                max-height: 4rem;
+                overflow: hidden;
             }
+        }
+
+        /* Mobile click-to-expand hero card text */
+        .hero-card.expanded .hero-card-text {
+            max-height: 20rem;
         }
 
 
@@ -1953,12 +1958,7 @@
                     <p class="testimonial-quote" data-i18n="test.q3">Skvelo napísaná kniha, ktorá prepája vedu a sebapoznanie bez zbytočných slniečkárskych omáčok. Autor ide do hĺbky, ale stále zrozumiteľne. Odporúčam každému, kto nechce čítať len motivačné frázy.</p>
                     <span class="testimonial-author" data-i18n="test.a3">— Ema Horváthová · Martinus.sk</span>
                 </div>
-            </div>
-                <div class="testimonials-nav">
-                    <button onclick="document.querySelector('.testimonials-grid').scrollBy({left:-400,behavior:'smooth'})" aria-label="Previous">←</button>
-                    <button onclick="document.querySelector('.testimonials-grid').scrollBy({left:400,behavior:'smooth'})" aria-label="Next">→</button>
-                </div>
-            <div class="testimonials-grid" style="margin-top: 2rem;">
+            
                 <div class="testimonial-card fade-in fade-in-delay-1">
                     <p class="testimonial-quote" data-i18n="test.q4">Hlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet. Kniha ďaleko prekračuje psychologické koncepty.</p>
                     <span class="testimonial-author" data-i18n="test.a4">— Sebastián Svit · Martinus.sk</span>
@@ -1972,6 +1972,10 @@
                     <span class="testimonial-author" data-i18n="test.a6">— Dominika · Martinus.sk</span>
                 </div>
             </div>
+                <div class="testimonials-nav">
+                    <button onclick="document.querySelector('.testimonials-grid').scrollBy({left:-440,behavior:'smooth'})" aria-label="Previous">←</button>
+                    <button onclick="document.querySelector('.testimonials-grid').scrollBy({left:440,behavior:'smooth'})" aria-label="Next">→</button>
+                </div>
         </div>
     </section>
 
@@ -2925,6 +2929,17 @@
 
         window.addEventListener('resize', syncWidths);
     })();
+    </script>
+    <script>
+    // Mobile: click to expand hero card text
+    if (window.innerWidth <= 640) {
+        document.querySelectorAll('.hero-card').forEach(function(card) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+            });
+        });
+    }
     </script>
 
 </body>
