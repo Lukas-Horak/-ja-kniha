@@ -2786,6 +2786,8 @@
         cloneThead.querySelectorAll('th').forEach(function(th) {
             th.style.background = 'var(--bg-warm, #f5f3ef)';
             th.style.boxShadow = 'inset 0 -2px 0 0 var(--text, #1a1a1a)';
+            var spans = th.querySelectorAll('span');
+            spans.forEach(function(s) { s.style.display = 'none'; });
         });
         cloneTable.appendChild(cloneThead);
         inner.appendChild(cloneTable);
