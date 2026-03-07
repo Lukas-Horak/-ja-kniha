@@ -7,7 +7,7 @@
     <meta name="description" content="Evolúcia vedomia — JA. Prelomový pohľad na ľudské vedomie. Bestseller od Lukáša Horáka. 336 strán. Objednaj s doručením.">
     <meta property="og:title" content="JA — Evolúcia vedomia">
     <meta property="og:description" content="Kniha, ktorá mení spôsob, akým vnímáš seba samého.">
-    <meta property="og:image" content="images/book-cover.jpg">
+    <meta property="og:image" content="images/book-cover.jpg"
     <meta property="og:type" content="website">
     <!--
         FONT: PP Mori (Pangram Pangram)
@@ -447,10 +447,8 @@
 
         /* Scrollable Photo Testimonial Gallery */
         .hero-gallery-wrap {
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
+            width: 100%;
             overflow: hidden;
-            max-width: 100vw;
         }
 
         .hero-cards {
@@ -1969,7 +1967,19 @@
                             </div>
                         </div>
 
-                        <!-- Promo Code -->
+                        <!-- Quantity -->
+            <div class="form-row" style="margin-top:1.5rem">
+              <div style="width:100%">
+                <label class="form-label">POČET KUSOV</label>
+                <div style="display:flex;align-items:center;gap:1rem">
+                  <button type="button" id="qtyMinus" style="width:44px;height:44px;border:1px solid #ccc;background:#fff;font-size:1.2rem;cursor:pointer;border-radius:8px">−</button>
+                  <input class="form-input" type="number" id="quantity" name="quantity" value="1" min="1" max="10" style="width:60px;text-align:center" readonly>
+                  <button type="button" id="qtyPlus" style="width:44px;height:44px;border:1px solid #ccc;background:#fff;font-size:1.2rem;cursor:pointer;border-radius:8px">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Promo Code -->
                         <div class="promo-section">
                             <button type="button" class="promo-toggle" onclick="togglePromo()">
                                 <span data-i18n="order.promo">+ Mám zľavový kód</span>
@@ -2260,6 +2270,18 @@
             }
         }
 
+            // Quantity selector handlers
+            document.getElementById('qtyMinus').addEventListener('click', function() {
+              var q = document.getElementById('quantity');
+              var v = parseInt(q.value) || 1;
+              if (v > 1) { q.value = v - 1; updatePrice(); }
+            });
+            document.getElementById('qtyPlus').addEventListener('click', function() {
+              var q = document.getElementById('quantity');
+              var v = parseInt(q.value) || 1;
+              if (v < 10) { q.value = v + 1; updatePrice(); }
+            });
+
         function formatPrice(amount) {
             return amount.toFixed(2).replace('.', ',') + ' €';
         }
@@ -2292,6 +2314,8 @@
             var orderData = {
                 firstName: form.firstName.value,
                 lastName: form.lastName.value,
+                name: form.firstName.value + ' ' + form.lastName.value,
+                quantity: parseInt(document.getElementById('quantity').value) || 1,
                 email: form.email.value,
                 phone: form.phone.value,
                 address: form.address.value,
@@ -2688,7 +2712,7 @@
     if(!inp||!box)return;
     var ai=-1;
     inp.addEventListener('input',function(){
-      var v=this.value.toLowerCase().trim();box.innerHTML='';ai=-1;
+      var v=this.value.toLowerCase().trim();box.innerHTML='';box.style.display='none';ai=-1;
       if(v.length<1)return;
       var m=[];
       if(type==='city'){
@@ -2701,7 +2725,7 @@
         var div=document.createElement('div');div.className='ac-item';
         div.innerHTML='<strong>'+item.l+'</strong><span style="float:right;color:#999;font-size:0.82rem">'+item.s+'</span>';
         div.addEventListener('mousedown',function(e){
-          e.preventDefault();inp.value=item.l;box.innerHTML='';
+          e.preventDefault();inp.value=item.l;box.innerHTML='';box.style.display='none';
           var ci=document.getElementById('city'),zi=document.getElementById('zip');
           if(type==='address'){if(ci)ci.value=item.city;if(zi)zi.value=item.psc;}
           if(type==='city'&&zi)zi.value=item.psc;
@@ -2716,8 +2740,9 @@
       else if(e.key==='Enter'&&ai>=0){e.preventDefault();items[ai].dispatchEvent(new MouseEvent('mousedown'));}
       else return;
       items.forEach(function(it,i){it.classList.toggle('active',i===ai);});
+              box.style.display=items.length?'block':'none';
     });
-    inp.addEventListener('blur',function(){setTimeout(function(){box.innerHTML='';},150);});
+    inp.addEventListener('blur',function(){setTimeout(function(){box.innerHTML='';box.style.display='none';},150);});
     inp.addEventListener('focus',function(){if(this.value.length>=1)this.dispatchEvent(new Event('input'));});
   }
   setup('address','address-suggestions','address');
