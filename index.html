@@ -764,26 +764,21 @@
         }
 
         .gallery-strip {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
             gap: 0;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 0;
-            scrollbar-width: none;
-        }
+            width: 100%;
+        }}
 
         .gallery-strip::-webkit-scrollbar {
             display: none;
         }
 
         .gallery-item {
-            flex: 0 0 auto;
-            width: 25vw;
-            height: 450px;
-            scroll-snap-align: start;
             overflow: hidden;
-        }
+            height: 450px;
+            position: relative;
+        }}
 
         .gallery-item img {
             width: 100%;
@@ -1611,8 +1606,8 @@
         <div class="nav-links">
             <a href="#intro" class="nav-link" data-i18n="nav.about" data-i18n="foot.about">O knihe</a>
             <a href="#spektrum" class="nav-link" data-i18n="nav.spectrum" data-i18n="foot.spectrum">Spektrum vedomia</a>
-            <a href="#autor" class="nav-link" data-i18n="nav.author" data-i18n="foot.author">Autor</a>
             <a href="#ohlasy" class="nav-link" data-i18n="nav.reviews">Ohlasy</a>
+            <a href="#autor" class="nav-link" data-i18n="nav.author" data-i18n="foot.author">Autor</a>
             <a href="#objednat" class="nav-cta" data-i18n="nav.order">Objednať</a>
             <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">EN</button>
         </div>
