@@ -1454,183 +1454,6 @@
             100% { opacity: 0; transform: translateY(-10px); }
         }
 
-        /* SPEKTRUM REMOVED
-/* ========================================
-           SPEKTRUM VEDOMIA — TABLE LAYOUT
-           ======================================== */
-        .spektrum {
-            background: var(--bg-warm);
-        }
-
-        .spektrum-table-wrap {
-            margin-top: 3rem;
-            overflow-x: auto;
-        }
-
-        .spektrum-table {
-            width: 100%;
-            min-width: 800px;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        .spektrum-table thead th {
-            padding: 3rem 1rem;
-            font-family: var(--serif);
-            font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: -0.02em;
-            text-align: left;
-            vertical-align: bottom;
-            border-bottom: none;
-            box-shadow: inset 0 -2px 0 0 var(--text);
-        
-            white-space: nowrap;}
-        .spektrum-table thead th:first-child {
-            font-size: 1.3rem;
-            font-weight: 600;
-            width: 160px;
-            min-width: 140px;
-            background: var(--bg-warm);
-        }
-
-        /* Column shading: darkest → lightest */
-        .spektrum-table thead th:nth-child(2),
-        .spektrum-table tbody td:nth-child(2) {
-            background: #E6E3DD;
-        }
-
-        .spektrum-table thead th:nth-child(3),
-        .spektrum-table tbody td:nth-child(3) {
-            background: #EDEBE6;
-        }
-
-        .spektrum-table thead th:nth-child(4),
-        .spektrum-table tbody td:nth-child(4) {
-            background: #F3F1EC;
-        }
-
-        .spektrum-table thead .th-percent {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            margin-top: 0.2rem;
-            font-family: var(--sans);
-        }
-
-        .spektrum-table tbody td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-            vertical-align: top;
-            color: var(--text);
-        }
-
-        .spektrum-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .spektrum-table tbody td:first-child {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            font-weight: 400;
-            white-space: nowrap;
-        }
-
-
-        /* Alternating row — removed, column shading handles it */
-
-        /* Hover */
-        .spektrum-table tbody tr {
-            transition: background 0.2s ease;
-        }
-
-        .spektrum-table tbody tr:hover {
-            background: rgba(0,0,0,0.03);
-        }
-
-        /* Mobile: card view */
-        .spektrum-mobile {
-            display: none;
-        }
-
-        .spektrum-mobile-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            position: sticky;
-            top: 56px;
-            z-index: 10;
-            background: var(--bg);
-            padding: 1rem 0;
-        }
-
-        .spektrum-mobile-tab {
-            padding: 0.6rem 1.2rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-family: var(--sans);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .spektrum-mobile-tab.active {
-            background: var(--text);
-            color: var(--bg);
-            border-color: var(--text);
-        }
-
-        .spektrum-mobile-card {
-            display: none;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .spektrum-mobile-card.active {
-            display: block;
-        }
-
-        .spektrum-mobile-card .mobile-row {
-            padding: 0.75rem 1.25rem;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
-
-        .spektrum-mobile-card .mobile-row:last-child {
-            border-bottom: none;
-        }
-
-        .spektrum-mobile-card .mobile-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-        }
-
-        .spektrum-mobile-card .mobile-value {
-            font-size: 0.9rem;
-            color: var(--text);
-            line-height: 1.4;
-            margin-top: 0.15rem;
-        }
-
-        @media (max-width: 899px) {
-            .spektrum-table-wrap {
-                display: none;
-            }
-            .spektrum-mobile {
-                display: block;
-                margin-top: 2rem;
-            }
-SPEKTRUM REMOVED */
         }
 
     
@@ -1725,7 +1548,6 @@ SPEKTRUM REMOVED */
         </div>
         <div class="nav-links">
             <a href="#intro" class="nav-link" data-i18n="nav.about" data-i18n="foot.about">O knihe</a>
-            <a href="#spektrum" class="nav-link" data-i18n="nav.spectrum" data-i18n="foot.spectrum">Spektrum vedomia</a>
             <a href="#ohlasy" class="nav-link" data-i18n="nav.reviews">Ohlasy</a>
             <a href="#autor" class="nav-link" data-i18n="nav.author" data-i18n="foot.author">Autor</a>
             <a href="#objednat" class="nav-cta" data-i18n="nav.order">Objednať</a>
@@ -1880,91 +1702,6 @@ SPEKTRUM REMOVED */
     
 
     <!-- ===== SPEKTRUM VEDOMIA ===== -->
-    <!-- SPEKTRUM REMOVED
-<section class="section spektrum" id="spektrum">
-        <div class="container">
-            <div style="text-align:center;" class="fade-in">
-                <span class="heading-sm" data-i18n="spektrum.label">Z knihy</span>
-                <div class="divider"></div>
-                <h2 class="heading-lg" data-i18n="spektrum.heading">Spektrum vedomia</h2>
-                <p class="body-md" style="max-width: 720px; margin: 1.5rem auto 0; color: var(--text-light);" data-i18n="spektrum.p1">Spektrum vedomia poskytuje užitočný rámec pre pochopenie troch základných úrovní ľudského vedomia – „Primitívne ja", „Rozumové ja" a&nbsp;„Vyššie ja". Predstavuje komplexný pohľad na psychologický a&nbsp;evolučný vývoj jedinca od základnej inštinktívnej úrovne po vysoko vedomé stavy bytia – a&nbsp;celý tento koncept je detailne rozobratý v&nbsp;knihe.</p>
-            </div>
-
-            <!-- Desktop: table like PDF -->
-            <div class="spektrum-table-wrap fade-in">
-                <table class="spektrum-table">
-                    <thead>
-                        <tr>
-                            <th data-i18n-html="tbl.h0">Spektrum vedomia</th>
-                            <th data-i18n-html="tbl.h1">Primitívne ja<span class="th-percent">70 % populácie</span></th>
-                            <th data-i18n-html="tbl.h2">Rozumové ja<span class="th-percent">29 % populácie</span></th>
-                            <th data-i18n-html="tbl.h3">Vyššie ja<span class="th-percent">&lt; 1 % populácie</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td data-i18n="tbl.r0c0">Sebaidentifikácia</td><td data-i18n="tbl.r0c1">Fyzické telo</td><td data-i18n="tbl.r0c2">Myseľ</td><td data-i18n="tbl.r0c3">Vedomie</td></tr>
-                        <tr><td data-i18n="tbl.r1c0">Zameranie</td><td data-i18n="tbl.r1c1">Stav vlastnenia (čo mám)</td><td data-i18n="tbl.r1c2">Stav konania (čo robím)</td><td data-i18n="tbl.r1c3">Stav bytia (kým som)</td></tr>
-                        <tr><td data-i18n="tbl.r2c0">Prevládajúci systém</td><td data-i18n="tbl.r2c1">Staré štruktúry mozgu</td><td data-i18n="tbl.r2c2">Nové štruktúry mozgu</td><td data-i18n="tbl.r2c3">Energetické pole vedomia</td></tr>
-                        <tr><td data-i18n="tbl.r3c0">Správanie</td><td data-i18n="tbl.r3c1">Inštinktívne, sebecké, detinské, nemorálne, konfliktné až agresívne</td><td data-i18n="tbl.r3c2">Inteligentné, logické, selektívne, morálne, kreatívne, zmysluplné</td><td data-i18n="tbl.r3c3">Uvedomelé, zmierlivé, nezaujaté, vysoko kreatívne, nezištné a láskyplné</td></tr>
-                        <tr><td data-i18n="tbl.r4c0">Vyhľadáva</td><td data-i18n="tbl.r4c1">Drámu, neustále aktivity, konflikty, súťaženie, kritiku a psychologický zisk</td><td data-i18n="tbl.r4c2">Myšlienkové koncepty, vedomosti, názory, postoje, ciele, význam a zmysel</td><td data-i18n="tbl.r4c3">Pokoj, mier, radosť, lásku, úprimnosť, harmóniu, zámer, porozumenie</td></tr>
-                        <tr><td data-i18n="tbl.r5c0">Riešenie konfliktov</td><td data-i18n="tbl.r5c1">Útok (agresívna konfrontácia) alebo útek</td><td data-i18n="tbl.r5c2">Diskusia, argumentácia, kompromis</td><td data-i18n="tbl.r5c3">Hlboké pochopenie, empatia, hľadanie spoločného základu</td></tr>
-                        <tr><td data-i18n="tbl.r6c0">Kognitívna otvorenosť</td><td data-i18n="tbl.r6c1">Uzavretá myseľ, dogmatizmus, nízka tolerancia neznámeho</td><td data-i18n="tbl.r6c2">Otvorenosť novým názorom, holistické až adaptívne myslenie</td><td data-i18n="tbl.r6c3">Transracionálne myslenie, prijímanie paradoxov až plne vedomé vnímanie</td></tr>
-                        <tr><td data-i18n="tbl.r7c0">Vnímanie reality</td><td data-i18n="tbl.r7c1">Uväznenie v ilúziách a sebaklamoch</td><td data-i18n="tbl.r7c2">Schopnosť prijímať nové a zložité informácie</td><td data-i18n="tbl.r7c3">Túžba po hlbokej pravde a prijímanie reality, aká „je"</td></tr>
-                        <tr><td data-i18n="tbl.r8c0">Porozumenie svetu</td><td data-i18n="tbl.r8c1">Veľmi obmedzené, jednoduché až primitívne</td><td data-i18n="tbl.r8c2">Obmedzené, lineárne, kauzálne a dualistické</td><td data-i18n="tbl.r8c3">Transcendentné, nelineárne a nedualistické</td></tr>
-                        <tr><td data-i18n="tbl.r9c0">Vplyv na svet</td><td data-i18n="tbl.r9c1">Ja a moja svorka</td><td data-i18n="tbl.r9c2">Lokálny až globálny</td><td data-i18n="tbl.r9c3">Neobmedzený</td></tr>
-                        <tr><td data-i18n="tbl.r10c0">Ostatných vníma ako</td><td data-i18n="tbl.r10c1">Konkurenciu, ohrozenie, nepriateľov</td><td data-i18n="tbl.r10c2">Súčasť celku, pomocníkov a spolupracovníkov</td><td data-i18n="tbl.r10c3">Súčasť jednotného a dokonalého celku</td></tr>
-                        <tr><td data-i18n="tbl.r11c0">Prevládajúce emócie</td><td data-i18n="tbl.r11c1">Nízke a negatívne (prázdnota, beznádej, vina, frustrácia, žiarlivosť, strach, hnev, osobné túžby, pýcha)</td><td data-i18n="tbl.r11c2">Neutrálne a pozitívne (nádej, vďačnosť, úcta, akceptácia, odvaha, spokojnosť, zištná láska)</td><td data-i18n="tbl.r11c3">Vyššie až transcendentné (bezpodmienečná láska, empatia, súcit, radosť, blaženosť, mier, jednota)</td></tr>
-                        <tr><td data-i18n="tbl.r12c0">Názor na život</td><td data-i18n="tbl.r12c1">Náročný až tragický</td><td data-i18n="tbl.r12c2">Zmysluplný</td><td data-i18n="tbl.r12c3">Harmonický až dokonalý</td></tr>
-                        <tr><td data-i18n="tbl.r13c0">Zmysel života</td><td data-i18n="tbl.r13c1">Prežitie a získavanie</td><td data-i18n="tbl.r13c2">Poznanie, zážitky a úspech</td><td data-i18n="tbl.r13c3">Čistá existencia a jednota</td></tr>
-                        <tr><td data-i18n="tbl.r14c0">Kvalita života</td><td data-i18n="tbl.r14c1">Nízka a neuspokojivá</td><td data-i18n="tbl.r14c2">Uspokojivá a rastúca</td><td data-i18n="tbl.r14c3">Mimoriadna</td></tr>
-                        <tr><td data-i18n="tbl.r15c0">Fyzické a mentálne zdravie</td><td data-i18n="tbl.r15c1">Slabé, náchylné na zdravotné problémy, ochorenia a úrazy</td><td data-i18n="tbl.r15c2">Dobré až výborné fyzické a mentálne zdravie, emocionálna regulácia</td><td data-i18n="tbl.r15c3">Optimálne fyzické, mentálne a duševné zdravie, emocionálna stabilita</td></tr>
-                        <tr><td data-i18n="tbl.r16c0">Spoločenská zodpovednosť</td><td data-i18n="tbl.r16c1">Sebectvo a malý záujem o iných ľudí</td><td data-i18n="tbl.r16c2">Neutrálna angažovanosť až prosociálne správanie</td><td data-i18n="tbl.r16c3">Každodenné láskavosti a silné altruistické správanie</td></tr>
-                        <tr><td data-i18n="tbl.r17c0">Duchovný proces</td><td data-i18n="tbl.r17c1">Nezáujem a skepticizmus</td><td data-i18n="tbl.r17c2">Exploratívny záujem</td><td data-i18n="tbl.r17c3">Duchovný rast a osvietenie</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Mobile: tabs + cards -->
-            <div class="spektrum-mobile fade-in">
-                <div class="spektrum-mobile-tabs">
-                    <button class="spektrum-mobile-tab active" onclick="switchMobileLevel(this, 'primitiv')" data-i18n="mob.tab1">Primitívne ja</button>
-                    <button class="spektrum-mobile-tab" onclick="switchMobileLevel(this, 'rozum')" data-i18n="mob.tab2">Rozumové ja</button>
-                    <button class="spektrum-mobile-tab" onclick="switchMobileLevel(this, 'vyssie')" data-i18n="mob.tab3">Vyššie ja</button>
-                </div>
-                <div class="spektrum-mobile-card active" id="mob-primitiv">
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l0">Sebaidentifikácia</div><div class="mobile-value" data-i18n="mob.p.v0">Fyzické telo</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l1">Zameranie</div><div class="mobile-value" data-i18n="mob.p.v1">Stav vlastnenia (čo mám)</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l2">Správanie</div><div class="mobile-value" data-i18n="mob.p.v2">Inštinktívne, sebecké, konfliktné až agresívne</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l3">Vyhľadáva</div><div class="mobile-value" data-i18n="mob.p.v3">Drámu, konflikty, súťaženie, kritiku</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l4">Prevládajúce emócie</div><div class="mobile-value" data-i18n="mob.p.v4">Prázdnota, beznádej, vina, frustrácia, žiarlivosť, strach, hnev, pýcha</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l5">Názor na život</div><div class="mobile-value" data-i18n="mob.p.v5">Náročný až tragický</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l6">Kvalita života</div><div class="mobile-value" data-i18n="mob.p.v6">Nízka a neuspokojivá</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.p.l7">Duchovný proces</div><div class="mobile-value" data-i18n="mob.p.v7">Nezáujem a skepticizmus</div></div>
-                </div>
-                <div class="spektrum-mobile-card" id="mob-rozum">
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l0">Sebaidentifikácia</div><div class="mobile-value" data-i18n="mob.r.v0">Myseľ</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l1">Zameranie</div><div class="mobile-value" data-i18n="mob.r.v1">Stav konania (čo robím)</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l2">Správanie</div><div class="mobile-value" data-i18n="mob.r.v2">Inteligentné, logické, morálne, kreatívne</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l3">Vyhľadáva</div><div class="mobile-value" data-i18n="mob.r.v3">Vedomosti, názory, ciele, význam a zmysel</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l4">Prevládajúce emócie</div><div class="mobile-value" data-i18n="mob.r.v4">Nádej, vďačnosť, úcta, akceptácia, odvaha, spokojnosť</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l5">Názor na život</div><div class="mobile-value" data-i18n="mob.r.v5">Zmysluplný</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l6">Kvalita života</div><div class="mobile-value" data-i18n="mob.r.v6">Uspokojivá a rastúca</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.r.l7">Duchovný proces</div><div class="mobile-value" data-i18n="mob.r.v7">Exploratívny záujem</div></div>
-                </div>
-                <div class="spektrum-mobile-card" id="mob-vyssie">
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l0">Sebaidentifikácia</div><div class="mobile-value" data-i18n="mob.v.v0">Vedomie</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l1">Zameranie</div><div class="mobile-value" data-i18n="mob.v.v1">Stav bytia (kým som)</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l2">Správanie</div><div class="mobile-value" data-i18n="mob.v.v2">Uvedomelé, zmierlivé, nezištné a láskyplné</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l3">Vyhľadáva</div><div class="mobile-value" data-i18n="mob.v.v3">Pokoj, mier, radosť, lásku, harmóniu</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l4">Prevládajúce emócie</div><div class="mobile-value" data-i18n="mob.v.v4">Bezpodmienečná láska, súcit, radosť, blaženosť, mier, jednota</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l5">Názor na život</div><div class="mobile-value" data-i18n="mob.v.v5">Harmonický až dokonalý</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l6">Kvalita života</div><div class="mobile-value" data-i18n="mob.v.v6">Mimoriadna</div></div>
-                    <div class="mobile-row"><div class="mobile-label" data-i18n="mob.v.l7">Duchovný proces</div><div class="mobile-value" data-i18n="mob.v.v7">Duchovný rast a osvietenie</div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-SPEKTRUM REMOVED -->
 
         <!-- ===== TESTIMONIALS ===== -->
     <section class="section testimonials" id="ohlasy">
@@ -2249,11 +1986,6 @@ SPEKTRUM REMOVED -->
 
         // ===== SPEKTRUM TABS (mobile) =====
         window.switchMobileLevel = function(btn, level) {
-/* SPEKTRUM REMOVED
-            document.querySelectorAll('.spektrum-mobile-tab').forEach(function(t) { t.classList.remove('active'); });
-            btn.classList.add('active');
-            document.querySelectorAll('.spektrum-mobile-card').forEach(function(c) { c.classList.remove('active'); }
-SPEKTRUM REMOVED */);
             document.getElementById('mob-' + level).classList.add('active');
         };
 
@@ -2902,31 +2634,6 @@ SPEKTRUM REMOVED */);
     <!-- Sticky Table Header JS -->
     <script>
     (function() {
-/* SPEKTRUM REMOVED
-        var table = document.querySelector('.spektrum-table');
-        if (!table) return;
-        var thead = table.querySelector('thead');
-        var nav = document.querySelector('.nav');
-        var navH = nav ? Math.round(nav.getBoundingClientRect().bottom) : 56;
-
-        // Create fixed clone
-        var fixedWrap = document.createElement('div');
-        fixedWrap.id = 'spektrum-sticky-clone';
-        fixedWrap.style.cssText = 'position:fixed;top:' + navH + 'px;left:0;right:0;z-index:100;display:none;pointer-events:none;margin-top:-1px;box-shadow:0 2px 8px rgba(0,0,0,0.06);';
-
-        var inner = document.createElement('div');
-        inner.style.cssText = 'max-width:1200px;margin:0 auto;padding:0 2rem;';
-
-        var cloneTable = document.createElement('table');
-        cloneTable.style.cssText = 'width:100%;border-collapse:collapse;font-size:0.85rem;line-height:1.5;';
-        var cloneThead = thead.cloneNode(true);
-        cloneThead.querySelectorAll('th').forEach(function(th) {
-            th.style.background = 'var(--bg-warm, #f5f3ef)';
-            th.style.boxShadow = 'inset 0 -2px 0 0 var(--text, #1a1a1a)';
-            var spans = th.querySelectorAll('span');
-            spans.forEach(function(s) { s.style.display = 'none'; });
-        }
-SPEKTRUM REMOVED */);
         cloneTable.appendChild(cloneThead);
         inner.appendChild(cloneTable);
         fixedWrap.appendChild(inner);
