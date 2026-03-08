@@ -1454,7 +1454,8 @@
             100% { opacity: 0; transform: translateY(-10px); }
         }
 
-        /* ========================================
+        /* SPEKTRUM REMOVED
+/* ========================================
            SPEKTRUM VEDOMIA — TABLE LAYOUT
            ======================================== */
         .spektrum {
@@ -1629,13 +1630,35 @@
                 display: block;
                 margin-top: 2rem;
             }
+SPEKTRUM REMOVED */
         }
 
     
         .ac-item { padding:0.7rem 1rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-size:0.9rem; border-bottom:1px solid rgba(0,0,0,0.05); transition:background 0.15s; }
         .ac-item:hover,.ac-item.active { background:rgba(102,126,234,0.08); }
         .ac-item:last-child { border-bottom:none; }
-        </style>
+        
+    /* ===============================
+       TESTIMONIAL SCROLL ANIMATION
+       =============================== */
+    .testimonial-card.fade-in {
+        opacity: 0;
+        transform: translateY(80px);
+        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .testimonial-card.fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .testimonial-card.fade-in-delay-1 { transition-delay: 0.1s; }
+    .testimonial-card.fade-in-delay-2 { transition-delay: 0.25s; }
+    .testimonial-card.fade-in-delay-3 { transition-delay: 0.4s; }
+    .testimonial-card.fade-in-delay-4 { transition-delay: 0.55s; }
+    .testimonial-card.fade-in-delay-5 { transition-delay: 0.7s; }
+    .testimonial-card.fade-in-delay-6 { transition-delay: 0.85s; }
+
+    </style>
     
     <!-- Structured Data - Book Schema -->
     <script type="application/ld+json">
@@ -1857,7 +1880,8 @@
     
 
     <!-- ===== SPEKTRUM VEDOMIA ===== -->
-    <section class="section spektrum" id="spektrum">
+    <!-- SPEKTRUM REMOVED
+<section class="section spektrum" id="spektrum">
         <div class="container">
             <div style="text-align:center;" class="fade-in">
                 <span class="heading-sm" data-i18n="spektrum.label">Z knihy</span>
@@ -1940,6 +1964,7 @@
             </div>
         </div>
     </section>
+SPEKTRUM REMOVED -->
 
         <!-- ===== TESTIMONIALS ===== -->
     <section class="section testimonials" id="ohlasy">
@@ -2224,9 +2249,11 @@
 
         // ===== SPEKTRUM TABS (mobile) =====
         window.switchMobileLevel = function(btn, level) {
+/* SPEKTRUM REMOVED
             document.querySelectorAll('.spektrum-mobile-tab').forEach(function(t) { t.classList.remove('active'); });
             btn.classList.add('active');
-            document.querySelectorAll('.spektrum-mobile-card').forEach(function(c) { c.classList.remove('active'); });
+            document.querySelectorAll('.spektrum-mobile-card').forEach(function(c) { c.classList.remove('active'); }
+SPEKTRUM REMOVED */);
             document.getElementById('mob-' + level).classList.add('active');
         };
 
@@ -2875,6 +2902,7 @@
     <!-- Sticky Table Header JS -->
     <script>
     (function() {
+/* SPEKTRUM REMOVED
         var table = document.querySelector('.spektrum-table');
         if (!table) return;
         var thead = table.querySelector('thead');
@@ -2897,7 +2925,8 @@
             th.style.boxShadow = 'inset 0 -2px 0 0 var(--text, #1a1a1a)';
             var spans = th.querySelectorAll('span');
             spans.forEach(function(s) { s.style.display = 'none'; });
-        });
+        }
+SPEKTRUM REMOVED */);
         cloneTable.appendChild(cloneThead);
         inner.appendChild(cloneTable);
         fixedWrap.appendChild(inner);
