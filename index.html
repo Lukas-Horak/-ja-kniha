@@ -497,6 +497,7 @@
             display: flex;
             gap: 0;
             overflow-x: auto;
+            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             padding: 0;
@@ -718,9 +719,11 @@
            DIVIDER
            ======================================== */
         .divider {
-            width: 60px;
-            height: 1px;
-            background: var(--accent);
+            width: 10px;
+            height: 10px;
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+            background: transparent;
             margin: 3rem auto;
         }
 
@@ -1785,7 +1788,7 @@
                     <span class="heading-sm" data-i18n="author.label">Predslov autora</span>
                     <div class="divider divider-left"></div>
                     <h2 class="heading-lg" data-i18n="author.name">Lukáš Horák</h2>
-                    <p class="body-lg" style="margin-bottom: 1.5rem;" data-i18n="author.p1">Mnohí z&nbsp;nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s&nbsp;negatívnymi emocionálnymi stavmi a&nbsp;vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a&nbsp;mier.</p>
+                    <p class="body-md" style="margin-bottom: 1.5rem;" data-i18n="author.p1">Mnohí z&nbsp;nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s&nbsp;negatívnymi emocionálnymi stavmi a&nbsp;vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a&nbsp;mier.</p>
                     <p class="body-md" style="margin-bottom: 1.5rem;" data-i18n="author.p2">Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a&nbsp;prichádza natoľko výnimočný, slovami neopísateľný a&nbsp;nezabudnuteľný stav, že by ho človek nevymenil za nič na svete.</p>
                     <p class="body-md" style="color: var(--text); font-weight: 600; font-style: italic;" data-i18n="author.p3">Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s&nbsp;ničím menším.</p>
                 </div>
@@ -2135,9 +2138,11 @@
         };
 
         function updatePrices() {
+            var qty = parseInt(document.getElementById('quantity').value) || 1;
             var basePrice = CONFIG.basePrice / 100;
-            var discountAmount = (basePrice * currentDiscount) / 100;
-            var finalPrice = basePrice - discountAmount;
+            var unitPrice = basePrice - (basePrice * currentDiscount / 100);
+            var finalPrice = unitPrice * qty;
+            var discountAmount = (basePrice * currentDiscount / 100) * qty;
 
             document.getElementById('totalPrice').textContent = formatPrice(finalPrice);
 
@@ -2145,7 +2150,7 @@
             if (currentDiscount > 0) {
                 discountRow.style.display = 'flex';
                 document.getElementById('discountLabel').textContent = 'Zľava (' + currentDiscount + '%)';
-                document.getElementById('discountAmount').textContent = '- ' + formatPrice(discountAmount);
+                document.getElementById('discountAmount').textContent = '\u2013 ' + formatPrice(discountAmount);
             } else {
                 discountRow.style.display = 'none';
             }
@@ -2155,12 +2160,12 @@
             document.getElementById('qtyMinus').addEventListener('click', function() {
               var q = document.getElementById('quantity');
               var v = parseInt(q.value) || 1;
-              if (v > 1) { q.value = v - 1; updatePrice(); }
+              if (v > 1) { q.value = v - 1; updatePrices(); }
             });
             document.getElementById('qtyPlus').addEventListener('click', function() {
               var q = document.getElementById('quantity');
               var v = parseInt(q.value) || 1;
-              if (v < 10) { q.value = v + 1; updatePrice(); }
+              if (v < 10) { q.value = v + 1; updatePrices(); }
             });
 
         function formatPrice(amount) {
@@ -2204,7 +2209,7 @@
                 zip: form.zip.value,
                 promoCode: appliedCode,
                 discount: currentDiscount,
-                finalPrice: (CONFIG.basePrice - (CONFIG.basePrice * currentDiscount / 100)),
+                finalPrice: (CONFIG.basePrice - (CONFIG.basePrice * currentDiscount / 100)) * (parseInt(document.getElementById('quantity').value) || 1),
                 currency: CONFIG.currency,
                 timestamp: new Date().toISOString()
             };
