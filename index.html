@@ -862,6 +862,37 @@
         }
 
         /* ========================================
+           MARTINUS RATING
+           ======================================== */
+        .martinus-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: calc(1.5rem + 10px) auto 0;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 100px;
+            width: fit-content;
+        }
+        .martinus-rating .stars {
+            display: flex;
+            gap: 2px;
+            color: #F5A623;
+            font-size: 1.1rem;
+        }
+        .martinus-rating .rating-text {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+        }
+        .martinus-rating .rating-score {
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        /* ========================================
            TESTIMONIALS
            ======================================== */
         .testimonials {
@@ -1568,7 +1599,6 @@
     <div class="nav-mobile-overlay" id="mobileMenu">
             <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('open');document.querySelector('.nav-hamburger').classList.remove('open');" aria-label="Close">&times;</button>
         <a href="#intro" onclick="closeMobileMenu()" data-i18n="nav.about" data-i18n="foot.about">O knihe</a>
-        <a href="#spektrum" onclick="closeMobileMenu()" data-i18n="nav.spectrum" data-i18n="foot.spectrum">Spektrum vedomia</a>
         <a href="#autor" onclick="closeMobileMenu()" data-i18n="nav.author" data-i18n="foot.author">Autor</a>
         <a href="#ohlasy" onclick="closeMobileMenu()" data-i18n="nav.reviews">Ohlasy</a>
         <a href="#objednat" class="nav-cta" onclick="closeMobileMenu()" data-i18n="nav.orderBook">Objednať knihu</a>
@@ -1714,6 +1744,10 @@
                 <span class="heading-sm" data-i18n="test.label">Ohlasy čitateľov</span>
                 <div class="divider">✦</div>
                 <h2 class="heading-lg" data-i18n="test.heading">Slová tých, ktorí čítali</h2>
+                <div class="martinus-rating fade-in">
+                    <div class="stars">★★★★★</div>
+                    <span class="rating-text"><span class="rating-score">4,6 / 5</span> · Martinus.sk</span>
+                </div>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card fade-in fade-in-delay-1">
@@ -1927,7 +1961,6 @@
         <div class="container">
             <div class="footer-links">
                 <a href="#intro" data-i18n="foot.about">O knihe</a>
-                <a href="#spektrum" data-i18n="foot.spectrum">Spektrum vedomia</a>
                 <a href="#autor" data-i18n="foot.author">Autor</a>
                 <a href="#objednat" data-i18n="foot.order">Objednávka</a>
                 <a href="mailto:info@evolvium.com" data-i18n="foot.contact">Kontakt</a>
