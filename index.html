@@ -70,7 +70,7 @@
         }
 
         html {
-            scroll-behavior: smooth;
+            /* scroll-behavior: smooth; — handled by Lenis */
             font-size: 16px;
             overflow-x: clip;
         }
@@ -296,17 +296,19 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             padding: 0.65rem 1.6rem;
-            border: 1px solid var(--text);
-            background: var(--text);
+            border: 1px solid var(--accent);
+            background: var(--accent);
             color: var(--white);
+            border-radius: 100px;
             transition: all 0.3s ease;
             cursor: pointer;
             text-decoration: none;
         }
 
         .nav-cta:hover {
-            background: transparent;
-            color: var(--text);
+            background: var(--text);
+            border-color: var(--text);
+            color: var(--white);
         }
 
         .lang-toggle {
@@ -927,7 +929,7 @@
             overflow-x: auto;
             overflow-y: hidden;
             scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
+            /* scroll-behavior: smooth; — handled by Lenis */
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             padding-bottom: 1rem;
@@ -1437,7 +1439,7 @@
             }
 
             .details-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
             }
 
             .order-form {
@@ -1516,6 +1518,387 @@
     .testimonial-card.fade-in-delay-5 { transition-delay: 0.7s; }
     .testimonial-card.fade-in-delay-6 { transition-delay: 0.85s; }
 
+
+        /* ========================================
+           AWARD-WINNING ENHANCEMENTS
+           ======================================== */
+
+        /* --- Lenis smooth scroll override --- */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        /* --- Grain/Noise Overlay --- */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 128px 128px;
+            opacity: 0.035;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: multiply;
+        }
+
+
+
+        /* --- Text Reveal Animation --- */
+        .word-reveal .word {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+        }
+        .word-reveal .word-inner {
+            display: inline-block;
+            transform: translateY(105%);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .word-reveal.revealed .word-inner {
+            transform: translateY(0);
+        }
+
+        /* --- Marquee / Ticker --- */
+        .marquee-section {
+            padding: 2rem 0;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+        .marquee-item {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-weight: 200;
+            color: var(--text-muted);
+            white-space: nowrap;
+            padding: 0 2rem;
+            letter-spacing: 0.05em;
+        }
+        .marquee-item .marquee-sep {
+            color: var(--accent);
+            margin: 0 0.5rem;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- Parallax subtle --- */
+        .parallax-float {
+            will-change: transform;
+        }
+
+        /* --- Section clip transitions --- */
+        .section-reveal {
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 0.01s;
+        }
+
+        /* --- Staggered theme cards --- */
+        .theme-card {
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        }
+        .theme-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08) !important;
+        }
+
+        /* --- Testimonial card hover --- */
+        .testimonial-card {
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px) !important;
+        }
+
+        /* --- Navbar dark mode for testimonials section --- */
+        .nav.nav-dark {
+            color: var(--white);
+        }
+        .nav.nav-dark .nav-logo svg {
+            color: var(--white);
+        }
+        .nav.nav-dark.scrolled {
+            background: rgba(26, 26, 26, 0.92);
+            border-bottom-color: rgba(255,255,255,0.08);
+            color: var(--white);
+        }
+        .nav.nav-dark .nav-link {
+            color: rgba(255,255,255,0.7);
+        }
+        .nav.nav-dark .nav-link:hover {
+            color: var(--white);
+        }
+        .nav.nav-dark .nav-hamburger span {
+            background: var(--white);
+        }
+
+        /* --- Smooth page load --- */
+        .page-loaded .fade-in-hero {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-hero {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-in-hero.delay-1 { transition-delay: 0.15s; }
+        .fade-in-hero.delay-2 { transition-delay: 0.3s; }
+        .fade-in-hero.delay-3 { transition-delay: 0.45s; }
+        .fade-in-hero.delay-4 { transition-delay: 0.6s; }
+
+        /* --- Line draw animation for dividers --- */
+        .divider {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .divider.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- Enhanced hero gallery --- */
+        .hero-cards::-webkit-scrollbar {
+            display: none;
+        }
+        .hero-cards {
+            scrollbar-width: none;
+        }
+
+        /* --- Smooth CTA pulse --- */
+        @keyframes subtlePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 0 0 12px rgba(102, 126, 234, 0); }
+        }
+        .btn-primary {
+            animation: subtlePulse 3s ease-in-out infinite;
+        }
+        .btn-primary:hover {
+            animation: none;
+        }
+
+        /* ========================================
+           AUDIO PLAYER
+           ======================================== */
+        .audio-section {
+            padding: 6rem 0;
+            background: var(--bg);
+        }
+
+        .audio-player {
+            display: flex;
+            max-width: 560px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.04);
+            background: var(--white);
+        }
+
+        .audio-player-cover {
+            width: 180px;
+            min-height: 180px;
+            background: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-player-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(102,126,234,0.15) 0%, transparent 60%);
+        }
+
+        .audio-cover-icon {
+            position: relative;
+            z-index: 1;
+        }
+
+        .audio-cover-icon svg {
+            width: 56px;
+            height: 56px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .audio-player-body {
+            flex: 1;
+            padding: 1.5rem 1.5rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+
+        .audio-player-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .audio-player-title {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .audio-player-author {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .audio-player-badge {
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 4px 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: 0.75rem;
+        }
+
+        /* Progress bar */
+        .audio-progress-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .audio-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-progress-bar:hover {
+            height: 6px;
+        }
+
+        .audio-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+            border-radius: 4px;
+            transition: width 0.1s linear;
+        }
+
+        .audio-time {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            min-width: 36px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Controls */
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .audio-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .audio-btn:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .audio-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .audio-btn-play {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--text);
+            color: var(--white);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .audio-btn-play:hover {
+            background: var(--accent);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .audio-btn-play svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 520px) {
+            .audio-player {
+                flex-direction: column;
+                max-width: 340px;
+            }
+
+            .audio-player-cover {
+                width: 100%;
+                min-height: 140px;
+            }
+
+            .audio-player-body {
+                padding: 1.25rem;
+            }
+        }
     </style>
     
     <!-- Structured Data - Book Schema -->
@@ -1560,6 +1943,8 @@
       }
     }
     </script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
 <body>
     <!-- Page Loader -->
@@ -1687,6 +2072,27 @@
     </section>
 
     <!-- ===== OBLASTI / TICKER ===== -->
+    <!-- ===== MARQUEE TICKER ===== -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <span class="marquee-item">Vedomie <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Evolúcia <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Premena <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Pozorovateľ <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Inštinkty <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Neuroplasticita <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Prebudenie <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Sebapoznanie <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Vedomie <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Evolúcia <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Premena <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Pozorovateľ <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Inštinkty <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Neuroplasticita <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Prebudenie <span class="marquee-sep">✦</span></span>
+            <span class="marquee-item">Sebapoznanie <span class="marquee-sep">✦</span></span>
+        </div>
+    </div>
 
     <!-- ===== KEY THEMES ===== -->
     <section class="section" id="temy">
@@ -1732,8 +2138,69 @@
         </div>
     </section>
 
-    <!-- ===== GALLERY ===== -->
-    
+
+    <!-- ===== AUDIO PLAYER ===== -->
+    <section class="audio-section" id="audio">
+        <div class="container">
+            <div style="text-align:center;" class="fade-in">
+                <span class="heading-sm">Ukážka z knihy</span>
+                <div class="divider">✦</div>
+                <h2 class="heading-lg" style="margin-bottom: 2.5rem;">Vypočujte si úryvok</h2>
+            </div>
+            <div class="audio-player fade-in fade-in-delay-1" id="audioPlayer">
+                <div class="audio-player-cover">
+                    <div class="audio-cover-icon">
+                        <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M8 18c4-4 12-8 20-8s16 4 20 8" stroke-linecap="round"/>
+                            <path d="M12 24c3-3 9-6 16-6s13 3 16 6" stroke-linecap="round"/>
+                            <path d="M16 30c2.5-2.5 7-4.5 12-4.5s9.5 2 12 4.5" stroke-linecap="round"/>
+                            <path d="M20 36c2-2 5-3 8-3s6 1 8 3" stroke-linecap="round"/>
+                            <path d="M24 42c1-1 2.5-1.5 4-1.5s3 .5 4 1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="audio-player-body">
+                    <div class="audio-player-meta">
+                        <div>
+                            <div class="audio-player-title">Tretia kapitola – Túžby</div>
+                            <div class="audio-player-author">Lukáš Horák</div>
+                        </div>
+                        <span class="audio-player-badge">Ukážka</span>
+                    </div>
+                    <div class="audio-progress-wrap">
+                        <div class="audio-progress-bar" id="audioProgressBar">
+                            <div class="audio-progress-fill" id="audioProgressFill"></div>
+                        </div>
+                        <span class="audio-time" id="audioTime">0:00</span>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="audio-btn" id="audioRewind" aria-label="Rewind 15s">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="1 4 1 10 7 10"></polyline>
+                                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                                <text x="9" y="16" font-size="7" fill="currentColor" stroke="none" font-weight="600">15</text>
+                            </svg>
+                        </button>
+                        <button class="audio-btn audio-btn-play" id="audioPlayBtn" aria-label="Play">
+                            <svg id="audioPlayIcon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                <polygon points="6,3 20,12 6,21"></polygon>
+                            </svg>
+                        </button>
+                        <button class="audio-btn" id="audioForward" aria-label="Forward 15s">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"></path>
+                                <text x="9" y="16" font-size="7" fill="currentColor" stroke="none" font-weight="600">15</text>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <audio id="audioElement" preload="metadata">
+                    <source src="audio-ukazka.m4a" type="audio/mp4">
+                </audio>
+            </div>
+        </div>
+    </section>
 
     <!-- ===== SPEKTRUM VEDOMIA ===== -->
 
@@ -2122,6 +2589,242 @@
 
             lastScroll = scrollY;
         });
+
+
+
+        // ===== AWARD-WINNING ENHANCEMENTS =====
+
+        // --- Lenis Smooth Scroll ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Override smooth scroll links
+        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    lenis.scrollTo(target, { offset: -80 });
+                }
+            });
+        });
+
+                // --- Text Word Reveal ---
+        (function() {
+            var targets = document.querySelectorAll('.heading-xl, .heading-lg');
+            targets.forEach(function(el) {
+                // Skip if already processed
+                if (el.classList.contains('word-reveal')) return;
+
+                // Get innerHTML, split by words while keeping HTML tags
+                var html = el.innerHTML;
+                // Replace <br> tags with a placeholder
+                html = html.replace(/<br\s*\/?>/gi, '|||BR|||');
+                // Split text nodes into words
+                var words = html.split(/\s+/);
+                var newHtml = '';
+                words.forEach(function(word, i) {
+                    if (word === '|||BR|||') {
+                        newHtml += '<br>';
+                        return;
+                    }
+                    if (word.indexOf('|||BR|||') !== -1) {
+                        var parts = word.split('|||BR|||');
+                        parts.forEach(function(part, j) {
+                            if (part) {
+                                newHtml += '<span class="word"><span class="word-inner" style="transition-delay:' + (i * 0.05) + 's">' + part + '</span></span> ';
+                            }
+                            if (j < parts.length - 1) newHtml += '<br>';
+                        });
+                        return;
+                    }
+                    newHtml += '<span class="word"><span class="word-inner" style="transition-delay:' + (i * 0.05) + 's">' + word + '</span></span> ';
+                });
+                el.innerHTML = newHtml;
+                el.classList.add('word-reveal');
+            });
+
+            // Observe for reveal
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.word-reveal').forEach(function(el) {
+                revealObserver.observe(el);
+            });
+        })();
+
+        // --- Parallax on Scroll ---
+        (function() {
+            var parallaxEls = [];
+
+            // Theme cards get subtle parallax
+            document.querySelectorAll('.theme-card').forEach(function(el, i) {
+                parallaxEls.push({ el: el, speed: 0.03 + (i % 3) * 0.015, offset: 0 });
+            });
+
+            // Dividers
+            document.querySelectorAll('.divider').forEach(function(el) {
+                parallaxEls.push({ el: el, speed: 0.02, offset: 0 });
+            });
+
+            function updateParallax() {
+                var scrollY = window.pageYOffset;
+                parallaxEls.forEach(function(item) {
+                    var rect = item.el.getBoundingClientRect();
+                    var center = rect.top + rect.height / 2;
+                    var windowCenter = window.innerHeight / 2;
+                    var diff = (center - windowCenter) * item.speed;
+                    item.el.style.transform = 'translateY(' + diff + 'px)';
+                });
+            }
+
+            var ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        updateParallax();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+        })();
+
+        // --- Divider Reveal Observer ---
+        (function() {
+            var dividerObs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.divider').forEach(function(d) {
+                dividerObs.observe(d);
+            });
+        })();
+
+        // --- Navbar Color Shift for Dark Sections ---
+        (function() {
+            var nav = document.getElementById('mainNav');
+            var darkSections = document.querySelectorAll('.testimonials');
+
+            function checkNavColor() {
+                var navBottom = nav.getBoundingClientRect().bottom;
+                var isDark = false;
+                darkSections.forEach(function(section) {
+                    var rect = section.getBoundingClientRect();
+                    if (rect.top < navBottom && rect.bottom > 0) {
+                        isDark = true;
+                    }
+                });
+                nav.classList.toggle('nav-dark', isDark);
+            }
+
+            window.addEventListener('scroll', function() {
+                requestAnimationFrame(checkNavColor);
+            }, { passive: true });
+            checkNavColor();
+        })();
+
+        // --- Page Load Animation ---
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.body.classList.add('page-loaded');
+            }, 900);
+        });
+
+
+        // ===== AUDIO PLAYER =====
+        (function() {
+            var audio = document.getElementById('audioElement');
+            var playBtn = document.getElementById('audioPlayBtn');
+            var playIcon = document.getElementById('audioPlayIcon');
+            var progressBar = document.getElementById('audioProgressBar');
+            var progressFill = document.getElementById('audioProgressFill');
+            var timeDisplay = document.getElementById('audioTime');
+            var rewindBtn = document.getElementById('audioRewind');
+            var forwardBtn = document.getElementById('audioForward');
+
+            if (!audio || !playBtn) return;
+
+            var isPlaying = false;
+
+            var playPath = '<polygon points="6,3 20,12 6,21"></polygon>';
+            var pausePath = '<rect x="5" y="3" width="4" height="18"></rect><rect x="15" y="3" width="4" height="18"></rect>';
+
+            function formatTime(sec) {
+                if (isNaN(sec)) return '0:00';
+                var m = Math.floor(sec / 60);
+                var s = Math.floor(sec % 60);
+                return m + ':' + (s < 10 ? '0' : '') + s;
+            }
+
+            playBtn.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    playIcon.innerHTML = playPath;
+                    isPlaying = false;
+                } else {
+                    audio.play();
+                    playIcon.innerHTML = pausePath;
+                    isPlaying = true;
+                }
+            });
+
+            audio.addEventListener('timeupdate', function() {
+                if (audio.duration) {
+                    var pct = (audio.currentTime / audio.duration) * 100;
+                    progressFill.style.width = pct + '%';
+                    timeDisplay.textContent = formatTime(audio.currentTime);
+                }
+            });
+
+            audio.addEventListener('ended', function() {
+                playIcon.innerHTML = playPath;
+                isPlaying = false;
+                progressFill.style.width = '0%';
+                timeDisplay.textContent = '0:00';
+            });
+
+            audio.addEventListener('loadedmetadata', function() {
+                timeDisplay.textContent = '0:00';
+            });
+
+            progressBar.addEventListener('click', function(e) {
+                if (!audio.duration) return;
+                var rect = progressBar.getBoundingClientRect();
+                var pct = (e.clientX - rect.left) / rect.width;
+                audio.currentTime = pct * audio.duration;
+            });
+
+            rewindBtn.addEventListener('click', function() {
+                audio.currentTime = Math.max(0, audio.currentTime - 15);
+            });
+
+            forwardBtn.addEventListener('click', function() {
+                audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 15);
+            });
+        })();
 
         // ===== PROMO CODE SYSTEM =====
         window.togglePromo = function() {
