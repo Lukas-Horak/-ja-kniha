@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JA – Evolúcia vedomia | Kniha od Lukáša Horáka</title>
+    <meta name="description" content="Prelomová kniha o evolúcii vedomia a sebapoznaní. 336 strán, ktoré menia spôsob, akým vnímaš realitu. Bestseller od Lukáša Horáka.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Lukáš Horák">
+    <meta name="theme-color" content="#E8E5DF">
+    <link rel="canonical" href="https://www.evolvium.com/">
+
+    <meta property="og:type" content="book">
+    <meta property="og:url" content="https://www.evolvium.com/">
+    <meta property="og:title" content="JA – Evolúcia vedomia | Lukáš Horák">
+    <meta property="og:description" content="Prelomová kniha o evolúcii vedomia a sebapoznaní. 336 strán, ktoré menia spôsob, akým vnímaš realitu.">
+    <meta property="og:locale" content="sk_SK">
+    <meta property="og:site_name" content="Evolvium">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JA – Evolúcia vedomia | Lukáš Horák">
+    <meta name="twitter:description" content="Prelomová kniha o evolúcii vedomia a sebapoznaní. 336 strán, ktoré menia spôsob, akým vnímaš realitu.">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' stroke='%231a1a1a' stroke-width='2' fill='none'/%3E%3Cpath d='M16 2C10.5 2 6 6.5 6 12c0 3.7 1.9 7 4.8 8.8' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%231a1a1a'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+        --bg: #E8E5DF;
+        --card: #FFFFFF;
+        --text: #1A1A1A;
+        --text-light: #6B6B6B;
+        --text-muted: #999999;
+        --border: #E0DCD6;
+        --dark: #1A1A1A;
+        --font: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
+
+    img { max-width:100%; height:auto; display:block; }
+    a { color:inherit; text-decoration:none; }
+
+    /* ===== NAV ===== */
+    .nav {
+        position: fixed; top:0; left:0; right:0; z-index:100;
+        padding: 20px 48px;
+        display: flex; align-items: center; justify-content: space-between;
+        background: rgba(232, 229, 223, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    .nav-logo {
+        display: flex; align-items: center; gap: 10px;
+        font-size: 1.125rem; font-weight: 500; letter-spacing: -0.01em;
+    }
+    .nav-logo svg { width: 32px; height: 32px; }
+    .nav-links {
+        display: flex; align-items: center; gap: 36px;
+        font-size: 0.9rem; font-weight: 400; color: var(--text-light);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 12px 24px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+        transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .nav-cta svg { width: 14px; height: 14px; }
+
+    /* ===== CONTAINER ===== */
+    .container { max-width: 1340px; margin: 0 auto; padding: 0 48px; }
+
+    /* ===== HERO ===== */
+    .hero {
+        padding-top: 120px;
+        padding-bottom: 0;
+    }
+    .hero-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 56px;
+    }
+    .hero-top {
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .hero-eyebrow {
+        font-size: 0.85rem; color: var(--text-light); margin-bottom: 16px;
+        font-weight: 400;
+    }
+    .hero-title {
+        font-size: clamp(2.4rem, 4vw, 3.4rem);
+        font-weight: 300;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        font-style: italic;
+        margin-bottom: 0;
+    }
+    .hero-title .light { color: var(--text-muted); font-weight: 300; }
+    .hero-actions {
+        display: flex; align-items: center; justify-content: center; gap: 24px;
+        margin-top: 36px;
+    }
+    .btn-primary {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 16px 32px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.95rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-primary svg { width: 14px; height: 14px; }
+    .btn-secondary {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 0.9rem; color: var(--text-muted); font-weight: 400;
+        cursor: pointer; border: none; background: none; font-family: var(--font);
+    }
+
+    .hero-carousel-wrap {
+        position: relative;
+        margin-top: 28px;
+        overflow: hidden;
+    }
+    .hero-carousel {
+        display: flex;
+        gap: 16px;
+        transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .hero-image-card {
+        flex: 0 0 calc((100% - 48px) / 4);
+        min-width: 0;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 3 / 4;
+        display: flex; flex-direction: column; justify-content: space-between;
+        padding: 28px;
+        background-size: cover; background-position: center;
+    }
+    .hero-image-card::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);
+        z-index: 1;
+    }
+    .hero-image-card > * { position: relative; z-index: 2; }
+    .hero-image-card .card-top { }
+    .hero-image-card .card-title {
+        font-size: 1.5rem; font-weight: 600; color: #fff;
+        font-style: italic; line-height: 1.2;
+    }
+    .hero-image-card .card-subtitle {
+        font-size: 0.75rem; color: rgba(255,255,255,0.7);
+        margin-top: 4px; font-weight: 400;
+    }
+    .hero-image-card .card-bottom {}
+    .hero-image-card .card-desc {
+        font-size: 0.8rem; color: rgba(255,255,255,0.85);
+        line-height: 1.5; margin-bottom: 16px;
+    }
+    .hero-image-card .card-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 10px 20px;
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(8px);
+        border-radius: 100px; color: #fff;
+        font-size: 0.8rem; font-weight: 500;
+        border: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-image-card .card-btn svg { width: 12px; height: 12px; }
+    .hero-image-card .card-number {
+        position: absolute; bottom: 20px; right: 24px;
+        font-size: 5rem; font-weight: 200; color: rgba(255,255,255,0.15);
+        line-height: 1; z-index: 2;
+    }
+
+    .hero-nav {
+        display: flex; gap: 8px; justify-content: flex-end;
+        padding: 20px 0 0;
+    }
+    .hero-arrow {
+        width: 48px; height: 48px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        border: 1.5px solid var(--border); background: var(--card);
+        cursor: pointer; transition: all 0.2s;
+    }
+    .hero-arrow:hover { background: var(--dark); border-color: var(--dark); }
+    .hero-arrow:hover svg { stroke: #fff; }
+    .hero-arrow svg { width: 18px; height: 18px; stroke: var(--text); stroke-width: 2; fill: none; }
+
+    /* ===== CONTENT / OBSAH ===== */
+    .content-section {
+        padding: 100px 0 80px;
+        text-align: center;
+    }
+    .content-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px;
+        font-weight: 400;
+    }
+    .content-text {
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        font-weight: 300;
+        font-style: italic;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .content-text .muted { color: var(--text-muted); }
+
+    /* ===== REVIEW + VIDEO ===== */
+    .review-video-section {
+        padding: 0 0 80px;
+    }
+    .rv-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 20px;
+    }
+    .rv-video {
+        grid-row: 1 / 3;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        min-height: 480px;
+        background-size: cover; background-position: center;
+        filter: grayscale(100%);
+        cursor: pointer;
+    }
+    .rv-video::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: rgba(0,0,0,0.2);
+    }
+    .rv-video .play-btn {
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 64px; height: 64px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        backdrop-filter: blur(8px);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 2;
+    }
+    .rv-video .play-btn svg { width: 24px; height: 24px; fill: #fff; }
+    .rv-video .video-overlay {
+        position: absolute; bottom: 24px; left: 24px; right: 24px;
+        display: flex; align-items: center; justify-content: space-between;
+        z-index: 2;
+    }
+    .rv-video .video-person {
+        display: flex; align-items: center; gap: 10px;
+    }
+    .rv-video .video-avatar {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: #E65C50; color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; font-weight: 600;
+    }
+    .rv-video .video-name { color: #fff; font-size: 0.85rem; font-weight: 400; }
+    .rv-video .video-quote {
+        color: rgba(255,255,255,0.85); font-size: 0.85rem;
+        font-style: italic;
+    }
+
+    .rv-review {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 36px;
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    .rv-review .review-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;
+    }
+    .rv-review .review-source {
+        font-size: 0.8rem; color: var(--text-muted);
+        position: absolute; top: 36px; right: 36px;
+    }
+    .rv-review { position: relative; }
+    .rv-review .review-name {
+        font-size: 1.5rem; font-weight: 500; margin-bottom: 16px;
+        letter-spacing: -0.02em;
+    }
+    .rv-review .review-text {
+        font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
+        font-style: italic;
+    }
+    .rv-review .review-avatar {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: var(--dark); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; font-weight: 600;
+        margin-top: 20px;
+    }
+
+    .rv-audio {
+        background: #2A2A2A;
+        border-radius: 20px;
+        padding: 28px 32px;
+        display: flex; flex-direction: column;
+        gap: 20px;
+    }
+    .rv-audio .audio-meta {
+        display: flex; align-items: center; gap: 12px;
+    }
+    .rv-audio .audio-meta-titles {
+        display: flex; align-items: baseline; gap: 8px;
+    }
+    .rv-audio .audio-title-ja {
+        font-size: 1.1rem; font-weight: 700; color: #fff;
+        letter-spacing: 0.05em;
+    }
+    .rv-audio .audio-subtitle {
+        font-size: 0.65rem; font-weight: 500;
+        color: rgba(255,255,255,0.35);
+        letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .rv-audio .audio-track-info {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .rv-audio .audio-chapter {
+        font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.85);
+    }
+    .rv-audio .audio-author {
+        font-size: 0.8rem; color: rgba(255,255,255,0.4);
+    }
+    .rv-audio .audio-badge {
+        font-size: 0.6rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.08em;
+        background: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.5);
+        padding: 3px 10px; border-radius: 20px;
+    }
+    .rv-audio .audio-progress-wrap {
+        display: flex; align-items: center; gap: 14px;
+    }
+    .rv-audio .audio-progress-bar {
+        flex: 1; height: 4px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 4px; cursor: pointer;
+        position: relative; overflow: hidden;
+    }
+    .rv-audio .audio-progress-bar:hover {
+        height: 6px;
+    }
+    .rv-audio .audio-progress-fill {
+        height: 100%; width: 0%; background: #fff;
+        border-radius: 4px; transition: width 0.1s linear;
+        pointer-events: none;
+    }
+    .rv-audio .audio-times {
+        display: flex; gap: 6px;
+        font-size: 0.7rem; color: rgba(255,255,255,0.35);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap; min-width: 70px;
+        justify-content: flex-end;
+    }
+    .rv-audio .audio-controls {
+        display: flex; align-items: center; justify-content: center; gap: 16px;
+    }
+    .rv-audio .audio-btn {
+        width: 38px; height: 38px; min-width: 38px;
+        border-radius: 50%; border: none; cursor: pointer;
+        background: rgba(255,255,255,0.06);
+        color: rgba(255,255,255,0.5);
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s, color 0.2s;
+    }
+    .rv-audio .audio-btn:hover {
+        background: rgba(255,255,255,0.12);
+        color: rgba(255,255,255,0.8);
+    }
+    .rv-audio .audio-btn svg { width: 18px; height: 18px; }
+    .rv-audio .audio-btn-play {
+        width: 52px; height: 52px; min-width: 52px;
+        background: #fff; color: #1a1a1a;
+    }
+    .rv-audio .audio-btn-play:hover {
+        background: rgba(255,255,255,0.9); color: #1a1a1a;
+    }
+    .rv-audio .audio-btn-play svg { width: 22px; height: 22px; }
+
+    /* ===== STATS ===== */
+    .stats-section {
+        padding: 0 0 80px;
+    }
+    .stats-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 56px;
+    }
+    .stat-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 32px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .stat-row:first-child { padding-top: 0; }
+    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-text {
+        font-size: 0.95rem; color: var(--text-light);
+        line-height: 1.6; max-width: 380px;
+        font-style: italic;
+    }
+    .stat-value {
+        display: flex; align-items: baseline; gap: 16px;
+        text-align: right;
+    }
+    .stat-number {
+        font-size: clamp(3.5rem, 6vw, 5.5rem);
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -0.04em;
+    }
+    .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+    }
+
+    /* ===== O KNIHE (ABOUT) ===== */
+    .about-section {
+        padding: 0 0 80px;
+    }
+    .about-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 56px;
+    }
+    .about-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+    }
+    .about-desc {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        color: var(--text-light);
+        line-height: 1.25;
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        padding-top: 8px;
+    }
+    .about-image {
+        border-radius: 16px;
+        overflow: hidden;
+        height: 360px;
+    }
+    .about-image img {
+        width: 100%; height: 100%; object-fit: cover;
+    }
+    .about-bottom {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+    }
+    .about-left {
+        padding-right: 24px;
+    }
+    .about-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
+    }
+    .about-title {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        font-style: italic;
+        margin-bottom: 24px;
+    }
+    .about-avatars {
+        display: flex; gap: 12px;
+    }
+    .avatar-circle {
+        width: 40px; height: 40px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; font-weight: 600;
+    }
+    .avatar-dark { background: var(--dark); color: #fff; }
+    .avatar-light { background: #E8E5DF; color: var(--text); }
+
+    .about-categories {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .category-card {
+        border-radius: 16px;
+        padding: 28px;
+        min-height: 120px;
+        display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .category-card.light { background: #F5F3EF; }
+    .category-card.dark { background: var(--dark); color: #fff; }
+    .category-num {
+        font-size: 0.75rem; color: var(--text-muted);
+        margin-bottom: 8px;
+    }
+    .category-card.dark .category-num { color: rgba(255,255,255,0.5); }
+    .category-name {
+        font-size: 1.05rem; font-weight: 500;
+        line-height: 1.3;
+    }
+    .category-sub {
+        font-size: 0.8rem; color: var(--text-muted);
+        margin-top: 4px;
+    }
+    .category-card.dark .category-sub { color: rgba(255,255,255,0.5); }
+
+    /* ===== AUTHOR ===== */
+    .author-section {
+        padding: 0 0 80px;
+    }
+    .author-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .author-left {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 56px;
+        display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .author-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
+    }
+    .author-title {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        font-style: italic;
+        margin-bottom: 20px;
+    }
+    .author-bio {
+        font-size: 0.9rem; color: var(--text-light);
+        line-height: 1.7; margin-bottom: 32px;
+    }
+    .author-stats {
+        display: flex; gap: 32px; margin-bottom: 32px;
+        align-items: flex-start;
+    }
+    .author-stat { position: relative; padding-right: 32px; }
+    .author-stat:not(:last-child)::after {
+        content: '';
+        position: absolute; right: 0; top: 0; bottom: 0;
+        width: 1px; background: var(--border);
+    }
+    .author-stat-number {
+        font-size: 2.5rem; font-weight: 300;
+        line-height: 1; letter-spacing: -0.03em;
+    }
+    .author-stat-label {
+        font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;
+    }
+    .author-right {
+        border-radius: 24px;
+        overflow: hidden;
+        position: relative;
+        min-height: 500px;
+        background-size: cover; background-position: center top;
+    }
+    .author-caption {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        padding: 40px 32px 32px;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    }
+    .author-caption-name {
+        font-size: 0.8rem; color: rgba(255,255,255,0.6);
+        margin-bottom: 4px;
+    }
+    .author-caption-quote {
+        font-size: 1.1rem; color: #fff;
+        font-style: italic; font-weight: 400;
+        line-height: 1.4;
+    }
+
+    /* ===== REVIEWS ===== */
+    .reviews-section {
+        padding: 0 0 80px;
+        text-align: center;
+    }
+    .reviews-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
+    }
+    .reviews-title {
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        font-weight: 400;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+        margin-bottom: 56px;
+    }
+    .reviews-title .muted { color: var(--text-muted); font-style: italic; }
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        text-align: left;
+    }
+    .review-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 32px;
+    }
+    .review-stars {
+        display: flex; gap: 2px; margin-bottom: 16px;
+    }
+    .review-stars svg { width: 16px; height: 16px; fill: var(--text); }
+    .review-stars svg.empty { fill: var(--border); }
+    .review-card .review-quote {
+        font-size: 0.9rem; color: var(--text-light);
+        line-height: 1.7; margin-bottom: 20px;
+        font-style: italic;
+    }
+    .review-card .review-footer {
+        display: flex; align-items: center; gap: 12px;
+    }
+    .review-card .r-avatar {
+        width: 36px; height: 36px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; font-weight: 600; color: #fff;
+    }
+    .review-card .r-name { font-size: 0.85rem; font-weight: 500; }
+
+    /* ===== ORDER ===== */
+    .order-section {
+        padding: 0 0 80px;
+    }
+    .order-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .order-dark {
+        background: var(--dark);
+        border-radius: 24px;
+        padding: 56px;
+        color: #fff;
+        display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .order-dark .order-eyebrow {
+        font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 16px;
+    }
+    .order-dark .order-title {
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+        font-weight: 400; font-style: italic;
+        line-height: 1.2; letter-spacing: -0.02em;
+        margin-bottom: 0;
+    }
+    .order-dark .order-body {
+        font-size: 0.9rem; color: rgba(255,255,255,0.6);
+        line-height: 1.7; margin-top: auto; padding-top: 48px;
+    }
+    .order-dark .order-meta {
+        display: flex; gap: 24px; margin-top: 20px;
+        font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    }
+    .order-dark .order-meta-item {
+        display: flex; align-items: center; gap: 8px;
+    }
+    .order-dark .order-meta-item svg { width: 16px; height: 16px; }
+
+    .order-light {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 56px;
+    }
+    .order-light .ol-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .order-light .ol-title {
+        font-size: 1.4rem; font-weight: 500;
+        letter-spacing: -0.01em; margin-bottom: 4px;
+    }
+    .order-light .ol-subtitle {
+        font-size: 0.85rem; color: var(--text-muted); margin-bottom: 32px;
+    }
+    .order-light .ol-price {
+        font-size: 3.5rem; font-weight: 400;
+        letter-spacing: -0.04em; margin-bottom: 32px;
+        line-height: 1;
+    }
+    .order-light .ol-price .cents {
+        font-size: 1.5rem; vertical-align: super;
+        font-weight: 300;
+    }
+    .order-light .ol-features {
+        list-style: none; margin-bottom: 36px;
+    }
+    .order-light .ol-features li {
+        display: flex; align-items: center; gap: 12px;
+        padding: 10px 0;
+        font-size: 0.9rem; color: var(--text-light);
+    }
+    .order-light .ol-features li svg {
+        width: 18px; height: 18px; min-width: 18px;
+        stroke: var(--text); fill: none; stroke-width: 2;
+    }
+    .order-light .ol-btn {
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        width: 100%; padding: 18px 32px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 1rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .order-light .ol-btn:hover { opacity: 0.85; }
+    .order-light .ol-btn svg { width: 14px; height: 14px; }
+
+    /* ===== FAQ ===== */
+    .faq-section {
+        padding: 0 0 80px;
+    }
+    .faq-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 56px;
+        text-align: center;
+    }
+    .faq-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
+    }
+    .faq-title {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em;
+        margin-bottom: 48px;
+    }
+    .faq-list {
+        max-width: 700px; margin: 0 auto;
+        text-align: left;
+    }
+    .faq-item {
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+        display: flex; align-items: center; justify-content: space-between;
+        cursor: pointer; font-size: 1rem; font-weight: 400;
+        gap: 24px;
+    }
+    .faq-toggle {
+        width: 36px; height: 36px; min-width: 36px;
+        border-radius: 50%;
+        background: #F5F3EF;
+        display: flex; align-items: center; justify-content: center;
+        transition: transform 0.3s;
+    }
+    .faq-toggle svg { width: 16px; height: 16px; stroke: var(--text); stroke-width: 2; fill: none; }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); }
+    .faq-answer {
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.open .faq-answer {
+        max-height: 300px;
+        padding-top: 16px;
+    }
+    .faq-answer p {
+        font-size: 0.9rem; color: var(--text-light);
+        line-height: 1.7;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+        padding: 0 0 80px;
+    }
+    .contact-card {
+        background: var(--dark);
+        border-radius: 24px;
+        padding: 64px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: start;
+    }
+    .contact-left {}
+    .contact-eyebrow {
+        font-size: 0.8rem; color: rgba(255,255,255,0.4);
+        margin-bottom: 24px; font-weight: 400;
+    }
+    .contact-title {
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+        font-weight: 300; font-style: italic;
+        line-height: 1.25; letter-spacing: -0.02em;
+        color: #fff; margin-bottom: 16px;
+    }
+    .contact-desc {
+        font-size: 0.9rem; color: rgba(255,255,255,0.5);
+        line-height: 1.7; max-width: 380px;
+    }
+    .contact-email-link {
+        display: inline-flex; align-items: center; gap: 8px;
+        margin-top: 24px;
+        font-size: 0.85rem; color: rgba(255,255,255,0.6);
+        transition: color 0.2s;
+    }
+    .contact-email-link:hover { color: #fff; }
+    .contact-email-link svg { width: 14px; height: 14px; }
+    .contact-form {
+        display: flex; flex-direction: column; gap: 16px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%; padding: 16px 20px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px; color: #fff;
+        font-family: var(--font); font-size: 0.9rem;
+        outline: none; transition: border-color 0.2s;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+        color: rgba(255,255,255,0.3);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: rgba(255,255,255,0.3);
+    }
+    .contact-form textarea {
+        resize: vertical; min-height: 140px;
+    }
+    .contact-form .form-row {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .contact-submit {
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+        padding: 16px 32px;
+        background: #fff; color: var(--dark);
+        border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s; align-self: flex-start;
+    }
+    .contact-submit:hover { opacity: 0.85; }
+    .contact-submit svg { width: 14px; height: 14px; }
+    .contact-success {
+        display: none;
+        padding: 16px 20px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 14px;
+        font-size: 0.85rem; color: rgba(255,255,255,0.7);
+        text-align: center;
+    }
+    .contact-success.visible { display: block; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+        padding: 0 0 48px;
+    }
+    .footer-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 32px 48px;
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-left {
+        font-size: 0.9rem; font-weight: 500;
+    }
+    .footer-left span { color: var(--text-muted); font-weight: 300; }
+    .footer-center {
+        display: flex; gap: 32px;
+    }
+    .footer-center a {
+        font-size: 0.85rem; color: var(--text-muted);
+    }
+    .footer-center a:hover { color: var(--text); }
+    .footer-right {
+        font-size: 0.85rem; color: var(--text-muted);
+    }
+
+    /* ===== STICKY MOBILE CTA ===== */
+    .sticky-cta {
+        display: none;
+        position: fixed; bottom: 0; left: 0; right: 0;
+        padding: 16px 24px;
+        background: rgba(232, 229, 223, 0.95);
+        backdrop-filter: blur(20px);
+        z-index: 100;
+    }
+    .sticky-cta a {
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        width: 100%; padding: 16px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.95rem; font-weight: 500;
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .nav-mobile-toggle {
+        display: none;
+        background: none; border: none; cursor: pointer;
+        width: 40px; height: 40px;
+        align-items: center; justify-content: center;
+    }
+    .nav-mobile-toggle svg { width: 24px; height: 24px; stroke: var(--text); stroke-width: 2; fill: none; }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-in {
+        opacity: 0; transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+        .container { padding: 0 32px; }
+        .nav { padding: 16px 32px; }
+        .hero-card { padding: 40px; }
+        .hero-image-card { flex: 0 0 calc((100% - 32px) / 3); }
+        .rv-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+        .rv-video { grid-row: 1 / 2; grid-column: 1 / 3; min-height: 360px; }
+        .about-top { grid-template-columns: 1fr; }
+        .about-bottom { grid-template-columns: 1fr; }
+        .about-categories { grid-template-columns: 1fr 1fr; }
+        .author-grid { grid-template-columns: 1fr; }
+        .author-right { min-height: 400px; }
+        .order-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+        .container { padding: 0 20px; }
+        .nav { padding: 14px 20px; }
+        .nav-links { display: none; }
+        .nav-mobile-toggle { display: flex; }
+        .hero { padding-top: 90px; }
+        .hero-card { padding: 28px; }
+        .hero-top { margin-bottom: 32px; }
+        .hero-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+        .hero-carousel { gap: 12px; }
+        .hero-image-card { flex: 0 0 calc((100% - 24px) / 2); padding: 20px; aspect-ratio: 3 / 4.2; }
+        .hero-image-card .card-title { font-size: 1.2rem; }
+        .hero-image-card .card-desc { font-size: 0.75rem; margin-bottom: 12px; }
+        .hero-image-card .card-number { font-size: 3.5rem; bottom: 14px; right: 18px; }
+        .hero-nav { padding: 12px 0 4px; }
+        .hero-actions { gap: 16px; }
+        .btn-primary { padding: 14px 24px; font-size: 0.85rem; white-space: nowrap; }
+        .content-section { padding: 60px 0 48px; }
+        .stats-card { padding: 32px; }
+        .stat-row { flex-direction: column; gap: 12px; }
+        .about-card { padding: 32px; }
+        .about-categories { grid-template-columns: 1fr; }
+        .author-left { padding: 36px; }
+        .author-stats { flex-direction: column; gap: 20px; }
+        .author-stat::after { display: none; }
+        .reviews-grid { grid-template-columns: 1fr; }
+        .order-dark, .order-light { padding: 36px; }
+        .faq-card { padding: 32px; }
+        .contact-card { grid-template-columns: 1fr; padding: 36px; gap: 36px; }
+        .contact-form .form-row { grid-template-columns: 1fr; }
+        .contact-submit { width: 100%; }
+        .footer-card {
+            flex-direction: column; gap: 16px;
+            text-align: center; padding: 28px;
+        }
+        .footer-center { flex-wrap: wrap; justify-content: center; }
+        .sticky-cta { display: block; }
+        .rv-grid { grid-template-columns: 1fr; }
+        .rv-video { grid-column: 1; min-height: 300px; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="/" class="nav-logo">
+        <svg viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M16 2C10.5 2 6 6.5 6 12c0 3.7 1.9 7 4.8 8.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="4" fill="currentColor"/>
+        </svg>
+        Evolvium
+    </a>
+    <div class="nav-links">
+        <a href="#kniha">O knihe</a>
+        <a href="#recenzie">Recenzie</a>
+        <a href="#autor">Autor</a>
+        <a href="#faq">FAQ</a>
+    </div>
+    <a href="#objednat" class="nav-cta">
+        Objednať
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 12L12 4M12 4H5M12 4v7"/>
+        </svg>
+    </a>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-card">
+            <div class="hero-top">
+                <p class="hero-eyebrow">Cesta rozvoja vedomia a sebapoznania.</p>
+                <h1 class="hero-title">
+                    <span class="light">Niektoré knihy zabávajú.</span><br>
+                    <span>Iné zmenia to, ako vidíme realitu.</span>
+                </h1>
+                <div class="hero-actions">
+                    <a href="#objednat" class="btn-primary">
+                        Objednať knihu
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 12L12 4M12 4H5M12 4v7"/>
+                        </svg>
+                    </a>
+                    <a href="#kniha" class="btn-secondary">
+                        Zistiť viac
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 3v10M3 8l5 5 5-5"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-carousel-wrap">
+            <div class="hero-carousel" id="heroCarousel">
+                    <div class="hero-image-card" style="background-image: url('https://www.evolvium.com/images/photo-1.jpg');">
+                        <div class="card-top">
+                            <div class="card-title">David</div>
+                            <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-desc">„Predstavte si, že hráte hru, v ktorej ste hlavným hrdinom Vy. Tá hra sa volá Život. Potom náhodou natrafíte na manuál — a zrazu Vám to všetko začne do seba postupne zapadať."</div>
+                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                        </div>
+                        <div class="card-number">01</div>
+                    </div>
+                    <div class="hero-image-card" style="background-image: url('https://www.evolvium.com/images/photo-2.jpg');">
+                        <div class="card-top">
+                            <div class="card-title">Martina</div>
+                            <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-desc">„Mám pocit, akoby som neprečítala jednu, ale desať kníh. Niektoré myšlienky vo mne zarezonovali veľmi silno. Nie je to čítanie na jeden dych, skôr kniha, ktorá si vyžaduje čas a premýšľanie."</div>
+                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                        </div>
+                        <div class="card-number">02</div>
+                    </div>
+                    <div class="hero-image-card" style="background-image: url('https://www.evolvium.com/images/photo-3.jpg');">
+                        <div class="card-top">
+                            <div class="card-title">Ema Horváthová</div>
+                            <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-desc">„Skvelo napísaná kniha, ktorá prepája vedu a sebapoznanie bez zbytočných slniečkárskych omáčok. Autor ide do hĺbky, ale stále zrozumiteľne."</div>
+                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                        </div>
+                        <div class="card-number">03</div>
+                    </div>
+                    <div class="hero-image-card" style="background-image: url('https://www.evolvium.com/images/photo-4.jpg');">
+                        <div class="card-top">
+                            <div class="card-title">Sebastián Svit</div>
+                            <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-desc">„Hlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet."</div>
+                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                        </div>
+                        <div class="card-number">04</div>
+                    </div>
+                    <div class="hero-image-card" style="background-image: url('https://www.evolvium.com/images/photo-5.jpg');">
+                        <div class="card-top">
+                            <div class="card-title">Timea</div>
+                            <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-desc">„Autor rozložil emócie na malé súčiastky a podrobne vysvetlil mechanizmy za každodenným správaním. Začala som sa úplne inak pozerať na seba aj ľudí z mojho blízkeho okolia."</div>
+                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                        </div>
+                        <div class="card-number">05</div>
+                    </div>
+                    <div class="hero-image-card" style="background-image: url('https://www.evolvium.com/images/photo-6.jpg');">
+                        <div class="card-top">
+                            <div class="card-title">Dominika</div>
+                            <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-desc">„Túto knihu úprimne odporúčam každému, kto hľadá hlbšie pochopenie seba samého. Kniha nie je ľahká na čítanie, ale práve vďaka tomu má silu posunúť človeka ďalej."</div>
+                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                        </div>
+                        <div class="card-number">06</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-nav">
+            <div class="hero-arrow" id="heroPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+            <div class="hero-arrow" id="heroNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT / OBSAH -->
+<section class="content-section fade-in">
+    <div class="container">
+        <p class="content-eyebrow">/Obsah</p>
+        <p class="content-text">
+            Kniha „JA – Evolúcia vedomia" je sprievodca, <span class="muted">ktorý vás prevedie najhlbšími vrstvami vášho bytia — od podvedomých vzorcov k autentickému prežívaniu prítomného okamihu,</span>
+        </p>
+    </div>
+</section>
+
+<!-- REVIEW + VIDEO -->
+<section class="review-video-section fade-in">
+    <div class="container">
+        <div class="rv-grid">
+            <div class="rv-video" style="background-image: url('https://images.unsplash.com/photo-1758650669689-1a39a1acae76?w=800&h=600&fit=crop&auto=format');">
+                <div class="play-btn">
+                    <svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg>
+                </div>
+                <div class="video-overlay">
+                    <div class="video-person">
+                        <div class="video-avatar">MK</div>
+                        <span class="video-name">Martina K.</span>
+                    </div>
+                    <span class="video-quote">„Táto kniha mi otvorila oči"</span>
+                </div>
+            </div>
+            <div class="rv-review">
+                <span class="review-eyebrow">/Recenzia</span>
+                <span class="review-source">Martinus.sk</span>
+                <h3 class="review-name">Andrea Šimková</h3>
+                <p class="review-text">„Konečne kniha, ktorá nie je plná prázdnych fráz. Každá strana je plná hlbokých myšlienok a praktických nástrojov. Už som ju darovala trom ľuďom."</p>
+                <div class="review-avatar">AŠ</div>
+            </div>
+            <div class="rv-audio">
+                <div class="audio-meta">
+                    <div class="audio-meta-titles">
+                        <div class="audio-title-ja">JA</div>
+                        <div class="audio-subtitle">Evolúcia vedomia</div>
+                    </div>
+                </div>
+                <div class="audio-track-info">
+                    <div class="audio-chapter">Tretia kapitola — Túžby</div>
+                    <div class="audio-author">Lukáš Horák</div>
+                    <span class="audio-badge">Ukážka</span>
+                </div>
+                <div class="audio-progress-wrap">
+                    <div class="audio-progress-bar" id="audioProgressBar">
+                        <div class="audio-progress-fill" id="audioProgressFill"></div>
+                    </div>
+                    <div class="audio-times">
+                        <span id="audioCurrentTime">0:00</span>
+                        <span>/</span>
+                        <span id="audioDuration">0:00</span>
+                    </div>
+                </div>
+                <div class="audio-controls">
+                    <button class="audio-btn" id="audioRewind" aria-label="Pretočiť o 15s späť">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                            <text x="9" y="16" font-size="7" fill="currentColor" stroke="none" font-weight="600">15</text>
+                        </svg>
+                    </button>
+                    <button class="audio-btn audio-btn-play" id="audioPlayBtn" aria-label="Prehrať">
+                        <svg id="audioPlayIcon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <polygon points="6,3 20,12 6,21"></polygon>
+                        </svg>
+                    </button>
+                    <button class="audio-btn" id="audioForward" aria-label="Pretočiť o 15s vpred">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"></path>
+                            <text x="9" y="16" font-size="7" fill="currentColor" stroke="none" font-weight="600">15</text>
+                        </svg>
+                    </button>
+                </div>
+                <audio id="audioElement" preload="metadata">
+                    <source src="/audio-ukazka.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section fade-in">
+    <div class="container">
+        <div class="stats-card">
+            <div class="stat-row">
+                <p class="stat-text">Kombinácia transpersonálnej psychológie, neurovedy a kontemplatívnych tradícii v praktickom formáte.</p>
+                <div class="stat-value">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Kapitol & cvičení</span>
+                </div>
+            </div>
+            <div class="stat-row">
+                <p class="stat-text">Každá kapitola obsahuje reflexie, cvičenia a meditácie, ktoré môžete okamžite aplikovať.</p>
+                <div class="stat-value">
+                    <span class="stat-number">336</span>
+                    <span class="stat-label">Strán obsahu</span>
+                </div>
+            </div>
+            <div class="stat-row">
+                <p class="stat-text">Kniha, ktorá mení spôsob myslenia a otvára bránu k hlbšiemu vhľadu do seba samého.</p>
+                <div class="stat-value">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Predaných kópií</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- O KNIHE -->
+<section class="about-section fade-in" id="kniha">
+    <div class="container">
+        <div class="about-card">
+            <div class="about-top">
+                <div class="about-desc">
+                    Sprievodca cestou k hlbšiemu poznaniu seba, ktorý kombinuje vedu s praxou a osobnou skúsenosťou.
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1762554907633-e2f14e742413?w=700&h=500&fit=crop&auto=format" alt="Kniha JA — Evolúcia vedomia" loading="lazy">
+                </div>
+            </div>
+            <div class="about-bottom">
+                <div class="about-left">
+                    <p class="about-eyebrow">/O knihe</p>
+                    <div class="about-avatars">
+                        <div class="avatar-circle avatar-dark">LH</div>
+                        <div class="avatar-circle avatar-light">JA</div>
+                    </div>
+                </div>
+                <div class="about-categories">
+                    <div class="category-card light">
+                        <span class="category-num">01</span>
+                        <span class="category-name">Vedomý život</span>
+                        <span class="category-sub">Reflexie & cvičenia</span>
+                    </div>
+                    <div class="category-card dark">
+                        <span class="category-num">02</span>
+                        <span class="category-name">Designing in Solution</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AUTOR -->
+<section class="author-section fade-in" id="autor">
+    <div class="container">
+        <div class="author-grid">
+            <div class="author-left">
+                <div>
+                    <p class="author-eyebrow">/O autorovi</p>
+                    <h2 class="author-title">Lukáš Horák — autor, lektor a sprievodca vedomému životu</h2>
+                    <p class="author-bio">Už viac ako 10 rokov sa venuje skúmaniu ľudského vedomia, práci s telom a mysľou. Absolvoval stovky hodín meditačných retreatov a pracoval s tisíckami ľudí.</p>
+                </div>
+                <div>
+                    <div class="author-stats">
+                        <div class="author-stat">
+                            <div class="author-stat-number">10+</div>
+                            <div class="author-stat-label">Rokov praxe</div>
+                        </div>
+                        <div class="author-stat">
+                            <div class="author-stat-number">2K+</div>
+                            <div class="author-stat-label">Účastníkov</div>
+                        </div>
+                    </div>
+                    <a href="#objednat" class="btn-primary">
+                        Objednať knihu
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 12L12 4M12 4H5M12 4v7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="author-right" style="background-image: url('https://images.unsplash.com/photo-1763293203909-47fc323a9ac9?w=700&h=800&fit=crop&auto=format');">
+                <div class="author-caption">
+                    <div class="author-caption-name">Lukáš Horák</div>
+                    <div class="author-caption-quote">„Každý človek má v sebe schopnosť prežívať život naplno."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RECENZIE -->
+<section class="reviews-section fade-in" id="recenzie">
+    <div class="container">
+        <p class="reviews-eyebrow">/Recenzie</p>
+        <h2 class="reviews-title">Čo hovoria čitatelia <span class="muted">o knihe, ktorá mení pohľad na seba samého</span></h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">„Táto kniha je dar. Čítala som ju pomaly, každú kapitolu som si nechala sadnúť. Po mesiaci cítim zmenu."</p>
+                <div class="review-footer">
+                    <div class="r-avatar" style="background: #E65C50;">MK</div>
+                    <span class="r-name">Mária K.</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">„Lukáš dokáže komplexné veci podať jednoducho. Inšpirovala ma začať meditovať a cvičenia robím každý deň."</p>
+                <div class="review-footer">
+                    <div class="r-avatar" style="background: #5B8DEF;">TL</div>
+                    <span class="r-name">Tomáš L.</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">„Konečne kniha, ktorá nie je plná prázdnych fráz. Každá strana je plná hlbokých myšlienok."</p>
+                <div class="review-footer">
+                    <div class="r-avatar" style="background: #8B5CF6;">AŠ</div>
+                    <span class="r-name">Andrea Š.</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★☆</div>
+                <p class="review-quote">„Kniha ma prinútila zamyslieť sa nad vecami, o ktorých som nikdy nepremýšľal. Odporúčam každému."</p>
+                <div class="review-footer">
+                    <div class="r-avatar" style="background: #F59E0B;">JN</div>
+                    <span class="r-name">Juraj N.</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">„Kúpila som ju ako darček a nakoniec som si ju prečítala prvá. Najlepšia investícia do seba za posledné roky."</p>
+                <div class="review-footer">
+                    <div class="r-avatar" style="background: #10B981;">KV</div>
+                    <span class="r-name">Katarína V.</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">„Praktická, hlboká a zároveň ľahko čitateľná. Presne to, čo som potreboval na svojej ceste."</p>
+                <div class="review-footer">
+                    <div class="r-avatar" style="background: #1A1A1A;">RM</div>
+                    <span class="r-name">Richard M.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OBJEDNÁVKA -->
+<section class="order-section fade-in" id="objednat">
+    <div class="container">
+        <div class="order-grid">
+            <div class="order-dark">
+                <div>
+                    <p class="order-eyebrow">/Objednávka</p>
+                    <h2 class="order-title">Začnite svoju cestu k hlbšiemu poznaniu seba samého</h2>
+                </div>
+                <div>
+                    <p class="order-body">336 strán, 12 kapitol, 48 cvičení a 24 meditácií — všetko, čo potrebujete na cestu k autentickému životu.</p>
+                    <div class="order-meta">
+                        <div class="order-meta-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                            Zadarmo
+                        </div>
+                        <div class="order-meta-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            30-dní garancia
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="order-light">
+                <p class="ol-eyebrow">/Tlačená kniha</p>
+                <h3 class="ol-title">JA — Evolúcia vedomia</h3>
+                <p class="ol-subtitle">Lukáš Horák · 336 strán · Tvrdá väzba</p>
+                <div class="ol-price">€24<span class="cents">,90</span></div>
+                <ul class="ol-features">
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 336 strán kvalitného obsahu</li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 12 kapitol + 48 cvičení</li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Tvrdá väzba, prémiová kvalita</li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Osobný podpis autora</li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Bonus: audio meditácie (MP3)</li>
+                </ul>
+                <a href="/checkout.html" class="ol-btn">
+                    Objednať teraz
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12L12 4M12 4H5M12 4v7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section fade-in" id="faq">
+    <div class="container">
+        <div class="faq-card">
+            <p class="faq-eyebrow">/FAQ</p>
+            <h2 class="faq-title">Časté otázky</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Pre koho je táto kniha určená?</span>
+                        <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                    </div>
+                    <div class="faq-answer"><p>Kniha je určená pre každého, kto sa chce hlbšie pochopiť, rozvíjať svoje vedomie a žiť autentickejší život. Nie je potrebná žiadna predchádzajúca skúsenosť s meditáciou ani psychológiou.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Ako dlho trvá doručenie?</span>
+                        <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                    </div>
+                    <div class="faq-answer"><p>Doručenie na Slovensku trvá zvyčajne 2-4 pracovné dni, do Česka 3-5 pracovných dní. Poštovné je €3,90 alebo zadarmo pri objednávke nad €50.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Existuje aj e-book alebo audiokniha?</span>
+                        <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                    </div>
+                    <div class="faq-answer"><p>Momentálne je kniha dostupná iba v tlačenej podobe s tvrdou väzbou. E-book a audiokniha sú v príprave a budú dostupné čoskoro.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Môžem knihu vrátiť?</span>
+                        <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                    </div>
+                    <div class="faq-answer"><p>Áno, ponúkame 30-dňovú garanciu vrátenia peňazí. Ak nebudete s knihou spokojní, vrátime vám plnú sumu bez otázok.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Je kniha vhodná ako darček?</span>
+                        <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                    </div>
+                    <div class="faq-answer"><p>Rozhodne áno. Kniha má krásnu tvrdú väzbu a obsahuje osobný podpis autora. Je to premyslený darček pre každého, kto sa zaujíma o osobný rast.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Aký je rozdiel oproti iným knihám o vedomí?</span>
+                        <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                    </div>
+                    <div class="faq-answer"><p>Táto kniha kombinuje transpersonálnu psychológiu, neuroscience a kontemplatívne tradície v jednom praktickom formáte s konkrétnymi cvičeniami a meditáciami, nie iba teóriou.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section fade-in" id="kontakt">
+    <div class="container">
+        <div class="contact-card">
+            <div class="contact-left">
+                <p class="contact-eyebrow">/Kontakt</p>
+                <h2 class="contact-title">Máte otázku pre autora?</h2>
+                <p class="contact-desc">Napíšte mi čokoľvek — otázku o knihe, návrh na spoluprácu, alebo len spätnú väzbu. Rád odpoviem.</p>
+                <a href="mailto:info@evolvium.com" class="contact-email-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+                    info@evolvium.com
+                </a>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Meno" required>
+                    <input type="email" name="email" placeholder="Váš e-mail" required>
+                </div>
+                <input type="text" name="subject" placeholder="Predmet správy">
+                <textarea name="message" placeholder="Vaša správa..." required></textarea>
+                <button type="submit" class="contact-submit">
+                    Odoslať správu
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </button>
+                <div class="contact-success" id="contactSuccess">Ďakujeme za vašu správu. Lukáš vám čoskoro odpovie.</div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-card">
+            <div class="footer-left">JA <span>/ Evolúcia vedomia</span></div>
+            <div class="footer-center">
+                <a href="#">Obchodné podmienky</a>
+                <a href="#">Ochrana súkromia</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+            <div class="footer-right">© 2026 Lukáš Horák</div>
+        </div>
+    </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+    <a href="#objednat">
+        Objednať knihu
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 12L12 4M12 4H5M12 4v7"/>
+        </svg>
+    </a>
+</div>
+
+<script>
+// ===== HERO CAROUSEL (slide animation) =====
+(function() {
+    const carousel = document.getElementById('heroCarousel');
+    const prevBtn = document.getElementById('heroPrev');
+    const nextBtn = document.getElementById('heroNext');
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    const cards = carousel.querySelectorAll('.hero-image-card');
+    const total = cards.length;
+    let offset = 0;
+    let isAnimating = false;
+
+    function getVisible() {
+        const w = window.innerWidth;
+        if (w <= 768) return 2;
+        if (w <= 1024) return 3;
+        return 4;
+    }
+
+    function getGap() {
+        const w = window.innerWidth;
+        if (w <= 768) return 12;
+        return 16;
+    }
+
+    function update(animate) {
+        const vis = getVisible();
+        const gap = getGap();
+        const wrapWidth = carousel.parentElement.offsetWidth;
+        const cardW = (wrapWidth - gap * (vis - 1)) / vis;
+        const shift = offset * (cardW + gap);
+        if (animate !== false) {
+            carousel.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)';
+        } else {
+            carousel.style.transition = 'none';
+        }
+        carousel.style.transform = 'translateX(-' + shift + 'px)';
+        prevBtn.style.opacity = offset === 0 ? '0.4' : '1';
+        prevBtn.style.pointerEvents = offset === 0 ? 'none' : 'auto';
+        const maxOff = total - vis;
+        nextBtn.style.opacity = offset >= maxOff ? '0.4' : '1';
+        nextBtn.style.pointerEvents = offset >= maxOff ? 'none' : 'auto';
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if (isAnimating) return;
+        const vis = getVisible();
+        const maxOff = total - vis;
+        if (offset >= maxOff) return;
+        isAnimating = true;
+        offset++;
+        update();
+        setTimeout(() => { isAnimating = false; }, 650);
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (isAnimating) return;
+        if (offset <= 0) return;
+        isAnimating = true;
+        offset--;
+        update();
+        setTimeout(() => { isAnimating = false; }, 650);
+    });
+
+    // Init
+    update(false);
+    window.addEventListener('resize', () => {
+        const vis = getVisible();
+        const maxOff = total - vis;
+        if (offset > maxOff) offset = Math.max(0, maxOff);
+        update(false);
+    });
+})();
+
+// ===== AUDIO PLAYER =====
+(function() {
+    const audio = document.getElementById('audioElement');
+    const playBtn = document.getElementById('audioPlayBtn');
+    const playIcon = document.getElementById('audioPlayIcon');
+    const progressBar = document.getElementById('audioProgressBar');
+    const progressFill = document.getElementById('audioProgressFill');
+    const currentTimeEl = document.getElementById('audioCurrentTime');
+    const durationEl = document.getElementById('audioDuration');
+    const rewindBtn = document.getElementById('audioRewind');
+    const forwardBtn = document.getElementById('audioForward');
+
+    if (!audio || !playBtn) return;
+
+    const playPath = '<polygon points="6,3 20,12 6,21"></polygon>';
+    const pausePath = '<rect x="5" y="3" width="4" height="18" rx="1"></rect><rect x="15" y="3" width="4" height="18" rx="1"></rect>';
+
+    function formatTime(s) {
+        if (isNaN(s) || !isFinite(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    audio.addEventListener('loadedmetadata', function() {
+        durationEl.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', function() {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = pct + '%';
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('ended', function() {
+        playIcon.innerHTML = playPath;
+        playBtn.setAttribute('aria-label', 'Prehrať');
+    });
+
+    playBtn.addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play();
+            playIcon.innerHTML = pausePath;
+            playBtn.setAttribute('aria-label', 'Pozastaviť');
+        } else {
+            audio.pause();
+            playIcon.innerHTML = playPath;
+            playBtn.setAttribute('aria-label', 'Prehrať');
+        }
+    });
+
+    progressBar.addEventListener('click', function(e) {
+        const rect = progressBar.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        if (audio.duration) {
+            audio.currentTime = pct * audio.duration;
+        }
+    });
+
+    // Drag seeking
+    let dragging = false;
+    progressBar.addEventListener('mousedown', function(e) {
+        dragging = true;
+        seek(e);
+    });
+    document.addEventListener('mousemove', function(e) {
+        if (dragging) seek(e);
+    });
+    document.addEventListener('mouseup', function() {
+        dragging = false;
+    });
+    // Touch support
+    progressBar.addEventListener('touchstart', function(e) {
+        dragging = true;
+        seek(e.touches[0]);
+    }, { passive: true });
+    document.addEventListener('touchmove', function(e) {
+        if (dragging) seek(e.touches[0]);
+    }, { passive: true });
+    document.addEventListener('touchend', function() {
+        dragging = false;
+    });
+
+    function seek(e) {
+        const rect = progressBar.getBoundingClientRect();
+        const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        progressFill.style.width = (pct * 100) + '%';
+        if (audio.duration) {
+            audio.currentTime = pct * audio.duration;
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+        }
+    }
+
+    rewindBtn.addEventListener('click', function() {
+        audio.currentTime = Math.max(0, audio.currentTime - 15);
+    });
+
+    forwardBtn.addEventListener('click', function() {
+        audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 15);
+    });
+
+    // Keyboard: Space to play/pause when player in viewport
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space' && document.activeElement && document.activeElement.closest('.rv-audio')) {
+            e.preventDefault();
+            playBtn.click();
+        }
+    });
+})();
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ===== CONTACT FORM =====
+(function() {
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('contactSuccess');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const subject = form.subject.value.trim() || 'Otázka z evolvium.com';
+        const message = form.message.value.trim();
+
+        const body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
+        const mailto = 'mailto:info@evolvium.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        window.location.href = mailto;
+
+        success.classList.add('visible');
+        form.reset();
+        setTimeout(function() {
+            success.classList.remove('visible');
+        }, 5000);
+    });
+})();
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
