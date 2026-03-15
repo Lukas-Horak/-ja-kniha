@@ -691,6 +691,255 @@
         font-style: italic;
     }
 
+
+    /* Reader settings button */
+    .fs-reader-actions {
+        display: flex; align-items: center; gap: 12px;
+    }
+    .fs-reader-settings-btn {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        border: 1.5px solid var(--r-border, #E8E0D6);
+        background: transparent;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        color: var(--r-muted, #8C7E72);
+        transition: all 0.2s;
+    }
+    .fs-reader-settings-btn:hover {
+        background: var(--r-hover, #F0EBE4);
+        color: var(--r-text, #3D3632);
+    }
+    .fs-reader-settings-btn svg {
+        width: 18px; height: 18px;
+    }
+
+    /* Settings panel */
+    .fs-settings-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10001;
+        background: rgba(0,0,0,0);
+        transition: background 0.3s;
+    }
+    .fs-settings-backdrop.open {
+        display: block;
+        background: rgba(0,0,0,0.3);
+    }
+    .fs-settings-panel {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 10002;
+        background: var(--r-card, #fff);
+        border-radius: 20px 20px 0 0;
+        padding: 0 28px 36px;
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        max-width: 480px;
+        margin: 0 auto;
+        box-shadow: 0 -4px 40px rgba(0,0,0,0.12);
+    }
+    .fs-settings-panel.open {
+        transform: translateY(0);
+    }
+    .fs-settings-handle {
+        width: 36px; height: 4px;
+        background: var(--r-border, #DDD6CC);
+        border-radius: 4px;
+        margin: 12px auto 20px;
+    }
+    .fs-settings-title {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--r-muted, #8C7E72);
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    /* Font size control */
+    .fs-settings-row {
+        margin-bottom: 28px;
+    }
+    .fs-font-size-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .fs-font-label {
+        font-family: 'Urbanist', sans-serif;
+        color: var(--r-muted, #8C7E72);
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+    .fs-font-label-sm { font-size: 0.8rem; }
+    .fs-font-label-lg { font-size: 1.3rem; }
+    .fs-font-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 4px;
+        background: var(--r-border, #DDD6CC);
+        border-radius: 4px;
+        outline: none;
+    }
+    .fs-font-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px; height: 24px;
+        background: var(--r-accent, #8C7E72);
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid var(--r-card, #fff);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .fs-font-slider::-moz-range-thumb {
+        width: 24px; height: 24px;
+        background: var(--r-accent, #8C7E72);
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid var(--r-card, #fff);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+
+    /* Theme picker */
+    .fs-theme-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+    .fs-theme-btn {
+        width: 52px; height: 52px;
+        border-radius: 50%;
+        border: 2.5px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .fs-theme-btn.active {
+        border-color: var(--r-accent, #8C7E72);
+    }
+    .fs-theme-btn::after {
+        content: '';
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        display: block;
+    }
+    .fs-theme-light::after { background: #FDFBF7; border: 1px solid #E8E0D6; }
+    .fs-theme-dark::after { background: #1C1C1E; }
+    .fs-theme-sepia::after { background: #F4E8D3; }
+    .fs-theme-forest::after { background: #2C3E2D; }
+
+    /* Theme: Light (default) */
+    .fs-reader-overlay {
+        --r-bg: #FDFBF7;
+        --r-text: #3D3632;
+        --r-muted: #8C7E72;
+        --r-heading: #1A1A1A;
+        --r-border: #EBE6DE;
+        --r-hover: #F0EBE4;
+        --r-card: #FFFFFF;
+        --r-topbar: rgba(253,251,247,0.92);
+        --r-divider: #DDD6CC;
+        --r-accent: #8C7E72;
+        --r-quote-border: #DDD6CC;
+    }
+
+    /* Theme: Dark */
+    .fs-reader-overlay.theme-dark {
+        --r-bg: #1C1C1E;
+        --r-text: #D4D2CE;
+        --r-muted: #8E8E93;
+        --r-heading: #F5F5F7;
+        --r-border: #38383A;
+        --r-hover: #2C2C2E;
+        --r-card: #2C2C2E;
+        --r-topbar: rgba(28,28,30,0.92);
+        --r-divider: #38383A;
+        --r-accent: #A8A29E;
+        --r-quote-border: #48484A;
+    }
+
+    /* Theme: Sepia */
+    .fs-reader-overlay.theme-sepia {
+        --r-bg: #F4E8D3;
+        --r-text: #5B4636;
+        --r-muted: #8B7355;
+        --r-heading: #3C2A1A;
+        --r-border: #DFD0B8;
+        --r-hover: #EBD9BE;
+        --r-card: #F9F0E0;
+        --r-topbar: rgba(244,232,211,0.92);
+        --r-divider: #D4C4A8;
+        --r-accent: #8B7355;
+        --r-quote-border: #C9B898;
+    }
+
+    /* Theme: Forest */
+    .fs-reader-overlay.theme-forest {
+        --r-bg: #2C3E2D;
+        --r-text: #C8D5C0;
+        --r-muted: #8BA07E;
+        --r-heading: #E8F0E4;
+        --r-border: #3D5240;
+        --r-hover: #3A4F3C;
+        --r-card: #344838;
+        --r-topbar: rgba(44,62,45,0.92);
+        --r-divider: #3D5240;
+        --r-accent: #8BA07E;
+        --r-quote-border: #4A6548;
+    }
+
+    /* Apply theme variables to reader elements */
+    .fs-reader-overlay {
+        background: var(--r-bg);
+        transition: background 0.4s, color 0.4s;
+    }
+    .fs-reader-topbar {
+        background: var(--r-topbar);
+        border-bottom-color: var(--r-border);
+        transition: background 0.4s, border-color 0.4s;
+    }
+    .fs-reader-booktitle {
+        color: var(--r-muted);
+        transition: color 0.4s;
+    }
+    .fs-reader-close {
+        border-color: var(--r-border);
+        color: var(--r-muted);
+    }
+    .fs-reader-close:hover {
+        background: var(--r-hover);
+        color: var(--r-text);
+    }
+    .fs-chapter-label {
+        color: var(--r-muted);
+        transition: color 0.4s;
+    }
+    .fs-chapter-heading {
+        color: var(--r-heading);
+        transition: color 0.4s;
+    }
+    .fs-chapter-quote {
+        color: var(--r-muted);
+        border-left-color: var(--r-quote-border);
+        transition: color 0.4s, border-color 0.4s;
+    }
+    .fs-chapter-text {
+        color: var(--r-text);
+        transition: color 0.4s, font-size 0.3s;
+    }
+    .fs-divider {
+        background: var(--r-divider);
+        transition: background 0.4s;
+    }
+    .fs-cta p {
+        color: var(--r-muted);
+    }
+
     @media (max-width: 768px) {
         .book-preview { padding: 32px 28px 28px; max-height: 440px; }
         .book-preview-text { font-size: 0.95rem; line-height: 1.9; }
@@ -1243,8 +1492,34 @@
         background: none; border: none; cursor: pointer;
         width: 40px; height: 40px;
         align-items: center; justify-content: center;
+        position: relative; z-index: 201;
     }
     .nav-mobile-toggle svg { width: 24px; height: 24px; stroke: var(--text); stroke-width: 2; fill: none; }
+
+    /* Mobile menu overlay */
+    .nav-links.mobile-open {
+        display: flex !important;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 200;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        background: #E8E5DF;
+        padding: 0;
+        margin: 0;
+    }
+    .nav-links.mobile-open a {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--text);
+        padding: 20px 0;
+        letter-spacing: -0.01em;
+    }
 
     /* ===== ANIMATIONS ===== */
     .fade-in {
@@ -1275,6 +1550,7 @@
         .container { padding: 0 20px; }
         .nav { padding: 14px 20px; }
         .nav-links { display: none; }
+        .nav-cta { display: none; }
         .nav-mobile-toggle { display: flex; }
         .hero { padding-top: 90px; }
         .hero-card { padding: 28px; }
@@ -1327,7 +1603,8 @@
             text-align: center; padding: 28px;
         }
         .footer-center { flex-wrap: wrap; justify-content: center; }
-        .sticky-cta { display: block; }
+        .sticky-cta { display: block; opacity: 0; transform: translateY(100%); transition: opacity 0.35s ease, transform 0.35s ease; pointer-events: none; }
+        .sticky-cta.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
         .rv-grid { grid-template-columns: 1fr; }
         .rv-video { grid-column: 1; min-height: 300px; }
     }
@@ -1430,8 +1707,8 @@
             <path d="M4 12L12 4M12 4H5M12 4v7"/>
         </svg>
     </a>
-    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <button class="nav-mobile-toggle" id="mobileMenuToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" id="menuIcon"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
 </nav>
 
@@ -1825,9 +2102,14 @@
 <div class="fs-reader-overlay" id="fsReaderOverlay">
     <div class="fs-reader-topbar">
         <div class="fs-reader-booktitle">JA – Evolúcia vedomia</div>
-        <button class="fs-reader-close" id="closeFullReader" aria-label="Zavrieť">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
+        <div class="fs-reader-actions">
+            <button class="fs-reader-settings-btn" id="openReaderSettings" aria-label="Nastavenia">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+            <button class="fs-reader-close" id="closeFullReader" aria-label="Zavrieť">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
     </div>
     <div class="fs-reader-content">
 
@@ -1913,6 +2195,29 @@
 
     </div>
 </div>
+
+<!-- READER SETTINGS PANEL -->
+<div class="fs-settings-backdrop" id="settingsBackdrop"></div>
+<div class="fs-settings-panel" id="settingsPanel">
+    <div class="fs-settings-handle"></div>
+    <div class="fs-settings-title">Nastavenia</div>
+    <div class="fs-settings-row">
+        <div class="fs-font-size-row">
+            <span class="fs-font-label fs-font-label-sm">Aa</span>
+            <input type="range" class="fs-font-slider" id="fontSizeSlider" min="0" max="4" step="1" value="2">
+            <span class="fs-font-label fs-font-label-lg">Aa</span>
+        </div>
+    </div>
+    <div class="fs-settings-row">
+        <div class="fs-theme-row">
+            <button class="fs-theme-btn fs-theme-light active" data-theme="" aria-label="Svetlá"></button>
+            <button class="fs-theme-btn fs-theme-dark" data-theme="theme-dark" aria-label="Tmavá"></button>
+            <button class="fs-theme-btn fs-theme-forest" data-theme="theme-forest" aria-label="Les"></button>
+            <button class="fs-theme-btn fs-theme-sepia" data-theme="theme-sepia" aria-label="Sépia"></button>
+        </div>
+    </div>
+</div>
+
 <!-- RECENZIE -->
 <section class="reviews-section fade-in" id="recenzie">
     <div class="container">
@@ -2169,12 +2474,28 @@ function toggleAuthorBio() {
     }
 }
 
-// ===== FULLSCREEN READER =====
+// ===== FULLSCREEN READER WITH SETTINGS =====
 (function() {
     var openBtn = document.getElementById('openFullReader');
     var closeBtn = document.getElementById('closeFullReader');
     var overlay = document.getElementById('fsReaderOverlay');
+    var settingsBtn = document.getElementById('openReaderSettings');
+    var settingsPanel = document.getElementById('settingsPanel');
+    var settingsBackdrop = document.getElementById('settingsBackdrop');
+    var fontSlider = document.getElementById('fontSizeSlider');
     if (!openBtn || !closeBtn || !overlay) return;
+
+    // Font sizes: 5 steps
+    var fontSizes = ['0.88rem', '0.95rem', '1.05rem', '1.18rem', '1.32rem'];
+    var lineHeights = ['1.85', '1.9', '2', '2.1', '2.15'];
+
+    // Load saved settings
+    var savedTheme = localStorage.getItem('ev-reader-theme') || '';
+    var savedFont = parseInt(localStorage.getItem('ev-reader-font') || '2');
+    if (savedTheme) overlay.className = 'fs-reader-overlay ' + savedTheme;
+    applyFontSize(savedFont);
+    if (fontSlider) fontSlider.value = savedFont;
+    updateThemeButtons();
 
     function openReader() {
         overlay.classList.add('open');
@@ -2184,15 +2505,66 @@ function toggleAuthorBio() {
     function closeReader() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
+        closeSettings();
+    }
+    function openSettings() {
+        settingsBackdrop.classList.add('open');
+        settingsPanel.classList.add('open');
+    }
+    function closeSettings() {
+        settingsBackdrop.classList.remove('open');
+        settingsPanel.classList.remove('open');
     }
 
+    function applyFontSize(idx) {
+        var texts = overlay.querySelectorAll('.fs-chapter-text');
+        texts.forEach(function(t) {
+            t.style.fontSize = fontSizes[idx];
+            t.style.lineHeight = lineHeights[idx];
+        });
+    }
+
+    function updateThemeButtons() {
+        var current = overlay.className.replace('fs-reader-overlay', '').replace('open', '').trim();
+        document.querySelectorAll('.fs-theme-btn').forEach(function(btn) {
+            btn.classList.toggle('active', btn.dataset.theme === current);
+        });
+    }
+
+    // Open/Close reader
     openBtn.addEventListener('click', openReader);
     openBtn.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openReader(); }
     });
     closeBtn.addEventListener('click', closeReader);
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && overlay.classList.contains('open')) closeReader();
+        if (e.key === 'Escape') {
+            if (settingsPanel.classList.contains('open')) closeSettings();
+            else if (overlay.classList.contains('open')) closeReader();
+        }
+    });
+
+    // Settings open/close
+    if (settingsBtn) settingsBtn.addEventListener('click', openSettings);
+    if (settingsBackdrop) settingsBackdrop.addEventListener('click', closeSettings);
+
+    // Font size slider
+    if (fontSlider) {
+        fontSlider.addEventListener('input', function() {
+            var idx = parseInt(this.value);
+            applyFontSize(idx);
+            localStorage.setItem('ev-reader-font', idx);
+        });
+    }
+
+    // Theme buttons
+    document.querySelectorAll('.fs-theme-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var theme = this.dataset.theme;
+            overlay.className = 'fs-reader-overlay open' + (theme ? ' ' + theme : '');
+            localStorage.setItem('ev-reader-theme', theme);
+            updateThemeButtons();
+        });
     });
 })();
 
@@ -2545,6 +2917,64 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
             success.classList.remove('visible');
         }, 5000);
     });
+})();
+
+// ===== MOBILE MENU TOGGLE =====
+(function() {
+    var toggle = document.getElementById('mobileMenuToggle');
+    var navLinks = document.querySelector('.nav-links');
+    var icon = document.getElementById('menuIcon');
+    if (!toggle || !navLinks || !icon) return;
+
+    var hamburgerSVG = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+    var closeSVG = '<line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>';
+
+    function openMenu() {
+        navLinks.classList.add('mobile-open');
+        icon.innerHTML = closeSVG;
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        navLinks.classList.remove('mobile-open');
+        icon.innerHTML = hamburgerSVG;
+        document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', function() {
+        if (navLinks.classList.contains('mobile-open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (navLinks.classList.contains('mobile-open')) {
+                closeMenu();
+            }
+        });
+    });
+})();
+
+// ===== STICKY CTA: show only after scrolling past hero =====
+(function() {
+    var hero = document.getElementById('hero');
+    var stickyCta = document.querySelector('.sticky-cta');
+    if (!hero || !stickyCta) return;
+
+    function checkScroll() {
+        var heroBottom = hero.getBoundingClientRect().bottom;
+        if (heroBottom < 0) {
+            stickyCta.classList.add('visible');
+        } else {
+            stickyCta.classList.remove('visible');
+        }
+    }
+
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
 })();
 
 // Smooth scroll for anchor links
