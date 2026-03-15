@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' stroke='%231a1a1a' stroke-width='2' fill='none'/%3E%3Cpath d='M16 2C10.5 2 6 6.5 6 12c0 3.7 1.9 7 4.8 8.8' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%231a1a1a'/%3E%3C/svg%3E">
-    <script src="https://js.stripe.com/v3/"></script>
     <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
@@ -38,6 +37,7 @@
     .back-link {
         display: inline-flex; align-items: center; gap: 8px;
         font-size: 0.9rem; color: var(--text-muted);
+        text-decoration: none;
         margin-bottom: 32px;
     }
     .back-link:hover { color: var(--text); }
@@ -86,6 +86,7 @@
     }
     .form-input::placeholder { color: var(--text-muted); }
     .form-input:focus { border-color: var(--text); }
+    .form-input.error { border-color: #E65C50; }
 
     .quantity-section { margin-bottom: 24px; }
     .quantity-controls {
@@ -108,58 +109,20 @@
         font-size: 1.1rem; font-weight: 500;
     }
 
-    .promo-section {
-        margin-top: 32px;
+    .info-note {
+        margin-top: 24px;
         padding: 20px 24px;
         background: #F8F6F2;
         border-radius: 16px;
         border: 1.5px dashed var(--border);
     }
-    .promo-header {
-        display: flex; align-items: center; gap: 10px;
-        margin-bottom: 4px;
+    .info-note p {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        line-height: 1.6;
     }
-    .promo-header svg {
-        width: 18px; height: 18px; stroke: var(--text); stroke-width: 2; fill: none;
-    }
-    .promo-header span {
-        font-size: 0.95rem; font-weight: 500; color: var(--text);
-    }
-    .promo-hint {
-        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;
-    }
-    .promo-field {
-        display: flex; gap: 12px;
-    }
-    .promo-field input {
-        flex: 1;
-        padding: 14px 20px;
-        border: 1.5px solid var(--border);
-        border-radius: 12px;
-        font-size: 0.95rem;
-        font-family: var(--font);
-        background: var(--card);
-        outline: none;
-    }
-    .promo-field input:focus { border-color: var(--text); }
-    .promo-apply {
-        padding: 14px 24px;
-        background: var(--dark);
-        color: #fff;
-        border-radius: 12px;
-        border: none;
-        cursor: pointer;
-        font-family: var(--font);
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: opacity 0.2s;
-    }
-    .promo-apply:hover { opacity: 0.85; }
-    .promo-msg {
-        font-size: 0.85rem; margin-top: 10px;
-    }
-    .promo-msg.success { color: #10B981; font-weight: 500; }
-    .promo-msg.error { color: #E65C50; }
+    .info-note p + p { margin-top: 8px; }
+    .info-note strong { color: var(--text); font-weight: 600; }
 
     /* Order summary */
     .summary {
@@ -200,7 +163,6 @@
         font-size: 0.95rem;
     }
     .summary-line .label { color: var(--text-light); }
-    .summary-line.discount .value { color: #10B981; }
     .summary-total {
         display: flex; justify-content: space-between;
         padding-top: 20px;
@@ -211,25 +173,6 @@
     .summary-total .value {
         font-size: 1.5rem; font-weight: 500;
         letter-spacing: -0.02em;
-    }
-
-    .card-label {
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        margin: 24px 0 12px;
-    }
-    #card-element {
-        padding: 16px 20px;
-        border: 1.5px solid var(--border);
-        border-radius: 12px;
-        background: var(--card);
-    }
-    #card-errors {
-        font-size: 0.85rem; color: #E65C50;
-        margin-top: 8px; min-height: 20px;
     }
 
     .pay-btn {
@@ -246,12 +189,24 @@
     .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .pay-btn svg { width: 14px; height: 14px; }
 
+    .promo-note {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-align: center;
+        margin-top: 12px;
+    }
+
     .secure-note {
         display: flex; align-items: center; justify-content: center; gap: 8px;
         font-size: 0.8rem; color: var(--text-muted);
         margin-top: 16px;
     }
     .secure-note svg { width: 14px; height: 14px; }
+
+    #formError {
+        font-size: 0.85rem; color: #E65C50;
+        margin-top: 8px; min-height: 20px;
+    }
 
     @media (max-width: 768px) {
         body { padding: 24px; }
@@ -278,39 +233,23 @@
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Meno</label>
-                    <input type="text" class="form-input" id="firstName" placeholder="Meno">
+                    <input type="text" class="form-input" id="firstName" placeholder="Meno" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Priezvisko</label>
-                    <input type="text" class="form-input" id="lastName" placeholder="Priezvisko">
+                    <input type="text" class="form-input" id="lastName" placeholder="Priezvisko" required>
                 </div>
             </div>
             <div class="form-row single">
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-input" id="email" placeholder="tvoj@email.sk">
+                    <input type="email" class="form-input" id="email" placeholder="tvoj@email.sk" required>
                 </div>
             </div>
             <div class="form-row single">
                 <div class="form-group">
                     <label class="form-label">Telefón</label>
                     <input type="tel" class="form-input" id="phone" placeholder="+421 ...">
-                </div>
-            </div>
-            <div class="form-row single">
-                <div class="form-group">
-                    <label class="form-label">Ulica a číslo</label>
-                    <input type="text" class="form-input" id="address" placeholder="Ulica a číslo domu">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Mesto</label>
-                    <input type="text" class="form-input" id="city" placeholder="Mesto">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">PSČ</label>
-                    <input type="text" class="form-input" id="zip" placeholder="PSČ">
                 </div>
             </div>
 
@@ -323,17 +262,9 @@
                 </div>
             </div>
 
-            <div class="promo-section">
-                <div class="promo-header">
-                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-                    <span>Zľavový kód</span>
-                </div>
-                <p class="promo-hint">Ak máte zľavový kód, zadajte ho nižšie</p>
-                <div class="promo-field">
-                    <input type="text" id="promoInput" placeholder="Zadajte kód">
-                    <button class="promo-apply" onclick="applyPromo()">Použiť</button>
-                </div>
-                <div class="promo-msg" id="promoMsg"></div>
+            <div class="info-note">
+                <p><strong>Zľavový kód?</strong> Zadáte ho na ďalšej stránke pri platbe.</p>
+                <p>Doručovaciu adresu vyplníte tiež na platobnej stránke Stripe.</p>
             </div>
         </div>
 
@@ -345,37 +276,33 @@
                     <div class="name">JA – Evolúcia vedomia</div>
                     <div class="meta">Lukáš Horák · <span id="summaryQty">1</span>×</div>
                 </div>
-                <div class="summary-price" id="summaryItemPrice">33.00 €</div>
+                <div class="summary-price" id="summaryItemPrice">€33.00</div>
             </div>
 
             <div class="summary-line">
                 <span class="label">Medzisúčet</span>
-                <span class="value" id="subtotal">33.00 €</span>
+                <span class="value" id="subtotal">€33.00</span>
             </div>
             <div class="summary-line">
                 <span class="label">Poštovné</span>
-                <span class="value" id="shipping">3.90 €</span>
-            </div>
-            <div class="summary-line discount" id="discountLine" style="display:none;">
-                <span class="label">Zľava (VEDOMIE10)</span>
-                <span class="value" id="discountValue">-3.30 €</span>
+                <span class="value">od €0.00</span>
             </div>
 
             <div class="summary-total">
                 <span class="label">Celkom</span>
-                <span class="value" id="totalPrice">36.90 €</span>
+                <span class="value" id="totalPrice">€33.00+</span>
             </div>
 
-            <p class="card-label">Platobná karta</p>
-            <div id="card-element"></div>
-            <div id="card-errors"></div>
+            <div id="formError"></div>
 
             <button class="pay-btn" id="payBtn" onclick="handlePayment()">
-                <span id="payBtnText">Zaplatiť 36.90 €</span>
+                <span id="payBtnText">Pokračovať na platbu</span>
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 12L12 4M12 4H5M12 4v7"/>
                 </svg>
             </button>
+
+            <p class="promo-note">Zľavový kód môžete zadať na platobnej stránke</p>
 
             <div class="secure-note">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -390,30 +317,7 @@
 
 <script>
 const BOOK_PRICE = 33.00;
-const SHIPPING = 3.90;
 let quantity = 1;
-let discount = 0;
-let promoApplied = false;
-
-// Stripe setup
-const stripe = Stripe('pk_live_51T81w2B5B1tNqSGiGl0j6Z2JlJXbSmI1KwGkmcH38kMLB7ewuDo1GCLZolk8XXGjoIVaWbKgqDQUO69iWhKlEfn500GsdigJ2X');
-const elements = stripe.elements({
-    fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500&display=swap' }]
-});
-const cardElement = elements.create('card', {
-    style: {
-        base: {
-            fontFamily: "'Urbanist', sans-serif",
-            fontSize: '16px',
-            color: '#1A1A1A',
-            '::placeholder': { color: '#999999' }
-        }
-    }
-});
-cardElement.mount('#card-element');
-cardElement.on('change', function(event) {
-    document.getElementById('card-errors').textContent = event.error ? event.error.message : '';
-});
 
 function changeQty(delta) {
     quantity = Math.max(1, Math.min(10, quantity + delta));
@@ -421,68 +325,44 @@ function changeQty(delta) {
     updatePrices();
 }
 
-function applyPromo() {
-    const code = document.getElementById('promoInput').value.trim().toUpperCase();
-    const msg = document.getElementById('promoMsg');
-    if (code === 'VEDOMIE10') {
-        promoApplied = true;
-        msg.textContent = 'Zľavový kód aplikovaný: -10%';
-        msg.className = 'promo-msg success';
-        updatePrices();
-    } else {
-        promoApplied = false;
-        discount = 0;
-        msg.textContent = 'Neplatný kód';
-        msg.className = 'promo-msg error';
-        updatePrices();
-    }
-}
-
 function updatePrices() {
     const subtotal = BOOK_PRICE * quantity;
-    discount = promoApplied ? subtotal * 0.10 : 0;
-    const total = subtotal + SHIPPING - discount;
-
     document.getElementById('summaryQty').textContent = quantity;
-    document.getElementById('summaryItemPrice').textContent = (BOOK_PRICE * quantity).toFixed(2) + ' €';
-    document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' €';
-    document.getElementById('totalPrice').textContent = total.toFixed(2) + ' €';
-    document.getElementById('payBtnText').textContent = 'Zaplatiť ' + total.toFixed(2) + ' €';
-
-    const discountLine = document.getElementById('discountLine');
-    if (promoApplied) {
-        discountLine.style.display = 'flex';
-        document.getElementById('discountValue').textContent = '-' + discount.toFixed(2) + ' €';
-    } else {
-        discountLine.style.display = 'none';
-    }
+    document.getElementById('summaryItemPrice').textContent = '€' + subtotal.toFixed(2);
+    document.getElementById('subtotal').textContent = '€' + subtotal.toFixed(2);
+    document.getElementById('totalPrice').textContent = '€' + subtotal.toFixed(2) + '+';
 }
 
 async function handlePayment() {
     const btn = document.getElementById('payBtn');
     const btnText = document.getElementById('payBtnText');
+    const errorEl = document.getElementById('formError');
 
     const firstName = document.getElementById('firstName').value.trim();
     const lastName = document.getElementById('lastName').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const city = document.getElementById('city').value.trim();
-    const zip = document.getElementById('zip').value.trim();
 
-    if (!firstName || !lastName || !email) {
-        document.getElementById('card-errors').textContent = 'Vyplňte prosím meno, priezvisko a email.';
+    // Validate
+    errorEl.textContent = '';
+    document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+
+    if (!firstName || !lastName) {
+        errorEl.textContent = 'Vyplňte prosím meno a priezvisko.';
+        if (!firstName) document.getElementById('firstName').classList.add('error');
+        if (!lastName) document.getElementById('lastName').classList.add('error');
+        return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = 'Zadajte platný email.';
+        document.getElementById('email').classList.add('error');
         return;
     }
 
     btn.disabled = true;
-    btnText.textContent = 'Spracovávam...';
+    btnText.textContent = 'Presmerovávam na Stripe...';
 
     try {
-        const subtotal = BOOK_PRICE * quantity;
-        const discountAmt = promoApplied ? subtotal * 0.10 : 0;
-        const finalPrice = Math.round((subtotal + SHIPPING - discountAmt) * 100);
-
         const response = await fetch('/api/create-checkout-session', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -490,27 +370,24 @@ async function handlePayment() {
                 email,
                 name: firstName + ' ' + lastName,
                 phone,
-                address,
-                city,
-                zip,
-                finalPrice,
-                promoCode: promoApplied ? 'VEDOMIE10' : '',
                 quantity
             })
         });
 
         const data = await response.json();
 
-        if (data.sessionId) {
-            await stripe.redirectToCheckout({ sessionId: data.sessionId });
+        if (data.url) {
+            // Redirect to Stripe Checkout
+            window.location.href = data.url;
+        } else if (data.error) {
+            throw new Error(data.error);
         } else {
-            throw new Error(data.error || 'Nepodarilo sa vytvoriť platbu');
+            throw new Error('Nepodarilo sa vytvoriť platbu.');
         }
     } catch (err) {
-        document.getElementById('card-errors').textContent = err.message;
+        errorEl.textContent = err.message || 'Niečo sa pokazilo. Skúste to znova.';
         btn.disabled = false;
-        const total = (BOOK_PRICE * quantity + SHIPPING - discount).toFixed(2);
-        btnText.textContent = 'Zaplatiť ' + total + ' €';
+        btnText.textContent = 'Pokračovať na platbu';
     }
 }
 
