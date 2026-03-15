@@ -44,17 +44,17 @@ module.exports = async (req, res) => {
                 price_data: {
                     currency: 'eur',
                     product_data: {
-                        name: 'JA — Evolúcia vedomia',
+                        name: 'JA – Evolúcia vedomia',
                         description: `Kniha od Lukáša Horáka | ${quantity || 1} ks`,
                         images: [],
                     },
-                    unit_amount: finalPrice, // in cents
+                    unit_amount: finalPrice, // total in cents (includes qty, shipping, discount)
                 },
-                quantity: quantity || 1,
+                quantity: 1,
             }],
             mode: 'payment',
-            success_url: `${baseUrl}/dakujeme.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${baseUrl}/#objednat`,
+            success_url: `${baseUrl}/new/dakujeme.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${baseUrl}/new/#objednat`,
             customer_email: email,
             shipping_address_collection: {
                 allowed_countries: ['SK', 'CZ'],
