@@ -2544,7 +2544,8 @@ function toggleAuthorBio() {
         // Move button after the expanded block
         extra.parentNode.insertBefore(btn, extra.nextSibling);
         btn.style.display = 'inline-block';
-        btn.style.marginTop = '12px';
+        btn.style.marginTop = '16px';
+        btn.style.marginBottom = '24px';
     } else {
         btn.textContent = (window.T && window.T[lang]) ? window.T[lang].author_read_more : 'Čítaj ďalej…';
         // Move button back inside the first paragraph
@@ -2552,6 +2553,7 @@ function toggleAuthorBio() {
         firstP.appendChild(btn);
         btn.style.display = '';
         btn.style.marginTop = '';
+        btn.style.marginBottom = '';
     }
 }
 
@@ -3605,12 +3607,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             }
         }
 
-        // Update toggleAuthorBio button text if expanded
+        // Reset author bio to collapsed state on language change
+        // (data-i18n-html re-creates the button inside the paragraph,
+        //  so we must remove any orphaned standalone button and collapse)
         var authorExtra = document.getElementById('authorBioExtra');
-        var authorBtn = document.getElementById('authorReadMore');
-        if (authorExtra && authorBtn) {
-            var bioExpanded = authorExtra.classList.contains('expanded');
-            authorBtn.textContent = bioExpanded ? T[lang].author_read_less : T[lang].author_read_more;
+        if (authorExtra) {
+            authorExtra.classList.remove('expanded');
+            // Remove any orphaned button that was moved outside the paragraph
+            var orphanBtn = authorExtra.parentNode.querySelector(':scope > .author-read-more');
+            if (orphanBtn) orphanBtn.remove();
         }
 
         // Update document lang attribute
