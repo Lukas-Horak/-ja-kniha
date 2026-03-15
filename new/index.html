@@ -548,15 +548,7 @@
     .book-preview-text p:first-child {
         text-indent: 0;
     }
-    .book-preview-text p:first-child::first-letter {
-        font-size: 3.2em;
-        float: left;
-        line-height: 0.8;
-        margin-right: 8px;
-        margin-top: 6px;
-        font-weight: 500;
-        color: #1A1A1A;
-    }
+
     .book-expand-bar {
         display: flex;
         align-items: center;
@@ -651,12 +643,12 @@
         margin-bottom: 24px;
     }
     .fs-chapter-heading {
-        font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-        font-weight: 400;
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        font-weight: 300;
         font-style: italic;
         color: #1A1A1A;
         margin-bottom: 32px;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
     }
     .fs-chapter-text {
         font-size: 1.05rem;
@@ -671,15 +663,7 @@
     .fs-chapter-text p:first-child {
         text-indent: 0;
     }
-    .fs-chapter-text p:first-child::first-letter {
-        font-size: 3.2em;
-        float: left;
-        line-height: 0.8;
-        margin-right: 8px;
-        margin-top: 6px;
-        font-weight: 500;
-        color: #1A1A1A;
-    }
+
     .fs-divider {
         width: 60px;
         height: 1px;
@@ -700,12 +684,12 @@
     @media (max-width: 768px) {
         .book-preview { padding: 32px 28px 28px; max-height: 440px; }
         .book-preview-text { font-size: 0.95rem; line-height: 1.9; }
-        .book-preview-text p:first-child::first-letter { font-size: 2.8em; margin-top: 4px; }
+
         .book-reader { border-radius: 20px; }
         .fs-reader-topbar { padding: 12px 20px; }
         .fs-reader-content { padding: 32px 24px 100px; }
         .fs-chapter-text { font-size: 0.95rem; line-height: 1.9; }
-        .fs-chapter-text p:first-child::first-letter { font-size: 2.8em; margin-top: 4px; }
+
         .learn-card { padding: 32px; grid-template-columns: 1fr; }
         .learn-image { min-height: 250px; }
     }
