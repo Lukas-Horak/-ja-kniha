@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JA – Evolúcia vedomia | Kniha od Lukáša Horáka</title>
-    <meta name="description" content="Prelomová kniha o evolúcii vedomia a sebapoznaní. 336 strán, ktoré menia spôsob, akým vnímaš realitu. Bestseller od Lukáša Horáka.">
+    <meta name="description" content="Druhé rozšírené vydanie. 408 strán o neurovede, evolučnej biológii a psychológii vedomia. Kniha, ktorá mení spôsob, akým vnímaš seba a realitu. Od Lukáša Horáka.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="author" content="Lukáš Horák">
     <meta name="theme-color" content="#E8E5DF">
@@ -13,13 +13,13 @@
     <meta property="og:type" content="book">
     <meta property="og:url" content="https://www.evolvium.com/">
     <meta property="og:title" content="JA – Evolúcia vedomia | Lukáš Horák">
-    <meta property="og:description" content="Prelomová kniha o evolúcii vedomia a sebapoznaní. 336 strán, ktoré menia spôsob, akým vnímaš realitu.">
+    <meta property="og:description" content="Druhé rozšírené vydanie. 408 strán o neurovede, evolučnej biológii a psychológii vedomia. Kniha, ktorá mení spôsob, akým vnímaš seba a realitu.">
     <meta property="og:locale" content="sk_SK">
     <meta property="og:site_name" content="Evolvium">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="JA – Evolúcia vedomia | Lukáš Horák">
-    <meta name="twitter:description" content="Prelomová kniha o evolúcii vedomia a sebapoznaní. 336 strán, ktoré menia spôsob, akým vnímaš realitu.">
+    <meta name="twitter:description" content="Druhé rozšírené vydanie. 408 strán o neurovede, evolučnej biológii a psychológii vedomia. Kniha, ktorá mení spôsob, akým vnímaš seba a realitu.">
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='60' cy='50' r='30' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3Ccircle cx='40' cy='50' r='30' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3Cpath d='M 50 78.28 A 30 30 0 0 0 50 21.72' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3C/svg%3E">
 
@@ -401,6 +401,87 @@
         background: rgba(255,255,255,0.9); color: #1a1a1a;
     }
     .rv-audio .audio-btn-play svg { width: 22px; height: 22px; }
+
+    /* ===== ČO SA DOZVIETE ===== */
+    .learn-section {
+        padding: 0 0 80px;
+    }
+    .learn-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 56px;
+    }
+    .learn-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
+        font-weight: 400;
+    }
+    .learn-title {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em;
+        margin-bottom: 40px;
+    }
+    .learn-list {
+        list-style: none;
+        max-width: 720px;
+    }
+    .learn-list li {
+        display: flex; align-items: flex-start; gap: 16px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.95rem; color: var(--text-light);
+        line-height: 1.6;
+    }
+    .learn-list li:last-child { border-bottom: none; }
+    .learn-list li svg {
+        width: 20px; height: 20px; min-width: 20px;
+        stroke: var(--text-muted); fill: none; stroke-width: 2;
+        margin-top: 2px;
+    }
+
+    /* ===== UKÁŽKY Z KNIHY ===== */
+    .excerpts-section {
+        padding: 0 0 80px;
+        text-align: center;
+    }
+    .excerpts-eyebrow {
+        font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
+        font-weight: 400;
+    }
+    .excerpts-title {
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        font-weight: 400;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+        margin-bottom: 48px;
+    }
+    .excerpts-title .muted { color: var(--text-muted); font-style: italic; }
+    .excerpts-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        text-align: left;
+    }
+    .excerpt-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 36px;
+        display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .excerpt-label {
+        font-size: 0.75rem; color: var(--text-muted);
+        text-transform: uppercase; letter-spacing: 0.05em;
+        margin-bottom: 16px; font-weight: 500;
+    }
+    .excerpt-text {
+        font-size: 0.95rem; color: var(--text-light);
+        line-height: 1.8; font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+        .excerpts-grid { grid-template-columns: 1fr; }
+        .learn-card { padding: 32px; }
+    }
 
     /* ===== STATS ===== */
     .stats-section {
@@ -1022,7 +1103,7 @@
     <div class="container">
         <div class="hero-card">
             <div class="hero-top">
-                <p class="hero-eyebrow">Cesta rozvoja vedomia a sebapoznania.</p>
+                <p class="hero-eyebrow">Druhé vydanie · 408 strán · Neuroveda × Psychológia × Evolučná biológia</p>
                 <h1 class="hero-title">
                     <span class="light">Niektoré knihy zabávajú.</span><br>
                     <span>Iné zmenia to, ako vidíme realitu.</span>
@@ -1126,7 +1207,7 @@
     <div class="container">
         <p class="content-eyebrow">/Obsah</p>
         <p class="content-text">
-            Kniha „JA – Evolúcia vedomia" je sprievodca, <span class="muted">ktorý vás prevedie najhlbšími vrstvami vášho bytia — od podvedomých vzorcov k autentickému prežívaniu prítomného okamihu,</span>
+            Táto kniha nie je povrchnou motivačnou publikáciou, <span class="muted">ale výsledkom dôkladného skúmania vedomia — jeho mechanizmov a dosahu na život jednotlivca i spoločnosti. Opiera sa o najnovšie poznatky v oblasti neurovedy, evolučnej biológie, psychológie a systémovej teórie.</span>
         </p>
     </div>
 </section>
@@ -1210,16 +1291,16 @@
     <div class="container">
         <div class="stats-card">
             <div class="stat-row">
-                <p class="stat-text">Kombinácia transpersonálnej psychológie, neurovedy a kontemplatívnych tradícii v praktickom formáte.</p>
+                <p class="stat-text">4 hlavné časti knihy — od primitívnych inštinktov cez evolučný vývoj emócií a rozumové ja až po najvyššie stavy vedomia.</p>
                 <div class="stat-value">
-                    <span class="stat-number">12+</span>
-                    <span class="stat-label">Kapitol & cvičení</span>
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Kapitol</span>
                 </div>
             </div>
             <div class="stat-row">
-                <p class="stat-text">Každá kapitola obsahuje reflexie, cvičenia a meditácie, ktoré môžete okamžite aplikovať.</p>
+                <p class="stat-text">Neuroveda, evolučná biológia, psychológia, systémová teória a transpersonálna psychológia — v jednom celku.</p>
                 <div class="stat-value">
-                    <span class="stat-number">336</span>
+                    <span class="stat-number">408</span>
                     <span class="stat-label">Strán obsahu</span>
                 </div>
             </div>
@@ -1234,13 +1315,57 @@
     </div>
 </section>
 
+<!-- ČO SA DOZVIETE -->
+<section class="learn-section fade-in">
+    <div class="container">
+        <div class="learn-card">
+            <p class="learn-eyebrow">/Čo sa dozviete</p>
+            <h2 class="learn-title">Otázky, na ktoré kniha odpovedá</h2>
+            <ul class="learn-list">
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Aký základný biologický mechanizmus skryto riadi naše životy?
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Prečo túžime po sláve, uznaní a materiálnom úspechu?
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Čo stojí za žiarlivosťou, závisťou a neustálym súperením?
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Ako pokročiť v evolučnom vývoji a dosiahnuť „prebudenie" alebo „osvietenie"?
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <!-- O KNIHE -->
 <section class="about-section fade-in" id="kniha">
     <div class="container">
         <div class="about-card">
             <div class="about-top">
                 <div class="about-desc">
-                    Sprievodca cestou k hlbšiemu poznaniu seba, ktorý kombinuje vedu s praxou a osobnou skúsenosťou.
+                    Spektrum vedomia — tri úrovne: Primitívne ja, Rozumové ja a Vyššie ja. Cesta od inštinktov k prebudeniu.
                 </div>
                 <div class="about-image">
                     <img src="https://images.unsplash.com/photo-1762554907633-e2f14e742413?w=700&h=500&fit=crop&auto=format" alt="Kniha JA — Evolúcia vedomia" loading="lazy">
@@ -1257,12 +1382,23 @@
                 <div class="about-categories">
                     <div class="category-card light">
                         <span class="category-num">01</span>
-                        <span class="category-name">Vedomý život</span>
-                        <span class="category-sub">Reflexie & cvičenia</span>
+                        <span class="category-name">Primitívne ja</span>
+                        <span class="category-sub">Energia, túžby, hnev, strach, odpustenie</span>
                     </div>
                     <div class="category-card dark">
                         <span class="category-num">02</span>
-                        <span class="category-name">Designing in Solution</span>
+                        <span class="category-name">Evolučný vývoj emócií</span>
+                        <span class="category-sub">Vyššie a transcendentné emócie</span>
+                    </div>
+                    <div class="category-card dark">
+                        <span class="category-num">03</span>
+                        <span class="category-name">Rozumové ja</span>
+                        <span class="category-sub">Dualistické vnímanie, kauzalita, atraktor</span>
+                    </div>
+                    <div class="category-card light">
+                        <span class="category-num">04</span>
+                        <span class="category-name">Vyššie ja</span>
+                        <span class="category-sub">Autentickosť, kvantový kolaps, kolektívne vedomie</span>
                     </div>
                 </div>
             </div>
@@ -1278,7 +1414,7 @@
                 <div>
                     <p class="author-eyebrow">/O autorovi</p>
                     <h2 class="author-title">Lukáš Horák — autor, lektor a sprievodca vedomému životu</h2>
-                    <p class="author-bio">Už viac ako 10 rokov sa venuje skúmaniu ľudského vedomia, práci s telom a mysľou. Absolvoval stovky hodín meditačných retreatov a pracoval s tisíckami ľudí.</p>
+                    <p class="author-bio">Autor knihy „Evolúcia vedomia — JA" a zakladateľ Evolvium, s.r.o. Už viac ako 10 rokov sa venuje skúmaniu ľudského vedomia, práci s telom a mysľou. Jeho kniha prepája neuovedu, evolučnú biológiu, psychológiu a systémovú teóriu do uceleného rámca pochopenia vedomia.</p>
                 </div>
                 <div>
                     <div class="author-stats">
@@ -1302,7 +1438,35 @@
             <div class="author-right" style="background-image: url('https://www.evolvium.com/images/author.jpg');">
                 <div class="author-caption">
                     <div class="author-caption-name">Lukáš Horák</div>
-                    <div class="author-caption-quote">„Každý človek má v sebe schopnosť prežívať život naplno."</div>
+                    <div class="author-caption-quote">„Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný stav, že by ho človek nevymenil za nič na svete."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- UKÁŽKY Z KNIHY -->
+<section class="excerpts-section fade-in">
+    <div class="container">
+        <p class="excerpts-eyebrow">/Ukážky z knihy</p>
+        <h2 class="excerpts-title">Slová, ktoré menia pohľad <span class="muted">na seba samého</span></h2>
+        <div class="excerpts-grid">
+            <div class="excerpt-card">
+                <div>
+                    <span class="excerpt-label">Mentálna krátkozrakosť</span>
+                    <p class="excerpt-text">„Nízky stav vedomia by sa dal prirovnať k mentálnej krátkozrakosti, pri ktorej je náš pohľad na okolitý svet celkom rozmazaný. Všetko okolo nás je zahmlené a neostré. Nevidíme zreteľne ani svoj odraz v zrkadle. V takomto stave nám nezostáva nič iné, len si domýšľať, čo sa s nami aj okolo nás naozaj deje."</p>
+                </div>
+            </div>
+            <div class="excerpt-card">
+                <div>
+                    <span class="excerpt-label">Svetlo v tme</span>
+                    <p class="excerpt-text">„Je to, akoby sme po rokoch tápania v tme konečne rozsvietili svetlo. To, čo bolo kedysi neviditeľné, zrazu vidíme jasne a zreteľne. Vidíme nielen prekážky, o ktoré sme sa potkýnali, a steny, do ktorých sme narážali, ale aj dvere, ktoré boli celý čas otvorené, len sme ich v tme jednoducho nevideli."</p>
+                </div>
+            </div>
+            <div class="excerpt-card">
+                <div>
+                    <span class="excerpt-label">Potápanie do hlbín</span>
+                    <p class="excerpt-text">„Rozvoj vedomia nie je tanec v oblakoch, ale skôr potápanie sa do vlastných hlbín. A len ten, kto sa odváži ponoriť do tej najhlbšej tmy, môže naozaj uzrieť Svetlo."</p>
                 </div>
             </div>
         </div>
@@ -1377,7 +1541,7 @@
                     <h2 class="order-title">Začnite svoju cestu k hlbšiemu poznaniu seba samého</h2>
                 </div>
                 <div>
-                    <p class="order-body">336 strán, 12 kapitol, 48 cvičení a 24 meditácií — všetko, čo potrebujete na cestu k autentickému životu.</p>
+                    <p class="order-body">408 strán, 30+ kapitol, 4 hlavné časti — od primitívnych inštinktov cez emócie a rozum až po najvyššie stavy vedomia. Druhé rozšírené vydanie.</p>
                     <div class="order-meta">
                         <div class="order-meta-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
@@ -1388,16 +1552,24 @@
                             30-dní garancia
                         </div>
                     </div>
+                    <div class="order-meta" style="margin-top: 8px;">
+                        <div class="order-meta-item">
+                            ISBN 978-80-975013-4-1
+                        </div>
+                        <div class="order-meta-item">
+                            Druhé rozšírené vydanie
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="order-light">
                 <p class="ol-eyebrow">/Tlačená kniha</p>
                 <h3 class="ol-title">JA — Evolúcia vedomia</h3>
-                <p class="ol-subtitle">Lukáš Horák · 336 strán · Tvrdá väzba</p>
+                <p class="ol-subtitle">Lukáš Horák · 408 strán · Tvrdá väzba</p>
                 <div class="ol-price">€24<span class="cents">,90</span></div>
                 <ul class="ol-features">
-                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 336 strán kvalitného obsahu</li>
-                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 12 kapitol + 48 cvičení</li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 408 strán kvalitného obsahu</li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 30+ kapitol v 4 hlavných častiach</li>
                     <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Tvrdá väzba, prémiová kvalita</li>
                     <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Osobný podpis autora</li>
                     <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Bonus: audio meditácie (MP3)</li>
@@ -1425,7 +1597,7 @@
                         <span>Pre koho je táto kniha určená?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Kniha je určená pre každého, kto sa chce hlbšie pochopiť, rozvíjať svoje vedomie a žiť autentickejší život. Nie je potrebná žiadna predchádzajúca skúsenosť s meditáciou ani psychológiou.</p></div>
+                    <div class="faq-answer"><p>Pre každého, kto chce pochopiť mechanizmy vlastného vedomia — prečo cítime hnev, závisť či strach a ako tieto inštinktívne vzorce prekonať. Kniha nie je povrchnou motivačnou publikáciou, ale vedecky podloženým sprievodcom od primitívnych inštinktov po najvyššie stavy vedomia. Nie je potrebná žiadna predchádzajúca skúsenosť.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
@@ -1439,7 +1611,7 @@
                         <span>Existuje aj e-book alebo audiokniha?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Momentálne je kniha dostupná iba v tlačenej podobe s tvrdou väzbou. E-book a audiokniha sú v príprave a budú dostupné čoskoro.</p></div>
+                    <div class="faq-answer"><p>Kniha „Evolúcia vedomia — JA" je dostupná v tlačenej podobe s tvrdou väzbou (druhé rozšírené vydanie, 408 strán). Audiokniha je v príprave a bude dostupná čoskoro.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
@@ -1460,7 +1632,7 @@
                         <span>Aký je rozdiel oproti iným knihám o vedomí?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Táto kniha kombinuje transpersonálnu psychológiu, neuroscience a kontemplatívne tradície v jednom praktickom formáte s konkrétnymi cvičeniami a meditáciami, nie iba teóriou.</p></div>
+                    <div class="faq-answer"><p>Na rozdiel od väčšiny kníh o vedomí, táto spája neuovedu, evolučnú biológiu, psychológiu a systémovú teóriu do uceleného rámca — „Spektrum vedomia" s tromi úrovňami: Primitívne ja, Rozumové ja a Vyššie ja. Obsahuje 408 strán a 30+ kapitol, ktoré systematicky mapujú cestu od inštinktov k prebudeniu.</p></div>
                 </div>
             </div>
         </div>
