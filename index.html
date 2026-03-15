@@ -2,6 +2,7 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
+    <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JA – Evolúcia vedomia | Kniha od Lukáša Horáka</title>
     <meta name="description" content="Druhé rozšírené vydanie. 336 strán o neurovede, evolučnej biológii a psychológii vedomia. Kniha, ktorá mení spôsob, akým vnímaš seba a realitu. Od Lukáša Horáka.">
@@ -101,7 +102,7 @@
     }
     .hero-top {
         text-align: center;
-        max-width: 720px;
+        max-width: 820px;
         margin: 0 auto;
     }
     .hero-eyebrow {
@@ -193,6 +194,32 @@
         position: absolute; bottom: 20px; right: 24px;
         font-size: 5rem; font-weight: 200; color: rgba(255,255,255,0.15);
         line-height: 1; z-index: 2;
+    }
+
+    .hero-show-more {
+        display: none;
+        align-items: center; justify-content: center; gap: 8px;
+        margin: 24px auto 0;
+        padding: 14px 32px;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 100px;
+        font-family: var(--font);
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .hero-show-more:hover {
+        background: var(--dark); color: #fff; border-color: var(--dark);
+    }
+    .hero-show-more svg {
+        width: 16px; height: 16px;
+        transition: transform 0.3s;
+    }
+    .hero-show-more.expanded svg {
+        transform: rotate(180deg);
     }
 
     .hero-nav {
@@ -410,6 +437,13 @@
         background: var(--card);
         border-radius: 24px;
         padding: 56px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+    }
+    .learn-content {
+        min-width: 0;
     }
     .learn-eyebrow {
         font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
@@ -423,7 +457,6 @@
     }
     .learn-list {
         list-style: none;
-        max-width: 720px;
     }
     .learn-list li {
         display: flex; align-items: flex-start; gap: 16px;
@@ -438,49 +471,243 @@
         stroke: var(--text-muted); fill: none; stroke-width: 2;
         margin-top: 2px;
     }
-
-    /* ===== UKÁŽKY Z KNIHY ===== */
-    .excerpts-section {
-        padding: 0 0 80px;
-        text-align: center;
+    .learn-image {
+        border-radius: 16px;
+        overflow: hidden;
+        height: 100%;
+        min-height: 400px;
     }
-    .excerpts-eyebrow {
+    .learn-image img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+
+    /* ===== UKÁŽKY Z KNIHY – READER ===== */
+    .book-reader-section {
+        padding: 0 0 80px;
+    }
+    .book-reader-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .book-reader-eyebrow {
         font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
         font-weight: 400;
     }
-    .excerpts-title {
+    .book-reader-title {
         font-size: clamp(1.8rem, 3.5vw, 2.8rem);
         font-weight: 400;
         line-height: 1.3;
         letter-spacing: -0.02em;
-        margin-bottom: 48px;
     }
-    .excerpts-title .muted { color: var(--text-muted); font-style: italic; }
-    .excerpts-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        text-align: left;
+    .book-reader-title .muted { color: var(--text-muted); font-style: italic; }
+
+    /* Inline preview reader */
+    .book-reader {
+        background: #FDFBF7;
+        border-radius: 24px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 40px rgba(0,0,0,0.06);
+        overflow: hidden;
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
     }
-    .excerpt-card {
-        background: var(--card);
-        border-radius: 20px;
-        padding: 36px;
-        display: flex; flex-direction: column; justify-content: space-between;
+    .book-preview {
+        padding: 48px 56px 40px;
+        max-height: 520px;
+        overflow: hidden;
+        position: relative;
     }
-    .excerpt-label {
-        font-size: 0.75rem; color: var(--text-muted);
-        text-transform: uppercase; letter-spacing: 0.05em;
-        margin-bottom: 16px; font-weight: 500;
+    .book-preview::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 120px;
+        background: linear-gradient(to top, #FDFBF7 0%, transparent 100%);
+        pointer-events: none;
     }
-    .excerpt-text {
-        font-size: 0.95rem; color: var(--text-light);
-        line-height: 1.8; font-style: italic;
+    .book-preview-chapter {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #B8A898;
+        margin-bottom: 28px;
+    }
+    .book-preview-text {
+        font-size: 1.05rem;
+        line-height: 2;
+        color: #3D3632;
+        font-weight: 400;
+    }
+    .book-preview-text p {
+        margin-bottom: 20px;
+        text-indent: 1.5em;
+    }
+    .book-preview-text p:first-child {
+        text-indent: 0;
+    }
+    .book-preview-text p:first-child::first-letter {
+        font-size: 3.2em;
+        float: left;
+        line-height: 0.8;
+        margin-right: 8px;
+        margin-top: 6px;
+        font-weight: 500;
+        color: #1A1A1A;
+    }
+    .book-expand-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 20px 24px;
+        gap: 10px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .book-expand-bar:hover {
+        background: #F5F0EA;
+    }
+    .book-expand-bar span {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #8C7E72;
+        letter-spacing: 0.02em;
+    }
+    .book-expand-bar svg {
+        width: 18px; height: 18px;
+        color: #8C7E72;
+    }
+
+    /* Fullscreen reader overlay */
+    .fs-reader-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: #FDFBF7;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .fs-reader-overlay.open {
+        display: block;
+        animation: fsReaderIn 0.35s ease;
+    }
+    @keyframes fsReaderIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fs-reader-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(253,251,247,0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 32px;
+        border-bottom: 1px solid #EBE6DE;
+    }
+    .fs-reader-booktitle {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #8C7E72;
+        letter-spacing: 0.02em;
+    }
+    .fs-reader-close {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        border: 1.5px solid #E8E0D6;
+        background: transparent;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        color: #8C7E72;
+        transition: all 0.2s;
+    }
+    .fs-reader-close:hover {
+        background: #F0EBE4;
+        color: #3D3632;
+    }
+    .fs-reader-close svg {
+        width: 18px; height: 18px;
+    }
+    .fs-reader-content {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 48px 32px 120px;
+    }
+    .fs-chapter {
+        margin-bottom: 56px;
+    }
+    .fs-chapter-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #B8A898;
+        margin-bottom: 24px;
+    }
+    .fs-chapter-heading {
+        font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+        font-weight: 400;
+        font-style: italic;
+        color: #1A1A1A;
+        margin-bottom: 32px;
+        letter-spacing: -0.01em;
+    }
+    .fs-chapter-text {
+        font-size: 1.05rem;
+        line-height: 2;
+        color: #3D3632;
+        font-weight: 400;
+    }
+    .fs-chapter-text p {
+        margin-bottom: 20px;
+        text-indent: 1.5em;
+    }
+    .fs-chapter-text p:first-child {
+        text-indent: 0;
+    }
+    .fs-chapter-text p:first-child::first-letter {
+        font-size: 3.2em;
+        float: left;
+        line-height: 0.8;
+        margin-right: 8px;
+        margin-top: 6px;
+        font-weight: 500;
+        color: #1A1A1A;
+    }
+    .fs-divider {
+        width: 60px;
+        height: 1px;
+        background: #DDD6CC;
+        margin: 48px auto;
+    }
+    .fs-cta {
+        text-align: center;
+        padding: 48px 0;
+    }
+    .fs-cta p {
+        font-size: 1rem;
+        color: #8C7E72;
+        margin-bottom: 24px;
+        font-style: italic;
     }
 
     @media (max-width: 768px) {
-        .excerpts-grid { grid-template-columns: 1fr; }
-        .learn-card { padding: 32px; }
+        .book-preview { padding: 32px 28px 28px; max-height: 440px; }
+        .book-preview-text { font-size: 0.95rem; line-height: 1.9; }
+        .book-preview-text p:first-child::first-letter { font-size: 2.8em; margin-top: 4px; }
+        .book-reader { border-radius: 20px; }
+        .fs-reader-topbar { padding: 12px 20px; }
+        .fs-reader-content { padding: 32px 24px 100px; }
+        .fs-chapter-text { font-size: 0.95rem; line-height: 1.9; }
+        .fs-chapter-text p:first-child::first-letter { font-size: 2.8em; margin-top: 4px; }
+        .learn-card { padding: 32px; grid-template-columns: 1fr; }
+        .learn-image { min-height: 250px; }
     }
 
     /* ===== STATS ===== */
@@ -640,6 +867,32 @@
     .author-bio {
         font-size: 0.9rem; color: var(--text-light);
         line-height: 1.7; margin-bottom: 32px;
+    }
+    .author-bio-hidden {
+        display: none;
+    }
+    .author-bio-hidden.expanded {
+        display: block;
+    }
+    .author-read-more {
+        display: inline;
+        font-size: inherit;
+        color: var(--text);
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        font-family: inherit;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        transition: color 0.2s;
+    }
+    .author-read-more:hover {
+        color: var(--accent, #8B7355);
     }
     .author-stats {
         display: flex; gap: 32px; margin-bottom: 32px;
@@ -1033,12 +1286,32 @@
         .hero-card { padding: 28px; }
         .hero-top { margin-bottom: 32px; }
         .hero-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
-        .hero-carousel { gap: 12px; }
-        .hero-image-card { flex: 0 0 calc((100% - 24px) / 2); padding: 20px; aspect-ratio: 3 / 4.2; }
-        .hero-image-card .card-title { font-size: 1.2rem; }
-        .hero-image-card .card-desc { font-size: 0.75rem; margin-bottom: 12px; }
+        .hero-carousel-wrap { overflow: visible; }
+        .hero-carousel {
+            flex-direction: column;
+            gap: 16px;
+            transform: none !important;
+            transition: none;
+        }
+        .hero-image-card {
+            flex: none;
+            width: 100%;
+            padding: 24px;
+            aspect-ratio: 3 / 4;
+        }
+        .hero-image-card:nth-child(n+4) {
+            display: none;
+        }
+        .hero-carousel.show-all .hero-image-card:nth-child(n+4) {
+            display: flex;
+        }
+        .hero-image-card .card-title { font-size: 1.3rem; }
+        .hero-image-card .card-desc { font-size: 0.8rem; margin-bottom: 12px; }
         .hero-image-card .card-number { font-size: 3.5rem; bottom: 14px; right: 18px; }
-        .hero-nav { padding: 12px 0 4px; }
+        .hero-nav { display: none; }
+        .hero-show-more {
+            display: flex;
+        }
         .hero-actions { gap: 16px; }
         .btn-primary { padding: 14px 24px; font-size: 0.85rem; white-space: nowrap; }
         .content-section { padding: 60px 0 48px; }
@@ -1064,6 +1337,76 @@
         .rv-grid { grid-template-columns: 1fr; }
         .rv-video { grid-column: 1; min-height: 300px; }
     }
+    /* EXIT-INTENT POPUP */
+    .exit-overlay {
+        position: fixed; inset: 0; z-index: 9999;
+        background: rgba(0,0,0,0.5);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+        backdrop-filter: blur(4px);
+    }
+    .exit-overlay.visible { opacity: 1; visibility: visible; }
+    .exit-popup {
+        background: #fff; border-radius: 20px;
+        padding: 48px 40px 36px; max-width: 420px; width: 90%;
+        position: relative; text-align: center;
+        transform: translateY(20px) scale(0.97);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .exit-overlay.visible .exit-popup {
+        transform: translateY(0) scale(1);
+    }
+    .exit-popup .exit-close {
+        position: absolute; top: 16px; right: 16px;
+        width: 32px; height: 32px; border: none; background: none;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; transition: background 0.2s;
+    }
+    .exit-popup .exit-close:hover { background: var(--surface); }
+    .exit-popup .exit-close svg { width: 18px; height: 18px; stroke: var(--text-muted); stroke-width: 2; }
+    .exit-eyebrow {
+        font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+        color: var(--text-muted); margin-bottom: 8px;
+    }
+    .exit-title {
+        font-family: 'Urbanist', sans-serif; font-size: 2rem; font-weight: 600;
+        color: var(--text); margin-bottom: 8px;
+    }
+    .exit-desc {
+        font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px;
+    }
+    .exit-code-box {
+        display: flex; align-items: center; justify-content: space-between;
+        background: var(--surface); border-radius: 12px;
+        padding: 14px 20px; margin-bottom: 20px;
+    }
+    .exit-code-box .code {
+        font-family: 'Urbanist', sans-serif; font-size: 1.1rem;
+        font-weight: 700; letter-spacing: 0.05em; color: var(--text);
+    }
+    .exit-code-box .copy-btn {
+        font-size: 0.8rem; color: var(--text-muted); background: none;
+        border: none; cursor: pointer; font-family: 'Urbanist', sans-serif;
+        transition: color 0.2s;
+    }
+    .exit-code-box .copy-btn:hover { color: var(--text); }
+    .exit-cta {
+        display: block; width: 100%; padding: 16px;
+        background: var(--text); color: var(--bg); border: none;
+        border-radius: 60px; font-family: 'Urbanist', sans-serif;
+        font-size: 0.95rem; font-weight: 500; cursor: pointer;
+        text-decoration: none; text-align: center;
+        transition: opacity 0.2s;
+    }
+    .exit-cta:hover { opacity: 0.85; }
+    .exit-cta svg { display: inline-block; width: 14px; height: 14px; margin-left: 6px; vertical-align: middle; stroke: currentColor; fill: none; stroke-width: 2; }
+    .exit-dismiss {
+        display: block; margin: 14px auto 0; background: none; border: none;
+        font-family: 'Urbanist', sans-serif; font-size: 0.85rem;
+        color: var(--text-muted); cursor: pointer; transition: color 0.2s;
+    }
+    .exit-dismiss:hover { color: var(--text); }
     </style>
 </head>
 <body>
@@ -1082,7 +1425,7 @@
         Evolvium
     </a>
     <div class="nav-links">
-        <a href="#kniha">O knihe</a>
+        <a href="#obsah">O knihe</a>
         <a href="#recenzie">Recenzie</a>
         <a href="#autor">Autor</a>
         <a href="#faq">FAQ</a>
@@ -1106,7 +1449,7 @@
                 <p class="hero-eyebrow">Cesta rozvoja vedomia a sebapoznania</p>
                 <h1 class="hero-title">
                     <span class="light">Niektoré knihy zabávajú.</span><br>
-                    <span>Iné zmenia to, ako vidíme realitu.</span>
+                    <span>Iné zmenia to, ako chápeme realitu.</span>
                 </h1>
                 <div class="hero-actions">
                     <a href="#objednat" class="btn-primary">
@@ -1115,7 +1458,7 @@
                             <path d="M4 12L12 4M12 4H5M12 4v7"/>
                         </svg>
                     </a>
-                    <a href="#kniha" class="btn-secondary">
+                    <a href="#obsah" class="btn-secondary">
                         Zistiť viac
                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M8 3v10M3 8l5 5 5-5"/>
@@ -1126,7 +1469,7 @@
         </div>
         <div class="hero-carousel-wrap">
             <div class="hero-carousel" id="heroCarousel">
-                    <div class="hero-image-card" style="background-image: url('images/hero-photo-1.jpg');">
+                    <div class="hero-image-card" style="background-image: url('images/IMG_4219.jpg');">
                         <div class="card-top">
                             <div class="card-title">David</div>
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
@@ -1170,7 +1513,7 @@
                         </div>
                         <div class="card-number">04</div>
                     </div>
-                    <div class="hero-image-card" style="background-image: url('images/hero-photo-5.jpg');">
+                    <div class="hero-image-card" style="background-image: url('images/IMG_4378.jpg');">
                         <div class="card-top">
                             <div class="card-title">Timea</div>
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
@@ -1236,17 +1579,7 @@
                         </div>
                         <div class="card-number">10</div>
                     </div>
-                    <div class="hero-image-card" style="background-image: url('images/IMG_4389.jpg');">
-                        <div class="card-top">
-                            <div class="card-title">Jakub</div>
-                            <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
-                        </div>
-                        <div class="card-bottom">
-                            <div class="card-desc">„Prepojenie neurovedy s osobným rozvojom je presne to, čo som hľadal. Autor to podáva zrozumiteľne a s hĺbkou."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
-                        </div>
-                        <div class="card-number">11</div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -1254,11 +1587,15 @@
             <div class="hero-arrow" id="heroPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
             <div class="hero-arrow" id="heroNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
+        <button class="hero-show-more" id="heroShowMore" onclick="toggleHeroCards()">
+            <span>Zobraziť viac</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
     </div>
 </section>
 
 <!-- CONTENT / OBSAH -->
-<section class="content-section fade-in">
+<section class="content-section fade-in" id="obsah">
     <div class="container">
         <p class="content-eyebrow">/Obsah</p>
         <p class="content-text scroll-reveal-text">
@@ -1271,7 +1608,7 @@
 <section class="review-video-section fade-in">
     <div class="container">
         <div class="rv-grid">
-            <div class="rv-video" style="background-image: url('https://www.evolvium.com/images/photo-3.jpg'); background-position: center 5%;">
+            <div class="rv-video" style="background-image: url('rv-photo.jpg'); background-position: center 30%;">
                 <div class="video-overlay">
                     <div class="video-person">
                         <div class="video-avatar">MK</div>
@@ -1356,13 +1693,7 @@
                     <span class="stat-label">Strán obsahu</span>
                 </div>
             </div>
-            <div class="stat-row">
-                <p class="stat-text">Kniha, ktorá mení spôsob myslenia a otvára bránu k hlbšiemu vhľadu do seba samého.</p>
-                <div class="stat-value">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Predaných kópií</span>
-                </div>
-            </div>
+
             <div class="stat-row">
                 <p class="stat-text">Výsledok piatich rokov intenzívneho štúdia psychologických mechanizmov, neurovedy a rozsiahleho výskumu ľudského vedomia naprieč vedeckými disciplínami.</p>
                 <div class="stat-value">
@@ -1378,92 +1709,52 @@
 <section class="learn-section fade-in">
     <div class="container">
         <div class="learn-card">
-            <p class="learn-eyebrow">/Čo sa dozviete</p>
-            <h2 class="learn-title">Otázky, na ktoré kniha odpovedá</h2>
-            <ul class="learn-list">
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Aký základný biologický mechanizmus skryto riadi naše životy?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Prečo túžime po sláve, uznaní a materiálnom úspechu?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Čo stojí za žiarlivosťou, závisťou a neustálym súperením?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Ako pokročiť v evolučnom vývoji a dosiahnuť „prebudenie" alebo „osvietenie"?
-                </li>
-            </ul>
+            <div class="learn-content">
+                <p class="learn-eyebrow">/Čo sa dozviete</p>
+                <h2 class="learn-title">Otázky, na ktoré kniha odpovedá</h2>
+                <ul class="learn-list">
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Aký základný biologický mechanizmus skryto riadi naše životy?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Prečo túžime po sláve, uznaní a materiálnom úspechu?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Čo stojí za žiarlivosťou, závisťou a neustálym súperením?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Ako pokročiť v evolučnom vývoji a dosiahnuť „prebudenie" alebo „osvietenie"?
+                    </li>
+                </ul>
+            </div>
+            <div class="learn-image">
+                <img src="forest-questions.jpg" alt="Les" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
 
-<!-- O KNIHE -->
-<section class="about-section fade-in" id="kniha">
-    <div class="container">
-        <div class="about-card">
-            <div class="about-top">
-                <div class="about-desc">
-                    Spektrum vedomia – tri úrovne: Primitívne ja, Rozumové ja a Vyššie ja. Cesta od inštinktov k prebudeniu.
-                </div>
-                <div class="about-image">
-                    <img src="book-open.jpg" alt="Kniha JA – Evolúcia vedomia" loading="lazy">
-                </div>
-            </div>
-            <div class="about-bottom">
-                <div class="about-left">
-                    <p class="about-eyebrow">/O knihe</p>
-                    <div class="about-avatars">
-                        <div class="avatar-circle avatar-dark">LH</div>
-                        <div class="avatar-circle avatar-light">JA</div>
-                    </div>
-                </div>
-                <div class="about-categories">
-                    <div class="category-card light">
-                        <span class="category-num">01</span>
-                        <span class="category-name">Primitívne ja</span>
-                        <span class="category-sub">Energia, túžby, hnev, strach, odpustenie</span>
-                    </div>
-                    <div class="category-card dark">
-                        <span class="category-num">02</span>
-                        <span class="category-name">Evolučný vývoj emócií</span>
-                        <span class="category-sub">Vyššie a transcendentné emócie</span>
-                    </div>
-                    <div class="category-card dark">
-                        <span class="category-num">03</span>
-                        <span class="category-name">Rozumové ja</span>
-                        <span class="category-sub">Dualistické vnímanie, kauzalita, atraktor</span>
-                    </div>
-                    <div class="category-card light">
-                        <span class="category-num">04</span>
-                        <span class="category-name">Vyššie ja</span>
-                        <span class="category-sub">Autentickosť, kvantový kolaps, kolektívne vedomie</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- AUTOR -->
 <section class="author-section fade-in" id="autor">
@@ -1473,17 +1764,26 @@
                 <div>
                     <p class="author-eyebrow">/O autorovi</p>
                     <h2 class="author-title">Lukáš Horák – podnikateľ, výskumník vedomia a autor</h2>
-                    <p class="author-bio">Lukáš Horák je zakladateľ medzinárodnej dizajnovej agentúry PLATFORM, ktorá už viac ako 18 rokov navrhuje oceňované aplikácie a platformy pre značky ako Spotify, LG, BMW, HP, Ikea, Henkel, Tatra banka a desiatky ďalších. Práca agentúry bola ocenená ako TIME Magazine's Best Inventions (2019) a Best App by Apple (2020). Popri profesionálnej kariére sa viac ako desaťročie intenzívne venuje výskumu ľudského vedomia, neurovedy a evolučnej biológie. Výsledkom je kniha „Evolúcia vedomia – JA", v ktorej prepája vedecké poznatky do uceleného rámca pochopenia vedomia a jeho vplyvu na kvalitu života.</p>
+                    <p class="author-bio">Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()">Čítaj ďalej…</button></p>
+                    <div class="author-bio author-bio-hidden" id="authorBioExtra">
+                        <p>Zásadná zmena prišla, keď sa Lukáš vydal na cestu zvyšovania úrovne vedomia, čo vyvrcholilo absolútnou transformáciou jeho života. Tento proces by sa dal pokojne nazvať znovuzrodením.</p>
+                        <p style="margin-top: 12px;">Vo veku 36 rokov napokon došlo k náhlemu, šokujúcemu a ťažko opísateľnému prechodu z bežného stavu vedomia do vysokého stavu vedomia, ktorý so sebou priniesol dovtedy nepredstaviteľnú vnútornú spokojnosť, šťastie, pokoj, mier a pocit jednoty so všetkým, čo existuje.</p>
+                        <p style="margin-top: 12px;">Osobnosť, ako ju poznal, sa rozplynula. Myseľ stíchla a prišiel natoľko výnimočný a nezabudnuteľný stav, že by ho nevymenil za nič na svete. Tento stav vedomia sa stal trvalým a stabilným, absolútne nezávislým od vonkajších okolností.</p>
+                    </div>
                 </div>
                 <div>
                     <div class="author-stats">
                         <div class="author-stat">
-                            <div class="author-stat-number">10+</div>
-                            <div class="author-stat-label">Rokov výskumu</div>
+                            <div class="author-stat-number">336</div>
+                            <div class="author-stat-label">Strán</div>
                         </div>
                         <div class="author-stat">
-                            <div class="author-stat-number">500+</div>
-                            <div class="author-stat-label">Predaných kópií</div>
+                            <div class="author-stat-number">6</div>
+                            <div class="author-stat-label">Rokov písania</div>
+                        </div>
+                        <div class="author-stat">
+                            <div class="author-stat-number">2.</div>
+                            <div class="author-stat-label">Rozšírené vydanie</div>
                         </div>
                     </div>
                     <a href="#objednat" class="btn-primary">
@@ -1504,29 +1804,64 @@
     </div>
 </section>
 
-<!-- UKÁŽKY Z KNIHY -->
-<section class="excerpts-section fade-in">
+<!-- UKÁŽKY Z KNIHY – APPLE BOOKS READER -->
+<section class="book-reader-section fade-in">
     <div class="container">
-        <p class="excerpts-eyebrow">/Ukážky z knihy</p>
-        <h2 class="excerpts-title">Slová, ktoré menia pohľad <span class="muted">na seba samého</span></h2>
-        <div class="excerpts-grid">
-            <div class="excerpt-card">
-                <div>
-                    <span class="excerpt-label">Mentálna krátkozrakosť</span>
-                    <p class="excerpt-text">„Nízky stav vedomia by sa dal prirovnať k mentálnej krátkozrakosti, pri ktorej je náš pohľad na okolitý svet celkom rozmazaný. Všetko okolo nás je zahmlené a neostré. Nevidíme zreteľne ani svoj odraz v zrkadle. V takomto stave nám nezostáva nič iné, len si domýšľať, čo sa s nami aj okolo nás naozaj deje."</p>
+        <div class="book-reader-header">
+            <p class="book-reader-eyebrow">/Ukážky z knihy</p>
+            <h2 class="book-reader-title">Nahliadnite do knihy <span class="muted">a začnite čítať</span></h2>
+        </div>
+        <div class="book-reader" id="bookReader">
+            <div class="book-reader-inner">
+                <div class="book-page active" data-chapter="Predtým ako začneme">
+                    <div class="book-page-chapter">Predtým ako začneme...</div>
+                    <div class="book-page-text">
+                        <p>Zamýšľanie sa nad otázkami našej existencie od pôvodu vesmíru cez význam biologických mechanizmov až po evolúciu vedomia môže byť na prvý pohľad považované za doménu filozofov a vedcov. Ak však neporozumieme fundamentálnym pravidlám, ktoré sa schovávajú za dynamikou celého vesmíru – počnúc jednoduchými molekulami, komplexnými biologickými organizmami a končiac obrovskými galaxiami – zbavujeme sa možnosti hlbšie porozumieť realite, v ktorej žijeme.</p>
+                        <p>Tieto „veľké otázky" nie sú len abstraktným intelektuálnym cvičením, ale majú potenciál zásadne zmeniť naše vnímanie a ovplyvniť naše každodenné životy do takej miery, že si to ani nedokážeme predstaviť.</p>
+                    </div>
+                    <div class="book-page-number">strana 15</div>
+                </div>
+                <div class="book-page" data-chapter="Stavy vedomia">
+                    <div class="book-page-chapter">Stavy vedomia</div>
+                    <div class="book-page-text">
+                        <p>Nízky stav vedomia by sa dal prirovnať k mentálnej krátkozrakosti, pri ktorej je náš pohľad na okolitý svet celkom rozmazaný. Všetko okolo nás je zahmlené a neostré. Nevidíme zreteľne ani svoj odraz v zrkadle. V takomto stave nám nezostáva nič iné, len si domýšľať, čo sa s nami aj okolo nás naozaj deje.</p>
+                        <p>Naopak, vysoký stav vedomia nám umožňuje vidieť svet zreteľne a jasne. Namiesto povrchného sústredenia sa na obsah nás zaujímajú súvislosti a širší kontext, čo nás vedie k hlbšiemu porozumeniu všetkým naším skúsenostiam. Každým zvýšením úrovne vedomia sa stávame autentickejšou a pravdivejšou verziou samých seba.</p>
+                    </div>
+                    <div class="book-page-number">strana 18</div>
+                </div>
+                <div class="book-page" data-chapter="Primitívne ja">
+                    <div class="book-page-chapter">Primitívne ja</div>
+                    <div class="book-page-text">
+                        <p>Veľká časť populácie trávi hodiny, dni, týždne, ba dokonca celý život v pohltení negatívnymi emocionálnymi stavmi, čo je nielen neprospešné, ale úplne zbytočné a často sebazničujúce. Väčšina ľudí jednoducho nedokáže pozorovať svoje vnútorné stavy s odstupom a emócie preberajú kontrolu nad ich myslením, správaním aj rozhodovaním.</p>
+                        <p>Nízke emocionálne stavy sú dokonca také rozšírené, že ich považujeme za normálnu súčasť nášho každodenného života. Hoci je pravda, že prežívanie emócií je súčasťou ľudskosti, neznamená to, že nás tieto inštinktívne reakcie a nízke emocionálne stavy majú riadiť, ovládať alebo v nich máme zotrvávať.</p>
+                    </div>
+                    <div class="book-page-number">strana 43</div>
+                </div>
+                <div class="book-page" data-chapter="Rozvoj vedomia">
+                    <div class="book-page-chapter">Rozvoj vedomia</div>
+                    <div class="book-page-text">
+                        <p>Je to, akoby sme po rokoch tápania v tme konečne rozsvietili svetlo. To, čo bolo kedysi neviditeľné, zrazu vidíme jasne a zreteľne. Vidíme nielen prekážky, o ktoré sme sa potkýnali, a steny, do ktorých sme narážali, ale aj dvere, ktoré boli celý čas otvorené, len sme ich v tme jednoducho nevideli.</p>
+                        <p>Rozvoj vedomia nie je tanec v oblakoch, ale skôr potápanie sa do vlastných hlbín. A len ten, kto sa odváži ponoriť do tej najhlbšej tmy, môže naozaj uzrieť Svetlo.</p>
+                    </div>
+                    <div class="book-page-number">strana 139</div>
+                </div>
+                <div class="book-page" data-chapter="Vyššie ja">
+                    <div class="book-page-chapter">Vyššie ja</div>
+                    <div class="book-page-text">
+                        <p>Najvyššie úrovne vedomia sprevádza neopísateľný pokoj a ticho mysle. Miznú detinské očakávania, narcistické nároky a nezdravá pripútanosť. Vytráca sa potreba vyjadrovať názory, hodnotiť, kategorizovať, porovnávať či akokoľvek opisovať dianie, ktoré pozorujeme vo svete.</p>
+                        <p>Realitu vnímame takú, aká je. Bez filtra. Akceptujeme ju. Nemáme potrebu ju meniť či akokoľvek do nej zasahovať. Skutočná transformácia vedomia pramení z pochopenia hlbokých súvislostí medzi vlastnými myšlienkami, názormi, presvedčeniami, emóciami a spôsobom, akým vnímame a ako reagujeme na svet okolo nás.</p>
+                    </div>
+                    <div class="book-page-number">strana 270</div>
                 </div>
             </div>
-            <div class="excerpt-card">
-                <div>
-                    <span class="excerpt-label">Svetlo v tme</span>
-                    <p class="excerpt-text">„Je to, akoby sme po rokoch tápania v tme konečne rozsvietili svetlo. To, čo bolo kedysi neviditeľné, zrazu vidíme jasne a zreteľne. Vidíme nielen prekážky, o ktoré sme sa potkýnali, a steny, do ktorých sme narážali, ale aj dvere, ktoré boli celý čas otvorené, len sme ich v tme jednoducho nevideli."</p>
-                </div>
-            </div>
-            <div class="excerpt-card">
-                <div>
-                    <span class="excerpt-label">Potápanie do hlbín</span>
-                    <p class="excerpt-text">„Rozvoj vedomia nie je tanec v oblakoch, ale skôr potápanie sa do vlastných hlbín. A len ten, kto sa odváži ponoriť do tej najhlbšej tmy, môže naozaj uzrieť Svetlo."</p>
-                </div>
+            <div class="book-controls">
+                <button class="book-nav-btn" id="bookPrev" disabled>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div class="book-chapter-tabs" id="bookDots"></div>
+                <button class="book-nav-btn" id="bookNext">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
             </div>
         </div>
     </div>
@@ -1535,55 +1870,55 @@
 <!-- RECENZIE -->
 <section class="reviews-section fade-in" id="recenzie">
     <div class="container">
-        <p class="reviews-eyebrow">/Recenzie</p>
+        <p class="reviews-eyebrow">/Ohlasy</p>
         <h2 class="reviews-title">Čo hovoria čitatelia <span class="muted">o knihe, ktorá mení pohľad na seba samého</span></h2>
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Táto kniha je dar. Čítala som ju pomaly, každú kapitolu som si nechala sadnúť. Po mesiaci cítim zmenu."</p>
+                <p class="review-quote">„Po kapitole o primitívnych mechanizmoch som konečne pochopil, prečo roky opakujem tie isté deštruktívne vzorce. Prvýkrát mám pocit, že viem, čo s tým."</p>
                 <div class="review-footer">
-                    <div class="r-avatar" style="background: #E65C50;">MK</div>
-                    <span class="r-name">Mária K.</span>
+                    <div class="r-avatar" style="background: #5B8DEF;">MH</div>
+                    <span class="r-name">Martin H. · Instagram</span>
                 </div>
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Lukáš dokáže komplexné veci podať jednoducho. Inšpirovala ma začať meditovať a cvičenia robím každý deň."</p>
+                <p class="review-quote">„Nie je to motivačná kniha. Je to manuál k vlastnému vedomiu. Vysvetľuje, prečo cítime to, čo cítime – a ako sa z toho posunúť vyššie. Čítal som ju trikrát."</p>
                 <div class="review-footer">
-                    <div class="r-avatar" style="background: #5B8DEF;">TL</div>
-                    <span class="r-name">Tomáš L.</span>
+                    <div class="r-avatar" style="background: #E65C50;">ZK</div>
+                    <span class="r-name">Zuzana K. · Facebook</span>
                 </div>
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Konečne kniha, ktorá nie je plná prázdnych fráz. Každá strana je plná hlbokých myšlienok."</p>
+                <p class="review-quote">„Spektrum vedomia mi dalo úplne nový rámec na pochopenie seba. Konečne rozumiem, prečo žiarlivosť, hnev a strach nie sú chyby – ale evolučné mechanizmy."</p>
                 <div class="review-footer">
-                    <div class="r-avatar" style="background: #8B5CF6;">AŠ</div>
-                    <span class="r-name">Andrea Š.</span>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="review-stars">★★★★☆</div>
-                <p class="review-quote">„Kniha ma prinútila zamyslieť sa nad vecami, o ktorých som nikdy nepremýšľal. Odporúčam každému."</p>
-                <div class="review-footer">
-                    <div class="r-avatar" style="background: #F59E0B;">JN</div>
-                    <span class="r-name">Juraj N.</span>
+                    <div class="r-avatar" style="background: #8B5CF6;">PŠ</div>
+                    <span class="r-name">Peter Š. · LinkedIn</span>
                 </div>
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Kúpila som ju ako darček a nakoniec som si ju prečítala prvá. Najlepšia investícia do seba za posledné roky."</p>
+                <p class="review-quote">„Kapitola o emocionálnom atraktore bola pre mňa zlomová. Uvedomila som si, v akom stave vedomia som roky žila a že existuje cesta von."</p>
+                <div class="review-footer">
+                    <div class="r-avatar" style="background: #F59E0B;">NB</div>
+                    <span class="r-name">Nina B. · Instagram</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">„Kúpila som ju na odporúčanie a po prvých 50 stranách som vedela, že toto je kniha, ku ktorej sa budem vracať. Prepája neurovedy s hlbokým sebapoznaním."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #10B981;">KV</div>
-                    <span class="r-name">Katarína V.</span>
+                    <span class="r-name">Katarína V. · Facebook</span>
                 </div>
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Praktická, hlboká a zároveň ľahko čitateľná. Presne to, čo som potreboval na svojej ceste."</p>
+                <p class="review-quote">„Autor rozložil to, čo väčšina kníh o vedomí mystifikuje, na zrozumiteľné princípy podložené vedou. Konečne kniha, pri ktorej nemusíte vypnúť kritické myslenie."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #1A1A1A;">RM</div>
-                    <span class="r-name">Richard M.</span>
+                    <span class="r-name">Richard M. · X</span>
                 </div>
             </div>
         </div>
@@ -1625,7 +1960,7 @@
                 <p class="ol-eyebrow">/Tlačená kniha</p>
                 <h3 class="ol-title">JA – Evolúcia vedomia</h3>
                 <p class="ol-subtitle">Lukáš Horák · 336 strán · Tvrdá väzba</p>
-                <div class="ol-price">€24<span class="cents">,90</span></div>
+                <div class="ol-price">€33</div>
                 <ul class="ol-features">
                     <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 336 strán kvalitného obsahu</li>
                     <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 30+ kapitol v 4 hlavných častiach</li>
@@ -1705,7 +2040,7 @@
             <div class="contact-left">
                 <p class="contact-eyebrow">/Kontakt</p>
                 <h2 class="contact-title">Máte otázku pre autora?</h2>
-                <p class="contact-desc">Napíšte mi čokoľvek – otázku o knihe, návrh na spoluprácu, alebo len spätnú väzbu. Rád odpoviem.</p>
+                <p class="contact-desc">Ak vás táto kniha inšpirovala, pomáha lepšie porozumieť vášmu „ja“ alebo vo vás zanechala nezodpovedané otázky – neváhajte sa o ne podeliť. Každá otázka, ktorú si položíme, prispieva k hlbšiemu pochopeniu toho, čo znamená byť človekom v nekonečnej evolúcii vedomia.</p>
                 <a href="mailto:info@evolvium.com" class="contact-email-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
                     info@evolvium.com
@@ -1738,7 +2073,7 @@
                 <a href="#">Ochrana súkromia</a>
                 <a href="#kontakt">Kontakt</a>
             </div>
-            <div class="footer-right">© 2026 Lukáš Horák</div>
+            <div class="footer-right">© 2026 Evolvium, s. r. o.</div>
         </div>
     </div>
 </footer>
@@ -1754,6 +2089,111 @@
 </div>
 
 <script>
+// ===== MOBILE: SHOW MORE / LESS CARDS =====
+function toggleHeroCards() {
+    const carousel = document.getElementById('heroCarousel');
+    const btn = document.getElementById('heroShowMore');
+    if (!carousel || !btn) return;
+    const isExpanded = carousel.classList.toggle('show-all');
+    btn.querySelector('span').textContent = isExpanded ? 'Zobraziť menej' : 'Zobraziť viac';
+    btn.classList.toggle('expanded', isExpanded);
+    if (!isExpanded) {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+}
+
+function toggleAuthorBio() {
+    var extra = document.getElementById('authorBioExtra');
+    var btn = document.getElementById('authorReadMore');
+    if (!extra || !btn) return;
+    var isExpanded = extra.classList.toggle('expanded');
+    if (isExpanded) {
+        btn.textContent = 'Zobraziť menej';
+        // Move button after the expanded block
+        extra.parentNode.insertBefore(btn, extra.nextSibling);
+        btn.style.display = 'inline-block';
+        btn.style.marginTop = '12px';
+    } else {
+        btn.textContent = 'Čítaj ďalej…';
+        // Move button back inside the first paragraph
+        var firstP = extra.previousElementSibling;
+        firstP.appendChild(btn);
+        btn.style.display = '';
+        btn.style.marginTop = '';
+    }
+}
+
+// ===== BOOK READER =====
+(function() {
+    var reader = document.getElementById('bookReader');
+    if (!reader) return;
+    var pages = Array.from(reader.querySelectorAll('.book-page'));
+    var prevBtn = document.getElementById('bookPrev');
+    var nextBtn = document.getElementById('bookNext');
+    var dotsWrap = document.getElementById('bookDots');
+    var current = 0;
+    var animating = false;
+
+    // Create dots
+    pages.forEach(function(_, i) {
+        var dot = document.createElement('div');
+        dot.className = 'book-chapter-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', function() { goTo(i); });
+        dotsWrap.appendChild(dot);
+    });
+
+    function updateControls() {
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === pages.length - 1;
+        var dots = dotsWrap.querySelectorAll('.book-chapter-dot');
+        dots.forEach(function(d, i) {
+            d.classList.toggle('active', i === current);
+        });
+    }
+
+    function goTo(idx, direction) {
+        if (animating || idx === current || idx < 0 || idx >= pages.length) return;
+        animating = true;
+        var dir = direction || (idx > current ? 'next' : 'prev');
+        var outClass = dir === 'next' ? 'slide-out-left' : 'slide-out-right';
+        var inClass = dir === 'next' ? 'slide-in-right' : 'slide-in-left';
+        var oldPage = pages[current];
+        var newPage = pages[idx];
+
+        oldPage.classList.add(outClass);
+        setTimeout(function() {
+            oldPage.classList.remove('active', outClass);
+            newPage.classList.add('active', inClass);
+            current = idx;
+            updateControls();
+            setTimeout(function() {
+                newPage.classList.remove(inClass);
+                animating = false;
+            }, 350);
+        }, 350);
+    }
+
+    prevBtn.addEventListener('click', function() { goTo(current - 1, 'prev'); });
+    nextBtn.addEventListener('click', function() { goTo(current + 1, 'next'); });
+
+    // Touch/swipe support for mobile
+    var touchStartX = 0;
+    var touchEndX = 0;
+    reader.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    reader.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) goTo(current + 1, 'next');
+            else goTo(current - 1, 'prev');
+        }
+    }, { passive: true });
+
+    updateControls();
+})();
+
 // ===== HERO CAROUSEL (click-only, simultaneous slide) =====
 (function() {
     const carousel = document.getElementById('heroCarousel');
@@ -1878,10 +2318,26 @@
     }
 
     // Set carousel to relative positioning
-    carousel.style.position = 'relative';
-    carousel.style.display = 'block';
+    function isMobile() { return window.innerWidth <= 768; }
 
     function initCarousel() {
+        if (isMobile()) {
+            // Mobile: reset all inline styles, let CSS handle vertical layout
+            carousel.style.position = '';
+            carousel.style.display = '';
+            carousel.style.height = '';
+            cards.forEach(function(card) {
+                card.style.position = '';
+                card.style.left = '';
+                card.style.width = '';
+                card.style.transform = '';
+                card.style.opacity = '';
+                card.style.transition = '';
+            });
+            return;
+        }
+        carousel.style.position = 'relative';
+        carousel.style.display = 'block';
         var cw = getCardWidth();
         carousel.style.height = (cw * 4 / 3) + 'px';
         positionCards(false);
@@ -1890,8 +2346,8 @@
     initCarousel();
 
     // Click only — no auto-play
-    nextBtn.addEventListener('click', slideNext);
-    prevBtn.addEventListener('click', slidePrev);
+    nextBtn.addEventListener('click', function() { if (!isMobile()) slideNext(); });
+    prevBtn.addEventListener('click', function() { if (!isMobile()) slidePrev(); });
 
     // Arrows always active (infinite loop)
     prevBtn.style.opacity = '1';
@@ -2099,6 +2555,87 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+</script>
+
+<!-- EXIT-INTENT POPUP -->
+<div class="exit-overlay" id="exitPopup">
+    <div class="exit-popup">
+        <button class="exit-close" id="exitClose" aria-label="Zavrieť">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <p class="exit-eyebrow">/Špeciálna ponuka</p>
+        <h3 class="exit-title">Zľava –10%</h3>
+        <p class="exit-desc">Použite kód na vašu prvú objednávku</p>
+        <div class="exit-code-box">
+            <span class="code">VEDOMIE10</span>
+            <button class="copy-btn" id="exitCopy">Kopírovať</button>
+        </div>
+        <a href="checkout.html?discount=VEDOMIE10" class="exit-cta">
+            Objednať so zľavou <svg viewBox="0 0 16 16"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+        </a>
+        <button class="exit-dismiss" id="exitDismiss">Nie, ďakujem.</button>
+    </div>
+</div>
+
+<script>
+// ===== EXIT-INTENT POPUP =====
+(function() {
+    var overlay = document.getElementById('exitPopup');
+    var closeBtn = document.getElementById('exitClose');
+    var dismissBtn = document.getElementById('exitDismiss');
+    var copyBtn = document.getElementById('exitCopy');
+    if (!overlay) return;
+
+    var shown = false;
+    var dismissed = sessionStorage.getItem('exitDismissed');
+
+    function showPopup() {
+        if (shown || dismissed) return;
+        shown = true;
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hidePopup() {
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('exitDismissed', '1');
+        dismissed = true;
+    }
+
+    // Exit intent: mouse leaves viewport at top
+    document.addEventListener('mouseout', function(e) {
+        if (e.clientY <= 0 && !shown && !dismissed) {
+            showPopup();
+        }
+    });
+
+    // Close on X button
+    closeBtn.addEventListener('click', hidePopup);
+
+    // Close on "Nie, ďakujem."
+    dismissBtn.addEventListener('click', hidePopup);
+
+    // Close on overlay click
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) hidePopup();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+            hidePopup();
+        }
+    });
+
+    // Copy code
+    copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText('VEDOMIE10').then(function() {
+            copyBtn.textContent = 'Skopírované ✓';
+            setTimeout(function() { copyBtn.textContent = 'Kopírovať'; }, 2000);
+        });
+    });
+})();
 </script>
 
 </body>
