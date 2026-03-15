@@ -196,6 +196,32 @@
         line-height: 1; z-index: 2;
     }
 
+    .hero-show-more {
+        display: none;
+        align-items: center; justify-content: center; gap: 8px;
+        margin: 24px auto 0;
+        padding: 14px 32px;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 100px;
+        font-family: var(--font);
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .hero-show-more:hover {
+        background: var(--dark); color: #fff; border-color: var(--dark);
+    }
+    .hero-show-more svg {
+        width: 16px; height: 16px;
+        transition: transform 0.3s;
+    }
+    .hero-show-more.expanded svg {
+        transform: rotate(180deg);
+    }
+
     .hero-nav {
         display: flex; gap: 8px; justify-content: center;
         padding: 20px 0 0;
@@ -1052,12 +1078,32 @@
         .hero-card { padding: 28px; }
         .hero-top { margin-bottom: 32px; }
         .hero-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
-        .hero-carousel { gap: 12px; }
-        .hero-image-card { flex: 0 0 calc((100% - 24px) / 2); padding: 20px; aspect-ratio: 3 / 4.2; }
-        .hero-image-card .card-title { font-size: 1.2rem; }
-        .hero-image-card .card-desc { font-size: 0.75rem; margin-bottom: 12px; }
+        .hero-carousel-wrap { overflow: visible; }
+        .hero-carousel {
+            flex-direction: column;
+            gap: 16px;
+            transform: none !important;
+            transition: none;
+        }
+        .hero-image-card {
+            flex: none;
+            width: 100%;
+            padding: 24px;
+            aspect-ratio: 3 / 4;
+        }
+        .hero-image-card:nth-child(n+4) {
+            display: none;
+        }
+        .hero-carousel.show-all .hero-image-card:nth-child(n+4) {
+            display: flex;
+        }
+        .hero-image-card .card-title { font-size: 1.3rem; }
+        .hero-image-card .card-desc { font-size: 0.8rem; margin-bottom: 12px; }
         .hero-image-card .card-number { font-size: 3.5rem; bottom: 14px; right: 18px; }
-        .hero-nav { padding: 12px 0 4px; }
+        .hero-nav { display: none; }
+        .hero-show-more {
+            display: flex;
+        }
         .hero-actions { gap: 16px; }
         .btn-primary { padding: 14px 24px; font-size: 0.85rem; white-space: nowrap; }
         .content-section { padding: 60px 0 48px; }
@@ -1343,6 +1389,10 @@
             <div class="hero-arrow" id="heroPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
             <div class="hero-arrow" id="heroNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
+        <button class="hero-show-more" id="heroShowMore" onclick="toggleHeroCards()">
+            <span>Zobraziť viac</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
     </div>
 </section>
 
@@ -1803,6 +1853,19 @@
 </div>
 
 <script>
+// ===== MOBILE: SHOW MORE / LESS CARDS =====
+function toggleHeroCards() {
+    const carousel = document.getElementById('heroCarousel');
+    const btn = document.getElementById('heroShowMore');
+    if (!carousel || !btn) return;
+    const isExpanded = carousel.classList.toggle('show-all');
+    btn.querySelector('span').textContent = isExpanded ? 'Zobraziť menej' : 'Zobraziť viac';
+    btn.classList.toggle('expanded', isExpanded);
+    if (!isExpanded) {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+}
+
 // ===== HERO CAROUSEL (click-only, simultaneous slide) =====
 (function() {
     const carousel = document.getElementById('heroCarousel');
@@ -1927,10 +1990,26 @@
     }
 
     // Set carousel to relative positioning
-    carousel.style.position = 'relative';
-    carousel.style.display = 'block';
+    function isMobile() { return window.innerWidth <= 768; }
 
     function initCarousel() {
+        if (isMobile()) {
+            // Mobile: reset all inline styles, let CSS handle vertical layout
+            carousel.style.position = '';
+            carousel.style.display = '';
+            carousel.style.height = '';
+            cards.forEach(function(card) {
+                card.style.position = '';
+                card.style.left = '';
+                card.style.width = '';
+                card.style.transform = '';
+                card.style.opacity = '';
+                card.style.transition = '';
+            });
+            return;
+        }
+        carousel.style.position = 'relative';
+        carousel.style.display = 'block';
         var cw = getCardWidth();
         carousel.style.height = (cw * 4 / 3) + 'px';
         positionCards(false);
@@ -1939,8 +2018,8 @@
     initCarousel();
 
     // Click only — no auto-play
-    nextBtn.addEventListener('click', slideNext);
-    prevBtn.addEventListener('click', slidePrev);
+    nextBtn.addEventListener('click', function() { if (!isMobile()) slideNext(); });
+    prevBtn.addEventListener('click', function() { if (!isMobile()) slidePrev(); });
 
     // Arrows always active (infinite loop)
     prevBtn.style.opacity = '1';
