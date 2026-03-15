@@ -1990,7 +1990,7 @@
                 </div>
                 <div class="audio-track-info">
                     <div class="audio-chapter" data-i18n="audio_chapter">Tretia kapitola – Túžby</div>
-                    <div class="audio-author">Lukáš Horák</div>
+                    <div class="audio-author" data-i18n="audio_author">Lukáš Horák</div>
                     <span class="audio-badge" data-i18n="audio_badge">Ukážka</span>
                 </div>
                 <div class="audio-progress-wrap">
@@ -2153,7 +2153,7 @@
             </div>
             <div class="author-right" style="background-image: url('https://www.evolvium.com/images/author.jpg');">
                 <div class="author-caption">
-                    <div class="author-caption-name">Lukáš Horák</div>
+                    <div class="author-caption-name" data-i18n="author_caption_name">Lukáš Horák</div>
                     <div class="author-caption-quote" data-i18n="author_caption_quote">„Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný stav, že by ho človek nevymenil za nič na svete."</div>
                 </div>
             </div>
@@ -2985,22 +2985,46 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     const success = document.getElementById('contactSuccess');
     if (!form) return;
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const subject = form.subject.value.trim() || 'Otázka z evolvium.com';
-        const message = form.message.value.trim();
+        const name = form.querySelector('[name="name"]').value.trim();
+        const email = form.querySelector('[name="email"]').value.trim();
+        const subject = form.querySelector('[name="subject"]').value.trim() || 'Otázka z evolvium.com';
+        const message = form.querySelector('[name="message"]').value.trim();
 
-        const body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
-        const mailto = 'mailto:info@evolvium.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        window.location.href = mailto;
+        if (!name || !email || !message) return;
 
-        success.classList.add('visible');
-        form.reset();
-        setTimeout(function() {
-            success.classList.remove('visible');
-        }, 5000);
+        const submitBtn = form.querySelector('.contact-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Odosiela sa...';
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, subject, message })
+            });
+
+            if (res.ok) {
+                success.classList.add('visible');
+                form.reset();
+                setTimeout(function() {
+                    success.classList.remove('visible');
+                }, 5000);
+            } else {
+                // Fallback to mailto
+                const body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
+                window.location.href = 'mailto:info@evolvium.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            }
+        } catch (err) {
+            // Fallback to mailto on network error
+            const body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
+            window.location.href = 'mailto:info@evolvium.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
     });
 })();
 
@@ -3204,6 +3228,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             rv_review_text: '\u201EKonečne kniha, ktorá nie je plná prázdnych fráz. Každá strana je plná hlbokých myšlienok a praktických nástrojov. Už som ju darovala trom ľuďom.\u201C',
             audio_subtitle: 'Evolúcia vedomia',
             audio_chapter: 'Tretia kapitola \u2013 Túžby',
+            audio_author: 'Lukáš Horák',
             audio_badge: 'Ukážka',
 
             // Stats
@@ -3429,7 +3454,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             order_edition: 'Second expanded edition',
             ol_eyebrow: '/Printed book',
             ol_title: 'I AM \u2013 Evolution of Consciousness',
-            ol_subtitle: 'Lukáš Horák \u00B7 336 pages \u00B7 Hardcover',
+            ol_subtitle: 'Lukas Horak \u00B7 336 pages \u00B7 Hardcover',
             ol_price: '\u20AC33',
             ol_btn: 'Order now',
             ol_feat_1: '336 pages of quality content',
@@ -3452,7 +3477,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             contact_title: 'Have a question for the author?',
             contact_desc: 'Whether this book inspired you, you need to clarify something, or you simply have a question before diving in \u2013 don\u2019t hesitate to write. Every question we ask contributes to a deeper understanding of what it means to be human in the infinite evolution of consciousness.',
             contact_submit: 'Send message',
-            contact_success: 'Thank you for your message. Lukáš will reply soon.',
+            contact_success: 'Thank you for your message. Lukas will reply soon.',
 
             // Footer
             footer_terms: 'Terms & Conditions',
@@ -3499,8 +3524,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             reviews_title: 'Čo hovoria čitatelia <span class="muted">o knihe, ktorá mení pohľad na seba samého</span>'
         },
         en: {
-            author_bio: 'By the age of thirty, Lukáš had fulfilled all his material and career dreams \u2013 financial success, prestige, and admiration. On the surface, he had it all. Yet it brought him no real happiness, contrary to what most would expect. Quite the opposite. What the world presented as a source of happiness only led to an endless cycle of craving for something more, something better, bigger, or more beautiful. Instead of fulfillment came disappointment, emptiness, and dissatisfaction. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Read more\u2026</button>',
-            author_bio_extra: '<p>A fundamental shift came when Lukáš embarked on a journey of raising his level of consciousness, which culminated in a complete transformation of his life. This process could rightly be called a rebirth.</p><p style="margin-top: 12px;">At the age of 36, a sudden, shocking, and nearly indescribable transition occurred \u2013 from an ordinary state of consciousness to a higher state, bringing with it previously unimaginable inner contentment, happiness, peace, tranquility, and a sense of unity with everything that exists.</p><p style="margin-top: 12px;">The personality as he knew it dissolved. The mind went silent and such an extraordinary and unforgettable state arrived that he would not trade it for anything in the world. This state of consciousness became permanent and stable, completely independent of external circumstances.</p>',
+            author_bio: 'By the age of thirty, Lukas had fulfilled all his material and career dreams \u2013 financial success, prestige, and admiration. On the surface, he had it all. Yet it brought him no real happiness, contrary to what most would expect. Quite the opposite. What the world presented as a source of happiness only led to an endless cycle of craving for something more, something better, bigger, or more beautiful. Instead of fulfillment came disappointment, emptiness, and dissatisfaction. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Read more\u2026</button>',
+            author_bio_extra: '<p>A fundamental shift came when Lukas embarked on a journey of raising his level of consciousness, which culminated in a complete transformation of his life. This process could rightly be called a rebirth.</p><p style="margin-top: 12px;">At the age of 36, a sudden, shocking, and nearly indescribable transition occurred \u2013 from an ordinary state of consciousness to a higher state, bringing with it previously unimaginable inner contentment, happiness, peace, tranquility, and a sense of unity with everything that exists.</p><p style="margin-top: 12px;">The personality as he knew it dissolved. The mind went silent and such an extraordinary and unforgettable state arrived that he would not trade it for anything in the world. This state of consciousness became permanent and stable, completely independent of external circumstances.</p>',
             faq_a1: '<p>For anyone who wants to understand the mechanisms of their own consciousness \u2013 why we feel anger, envy, or fear and how to overcome these instinctive patterns. The book is not a superficial motivational publication, but a scientifically grounded guide from primitive instincts to the highest states of consciousness. No prior experience is needed.</p>',
             faq_a2: '<p>Delivery in Slovakia typically takes 2\u20134 business days, to the Czech Republic 3\u20135 business days. Shipping is \u20AC3.90 or free for orders over \u20AC50.</p>',
             faq_a3: '<p>The book \u201CEvolution of Consciousness \u2013 I AM\u201D is available in printed hardcover format (second expanded edition, 336 pages). The audiobook is in preparation and will be available soon.</p>',
