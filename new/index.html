@@ -1065,6 +1065,76 @@
         .rv-grid { grid-template-columns: 1fr; }
         .rv-video { grid-column: 1; min-height: 300px; }
     }
+    /* EXIT-INTENT POPUP */
+    .exit-overlay {
+        position: fixed; inset: 0; z-index: 9999;
+        background: rgba(0,0,0,0.5);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+        backdrop-filter: blur(4px);
+    }
+    .exit-overlay.visible { opacity: 1; visibility: visible; }
+    .exit-popup {
+        background: #fff; border-radius: 20px;
+        padding: 48px 40px 36px; max-width: 420px; width: 90%;
+        position: relative; text-align: center;
+        transform: translateY(20px) scale(0.97);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .exit-overlay.visible .exit-popup {
+        transform: translateY(0) scale(1);
+    }
+    .exit-popup .exit-close {
+        position: absolute; top: 16px; right: 16px;
+        width: 32px; height: 32px; border: none; background: none;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; transition: background 0.2s;
+    }
+    .exit-popup .exit-close:hover { background: var(--surface); }
+    .exit-popup .exit-close svg { width: 18px; height: 18px; stroke: var(--text-muted); stroke-width: 2; }
+    .exit-eyebrow {
+        font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+        color: var(--text-muted); margin-bottom: 8px;
+    }
+    .exit-title {
+        font-family: 'Urbanist', sans-serif; font-size: 2rem; font-weight: 600;
+        color: var(--text); margin-bottom: 8px;
+    }
+    .exit-desc {
+        font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px;
+    }
+    .exit-code-box {
+        display: flex; align-items: center; justify-content: space-between;
+        background: var(--surface); border-radius: 12px;
+        padding: 14px 20px; margin-bottom: 20px;
+    }
+    .exit-code-box .code {
+        font-family: 'Urbanist', sans-serif; font-size: 1.1rem;
+        font-weight: 700; letter-spacing: 0.05em; color: var(--text);
+    }
+    .exit-code-box .copy-btn {
+        font-size: 0.8rem; color: var(--text-muted); background: none;
+        border: none; cursor: pointer; font-family: 'Urbanist', sans-serif;
+        transition: color 0.2s;
+    }
+    .exit-code-box .copy-btn:hover { color: var(--text); }
+    .exit-cta {
+        display: block; width: 100%; padding: 16px;
+        background: var(--text); color: var(--bg); border: none;
+        border-radius: 60px; font-family: 'Urbanist', sans-serif;
+        font-size: 0.95rem; font-weight: 500; cursor: pointer;
+        text-decoration: none; text-align: center;
+        transition: opacity 0.2s;
+    }
+    .exit-cta:hover { opacity: 0.85; }
+    .exit-cta svg { display: inline-block; width: 14px; height: 14px; margin-left: 6px; vertical-align: middle; stroke: currentColor; fill: none; stroke-width: 2; }
+    .exit-dismiss {
+        display: block; margin: 14px auto 0; background: none; border: none;
+        font-family: 'Urbanist', sans-serif; font-size: 0.85rem;
+        color: var(--text-muted); cursor: pointer; transition: color 0.2s;
+    }
+    .exit-dismiss:hover { color: var(--text); }
     </style>
 </head>
 <body>
@@ -2100,6 +2170,87 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+</script>
+
+<!-- EXIT-INTENT POPUP -->
+<div class="exit-overlay" id="exitPopup">
+    <div class="exit-popup">
+        <button class="exit-close" id="exitClose" aria-label="Zavrieť">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <p class="exit-eyebrow">/Špeciálna ponuka</p>
+        <h3 class="exit-title">Zľava –10%</h3>
+        <p class="exit-desc">Použite kód na vašu prvú objednávku</p>
+        <div class="exit-code-box">
+            <span class="code">VEDOMIE10</span>
+            <button class="copy-btn" id="exitCopy">Kopírovať</button>
+        </div>
+        <a href="checkout.html?discount=VEDOMIE10" class="exit-cta">
+            Objednať so zľavou <svg viewBox="0 0 16 16"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+        </a>
+        <button class="exit-dismiss" id="exitDismiss">Nie, ďakujem.</button>
+    </div>
+</div>
+
+<script>
+// ===== EXIT-INTENT POPUP =====
+(function() {
+    var overlay = document.getElementById('exitPopup');
+    var closeBtn = document.getElementById('exitClose');
+    var dismissBtn = document.getElementById('exitDismiss');
+    var copyBtn = document.getElementById('exitCopy');
+    if (!overlay) return;
+
+    var shown = false;
+    var dismissed = sessionStorage.getItem('exitDismissed');
+
+    function showPopup() {
+        if (shown || dismissed) return;
+        shown = true;
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hidePopup() {
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('exitDismissed', '1');
+        dismissed = true;
+    }
+
+    // Exit intent: mouse leaves viewport at top
+    document.addEventListener('mouseout', function(e) {
+        if (e.clientY <= 0 && !shown && !dismissed) {
+            showPopup();
+        }
+    });
+
+    // Close on X button
+    closeBtn.addEventListener('click', hidePopup);
+
+    // Close on "Nie, ďakujem."
+    dismissBtn.addEventListener('click', hidePopup);
+
+    // Close on overlay click
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) hidePopup();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+            hidePopup();
+        }
+    });
+
+    // Copy code
+    copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText('VEDOMIE10').then(function() {
+            copyBtn.textContent = 'Skopírované ✓';
+            setTimeout(function() { copyBtn.textContent = 'Kopírovať'; }, 2000);
+        });
+    });
+})();
 </script>
 
 </body>
