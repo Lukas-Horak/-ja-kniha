@@ -102,7 +102,7 @@
     }
     .hero-top {
         text-align: center;
-        max-width: 720px;
+        max-width: 820px;
         margin: 0 auto;
     }
     .hero-eyebrow {
@@ -483,7 +483,7 @@
         border-radius: 16px;
     }
 
-    /* ===== UKÁŽKY Z KNIHY – APPLE BOOKS READER ===== */
+    /* ===== UKÁŽKY Z KNIHY – READER ===== */
     .book-reader-section {
         padding: 0 0 80px;
     }
@@ -502,6 +502,8 @@
         letter-spacing: -0.02em;
     }
     .book-reader-title .muted { color: var(--text-muted); font-style: italic; }
+
+    /* Inline preview reader */
     .book-reader {
         background: #FDFBF7;
         border-radius: 24px;
@@ -511,20 +513,21 @@
         max-width: 800px;
         margin: 0 auto;
     }
-    .book-reader-inner {
-        position: relative;
-        overflow: hidden;
-    }
-    .book-page {
+    .book-preview {
         padding: 48px 56px 40px;
-        min-height: 520px;
-        display: none;
-        flex-direction: column;
+        max-height: 520px;
+        overflow: hidden;
+        position: relative;
     }
-    .book-page.active {
-        display: flex;
+    .book-preview::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 120px;
+        background: linear-gradient(to top, #FDFBF7 0%, transparent 100%);
+        pointer-events: none;
     }
-    .book-page-chapter {
+    .book-preview-chapter {
         font-size: 0.7rem;
         font-weight: 600;
         letter-spacing: 0.15em;
@@ -532,21 +535,20 @@
         color: #B8A898;
         margin-bottom: 28px;
     }
-    .book-page-text {
+    .book-preview-text {
         font-size: 1.05rem;
         line-height: 2;
         color: #3D3632;
-        flex: 1;
         font-weight: 400;
     }
-    .book-page-text p {
+    .book-preview-text p {
         margin-bottom: 20px;
         text-indent: 1.5em;
     }
-    .book-page-text p:first-child {
+    .book-preview-text p:first-child {
         text-indent: 0;
     }
-    .book-page-text p:first-child::first-letter {
+    .book-preview-text p:first-child::first-letter {
         font-size: 3.2em;
         float: left;
         line-height: 0.8;
@@ -555,21 +557,68 @@
         font-weight: 500;
         color: #1A1A1A;
     }
-    .book-page-number {
-        font-size: 0.75rem;
-        color: #C5B9AD;
-        text-align: center;
-        margin-top: 32px;
-        font-weight: 400;
+    .book-expand-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 20px 24px;
+        gap: 10px;
+        cursor: pointer;
+        transition: background 0.2s;
     }
-    .book-controls {
+    .book-expand-bar:hover {
+        background: #F5F0EA;
+    }
+    .book-expand-bar span {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #8C7E72;
+        letter-spacing: 0.02em;
+    }
+    .book-expand-bar svg {
+        width: 18px; height: 18px;
+        color: #8C7E72;
+    }
+
+    /* Fullscreen reader overlay */
+    .fs-reader-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: #FDFBF7;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .fs-reader-overlay.open {
+        display: block;
+        animation: fsReaderIn 0.35s ease;
+    }
+    @keyframes fsReaderIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fs-reader-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(253,251,247,0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 20px 20px;
+        padding: 16px 32px;
+        border-bottom: 1px solid #EBE6DE;
     }
-    .book-nav-btn {
-        width: 44px; height: 44px;
+    .fs-reader-booktitle {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #8C7E72;
+        letter-spacing: 0.02em;
+    }
+    .fs-reader-close {
+        width: 40px; height: 40px;
         border-radius: 50%;
         border: 1.5px solid #E8E0D6;
         background: transparent;
@@ -578,74 +627,85 @@
         color: #8C7E72;
         transition: all 0.2s;
     }
-    .book-nav-btn:hover {
+    .fs-reader-close:hover {
         background: #F0EBE4;
         color: #3D3632;
-        border-color: #D4C9BC;
     }
-    .book-nav-btn:disabled {
-        opacity: 0.3;
-        cursor: default;
-    }
-    .book-nav-btn:disabled:hover {
-        background: transparent;
-        color: #8C7E72;
-        border-color: #E8E0D6;
-    }
-    .book-nav-btn svg {
+    .fs-reader-close svg {
         width: 18px; height: 18px;
     }
-    .book-chapter-tabs {
-        display: flex;
-        gap: 6px;
+    .fs-reader-content {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 48px 32px 120px;
     }
-    .book-chapter-dot {
-        width: 8px; height: 8px;
-        border-radius: 50%;
+    .fs-chapter {
+        margin-bottom: 56px;
+    }
+    .fs-chapter-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #B8A898;
+        margin-bottom: 24px;
+    }
+    .fs-chapter-heading {
+        font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+        font-weight: 400;
+        font-style: italic;
+        color: #1A1A1A;
+        margin-bottom: 32px;
+        letter-spacing: -0.01em;
+    }
+    .fs-chapter-text {
+        font-size: 1.05rem;
+        line-height: 2;
+        color: #3D3632;
+        font-weight: 400;
+    }
+    .fs-chapter-text p {
+        margin-bottom: 20px;
+        text-indent: 1.5em;
+    }
+    .fs-chapter-text p:first-child {
+        text-indent: 0;
+    }
+    .fs-chapter-text p:first-child::first-letter {
+        font-size: 3.2em;
+        float: left;
+        line-height: 0.8;
+        margin-right: 8px;
+        margin-top: 6px;
+        font-weight: 500;
+        color: #1A1A1A;
+    }
+    .fs-divider {
+        width: 60px;
+        height: 1px;
         background: #DDD6CC;
-        transition: all 0.3s;
-        cursor: pointer;
+        margin: 48px auto;
     }
-    .book-chapter-dot.active {
-        background: #8C7E72;
-        width: 24px;
-        border-radius: 4px;
+    .fs-cta {
+        text-align: center;
+        padding: 48px 0;
     }
-    /* Page turn animation */
-    .book-page.slide-out-left {
-        animation: slideOutLeft 0.35s ease forwards;
-    }
-    .book-page.slide-in-right {
-        animation: slideInRight 0.35s ease forwards;
-    }
-    .book-page.slide-out-right {
-        animation: slideOutRight 0.35s ease forwards;
-    }
-    .book-page.slide-in-left {
-        animation: slideInLeft 0.35s ease forwards;
-    }
-    @keyframes slideOutLeft {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(-40px); opacity: 0; }
-    }
-    @keyframes slideInRight {
-        from { transform: translateX(40px); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideOutRight {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(40px); opacity: 0; }
-    }
-    @keyframes slideInLeft {
-        from { transform: translateX(-40px); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
+    .fs-cta p {
+        font-size: 1rem;
+        color: #8C7E72;
+        margin-bottom: 24px;
+        font-style: italic;
     }
 
     @media (max-width: 768px) {
-        .book-page { padding: 32px 28px 28px; min-height: 480px; }
-        .book-page-text { font-size: 0.95rem; line-height: 1.9; }
-        .book-page-text p:first-child::first-letter { font-size: 2.8em; margin-top: 4px; }
+        .book-preview { padding: 32px 28px 28px; max-height: 440px; }
+        .book-preview-text { font-size: 0.95rem; line-height: 1.9; }
+        .book-preview-text p:first-child::first-letter { font-size: 2.8em; margin-top: 4px; }
         .book-reader { border-radius: 20px; }
+        .fs-reader-topbar { padding: 12px 20px; }
+        .fs-reader-content { padding: 32px 24px 100px; }
+        .fs-chapter-text { font-size: 0.95rem; line-height: 1.9; }
+        .fs-chapter-text p:first-child::first-letter { font-size: 2.8em; margin-top: 4px; }
         .learn-card { padding: 32px; grid-template-columns: 1fr; }
         .learn-image { min-height: 250px; }
     }
