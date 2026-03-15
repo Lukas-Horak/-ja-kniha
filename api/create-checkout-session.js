@@ -1,5 +1,8 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const PRICE_ID = process.env.STRIPE_PRICE_ID || 'price_1TBKL1B5B1tNqSGiuXvoFlVY';
+const SHIPPING_RATE = 390; // €3.90 in cents
+
 module.exports = async (req, res) => {
     // CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,62 +18,70 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const {
-            email,
-            name,
-            phone,
-            address,
-            city,
-            zip,
-            finalPrice,
-            promoCode,
-            influencer,
-            quantity
-        } = req.body;
+        const { email, name, phone, quantity } = req.body;
 
-        // Validate required fields
-        if (!email || !name || !finalPrice) {
-            return res.status(400).json({ error: 'Missing required fields' });
+        if (!email || !name) {
+            return res.status(400).json({ error: 'Vyplňte prosím meno a email.' });
         }
 
-        // Get the domain from the request for redirect URLs
+        const qty = Math.max(1, Math.min(10, parseInt(quantity) || 1));
+
+        // Build the Checkout Session
         const protocol = req.headers['x-forwarded-proto'] || 'https';
         const host = req.headers.host;
         const baseUrl = `${protocol}://${host}`;
 
-        const session = await stripe.checkout.sessions.create({
+        const sessionParams = {
             payment_method_types: ['card'],
-            line_items: [{
-                price_data: {
-                    currency: 'eur',
-                    product_data: {
-                        name: 'JA – Evolúcia vedomia',
-                        description: `Kniha od Lukáša Horáka | ${quantity || 1} ks`,
-                        images: [],
-                    },
-                    unit_amount: finalPrice, // total in cents (includes qty, shipping, discount)
-                },
-                quantity: 1,
-            }],
             mode: 'payment',
-            success_url: `${baseUrl}/new/dakujeme.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${baseUrl}/new/#objednat`,
-            customer_email: email,
+            line_items: [{
+                price: PRICE_ID,
+                quantity: qty,
+                adjustable_quantity: {
+                    enabled: true,
+                    minimum: 1,
+                    maximum: 10,
+                },
+            }],
+            // Shipping as a fixed-amount shipping rate
+            shipping_options: [{
+                shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: { amount: SHIPPING_RATE, currency: 'eur' },
+                    display_name: 'Doručenie',
+                    delivery_estimate: {
+                        minimum: { unit: 'business_day', value: 2 },
+                        maximum: { unit: 'business_day', value: 5 },
+                    },
+                },
+            }, {
+                shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: { amount: 0, currency: 'eur' },
+                    display_name: 'Zadarmo (nad €50)',
+                    delivery_estimate: {
+                        minimum: { unit: 'business_day', value: 2 },
+                        maximum: { unit: 'business_day', value: 5 },
+                    },
+                },
+            }],
+            // Enable customer-facing promo codes (FRIENDS20, VETRO10, etc.)
+            allow_promotion_codes: true,
+            // Collect shipping address
             shipping_address_collection: {
-                allowed_countries: ['SK', 'CZ'],
+                allowed_countries: ['SK', 'CZ', 'AT', 'DE', 'PL', 'HU'],
             },
+            customer_email: email,
+            success_url: `${baseUrl}/dakujeme.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${baseUrl}/checkout.html`,
             metadata: {
                 customer_name: name,
                 phone: phone || '',
-                address: address || '',
-                city: city || '',
-                zip: zip || '',
-                promo_code: promoCode || '',
-                influencer: influencer || '',
             },
-        });
+        };
 
-        res.status(200).json({ sessionId: session.id });
+        const session = await stripe.checkout.sessions.create(sessionParams);
+        res.status(200).json({ sessionId: session.id, url: session.url });
     } catch (error) {
         console.error('Stripe error:', error.message);
         res.status(500).json({ error: error.message });
