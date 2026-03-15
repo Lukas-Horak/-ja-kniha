@@ -1294,12 +1294,16 @@
         font-size: 0.9rem; color: rgba(255,255,255,0.6);
         line-height: 1.7; margin-top: auto; padding-top: 48px;
     }
+    .order-dark .order-meta-wrap {
+        margin-top: auto;
+    }
     .order-dark .order-meta {
-        display: flex; gap: 24px; margin-top: 20px;
+        display: flex; flex-wrap: wrap; gap: 12px 24px;
         font-size: 0.8rem; color: rgba(255,255,255,0.5);
     }
     .order-dark .order-meta-item {
         display: flex; align-items: center; gap: 8px;
+        white-space: nowrap;
     }
     .order-dark .order-meta-item svg { width: 16px; height: 16px; }
 
@@ -2367,14 +2371,12 @@
                     <p class="order-eyebrow" data-i18n="order_eyebrow">/Objednávka</p>
                     <h2 class="order-title" data-i18n="order_title">Začnite svoju cestu k hlbšiemu poznaniu seba samého</h2>
                 </div>
-                <div>
+                <div class="order-meta-wrap">
                     <div class="order-meta">
                         <div class="order-meta-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             <span data-i18n="order_guarantee">30-dní garancia</span>
                         </div>
-                    </div>
-                    <div class="order-meta" style="margin-top: 8px;">
                         <div class="order-meta-item">
                             ISBN 978-80-975013-4-1
                         </div>
