@@ -87,6 +87,32 @@
     .nav-cta:hover { opacity: 0.85; }
     .nav-cta svg { width: 14px; height: 14px; }
 
+    /* ===== LANG TOGGLE ===== */
+    .lang-toggle {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        background: rgba(0,0,0,0.06);
+        border-radius: 100px;
+        padding: 4px;
+        border: none;
+        cursor: pointer;
+        font-family: var(--font);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+    }
+    .lang-toggle span {
+        padding: 4px 10px;
+        border-radius: 100px;
+        transition: all 0.2s;
+        color: var(--text-muted);
+    }
+    .lang-toggle span.active {
+        background: var(--dark);
+        color: #fff;
+    }
+
     /* ===== CONTAINER ===== */
     .container { max-width: 1340px; margin: 0 auto; padding: 0 48px; }
 
@@ -1696,12 +1722,16 @@
         Evolvium
     </a>
     <div class="nav-links">
-        <a href="#obsah">O knihe</a>
-        <a href="#recenzie">Recenzie</a>
-        <a href="#autor">Autor</a>
+        <a href="#obsah" data-i18n="nav_about">O knihe</a>
+        <a href="#recenzie" data-i18n="nav_reviews">Recenzie</a>
+        <a href="#autor" data-i18n="nav_author">Autor</a>
         <a href="#faq">FAQ</a>
     </div>
-    <a href="#objednat" class="nav-cta">
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="active" data-lang="sk">SK</span>
+        <span data-lang="en">EN</span>
+    </button>
+    <a href="#objednat" class="nav-cta" data-i18n="nav_cta">
         Objednať
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 12L12 4M12 4H5M12 4v7"/>
@@ -1717,19 +1747,19 @@
     <div class="container">
         <div class="hero-card">
             <div class="hero-top">
-                <p class="hero-eyebrow">Cesta rozvoja vedomia a sebapoznania</p>
+                <p class="hero-eyebrow" data-i18n="hero_eyebrow">Cesta rozvoja vedomia a sebapoznania</p>
                 <h1 class="hero-title">
-                    <span class="light">Niektoré knihy zabávajú.</span><br>
-                    <span>Iné zmenia to, ako chápeme realitu.</span>
+                    <span class="light" data-i18n="hero_title_1">Niektoré knihy zabávajú.</span><br>
+                    <span data-i18n="hero_title_2">Iné zmenia to, ako chápeme realitu.</span>
                 </h1>
                 <div class="hero-actions">
-                    <a href="#objednat" class="btn-primary">
+                    <a href="#objednat" class="btn-primary" data-i18n="hero_cta_order">
                         Objednať knihu
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 12L12 4M12 4H5M12 4v7"/>
                         </svg>
                     </a>
-                    <a href="#obsah" class="btn-secondary">
+                    <a href="#obsah" class="btn-secondary" data-i18n="hero_cta_more">
                         Zistiť viac
                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M8 3v10M3 8l5 5 5-5"/>
@@ -1746,8 +1776,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Predstavte si, že hráte hru, v ktorej ste hlavným hrdinom Vy. Tá hra sa volá Život. Potom náhodou natrafíte na manuál – a zrazu Vám to všetko začne do seba postupne zapadať."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card1_desc">„Predstavte si, že hráte hru, v ktorej ste hlavným hrdinom Vy. Tá hra sa volá Život. Potom náhodou natrafíte na manuál – a zrazu Vám to všetko začne do seba postupne zapadať."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">01</div>
                     </div>
@@ -1757,8 +1787,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Mám pocit, akoby som neprečítala jednu, ale desať kníh. Niektoré myšlienky vo mne zarezonovali veľmi silno. Nie je to čítanie na jeden dych, skôr kniha, ktorá si vyžaduje čas a premýšľanie."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card2_desc">„Mám pocit, akoby som neprečítala jednu, ale desať kníh. Niektoré myšlienky vo mne zarezonovali veľmi silno. Nie je to čítanie na jeden dych, skôr kniha, ktorá si vyžaduje čas a premýšľanie."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">02</div>
                     </div>
@@ -1768,8 +1798,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Skvelo napísaná kniha, ktorá prepája vedu a sebapoznanie bez zbytočných slniečkárskych omáčok. Autor ide do hĺbky, ale stále zrozumiteľne."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card3_desc">„Skvelo napísaná kniha, ktorá prepája vedu a sebapoznanie bez zbytočných slniečkárskych omáčok. Autor ide do hĺbky, ale stále zrozumiteľne."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">03</div>
                     </div>
@@ -1779,8 +1809,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Hlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card4_desc">„Hlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">04</div>
                     </div>
@@ -1790,8 +1820,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Autor rozložil emócie na malé súčiastky a podrobne vysvetlil mechanizmy za každodenným správaním. Začala som sa úplne inak pozerať na seba aj ľudí z mojho blízkeho okolia."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card5_desc">„Autor rozložil emócie na malé súčiastky a podrobne vysvetlil mechanizmy za každodenným správaním. Začala som sa úplne inak pozerať na seba aj ľudí z mojho blízkeho okolia."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">05</div>
                     </div>
@@ -1801,8 +1831,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Túto knihu úprimne odporúčam každému, kto hľadá hlbšie pochopenie seba samého. Kniha nie je ľahká na čítanie, ale práve vďaka tomu má silu posunúť človeka ďalej."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card6_desc">„Túto knihu úprimne odporúčam každému, kto hľadá hlbšie pochopenie seba samého. Kniha nie je ľahká na čítanie, ale práve vďaka tomu má silu posunúť človeka ďalej."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">06</div>
                     </div>
@@ -1812,8 +1842,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Kniha, ktorá by mala byť povinnou literatúrou pre každého, kto chce žiť vedomejšie. Každá strana prináša nový pohľad."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card7_desc">„Kniha, ktorá by mala byť povinnou literatúrou pre každého, kto chce žiť vedomejšie. Každá strana prináša nový pohľad."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">07</div>
                     </div>
@@ -1823,8 +1853,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Po prečítaní tejto knihy sa mi úplne zmenil pohľad na vlastné emócie. Konečne chápem, prečo reagujeme tak, ako reagujeme."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card8_desc">„Po prečítaní tejto knihy sa mi úplne zmenil pohľad na vlastné emócie. Konečne chápem, prečo reagujeme tak, ako reagujeme."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">08</div>
                     </div>
@@ -1834,8 +1864,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Nie je to ľahké čítanie, ale práve to je jej sila. Každý koncept vo mne zanechal hlboký dojem a núti ma premýšľať."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card9_desc">„Nie je to ľahké čítanie, ale práve to je jej sila. Každý koncept vo mne zanechal hlboký dojem a núti ma premýšľať."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">09</div>
                     </div>
@@ -1845,8 +1875,8 @@
                             <div class="card-subtitle">Martinus.sk<br>★★★★★</div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card-desc">„Kúpila som ju na odporúčanie priateľky a od tej doby ju dávam ďalej. Každý, kto ju prečítal, mi ďakoval."</div>
-                            <a class="card-btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
+                            <div class="card-desc" data-i18n="card10_desc">„Kúpila som ju na odporúčanie priateľky a od tej doby ju dávam ďalej. Každý, kto ju prečítal, mi ďakoval."</div>
+                            <a class="card-btn" data-i18n="card_btn">Viac info <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg></a>
                         </div>
                         <div class="card-number">10</div>
                     </div>
@@ -1859,7 +1889,7 @@
             <div class="hero-arrow" id="heroNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
         <button class="hero-show-more" id="heroShowMore" onclick="toggleHeroCards()">
-            <span>Zobraziť viac</span>
+            <span data-i18n="hero_show_more">Zobraziť viac</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
     </div>
@@ -1868,8 +1898,8 @@
 <!-- CONTENT / OBSAH -->
 <section class="content-section fade-in" id="obsah">
     <div class="container">
-        <p class="content-eyebrow">/Obsah</p>
-        <p class="content-text scroll-reveal-text">
+        <p class="content-eyebrow" data-i18n="content_eyebrow">/Obsah</p>
+        <p class="content-text scroll-reveal-text" data-i18n="content_text">
             Táto kniha nie je povrchnou motivačnou publikáciou, ale výsledkom dôkladného skúmania vedomia – jeho mechanizmov a dosahu na život jednotlivca i spoločnosti. Opiera sa o najnovšie poznatky v oblasti neurovedy, evolučnej biológie, psychológie a systémovej teórie.
         </p>
     </div>
@@ -1885,27 +1915,27 @@
                         <div class="video-avatar">MK</div>
                         <span class="video-name">Martina K.</span>
                     </div>
-                    <span class="video-quote">„Táto kniha mi otvorila oči"</span>
+                    <span class="video-quote" data-i18n="video_quote">„Táto kniha mi otvorila oči"</span>
                 </div>
             </div>
             <div class="rv-review">
-                <span class="review-eyebrow">/Recenzia</span>
+                <span class="review-eyebrow" data-i18n="rv_review_eyebrow">/Recenzia</span>
                 <span class="review-source">Martinus.sk</span>
                 <h3 class="review-name">Andrea Šimková</h3>
-                <p class="review-text">„Konečne kniha, ktorá nie je plná prázdnych fráz. Každá strana je plná hlbokých myšlienok a praktických nástrojov. Už som ju darovala trom ľuďom."</p>
+                <p class="review-text" data-i18n="rv_review_text">„Konečne kniha, ktorá nie je plná prázdnych fráz. Každá strana je plná hlbokých myšlienok a praktických nástrojov. Už som ju darovala trom ľuďom."</p>
                 <div class="review-avatar">AŠ</div>
             </div>
             <div class="rv-audio">
                 <div class="audio-meta">
                     <div class="audio-meta-titles">
                         <div class="audio-title-ja">JA</div>
-                        <div class="audio-subtitle">Evolúcia vedomia</div>
+                        <div class="audio-subtitle" data-i18n="audio_subtitle">Evolúcia vedomia</div>
                     </div>
                 </div>
                 <div class="audio-track-info">
-                    <div class="audio-chapter">Tretia kapitola – Túžby</div>
+                    <div class="audio-chapter" data-i18n="audio_chapter">Tretia kapitola – Túžby</div>
                     <div class="audio-author">Lukáš Horák</div>
-                    <span class="audio-badge">Ukážka</span>
+                    <span class="audio-badge" data-i18n="audio_badge">Ukážka</span>
                 </div>
                 <div class="audio-progress-wrap">
                     <div class="audio-progress-bar" id="audioProgressBar">
@@ -1951,25 +1981,25 @@
     <div class="container">
         <div class="stats-card">
             <div class="stat-row">
-                <p class="stat-text">Táto kniha prináša unikátne informácie a prelomový pohľad na evolúciu vedomia – a to od najnižších emocionálnych stavov cez sociálne a hierarchické emócie až po najvyššie stavy vedomia, ktoré sú historicky označované ako „osvietenie" alebo „prebudenie".</p>
+                <p class="stat-text" data-i18n="stat_text_1">Táto kniha prináša unikátne informácie a prelomový pohľad na evolúciu vedomia – a to od najnižších emocionálnych stavov cez sociálne a hierarchické emócie až po najvyššie stavy vedomia, ktoré sú historicky označované ako „osvietenie" alebo „prebudenie".</p>
                 <div class="stat-value">
                     <span class="stat-number">30+</span>
-                    <span class="stat-label">Kapitol</span>
+                    <span class="stat-label" data-i18n="stat_label_1">Kapitol</span>
                 </div>
             </div>
             <div class="stat-row">
-                <p class="stat-text">Neuroveda, evolučná biológia, psychológia, systémová teória, transpersonálna psychológia a výskum vedomia – v jednom celku.</p>
+                <p class="stat-text" data-i18n="stat_text_2">Neuroveda, evolučná biológia, psychológia, systémová teória, transpersonálna psychológia a výskum vedomia – v jednom celku.</p>
                 <div class="stat-value">
                     <span class="stat-number">336</span>
-                    <span class="stat-label">Strán obsahu</span>
+                    <span class="stat-label" data-i18n="stat_label_2">Strán obsahu</span>
                 </div>
             </div>
 
             <div class="stat-row">
-                <p class="stat-text">Výsledok piatich rokov intenzívneho štúdia psychologických mechanizmov, neurovedy a rozsiahleho výskumu ľudského vedomia naprieč vedeckými disciplínami.</p>
+                <p class="stat-text" data-i18n="stat_text_3">Výsledok piatich rokov intenzívneho štúdia psychologických mechanizmov, neurovedy a rozsiahleho výskumu ľudského vedomia naprieč vedeckými disciplínami.</p>
                 <div class="stat-value">
                     <span class="stat-number">5</span>
-                    <span class="stat-label">Rokov výskumu</span>
+                    <span class="stat-label" data-i18n="stat_label_3">Rokov výskumu</span>
                 </div>
             </div>
         </div>
@@ -1981,40 +2011,40 @@
     <div class="container">
         <div class="learn-card">
             <div class="learn-content">
-                <p class="learn-eyebrow">/Čo sa dozviete</p>
-                <h2 class="learn-title">Otázky, na ktoré kniha odpovedá</h2>
+                <p class="learn-eyebrow" data-i18n="learn_eyebrow">/Čo sa dozviete</p>
+                <h2 class="learn-title" data-i18n="learn_title">Otázky, na ktoré kniha odpovedá</h2>
                 <ul class="learn-list">
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Aký základný biologický mechanizmus skryto riadi naše životy?
+                        <span data-i18n="learn_q1">Aký základný biologický mechanizmus skryto riadi naše životy?</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Prečo túžime po sláve, uznaní a materiálnom úspechu?
+                        <span data-i18n="learn_q2">Prečo túžime po sláve, uznaní a materiálnom úspechu?</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Čo stojí za žiarlivosťou, závisťou a neustálym súperením?
+                        <span data-i18n="learn_q3">Čo stojí za žiarlivosťou, závisťou a neustálym súperením?</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?
+                        <span data-i18n="learn_q4">Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?
+                        <span data-i18n="learn_q5">Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?
+                        <span data-i18n="learn_q6">Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?
+                        <span data-i18n="learn_q7">Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        Ako pokročiť v evolučnom vývoji a dosiahnuť „prebudenie" alebo „osvietenie"?
+                        <span data-i18n="learn_q8">Ako pokročiť v evolučnom vývoji a dosiahnuť „prebudenie" alebo „osvietenie"?</span>
                     </li>
                 </ul>
             </div>
@@ -2033,10 +2063,10 @@
         <div class="author-grid">
             <div class="author-left">
                 <div>
-                    <p class="author-eyebrow">/O autorovi</p>
+                    <p class="author-eyebrow" data-i18n="author_eyebrow">/O autorovi</p>
 
-                    <p class="author-bio">Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()">Čítaj ďalej…</button></p>
-                    <div class="author-bio author-bio-hidden" id="authorBioExtra">
+                    <p class="author-bio" data-i18n-html="author_bio">Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Čítaj ďalej…</button></p>
+                    <div class="author-bio author-bio-hidden" id="authorBioExtra" data-i18n-html="author_bio_extra">
                         <p>Zásadná zmena prišla, keď sa Lukáš vydal na cestu zvyšovania úrovne vedomia, čo vyvrcholilo absolútnou transformáciou jeho života. Tento proces by sa dal pokojne nazvať znovuzrodením.</p>
                         <p style="margin-top: 12px;">Vo veku 36 rokov napokon došlo k náhlemu, šokujúcemu a ťažko opísateľnému prechodu z bežného stavu vedomia do vysokého stavu vedomia, ktorý so sebou priniesol dovtedy nepredstaviteľnú vnútornú spokojnosť, šťastie, pokoj, mier a pocit jednoty so všetkým, čo existuje.</p>
                         <p style="margin-top: 12px;">Osobnosť, ako ju poznal, sa rozplynula. Myseľ stíchla a prišiel natoľko výnimočný a nezabudnuteľný stav, že by ho nevymenil za nič na svete. Tento stav vedomia sa stal trvalým a stabilným, absolútne nezávislým od vonkajších okolností.</p>
@@ -2046,18 +2076,18 @@
                     <div class="author-stats">
                         <div class="author-stat">
                             <div class="author-stat-number">336</div>
-                            <div class="author-stat-label">Strán</div>
+                            <div class="author-stat-label" data-i18n="author_stat_1">Strán</div>
                         </div>
                         <div class="author-stat">
                             <div class="author-stat-number">6</div>
-                            <div class="author-stat-label">Rokov písania</div>
+                            <div class="author-stat-label" data-i18n="author_stat_2">Rokov písania</div>
                         </div>
                         <div class="author-stat">
                             <div class="author-stat-number">2.</div>
-                            <div class="author-stat-label">Rozšírené vydanie</div>
+                            <div class="author-stat-label" data-i18n="author_stat_3">Rozšírené vydanie</div>
                         </div>
                     </div>
-                    <a href="#objednat" class="btn-primary">
+                    <a href="#objednat" data-i18n="author_order_btn" class="btn-primary">
                         Objednať knihu
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 12L12 4M12 4H5M12 4v7"/>
@@ -2068,7 +2098,7 @@
             <div class="author-right" style="background-image: url('https://www.evolvium.com/images/author.jpg');">
                 <div class="author-caption">
                     <div class="author-caption-name">Lukáš Horák</div>
-                    <div class="author-caption-quote">„Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný stav, že by ho človek nevymenil za nič na svete."</div>
+                    <div class="author-caption-quote" data-i18n="author_caption_quote">„Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný stav, že by ho človek nevymenil za nič na svete."</div>
                 </div>
             </div>
         </div>
@@ -2079,19 +2109,19 @@
 <section class="book-reader-section fade-in">
     <div class="container">
         <div class="book-reader-header">
-            <p class="book-reader-eyebrow">/Ukážky z knihy</p>
-            <h2 class="book-reader-title">Nahliadnite do knihy <span class="muted">a začnite čítať</span></h2>
+            <p class="book-reader-eyebrow" data-i18n="reader_eyebrow">/Ukážky z knihy</p>
+            <h2 class="book-reader-title" data-i18n-html="reader_title">Nahliadnite do knihy <span class="muted">a začnite čítať</span></h2>
         </div>
         <div class="book-reader" id="bookReader">
             <div class="book-preview">
-                <div class="book-preview-chapter">Predslov autora</div>
-                <div class="book-preview-text">
+                <div class="book-preview-chapter" data-i18n="reader_preview_chapter">Predslov autora</div>
+                <div class="book-preview-text" data-i18n-html="reader_preview_text">
                     <p>Mnohí z nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s negatívnymi emocionálnymi stavmi a vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a mier. Primitívne mechanizmy ľudskej mysle vyvolávajú nízke emocionálne stavy, ktoré bránia miliónom ľudí v živote, po ktorom túžia, a vťahujú ich do patologických vzorcov myslenia a deštruktívnych cyklov správania.</p>
                     <p>Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný, slovami neopísateľný a nezabudnuteľný stav, že by ho človek nevymenil za nič na svete. Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s ničím menším.</p>
                 </div>
             </div>
             <div class="book-expand-bar" id="openFullReader" role="button" tabindex="0">
-                <span>Čítať ďalej – Fullscreen</span>
+                <span data-i18n="reader_expand">Čítať ďalej – Fullscreen</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
             </div>
         </div>
@@ -2101,7 +2131,7 @@
 <!-- FULLSCREEN READER OVERLAY -->
 <div class="fs-reader-overlay" id="fsReaderOverlay">
     <div class="fs-reader-topbar">
-        <div class="fs-reader-booktitle">JA – Evolúcia vedomia</div>
+        <div class="fs-reader-booktitle" data-i18n="fs_booktitle">JA – Evolúcia vedomia</div>
         <div class="fs-reader-actions">
             <button class="fs-reader-settings-btn" id="openReaderSettings" aria-label="Nastavenia">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -2115,9 +2145,9 @@
 
         <!-- Predslov autora -->
         <div class="fs-chapter">
-            <div class="fs-chapter-label">Strana 9</div>
-            <div class="fs-chapter-heading">Predslov autora</div>
-            <div class="fs-chapter-text">
+            <div class="fs-chapter-label" data-i18n="fs_page_9">Strana 9</div>
+            <div class="fs-chapter-heading" data-i18n="fs_heading_1">Predslov autora</div>
+            <div class="fs-chapter-text" data-i18n-html="fs_text_1">
                 <p>Mnohí z nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s negatívnymi emocionálnymi stavmi a vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a mier. Primitívne mechanizmy ľudskej mysle vyvolávajú nízke emocionálne stavy, ktoré bránia miliónom ľudí v živote, po ktorom túžia, a vťahujú ich do patologických vzorcov myslenia a deštruktívnych cyklov správania. Tak niektorí ostávame roky, desaťročia či dokonca celý život zaseknutí v stavoch vedomia, kde sa pozitívne a negatívne emócie neustále striedajú ako na horskej dráhe a myseľ bez prestávky generuje jednu myšlienku za druhou.</p>
                 <p>Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný, slovami neopísateľný a nezabudnuteľný stav, že by ho človek nevymenil za nič na svete. Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s ničím menším.</p>
             </div>
@@ -2127,9 +2157,9 @@
 
         <!-- Upozornenie pre čitateľa -->
         <div class="fs-chapter">
-            <div class="fs-chapter-label">Strana 14</div>
-            <div class="fs-chapter-heading">Upozornenie pre čitateľa</div>
-            <div class="fs-chapter-text">
+            <div class="fs-chapter-label" data-i18n="fs_page_14">Strana 14</div>
+            <div class="fs-chapter-heading" data-i18n="fs_heading_2">Upozornenie pre čitateľa</div>
+            <div class="fs-chapter-text" data-i18n-html="fs_text_2">
                 <p>Na úvod by som čitateľov rád upozornil, že obsah tejto knihy môže byť výzvou pre osoby s povrchným a materialistickým pohľadom na život, ktorý podporujú a upevňujú masové médiá, sociálne siete alebo filmový a reklamný priemysel. Ako som mohol mnohokrát pozorovať, proces prijatia radikálnej pravdy zvykne byť pre niektorých ľudí veľmi náročný a vyžaduje veľkú odvahu. Pre tých, ktorí sú spokojní so svojím súčasným chápaním sveta a necítia potrebu hľadať hlbšie odpovede, táto kniha nemusí byť tou správnou voľbou. Svetlo nemôže vojsť do uzavretej nádoby.</p>
                 <p>Rovnako by som rád upozornil, že témy, ktoré sa v tejto knihe rozoberajú, môžu byť niektorými ľuďmi hodnotené ako provokatívne a vyvolať u nich silný nesúhlas. Ide najmä o osoby s hlbokým zázemím v tradičných a rigidých náboženských alebo duchovných systémoch. Tieto systémy sa často spoliehajú na pevné pravidlá a dogmy, ktoré definujú, čo je „správne“ a čo „nesprávne“, čo je „zlé“ a čo „dobré“.</p>
                 <p>Obsah knihy, ktorú máte pred sebou, podnecuje čitateľov k prehodnoteniu pevne stanovených názorov, presvedčení, postojov a zaujatých stanovísk, čo u nich môže vyvolať silné emocionálne reakcie – odpor, strach, znechutenie, pohŕdanie alebo dokonca hnev –, obzvlášť v prípade, že tieto systémy považujú za neotrasiteľný základ svojho života. Týmto ľuďom by som preto odporučil siahnuť po titule, ktorý viac rezonuje s ich aktuálnou úrovňou vedomia.</p>
@@ -2141,9 +2171,9 @@
 
         <!-- Predtým ako začneme -->
         <div class="fs-chapter">
-            <div class="fs-chapter-label">Strana 15</div>
-            <div class="fs-chapter-heading">Predtým ako začneme...</div>
-            <div class="fs-chapter-text">
+            <div class="fs-chapter-label" data-i18n="fs_page_15">Strana 15</div>
+            <div class="fs-chapter-heading" data-i18n="fs_heading_3">Predtým ako začneme...</div>
+            <div class="fs-chapter-text" data-i18n-html="fs_text_3">
                 <p>Zamýšľanie sa nad otázkami našej existencie od pôvodu vesmíru cez význam biologických mechanizmov až po evolúciu vedomia môže byť na prvý pohľad považované za doménu filozofov a vedcov. Ak však neporozumieme fundamentálnym pravidlám, ktoré sa schovávajú za dynamikou celého vesmíru – počnúc jednoduchými molekulami, komplexnými biologickými organizmami a končiac obrovskými galaxiami –, zbavujeme sa možnosti hlbšie porozumieť realite, v ktorej žijeme.</p>
                 <p>Tieto „veľké otázky“ nie sú len abstraktným intelektuálnym cvičením, ale majú potenciál zásadne zmeniť naše vnímanie a ovplyvniť naše každodenné životy do takej miery, že si to ani nedokážeme predstaviť.</p>
             </div>
@@ -2153,9 +2183,9 @@
 
         <!-- Stavy vedomia -->
         <div class="fs-chapter">
-            <div class="fs-chapter-label">Strana 18</div>
-            <div class="fs-chapter-heading">Stavy vedomia</div>
-            <div class="fs-chapter-quote">Vyššie vedomie nie je pripútané k dočasným a povrchným veciam. Svoju pozornosť smeruje k hlbším, nadčasovým a univerzálnym hodnotám.</div>
+            <div class="fs-chapter-label" data-i18n="fs_page_18">Strana 18</div>
+            <div class="fs-chapter-heading" data-i18n="fs_heading_4">Stavy vedomia</div>
+            <div class="fs-chapter-quote" data-i18n="fs_quote_4">Vyššie vedomie nie je pripútané k dočasným a povrchným veciam. Svoju pozornosť smeruje k hlbším, nadčasovým a univerzálnym hodnotám.</div>
             <div class="fs-chapter-text">
                 <p>Vysoký stav vedomia je pre väčšinu ľudí relatívne neznámy pojem. Keďže úroveň vedomia človeka nijako nesúvisí s externými faktormi, ako sú akademické tituly, profesionálne úspechy, sociálny status, materiálne bohatstvo alebo životné skúsenosti, téma ľudského vedomia zostáva pre veľkú časť populácie nezaujímavá a úplne mimo povedomia. Pri čítaní opisu vysokých stavov vedomia nemá väčšina ľudí najmenšiu predstavu, o čom vlastne čítajú. V skutočnosti je rozvoj vedomia najväčším darom, aký môže jednotlivec sám sebe a ľudstvu ako celku ponúknuť.</p>
                 <p>Táto kniha prináša unikátne informácie a prelomový pohľad na evolúciu vedomia – a to od najnižších emocionálnych stavov cez sociálne a hierarchické emócie až po najvyššie stavy vedomia, ktoré sú historicky označované ako „osvietenie“ alebo „prebudenie“. Už len dozvedieť sa pravdivé informácie o týchto vysokých stavoch môže mať obrovský vplyv na náš život. Otvárajú sa nám tým dvere k novému spôsobu vnímania a naše chápanie reality sa rozširuje. To, čo bolo predtým neviditeľné, sa zrazu stáva potenciálnou možnosťou.</p>
@@ -2179,15 +2209,15 @@
                 <p>Skutočná transformácia vedomia pramení z pochopenia hlbokých súvislostí medzi vlastnými myšlienkami, názormi, presvedčeniami, emóciami a spôsobom, akým vnímame a ako reagujeme na svet okolo nás. Preto potrebujeme najprv porozumieť prekážkam, ktoré nám v dosiahnutí vysokého stavu vedomia bránia. Práve tie tvoria značnú časť obsahu tejto knihy. Už len tým, že sa o daných prekážkach dozvieme, prirodzene zvyšujeme úroveň svojho vedomia.</p>
                 <p>Kto kráča cestou rozvoja vedomia, skôr či neskôr pochopí, že nejde o to „vznášať sa nad svetom“, ale vidieť ho taký, aký skutočne je. A práve v tom spočíva zásadný rozdiel medzi nízkym a vysokým stavom vedomia.</p>
                 <p>Nízky stav vedomia by sa dal prirovnať k mentálnej krátkozrakosti, pri ktorej je náš pohľad na okolitý svet celkom rozmazaný. Všetko okolo nás je zahmlené a neostré. Nevidíme zreteľne ani svoj odraz v zrkadle. V takomto stave nám nezostáva nič iné, len si domýšľať, čo sa s nami aj okolo nás naozaj deje. Často to vedie k nesprávnym záverom a chybám v úsudku. Nevidíme svet taký, aký skutočne je, ale len nejasný odraz našich vlastných obmedzených predstáv a našej predpojatosti. Táto mentálna krátkozrakosť nás oddeľuje od skutočnej reality, od autentického vnímania života a od hlbšieho pochopenia seba samých.</p>
-                <p>Naopak, vysoký stav vedomia nám umožňuje vidieť svet zreteľne a jasne. Vidíme svet taký, aký je. Namiesto povrchného sústredenia sa na obsah nás zaujímajú súvislosti a širší kontext, čo nás vedie k hlbšiemu porozumeniu všetkým našim skúsenostiam. V tomto stave sa vytráca dualistické posudzovanie a zjednodušovanie reality prostredníctvom lineárnych vzťahov, takže namiesto toho, aby...</p>
+                <p>Naopak, vysoký stav vedomia nám umožňuje vidieť svet zreteľne a jasne. Vidíme svet taký, aký je. Namiesto povrchného sústredenia sa na obsah nás zaujímajú súvislosti a širší kontext, čo nás vedie k hlbšiemu porozumeniu všetkým našim skúsenostiam. V tomto stave sa vytráca dualistické posudzovanie a zjednodušovanie reality prostredníctvom lineárnych vzťahov, takže namiesto toho, aby...</p>
             </div>
         </div>
 
         <!-- CTA -->
         <div class="fs-divider"></div>
         <div class="fs-cta">
-            <p>Pokračovanie nájdete v knihe...</p>
-            <a href="#objednat" class="btn-primary" onclick="document.getElementById('fsReaderOverlay').classList.remove('open');document.body.style.overflow='';">
+            <p data-i18n="fs_cta_text">Pokračovanie nájdete v knihe...</p>
+            <a href="#objednat" class="btn-primary" data-i18n="fs_order_btn" onclick="document.getElementById('fsReaderOverlay').classList.remove('open');document.body.style.overflow='';">
                 Objednať knihu
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
             </a>
@@ -2200,7 +2230,7 @@
 <div class="fs-settings-backdrop" id="settingsBackdrop"></div>
 <div class="fs-settings-panel" id="settingsPanel">
     <div class="fs-settings-handle"></div>
-    <div class="fs-settings-title">Nastavenia</div>
+    <div class="fs-settings-title" data-i18n="fs_settings_title">Nastavenia</div>
     <div class="fs-settings-row">
         <div class="fs-font-size-row">
             <span class="fs-font-label fs-font-label-sm">Aa</span>
@@ -2221,12 +2251,12 @@
 <!-- RECENZIE -->
 <section class="reviews-section fade-in" id="recenzie">
     <div class="container">
-        <p class="reviews-eyebrow">/Ohlasy</p>
-        <h2 class="reviews-title">Čo hovoria čitatelia <span class="muted">o knihe, ktorá mení pohľad na seba samého</span></h2>
+        <p class="reviews-eyebrow" data-i18n="reviews_eyebrow">/Ohlasy</p>
+        <h2 class="reviews-title" data-i18n-html="reviews_title">Čo hovoria čitatelia <span class="muted">o knihe, ktorá mení pohľad na seba samého</span></h2>
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Po kapitole o primitívnych mechanizmoch som konečne pochopil, prečo roky opakujem tie isté deštruktívne vzorce. Prvýkrát mám pocit, že viem, čo s tým."</p>
+                <p class="review-quote" data-i18n="rev1_quote">„Po kapitole o primitívnych mechanizmoch som konečne pochopil, prečo roky opakujem tie isté deštruktívne vzorce. Prvýkrát mám pocit, že viem, čo s tým."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #5B8DEF;">MH</div>
                     <span class="r-name">Martin H. · Instagram</span>
@@ -2234,7 +2264,7 @@
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Nie je to motivačná kniha. Je to manuál k vlastnému vedomiu. Vysvetľuje, prečo cítime to, čo cítime – a ako sa z toho posunúť vyššie. Čítal som ju trikrát."</p>
+                <p class="review-quote" data-i18n="rev2_quote">„Nie je to motivačná kniha. Je to manuál k vlastnému vedomiu. Vysvetľuje, prečo cítime to, čo cítime – a ako sa z toho posunúť vyššie. Čítal som ju trikrát."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #E65C50;">ZK</div>
                     <span class="r-name">Zuzana K. · Facebook</span>
@@ -2242,7 +2272,7 @@
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Spektrum vedomia mi dalo úplne nový rámec na pochopenie seba. Konečne rozumiem, prečo žiarlivosť, hnev a strach nie sú chyby – ale evolučné mechanizmy."</p>
+                <p class="review-quote" data-i18n="rev3_quote">„Spektrum vedomia mi dalo úplne nový rámec na pochopenie seba. Konečne rozumiem, prečo žiarlivosť, hnev a strach nie sú chyby – ale evolučné mechanizmy."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #8B5CF6;">PŠ</div>
                     <span class="r-name">Peter Š. · LinkedIn</span>
@@ -2250,7 +2280,7 @@
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Kapitola o emocionálnom atraktore bola pre mňa zlomová. Uvedomila som si, v akom stave vedomia som roky žila a že existuje cesta von."</p>
+                <p class="review-quote" data-i18n="rev4_quote">„Kapitola o emocionálnom atraktore bola pre mňa zlomová. Uvedomila som si, v akom stave vedomia som roky žila a že existuje cesta von."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #F59E0B;">NB</div>
                     <span class="r-name">Nina B. · Instagram</span>
@@ -2258,7 +2288,7 @@
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Kúpila som ju na odporúčanie a po prvých 50 stranách som vedela, že toto je kniha, ku ktorej sa budem vracať. Prepája neurovedy s hlbokým sebapoznaním."</p>
+                <p class="review-quote" data-i18n="rev5_quote">„Kúpila som ju na odporúčanie a po prvých 50 stranách som vedela, že toto je kniha, ku ktorej sa budem vracať. Prepája neurovedy s hlbokým sebapoznaním."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #10B981;">KV</div>
                     <span class="r-name">Katarína V. · Facebook</span>
@@ -2266,7 +2296,7 @@
             </div>
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-quote">„Autor rozložil to, čo väčšina kníh o vedomí mystifikuje, na zrozumiteľné princípy podložené vedou. Konečne kniha, pri ktorej nemusíte vypnúť kritické myslenie."</p>
+                <p class="review-quote" data-i18n="rev6_quote">„Autor rozložil to, čo väčšina kníh o vedomí mystifikuje, na zrozumiteľné princípy podložené vedou. Konečne kniha, pri ktorej nemusíte vypnúť kritické myslenie."</p>
                 <div class="review-footer">
                     <div class="r-avatar" style="background: #1A1A1A;">RM</div>
                     <span class="r-name">Richard M. · X</span>
@@ -2282,39 +2312,39 @@
         <div class="order-grid">
             <div class="order-dark">
                 <div>
-                    <p class="order-eyebrow">/Objednávka</p>
-                    <h2 class="order-title">Začnite svoju cestu k hlbšiemu poznaniu seba samého</h2>
+                    <p class="order-eyebrow" data-i18n="order_eyebrow">/Objednávka</p>
+                    <h2 class="order-title" data-i18n="order_title">Začnite svoju cestu k hlbšiemu poznaniu seba samého</h2>
                 </div>
                 <div>
                     <div class="order-meta">
                         <div class="order-meta-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            30-dní garancia
+                            <span data-i18n="order_guarantee">30-dní garancia</span>
                         </div>
                     </div>
                     <div class="order-meta" style="margin-top: 8px;">
                         <div class="order-meta-item">
                             ISBN 978-80-975013-4-1
                         </div>
-                        <div class="order-meta-item">
+                        <div class="order-meta-item" data-i18n="order_edition">
                             Druhé rozšírené vydanie
                         </div>
                     </div>
                 </div>
             </div>
             <div class="order-light">
-                <p class="ol-eyebrow">/Tlačená kniha</p>
-                <h3 class="ol-title">JA – Evolúcia vedomia</h3>
-                <p class="ol-subtitle">Lukáš Horák · 336 strán · Tvrdá väzba</p>
-                <div class="ol-price">€33</div>
+                <p class="ol-eyebrow" data-i18n="ol_eyebrow">/Tlačená kniha</p>
+                <h3 class="ol-title" data-i18n="ol_title">JA – Evolúcia vedomia</h3>
+                <p class="ol-subtitle" data-i18n="ol_subtitle">Lukáš Horák · 336 strán · Tvrdá väzba</p>
+                <div class="ol-price" data-i18n="ol_price">€33</div>
                 <ul class="ol-features">
-                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 336 strán kvalitného obsahu</li>
-                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 30+ kapitol v 4 hlavných častiach</li>
-                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Tvrdá väzba, prémiová kvalita</li>
-                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Osobný podpis autora</li>
-                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Bonus: audio meditácie (MP3)</li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="ol_feat_1">336 strán kvalitného obsahu</span></li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="ol_feat_2">30+ kapitol v 4 hlavných častiach</span></li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="ol_feat_3">Tvrdá väzba, prémiová kvalita</span></li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="ol_feat_4">Osobný podpis autora</span></li>
+                    <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="ol_feat_5">Bonus: audio meditácie (MP3)</span></li>
                 </ul>
-                <a href="checkout.html" class="ol-btn">
+                <a href="checkout.html" class="ol-btn" data-i18n="ol_btn">
                     Objednať teraz
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 12L12 4M12 4H5M12 4v7"/>
@@ -2330,49 +2360,49 @@
     <div class="container">
         <div class="faq-card">
             <p class="faq-eyebrow">/FAQ</p>
-            <h2 class="faq-title">Časté otázky</h2>
+            <h2 class="faq-title" data-i18n="faq_title">Časté otázky</h2>
             <div class="faq-list">
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                        <span>Pre koho je táto kniha určená?</span>
+                        <span data-i18n="faq_q1">Pre koho je táto kniha určená?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Pre každého, kto chce pochopiť mechanizmy vlastného vedomia – prečo cítime hnev, závisť či strach a ako tieto inštinktívne vzorce prekonať. Kniha nie je povrchnou motivačnou publikáciou, ale vedecky podloženým sprievodcom od primitívnych inštinktov po najvyššie stavy vedomia. Nie je potrebná žiadna predchádzajúca skúsenosť.</p></div>
+                    <div class="faq-answer" data-i18n-html="faq_a1"><p>Pre každého, kto chce pochopiť mechanizmy vlastného vedomia – prečo cítime hnev, závisť či strach a ako tieto inštinktívne vzorce prekonať. Kniha nie je povrchnou motivačnou publikáciou, ale vedecky podloženým sprievodcom od primitívnych inštinktov po najvyššie stavy vedomia. Nie je potrebná žiadna predchádzajúca skúsenosť.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                        <span>Ako dlho trvá doručenie?</span>
+                        <span data-i18n="faq_q2">Ako dlho trvá doručenie?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Doručenie na Slovensku trvá zvyčajne 2-4 pracovné dni, do Česka 3-5 pracovných dní. Poštovné je €3,90 alebo zadarmo pri objednávke nad €50.</p></div>
+                    <div class="faq-answer" data-i18n-html="faq_a2"><p>Doručenie na Slovensku trvá zvyčajne 2-4 pracovné dni, do Česka 3-5 pracovných dní. Poštovné je €3,90 alebo zadarmo pri objednávke nad €50.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                        <span>Existuje aj e-book alebo audiokniha?</span>
+                        <span data-i18n="faq_q3">Existuje aj e-book alebo audiokniha?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Kniha „Evolúcia vedomia – JA" je dostupná v tlačenej podobe s tvrdou väzbou (druhé rozšírené vydanie, 336 strán). Audiokniha je v príprave a bude dostupná čoskoro.</p></div>
+                    <div class="faq-answer" data-i18n-html="faq_a3"><p>Kniha „Evolúcia vedomia – JA" je dostupná v tlačenej podobe s tvrdou väzbou (druhé rozšírené vydanie, 336 strán). Audiokniha je v príprave a bude dostupná čoskoro.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                        <span>Môžem knihu vrátiť?</span>
+                        <span data-i18n="faq_q4">Môžem knihu vrátiť?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Áno, ponúkame 30-dňovú garanciu vrátenia peňazí. Ak nebudete s knihou spokojní, vrátime vám plnú sumu bez otázok.</p></div>
+                    <div class="faq-answer" data-i18n-html="faq_a4"><p>Áno, ponúkame 30-dňovú garanciu vrátenia peňazí. Ak nebudete s knihou spokojní, vrátime vám plnú sumu bez otázok.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                        <span>Je kniha vhodná ako darček?</span>
+                        <span data-i18n="faq_q5">Je kniha vhodná ako darček?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Rozhodne áno. Kniha má krásnu tvrdú väzbu a obsahuje osobný podpis autora. Je to premyslený darček pre každého, kto sa zaujíma o osobný rast.</p></div>
+                    <div class="faq-answer" data-i18n-html="faq_a5"><p>Rozhodne áno. Kniha má krásnu tvrdú väzbu a obsahuje osobný podpis autora. Je to premyslený darček pre každého, kto sa zaujíma o osobný rast.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                        <span>Aký je rozdiel oproti iným knihám o vedomí?</span>
+                        <span data-i18n="faq_q6">Aký je rozdiel oproti iným knihám o vedomí?</span>
                         <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
                     </div>
-                    <div class="faq-answer"><p>Na rozdiel od väčšiny kníh o vedomí, táto spája neuovedu, evolučnú biológiu, psychológiu a systémovú teóriu do uceleného rámca – „Spektrum vedomia" s tromi úrovňami: Primitívne ja, Rozumové ja a Vyššie ja. Obsahuje 336 strán a 30+ kapitol, ktoré systematicky mapujú cestu od inštinktov k prebudeniu.</p></div>
+                    <div class="faq-answer" data-i18n-html="faq_a6"><p>Na rozdiel od väčšiny kníh o vedomí, táto spája neuovedu, evolučnú biológiu, psychológiu a systémovú teóriu do uceleného rámca – „Spektrum vedomia" s tromi úrovňami: Primitívne ja, Rozumové ja a Vyššie ja. Obsahuje 336 strán a 30+ kapitol, ktoré systematicky mapujú cestu od inštinktov k prebudeniu.</p></div>
                 </div>
             </div>
         </div>
@@ -2384,9 +2414,9 @@
     <div class="container">
         <div class="contact-card">
             <div class="contact-left">
-                <p class="contact-eyebrow">/Kontakt</p>
-                <h2 class="contact-title">Máte otázku pre autora?</h2>
-                <p class="contact-desc">Či vás táto kniha inšpirovala, potrebujete si niečo ujasniť, alebo len máte otázku ešte predtým, ako sa do nej pustíte – neváhajte napísať. Každá otázka, ktorú si položíme, prispieva k hlbšiemu pochopeniu toho, čo znamená byť človekom v nekonečnej evolúcii vedomia.</p>
+                <p class="contact-eyebrow" data-i18n="contact_eyebrow">/Kontakt</p>
+                <h2 class="contact-title" data-i18n="contact_title">Máte otázku pre autora?</h2>
+                <p class="contact-desc" data-i18n="contact_desc">Či vás táto kniha inšpirovala, potrebujete si niečo ujasniť, alebo len máte otázku ešte predtým, ako sa do nej pustíte – neváhajte napísať. Každá otázka, ktorú si položíme, prispieva k hlbšiemu pochopeniu toho, čo znamená byť človekom v nekonečnej evolúcii vedomia.</p>
                 <a href="mailto:info@evolvium.com" class="contact-email-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
                     info@evolvium.com
@@ -2394,16 +2424,16 @@
             </div>
             <form class="contact-form" id="contactForm">
                 <div class="form-row">
-                    <input type="text" name="name" placeholder="Meno" required>
-                    <input type="email" name="email" placeholder="Váš e-mail" required>
+                    <input type="text" name="name" placeholder="Meno" data-i18n-ph="form_name" required>
+                    <input type="email" name="email" placeholder="Váš e-mail" data-i18n-ph="form_email" required>
                 </div>
-                <input type="text" name="subject" placeholder="Predmet správy">
-                <textarea name="message" placeholder="Vaša správa..." required></textarea>
-                <button type="submit" class="contact-submit">
+                <input type="text" name="subject" placeholder="Predmet správy" data-i18n-ph="form_subject">
+                <textarea name="message" placeholder="Vaša správa..." data-i18n-ph="form_message" required></textarea>
+                <button type="submit" class="contact-submit" data-i18n="contact_submit">
                     Odoslať správu
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
                 </button>
-                <div class="contact-success" id="contactSuccess">Ďakujeme za vašu správu. Lukáš vám čoskoro odpovie.</div>
+                <div class="contact-success" id="contactSuccess" data-i18n="contact_success">Ďakujeme za vašu správu. Lukáš vám čoskoro odpovie.</div>
             </form>
         </div>
     </div>
@@ -2413,11 +2443,11 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-card">
-            <div class="footer-left">JA <span>/ Evolúcia vedomia</span></div>
+            <div class="footer-left" data-i18n-html="footer_left">JA <span>/ Evolúcia vedomia</span></div>
             <div class="footer-center">
-                <a href="#">Obchodné podmienky</a>
-                <a href="#">Ochrana súkromia</a>
-                <a href="#kontakt">Kontakt</a>
+                <a href="#" data-i18n="footer_terms">Obchodné podmienky</a>
+                <a href="#" data-i18n="footer_privacy">Ochrana súkromia</a>
+                <a href="#kontakt" data-i18n="footer_contact">Kontakt</a>
             </div>
             <div class="footer-right">© 2026 Evolvium, s. r. o.</div>
         </div>
@@ -2426,7 +2456,7 @@
 
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-cta">
-    <a href="#objednat">
+    <a href="#objednat" data-i18n="sticky_cta">
         Objednať knihu
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 12L12 4M12 4H5M12 4v7"/>
@@ -2441,7 +2471,10 @@ function toggleHeroCards() {
     const btn = document.getElementById('heroShowMore');
     if (!carousel || !btn) return;
     const isExpanded = carousel.classList.toggle('show-all');
-    btn.querySelector('span').textContent = isExpanded ? 'Zobraziť menej' : 'Zobraziť viac';
+    var lang = (typeof getCurrentLang === 'function') ? getCurrentLang() : 'sk';
+    var less = (window.T && window.T[lang]) ? window.T[lang].hero_show_less : 'Zobraziť menej';
+    var more = (window.T && window.T[lang]) ? window.T[lang].hero_show_more : 'Zobraziť viac';
+    btn.querySelector('span').textContent = isExpanded ? less : more;
     btn.classList.toggle('expanded', isExpanded);
     if (!isExpanded) {
         btn.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -2453,14 +2486,15 @@ function toggleAuthorBio() {
     var btn = document.getElementById('authorReadMore');
     if (!extra || !btn) return;
     var isExpanded = extra.classList.toggle('expanded');
+    var lang = (typeof getCurrentLang === 'function') ? getCurrentLang() : 'sk';
     if (isExpanded) {
-        btn.textContent = 'Zobraziť menej';
+        btn.textContent = (window.T && window.T[lang]) ? window.T[lang].author_read_less : 'Zobraziť menej';
         // Move button after the expanded block
         extra.parentNode.insertBefore(btn, extra.nextSibling);
         btn.style.display = 'inline-block';
         btn.style.marginTop = '12px';
     } else {
-        btn.textContent = 'Čítaj ďalej…';
+        btn.textContent = (window.T && window.T[lang]) ? window.T[lang].author_read_more : 'Čítaj ďalej…';
         // Move button back inside the first paragraph
         var firstP = extra.previousElementSibling;
         firstP.appendChild(btn);
@@ -2990,17 +3024,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         <button class="exit-close" id="exitClose" aria-label="Zavrieť">
             <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
-        <p class="exit-eyebrow">/Špeciálna ponuka</p>
-        <h3 class="exit-title">Zľava –10%</h3>
-        <p class="exit-desc">Použite kód na vašu prvú objednávku</p>
+        <p class="exit-eyebrow" data-i18n="exit_eyebrow">/Špeciálna ponuka</p>
+        <h3 class="exit-title" data-i18n="exit_title">Zľava –10%</h3>
+        <p class="exit-desc" data-i18n="exit_desc">Použite kód na vašu prvú objednávku</p>
         <div class="exit-code-box">
             <span class="code">VEDOMIE10</span>
-            <button class="copy-btn" id="exitCopy">Kopírovať</button>
+            <button class="copy-btn" id="exitCopy" data-i18n="exit_copy">Kopírovať</button>
         </div>
-        <a href="checkout.html?discount=VEDOMIE10" class="exit-cta">
+        <a href="checkout.html?discount=VEDOMIE10" class="exit-cta" data-i18n="exit_cta">
             Objednať so zľavou <svg viewBox="0 0 16 16"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
         </a>
-        <button class="exit-dismiss" id="exitDismiss">Nie, ďakujem.</button>
+        <button class="exit-dismiss" id="exitDismiss" data-i18n="exit_dismiss">Nie, ďakujem.</button>
     </div>
 </div>
 
@@ -3058,10 +3092,491 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     // Copy code
     copyBtn.addEventListener('click', function() {
         navigator.clipboard.writeText('VEDOMIE10').then(function() {
-            copyBtn.textContent = 'Skopírované ✓';
-            setTimeout(function() { copyBtn.textContent = 'Kopírovať'; }, 2000);
+            var lang = (typeof getCurrentLang === 'function') ? getCurrentLang() : 'sk';
+            var done = (window.T && window.T[lang]) ? window.T[lang].exit_copy_done : 'Skopírované ✓';
+            var idle = (window.T && window.T[lang]) ? window.T[lang].exit_copy : 'Kopírovať';
+            copyBtn.textContent = done;
+            setTimeout(function() { copyBtn.textContent = idle; }, 2000);
         });
     });
+})();
+</script>
+
+
+<script>
+// ===== LANGUAGE SWITCHER =====
+(function() {
+    var T = {
+        sk: {
+            // Nav
+            nav_about: 'O knihe',
+            nav_reviews: 'Recenzie',
+            nav_author: 'Autor',
+            nav_cta: 'Objednať',
+
+            // Hero
+            hero_eyebrow: 'Cesta rozvoja vedomia a sebapoznania',
+            hero_title_1: 'Niektoré knihy zabávajú.',
+            hero_title_2: 'Iné zmenia to, ako chápeme realitu.',
+            hero_cta_order: 'Objednať knihu',
+            hero_cta_more: 'Zistiť viac',
+            hero_show_more: 'Zobraziť viac',
+            hero_show_less: 'Zobraziť menej',
+
+            // Carousel cards
+            card1_desc: '\u201EPredstavte si, že hráte hru, v ktorej ste hlavným hrdinom Vy. Tá hra sa volá Život. Potom náhodou natrafíte na manuál \u2013 a zrazu Vám to všetko začne do seba postupne zapadať.\u201C',
+            card2_desc: '\u201EMám pocit, akoby som neprečítala jednu, ale desať kníh. Niektoré myšlienky vo mne zarezonovali veľmi silno. Nie je to čítanie na jeden dych, skôr kniha, ktorá si vyžaduje čas a premýšľanie.\u201C',
+            card3_desc: '\u201ESkvelo napísaná kniha, ktorá prepája vedu a sebapoznanie bez zbytočných slniečkárskych omáčok. Autor ide do hĺbky, ale stále zrozumiteľne.\u201C',
+            card4_desc: '\u201EHlboká výprava do vnútra ľudskej psychiky. Namiesto jednoduchých motivačných fráz ponúka autor podrobné vysvetlenie evolučných a emocionálnych mechanizmov, ktoré formujú náš vnútorný svet.\u201C',
+            card5_desc: '\u201EAutor rozložil emócie na malé súčiastky a podrobne vysvetlil mechanizmy za každodenným správaním. Začala som sa úplne inak pozerať na seba aj ľudí z mojho blízkeho okolia.\u201C',
+            card6_desc: '\u201ETúto knihu úprimne odporúčam každému, kto hľadá hlbšie pochopenie seba samého. Kniha nie je ľahká na čítanie, ale práve vďaka tomu má silu posunúť človeka ďalej.\u201C',
+            card7_desc: '\u201EKniha, ktorá by mala byť povinnou literatúrou pre každého, kto chce žiť vedomejšie. Každá strana prináša nový pohľad.\u201C',
+            card8_desc: '\u201EPo prečítaní tejto knihy sa mi úplne zmenil pohľad na vlastné emócie. Konečne chápem, prečo reagujeme tak, ako reagujeme.\u201C',
+            card9_desc: '\u201ENie je to ľahké čítanie, ale práve to je jej sila. Každý koncept vo mne zanechal hlboký dojem a núti ma premýšľať.\u201C',
+            card10_desc: '\u201EKúpila som ju na odporúčanie priateľky a od tej doby ju dávam ďalej. Každý, kto ju prečítal, mi ďakoval.\u201C',
+            card_btn: 'Viac info',
+
+            // Content
+            content_eyebrow: '/Obsah',
+            content_text: 'Táto kniha nie je povrchnou motivačnou publikáciou, ale výsledkom dôkladného skúmania vedomia \u2013 jeho mechanizmov a dosahu na život jednotlivca i spoločnosti. Opiera sa o najnovšie poznatky v oblasti neurovedy, evolučnej biológie, psychológie a systémovej teórie.',
+
+            // Video
+            video_quote: '\u201ETáto kniha mi otvorila oči\u201C',
+
+            // Review/Video/Audio
+            rv_review_eyebrow: '/Recenzia',
+            rv_review_text: '\u201EKonečne kniha, ktorá nie je plná prázdnych fráz. Každá strana je plná hlbokých myšlienok a praktických nástrojov. Už som ju darovala trom ľuďom.\u201C',
+            audio_subtitle: 'Evolúcia vedomia',
+            audio_chapter: 'Tretia kapitola \u2013 Túžby',
+            audio_badge: 'Ukážka',
+
+            // Stats
+            stat_text_1: 'Táto kniha prináša unikátne informácie a prelomový pohľad na evolúciu vedomia \u2013 a to od najnižších emocionálnych stavov cez sociálne a hierarchické emócie až po najvyššie stavy vedomia, ktoré sú historicky označované ako \u201Eosvietenie\u201C alebo \u201Eprebudenie\u201C.',
+            stat_text_2: 'Neuroveda, evolučná biológia, psychológia, systémová teória, transpersonálna psychológia a výskum vedomia \u2013 v jednom celku.',
+            stat_text_3: 'Výsledok piatich rokov intenzívneho štúdia psychologických mechanizmov, neurovedy a rozsiahleho výskumu ľudského vedomia naprieč vedeckými disciplínami.',
+            stat_label_1: 'Kapitol',
+            stat_label_2: 'Strán obsahu',
+            stat_label_3: 'Rokov výskumu',
+
+            // Learn
+            learn_eyebrow: '/Čo sa dozviete',
+            learn_title: 'Otázky, na ktoré kniha odpovedá',
+            learn_q1: 'Aký základný biologický mechanizmus skryto riadi naše životy?',
+            learn_q2: 'Prečo túžime po sláve, uznaní a materiálnom úspechu?',
+            learn_q3: 'Čo stojí za žiarlivosťou, závisťou a neustálym súperením?',
+            learn_q4: 'Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?',
+            learn_q5: 'Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?',
+            learn_q6: 'Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?',
+            learn_q7: 'Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?',
+            learn_q8: 'Ako pokročiť v evolučnom vývoji a dosiahnuť \u201Eprebudenie\u201C alebo \u201Eosvietenie\u201C?',
+
+            // Author
+            author_eyebrow: '/O autorovi',
+            author_caption_quote: '\u201EExistuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný stav, že by ho človek nevymenil za nič na svete.\u201C',
+            author_stat_1: 'Strán',
+            author_stat_2: 'Rokov písania',
+            author_stat_3: 'Rozšírené vydanie',
+            author_read_more: 'Čítaj ďalej…',
+            author_read_less: 'Zobraziť menej',
+            author_order_btn: 'Objednať knihu',
+
+            // Reader
+            reader_eyebrow: '/Ukážky z knihy',
+            reader_preview_chapter: 'Predslov autora',
+            reader_expand: 'Čítať ďalej \u2013 Fullscreen',
+
+            // Fullscreen reader
+            fs_booktitle: 'JA \u2013 Evolúcia vedomia',
+            fs_settings_title: 'Nastavenia',
+            fs_page_9: 'Strana 9',
+            fs_page_14: 'Strana 14',
+            fs_page_15: 'Strana 15',
+            fs_page_18: 'Strana 18',
+            fs_heading_1: 'Predslov autora',
+            fs_heading_2: 'Upozornenie pre čitateľa',
+            fs_heading_3: 'Predtým ako začneme...',
+            fs_heading_4: 'Stavy vedomia',
+            fs_quote_4: 'Vyššie vedomie nie je pripútané k dočasným a povrchným veciam. Svoju pozornosť smeruje k hlbším, nadčasovým a univerzálnym hodnotám.',
+            fs_cta_text: 'Pokračovanie nájdete v knihe...',
+            fs_order_btn: 'Objednať knihu',
+
+            // Reviews
+            reviews_eyebrow: '/Ohlasy',
+            rev1_quote: '\u201EPo kapitole o primitívnych mechanizmoch som konečne pochopil, prečo roky opakujem tie isté deštruktívne vzorce. Prvýkrát mám pocit, že viem, čo s tým.\u201C',
+            rev2_quote: '\u201ENie je to motivačná kniha. Je to manuál k vlastnému vedomiu. Vysvetľuje, prečo cítime to, čo cítime \u2013 a ako sa z toho posunúť vyššie. Čítal som ju trikrát.\u201C',
+            rev3_quote: '\u201ESpektrum vedomia mi dalo úplne nový rámec na pochopenie seba. Konečne rozumiem, prečo žiarlivosť, hnev a strach nie sú chyby \u2013 ale evolučné mechanizmy.\u201C',
+            rev4_quote: '\u201EKapitola o emocionálnom atraktore bola pre mňa zlomová. Uvedomila som si, v akom stave vedomia som roky žila a že existuje cesta von.\u201C',
+            rev5_quote: '\u201EKúpila som ju na odporúčanie a po prvých 50 stranách som vedela, že toto je kniha, ku ktorej sa budem vracať. Prepája neurovedy s hlbokým sebapoznaním.\u201C',
+            rev6_quote: '\u201EAutor rozložil to, čo väčšina kníh o vedomí mystifikuje, na zrozumiteľné princípy podložené vedou. Konečne kniha, pri ktorej nemusíte vypnúť kritické myslenie.\u201C',
+
+            // Order
+            order_eyebrow: '/Objednávka',
+            order_title: 'Začnite svoju cestu k hlbšiemu poznaniu seba samého',
+            order_guarantee: '30-dní garancia',
+            order_edition: 'Druhé rozšírené vydanie',
+            ol_eyebrow: '/Tlačená kniha',
+            ol_title: 'JA \u2013 Evolúcia vedomia',
+            ol_subtitle: 'Lukáš Horák \u00B7 336 strán \u00B7 Tvrdá väzba',
+            ol_price: '\u20AC33',
+            ol_btn: 'Objednať teraz',
+            ol_feat_1: '336 strán kvalitného obsahu',
+            ol_feat_2: '30+ kapitol v 4 hlavných častiach',
+            ol_feat_3: 'Tvrdá väzba, prémiová kvalita',
+            ol_feat_4: 'Osobný podpis autora',
+            ol_feat_5: 'Bonus: audio meditácie (MP3)',
+
+            // FAQ
+            faq_title: 'Časté otázky',
+            faq_q1: 'Pre koho je táto kniha určená?',
+            faq_q2: 'Ako dlho trvá doručenie?',
+            faq_q3: 'Existuje aj e-book alebo audiokniha?',
+            faq_q4: 'Môžem knihu vrátiť?',
+            faq_q5: 'Je kniha vhodná ako darček?',
+            faq_q6: 'Aký je rozdiel oproti iným knihám o vedomí?',
+
+            // Contact
+            contact_eyebrow: '/Kontakt',
+            contact_title: 'Máte otázku pre autora?',
+            contact_desc: 'Či vás táto kniha inšpirovala, potrebujete si niečo ujasniť, alebo len máte otázku ešte predtým, ako sa do nej pustíte \u2013 neváhajte napísať. Každá otázka, ktorú si položíme, prispieva k hlbšiemu pochopeniu toho, čo znamená byť človekom v nekonečnej evolúcii vedomia.',
+            contact_submit: 'Odoslať správu',
+            contact_success: 'Ďakujeme za vašu správu. Lukáš vám čoskoro odpovie.',
+
+            // Footer
+            footer_terms: 'Obchodné podmienky',
+            footer_privacy: 'Ochrana súkromia',
+            footer_contact: 'Kontakt',
+
+            // Sticky CTA
+            sticky_cta: 'Objednať knihu',
+
+            // Exit popup
+            exit_eyebrow: '/Špeciálna ponuka',
+            exit_title: 'Zľava \u201310%',
+            exit_desc: 'Použite kód na vašu prvú objednávku',
+            exit_copy: 'Kopírovať',
+            exit_copy_done: 'Skopírované \u2713',
+            exit_cta: 'Objednať so zľavou',
+            exit_dismiss: 'Nie, ďakujem.',
+
+            // Form placeholders
+            form_name: 'Meno',
+            form_email: 'Váš e-mail',
+            form_subject: 'Predmet správy',
+            form_message: 'Vaša správa...'
+        },
+        en: {
+            // Nav
+            nav_about: 'About',
+            nav_reviews: 'Reviews',
+            nav_author: 'Author',
+            nav_cta: 'Order',
+
+            // Hero
+            hero_eyebrow: 'A path of consciousness development and self-discovery',
+            hero_title_1: 'Some books entertain.',
+            hero_title_2: 'Others change how we understand reality.',
+            hero_cta_order: 'Order the book',
+            hero_cta_more: 'Learn more',
+            hero_show_more: 'Show more',
+            hero_show_less: 'Show less',
+
+            // Carousel cards
+            card1_desc: '\u201CImagine playing a game where you are the main hero. That game is called Life. Then you stumble upon the manual \u2013 and suddenly everything starts falling into place.\u201D',
+            card2_desc: '\u201CI feel as if I\u2019ve read not one, but ten books. Some ideas resonated with me very strongly. It\u2019s not a quick read \u2013 rather a book that demands time and reflection.\u201D',
+            card3_desc: '\u201CBrilliantly written book that bridges science and self-knowledge without empty platitudes. The author goes deep, yet stays accessible.\u201D',
+            card4_desc: '\u201CA deep expedition into the human psyche. Instead of simple motivational phrases, the author offers a detailed explanation of the evolutionary and emotional mechanisms that shape our inner world.\u201D',
+            card5_desc: '\u201CThe author broke emotions down into small components and thoroughly explained the mechanisms behind everyday behavior. I started seeing myself and the people around me in a completely different light.\u201D',
+            card6_desc: '\u201CI wholeheartedly recommend this book to anyone seeking a deeper understanding of themselves. It\u2019s not an easy read, but that\u2019s exactly what gives it the power to move you forward.\u201D',
+            card7_desc: '\u201CA book that should be required reading for everyone who wants to live more consciously. Every page brings a new perspective.\u201D',
+            card8_desc: '\u201CAfter reading this book, my view of my own emotions completely changed. I finally understand why we react the way we do.\u201D',
+            card9_desc: '\u201CIt\u2019s not an easy read, but that\u2019s its strength. Every concept left a deep impression on me and makes me think.\u201D',
+            card10_desc: '\u201CI bought it on a friend\u2019s recommendation and since then I\u2019ve been passing it on. Everyone who read it thanked me.\u201D',
+            card_btn: 'More info',
+
+            // Content
+            content_eyebrow: '/Content',
+            content_text: 'This book is not a superficial motivational publication, but the result of a thorough examination of consciousness \u2013 its mechanisms and impact on the individual and society. It draws on the latest findings in neuroscience, evolutionary biology, psychology, and systems theory.',
+
+            // Video
+            video_quote: '\u201CThis book opened my eyes\u201D',
+
+            // Review/Video/Audio
+            rv_review_eyebrow: '/Review',
+            rv_review_text: '\u201CFinally a book that isn\u2019t full of empty phrases. Every page is packed with profound thoughts and practical tools. I\u2019ve already gifted it to three people.\u201D',
+            audio_subtitle: 'Evolution of Consciousness',
+            audio_chapter: 'Chapter Three \u2013 Desires',
+            audio_badge: 'Sample',
+
+            // Stats
+            stat_text_1: 'This book offers unique insights and a groundbreaking perspective on the evolution of consciousness \u2013 from the lowest emotional states through social and hierarchical emotions to the highest states of consciousness, historically referred to as \u201Cenlightenment\u201D or \u201Cawakening.\u201D',
+            stat_text_2: 'Neuroscience, evolutionary biology, psychology, systems theory, transpersonal psychology, and consciousness research \u2013 all in one volume.',
+            stat_text_3: 'The result of five years of intensive study of psychological mechanisms, neuroscience, and extensive research on human consciousness across scientific disciplines.',
+            stat_label_1: 'Chapters',
+            stat_label_2: 'Pages of content',
+            stat_label_3: 'Years of research',
+
+            // Learn
+            learn_eyebrow: '/What you\u2019ll learn',
+            learn_title: 'Questions the book answers',
+            learn_q1: 'What fundamental biological mechanism secretly governs our lives?',
+            learn_q2: 'Why do we crave fame, recognition, and material success?',
+            learn_q3: 'What is behind jealousy, envy, and constant rivalry?',
+            learn_q4: 'Where do our destructive habits that ruin our lives originate?',
+            learn_q5: 'How to overcome instinctive mechanisms that pull us back toward suffering?',
+            learn_q6: 'Which emotions appeared only recently in evolution and are accessible to less than 1% of the population?',
+            learn_q7: 'How to quiet one\u2019s own mind and achieve an extraordinary inner peace?',
+            learn_q8: 'How to advance in evolutionary development and achieve \u201Cawakening\u201D or \u201Cenlightenment\u201D?',
+
+            // Author
+            author_eyebrow: '/About the author',
+            author_caption_quote: '\u201CThere is a state of consciousness where negative emotions fundamentally recede into the background, the mind goes quiet, and such an extraordinary state arrives that one would not trade it for anything in the world.\u201D',
+            author_stat_1: 'Pages',
+            author_stat_2: 'Years of writing',
+            author_stat_3: 'Expanded edition',
+            author_read_more: 'Read more\u2026',
+            author_read_less: 'Show less',
+            author_order_btn: 'Order the book',
+
+            // Reader
+            reader_eyebrow: '/Excerpts from the book',
+            reader_preview_chapter: 'Author\u2019s Foreword',
+            reader_expand: 'Continue reading \u2013 Fullscreen',
+
+            // Fullscreen reader
+            fs_booktitle: 'I AM \u2013 Evolution of Consciousness',
+            fs_settings_title: 'Settings',
+            fs_page_9: 'Page 9',
+            fs_page_14: 'Page 14',
+            fs_page_15: 'Page 15',
+            fs_page_18: 'Page 18',
+            fs_heading_1: 'Author\u2019s Foreword',
+            fs_heading_2: 'A Note to the Reader',
+            fs_heading_3: 'Before we begin\u2026',
+            fs_heading_4: 'States of Consciousness',
+            fs_quote_4: 'Higher consciousness is not attached to temporary and superficial things. It directs its attention toward deeper, timeless, and universal values.',
+            fs_cta_text: 'Continue reading in the book\u2026',
+            fs_order_btn: 'Order the book',
+
+            // Reviews
+            reviews_eyebrow: '/Testimonials',
+            rev1_quote: '\u201CAfter the chapter on primitive mechanisms, I finally understood why I\u2019ve been repeating the same destructive patterns for years. For the first time, I feel like I know what to do about it.\u201D',
+            rev2_quote: '\u201CThis is not a motivational book. It\u2019s a manual for your own consciousness. It explains why we feel what we feel \u2013 and how to move beyond it. I\u2019ve read it three times.\u201D',
+            rev3_quote: '\u201CThe Spectrum of Consciousness gave me an entirely new framework for understanding myself. I finally see that jealousy, anger, and fear are not flaws \u2013 but evolutionary mechanisms.\u201D',
+            rev4_quote: '\u201CThe chapter on the emotional attractor was a turning point for me. I realized what state of consciousness I\u2019d been living in for years and that there is a way out.\u201D',
+            rev5_quote: '\u201CI bought it on a recommendation and after the first 50 pages I knew this was a book I\u2019d keep returning to. It bridges neuroscience with deep self-knowledge.\u201D',
+            rev6_quote: '\u201CThe author broke down what most books on consciousness mystify into understandable principles backed by science. Finally a book where you don\u2019t have to turn off critical thinking.\u201D',
+
+            // Order
+            order_eyebrow: '/Order',
+            order_title: 'Begin your journey to a deeper understanding of yourself',
+            order_guarantee: '30-day guarantee',
+            order_edition: 'Second expanded edition',
+            ol_eyebrow: '/Printed book',
+            ol_title: 'I AM \u2013 Evolution of Consciousness',
+            ol_subtitle: 'Lukáš Horák \u00B7 336 pages \u00B7 Hardcover',
+            ol_price: '\u20AC33',
+            ol_btn: 'Order now',
+            ol_feat_1: '336 pages of quality content',
+            ol_feat_2: '30+ chapters in 4 main parts',
+            ol_feat_3: 'Hardcover, premium quality',
+            ol_feat_4: 'Personal author\u2019s signature',
+            ol_feat_5: 'Bonus: guided meditations (MP3)',
+
+            // FAQ
+            faq_title: 'Frequently asked questions',
+            faq_q1: 'Who is this book for?',
+            faq_q2: 'How long does delivery take?',
+            faq_q3: 'Is there an e-book or audiobook?',
+            faq_q4: 'Can I return the book?',
+            faq_q5: 'Is the book a good gift?',
+            faq_q6: 'How does it differ from other books on consciousness?',
+
+            // Contact
+            contact_eyebrow: '/Contact',
+            contact_title: 'Have a question for the author?',
+            contact_desc: 'Whether this book inspired you, you need to clarify something, or you simply have a question before diving in \u2013 don\u2019t hesitate to write. Every question we ask contributes to a deeper understanding of what it means to be human in the infinite evolution of consciousness.',
+            contact_submit: 'Send message',
+            contact_success: 'Thank you for your message. Lukáš will reply soon.',
+
+            // Footer
+            footer_terms: 'Terms & Conditions',
+            footer_privacy: 'Privacy Policy',
+            footer_contact: 'Contact',
+
+            // Sticky CTA
+            sticky_cta: 'Order the book',
+
+            // Exit popup
+            exit_eyebrow: '/Special offer',
+            exit_title: '\u201310% Discount',
+            exit_desc: 'Use the code on your first order',
+            exit_copy: 'Copy',
+            exit_copy_done: 'Copied \u2713',
+            exit_cta: 'Order with discount',
+            exit_dismiss: 'No, thanks.',
+
+            // Form placeholders
+            form_name: 'Name',
+            form_email: 'Your e-mail',
+            form_subject: 'Message subject',
+            form_message: 'Your message...'
+        }
+    };
+
+    // HTML translations (innerHTML)
+    var TH = {
+        sk: {
+            author_bio: 'Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Čítaj ďalej…</button>',
+            author_bio_extra: '<p>Zásadná zmena prišla, keď sa Lukáš vydal na cestu zvyšovania úrovne vedomia, čo vyvrcholilo absolútnou transformáciou jeho života. Tento proces by sa dal pokojne nazvať znovuzrodením.</p><p style="margin-top: 12px;">Vo veku 36 rokov napokon došlo k náhlemu, šokujúcemu a ťažko opísateľnému prechodu z bežného stavu vedomia do vysokého stavu vedomia, ktorý so sebou priniesol dovtedy nepredstaviteľnú vnútornú spokojnosť, šťastie, pokoj, mier a pocit jednoty so všetkým, čo existuje.</p><p style="margin-top: 12px;">Osobnosť, ako ju poznal, sa rozplynula. Myseľ stíchla a prišiel natoľko výnimočný a nezabudnuteľný stav, že by ho nevymenil za nič na svete. Tento stav vedomia sa stal trvalým a stabilným, absolútne nezávislým od vonkajších okolností.</p>',
+            faq_a1: '<p>Pre každého, kto chce pochopiť mechanizmy vlastného vedomia \u2013 prečo cítime hnev, závisť či strach a ako tieto inštinktívne vzorce prekonať. Kniha nie je povrchnou motivačnou publikáciou, ale vedecky podloženým sprievodcom od primitívnych inštinktov po najvyššie stavy vedomia. Nie je potrebná žiadna predchádzajúca skúsenosť.</p>',
+            faq_a2: '<p>Doručenie na Slovensku trvá zvyčajne 2\u20134 pracovné dni, do Česka 3\u20135 pracovných dní. Poštovné je \u20AC3,90 alebo zadarmo pri objednávke nad \u20AC50.</p>',
+            faq_a3: '<p>Kniha \u201EEvolúcia vedomia \u2013 JA\u201C je dostupná v tlačenej podobe s tvrdou väzbou (druhé rozšírené vydanie, 336 strán). Audiokniha je v príprave a bude dostupná čoskoro.</p>',
+            faq_a4: '<p>Áno, ponúkame 30-dňovú garanciu vrátenia peňazí. Ak nebudete s knihou spokojní, vrátime vám plnú sumu bez otázok.</p>',
+            faq_a5: '<p>Rozhodne áno. Kniha má krásnu tvrdú väzbu a obsahuje osobný podpis autora. Je to premyslený darček pre každého, kto sa zaujíma o osobný rast.</p>',
+            faq_a6: '<p>Na rozdiel od väčšiny kníh o vedomí, táto spája neuovedu, evolučnú biológiu, psychológiu a systémovú teóriu do uceleného rámca \u2013 \u201ESpektrum vedomia\u201C s tromi úrovňami: Primitívne ja, Rozumové ja a Vyššie ja. Obsahuje 336 strán a 30+ kapitol, ktoré systematicky mapujú cestu od inštinktov k prebudeniu.</p>',
+            footer_left: 'JA <span>/ Evolúcia vedomia</span>',
+            fs_text_1: '<p>Mnohí z nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s negatívnymi emocionálnymi stavmi a vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a mier. Primitívne mechanizmy ľudskej mysle vyvolávajú nízke emocionálne stavy, ktoré bránia miliónom ľudí v živote, po ktorom túžia, a vťahujú ich do patologických vzorcov myslenia a deštruktívnych cyklov správania. Tak niektorí ostávame roky, desaťročia či dokonca celý život zaseknutí v stavoch vedomia, kde sa pozitívne a negatívne emócie neustále striedajú ako na horskej dráhe a myseľ bez prestávky generuje jednu myšlienku za druhou.</p><p>Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný, slovami neopísateľný a nezabudnuteľný stav, že by ho človek nevymenil za nič na svete. Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s ničím menším.</p>',
+            fs_text_2: '<p>Na úvod by som čitateľov rád upozornil, že obsah tejto knihy môže byť výzvou pre osoby s povrchným a materialistickým pohľadom na život, ktorý podporujú a upevňujú masové médiá, sociálne siete alebo filmový a reklamný priemysel. Ako som mohol mnohokrát pozorovať, proces prijatia radikálnej pravdy zvykne byť pre niektorých ľudí veľmi náročný a vyžaduje veľkú odvahu. Pre tých, ktorí sú spokojní so svojím súčasným chápaním sveta a necítia potrebu hľadať hlbšie odpovede, táto kniha nemusí byť tou správnou voľbou. Svetlo nemôže vojsť do uzavretej nádoby.</p><p>Rovnako by som rád upozornil, že témy, ktoré sa v tejto knihe rozoberajú, môžu byť niektorými ľuďmi hodnotené ako provokatívne a vyvolať u nich silný nesúhlas. Ide najmä o osoby s hlbokým zázemím v tradičných a rigidých náboženských alebo duchovných systémoch. Tieto systémy sa často spoliehajú na pevné pravidlá a dogmy, ktoré definujú, čo je \u201Esprávne\u201C a čo \u201Enesprávne\u201C, čo je \u201Ezlé\u201C a čo \u201Edobré\u201C.</p><p>Obsah knihy, ktorú máte pred sebou, podnecuje čitateľov k prehodnoteniu pevne stanovených názorov, presvedčení, postojov a zaujatých stanovísk, čo u nich môže vyvolať silné emocionálne reakcie \u2013 odpor, strach, znechutenie, pohŕdanie alebo dokonca hnev \u2013, obzvlášť v prípade, že tieto systémy považujú za neotrasiteľný základ svojho života. Týmto ľuďom by som preto odporučil siahnuť po titule, ktorý viac rezonuje s ich aktuálnou úrovňou vedomia.</p><p>Ak však patríte k tým, ktorí sú pripravení vydať sa na cestu transformácie a objavovania hlbšej pravdy, nech je pre vás táto kniha sprievodcom na ceste k hlbšiemu sebauvedomeniu, sebapoznaniu a konečnému osvieteniu.</p>',
+            fs_text_3: '<p>Zamýšľanie sa nad otázkami našej existencie od pôvodu vesmíru cez význam biologických mechanizmov až po evolúciu vedomia môže byť na prvý pohľad považované za doménu filozofov a vedcov. Ak však neporozumieme fundamentálnym pravidlám, ktoré sa schovávajú za dynamikou celého vesmíru \u2013 počnúc jednoduchými molekulami, komplexnými biologickými organizmami a končiac obrovskými galaxiami \u2013, zbavujeme sa možnosti hlbšie porozumieť realite, v ktorej žijeme.</p><p>Tieto \u201Eveľké otázky\u201C nie sú len abstraktným intelektuálnym cvičením, ale majú potenciál zásadne zmeniť naše vnímanie a ovplyvniť naše každodenné životy do takej miery, že si to ani nedokážeme predstaviť.</p>',
+            reader_preview_text: '<p>Mnohí z nás, bez ohľadu na vek, vzdelanie, životné úspechy alebo postavenie, zápasia s negatívnymi emocionálnymi stavmi a vzorcami myslenia, ktoré nám znemožňujú prežívať skutočné šťastie, spokojnosť, vnútorný pokoj, lásku a mier. Primitívne mechanizmy ľudskej mysle vyvolávajú nízke emocionálne stavy, ktoré bránia miliónom ľudí v živote, po ktorom túžia, a vťahujú ich do patologických vzorcov myslenia a deštruktívnych cyklov správania.</p><p>Nie je to však jediný možný stav existencie. Existuje stav vedomia, kde negatívne emócie zásadne ustúpia do úzadia, myseľ stíchne a prichádza natoľko výnimočný, slovami neopísateľný a nezabudnuteľný stav, že by ho človek nevymenil za nič na svete. Ak niekto raz nahliadne do tohto poznania, už sa nikdy neuspokojí s ničím menším.</p>',
+            reader_title: 'Nahliadnite do knihy <span class="muted">a začnite čítať</span>',
+            reviews_title: 'Čo hovoria čitatelia <span class="muted">o knihe, ktorá mení pohľad na seba samého</span>'
+        },
+        en: {
+            author_bio: 'By the age of thirty, Lukáš had fulfilled all his material and career dreams \u2013 financial success, prestige, and admiration. On the surface, he had it all. Yet it brought him no real happiness, contrary to what most would expect. Quite the opposite. What the world presented as a source of happiness only led to an endless cycle of craving for something more, something better, bigger, or more beautiful. Instead of fulfillment came disappointment, emptiness, and dissatisfaction. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Read more\u2026</button>',
+            author_bio_extra: '<p>A fundamental shift came when Lukáš embarked on a journey of raising his level of consciousness, which culminated in a complete transformation of his life. This process could rightly be called a rebirth.</p><p style="margin-top: 12px;">At the age of 36, a sudden, shocking, and nearly indescribable transition occurred \u2013 from an ordinary state of consciousness to a higher state, bringing with it previously unimaginable inner contentment, happiness, peace, tranquility, and a sense of unity with everything that exists.</p><p style="margin-top: 12px;">The personality as he knew it dissolved. The mind went silent and such an extraordinary and unforgettable state arrived that he would not trade it for anything in the world. This state of consciousness became permanent and stable, completely independent of external circumstances.</p>',
+            faq_a1: '<p>For anyone who wants to understand the mechanisms of their own consciousness \u2013 why we feel anger, envy, or fear and how to overcome these instinctive patterns. The book is not a superficial motivational publication, but a scientifically grounded guide from primitive instincts to the highest states of consciousness. No prior experience is needed.</p>',
+            faq_a2: '<p>Delivery in Slovakia typically takes 2\u20134 business days, to the Czech Republic 3\u20135 business days. Shipping is \u20AC3.90 or free for orders over \u20AC50.</p>',
+            faq_a3: '<p>The book \u201CEvolution of Consciousness \u2013 I AM\u201D is available in printed hardcover format (second expanded edition, 336 pages). The audiobook is in preparation and will be available soon.</p>',
+            faq_a4: '<p>Yes, we offer a 30-day money-back guarantee. If you are not satisfied with the book, we will refund the full amount, no questions asked.</p>',
+            faq_a5: '<p>Absolutely. The book has a beautiful hardcover and includes the author\u2019s personal signature. It is a thoughtful gift for anyone interested in personal growth.</p>',
+            faq_a6: '<p>Unlike most books on consciousness, this one combines neuroscience, evolutionary biology, psychology, and systems theory into a unified framework \u2013 the \u201CSpectrum of Consciousness\u201D with three levels: Primitive Self, Rational Self, and Higher Self. It contains 336 pages and 30+ chapters that systematically map the path from instincts to awakening.</p>',
+            footer_left: 'I AM <span>/ Evolution of Consciousness</span>',
+            fs_text_1: '<p>Many of us, regardless of age, education, life achievements, or status, struggle with negative emotional states and thought patterns that prevent us from experiencing true happiness, contentment, inner peace, love, and tranquility. Primitive mechanisms of the human mind trigger low emotional states that keep millions of people from the life they long for, pulling them into pathological thought patterns and destructive behavioral cycles. Some of us remain stuck for years, decades, or even a lifetime in states of consciousness where positive and negative emotions alternate like a roller coaster and the mind ceaselessly generates one thought after another.</p><p>Yet this is not the only possible state of existence. There is a state of consciousness where negative emotions fundamentally recede into the background, the mind goes quiet, and such an extraordinary, indescribable, and unforgettable state arrives that one would not trade it for anything in the world. Once someone glimpses this knowledge, they will never settle for anything less.</p>',
+            fs_text_2: '<p>I would like to note at the outset that the content of this book may be challenging for individuals with a superficial and materialistic outlook on life, which is reinforced and upheld by mass media, social networks, or the film and advertising industry. As I have observed many times, the process of accepting a radical truth tends to be very difficult for some people and requires great courage. For those who are satisfied with their current understanding of the world and feel no need to seek deeper answers, this book may not be the right choice. Light cannot enter a sealed vessel.</p><p>I would also like to point out that the topics discussed in this book may be perceived as provocative by some individuals and may evoke strong disagreement. This is especially true for those with deep roots in traditional and rigid religious or spiritual systems. These systems often rely on fixed rules and dogmas that define what is \u201Cright\u201D and \u201Cwrong,\u201D what is \u201Cevil\u201D and what is \u201Cgood.\u201D</p><p>The content of the book before you encourages readers to reassess firmly held opinions, beliefs, attitudes, and biases, which may trigger strong emotional reactions \u2013 resistance, fear, disgust, contempt, or even anger \u2013 especially for those who consider these systems the unshakeable foundation of their lives. I would therefore recommend that such individuals reach for a title that resonates more with their current level of consciousness.</p><p>If, however, you are among those ready to embark on a journey of transformation and discovery of a deeper truth, may this book serve as a guide on the path to greater self-awareness, self-knowledge, and ultimate enlightenment.</p>',
+            fs_text_3: '<p>Contemplating questions of our existence \u2013 from the origin of the universe through the significance of biological mechanisms to the evolution of consciousness \u2013 may at first glance seem like the domain of philosophers and scientists. Yet if we fail to understand the fundamental rules hidden behind the dynamics of the entire universe \u2013 from simple molecules and complex biological organisms to vast galaxies \u2013 we deprive ourselves of the possibility of a deeper understanding of the reality in which we live.</p><p>These \u201Cbig questions\u201D are not merely abstract intellectual exercises; they have the potential to fundamentally change our perception and influence our daily lives to an extent we cannot even imagine.</p>',
+            reader_preview_text: '<p>Many of us, regardless of age, education, life achievements, or status, struggle with negative emotional states and thought patterns that prevent us from experiencing true happiness, contentment, inner peace, love, and tranquility. Primitive mechanisms of the human mind trigger low emotional states that keep millions of people from the life they long for, pulling them into pathological thought patterns and destructive behavioral cycles.</p><p>Yet this is not the only possible state of existence. There is a state of consciousness where negative emotions fundamentally recede into the background, the mind goes quiet, and such an extraordinary, indescribable, and unforgettable state arrives that one would not trade it for anything in the world. Once someone glimpses this knowledge, they will never settle for anything less.</p>',
+            reader_title: 'Look inside the book <span class="muted">and start reading</span>',
+            reviews_title: 'What readers say <span class="muted">about the book that changes your self-perception</span>'
+        }
+    };
+
+    var currentLang = localStorage.getItem('ev-lang') || 'sk';
+
+    function applyLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('ev-lang', lang);
+
+        // Update toggle UI
+        var toggle = document.getElementById('langToggle');
+        if (toggle) {
+            toggle.querySelectorAll('span').forEach(function(s) {
+                s.classList.toggle('active', s.getAttribute('data-lang') === lang);
+            });
+        }
+
+        // data-i18n → textContent (preserve child SVGs)
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (!T[lang] || !T[lang][key]) return;
+            // If element contains SVG, only replace text nodes
+            var svg = el.querySelector('svg');
+            if (svg) {
+                // Replace only the first text node before SVG
+                for (var i = 0; i < el.childNodes.length; i++) {
+                    var node = el.childNodes[i];
+                    if (node.nodeType === 3 && node.textContent.trim()) {
+                        node.textContent = T[lang][key] + ' ';
+                        break;
+                    }
+                }
+            } else {
+                el.textContent = T[lang][key];
+            }
+        });
+
+        // data-i18n-html → innerHTML
+        document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n-html');
+            if (!TH[lang] || !TH[lang][key]) return;
+            el.innerHTML = TH[lang][key];
+        });
+
+        // data-i18n-ph → placeholder
+        document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n-ph');
+            if (!T[lang] || !T[lang][key]) return;
+            el.setAttribute('placeholder', T[lang][key]);
+        });
+
+        // Audio source swap
+        var audioEl = document.getElementById('audioElement');
+        if (audioEl) {
+            var src = audioEl.querySelector('source');
+            if (src) {
+                var wasPlaying = !audioEl.paused;
+                var currentTime = audioEl.currentTime;
+                src.setAttribute('src', lang === 'en' ? 'audio-sample-en.mp3' : 'audio-ukazka.mp3');
+                audioEl.load();
+                if (wasPlaying) {
+                    audioEl.currentTime = currentTime;
+                    audioEl.play();
+                }
+            }
+        }
+
+        // Re-init scroll-reveal text
+        var srt = document.querySelector('.scroll-reveal-text');
+        if (srt) {
+            var key = srt.getAttribute('data-i18n');
+            if (T[lang] && T[lang][key]) {
+                var words = T[lang][key].split(/\s+/);
+                srt.innerHTML = words.map(function(w) {
+                    return '<span class="sr-word" style="color: var(--text-muted); transition: color 0.15s ease;">' + w + '</span>';
+                }).join(' ');
+            }
+        }
+
+        // Update toggleHeroCards button text if expanded
+        var heroBtn = document.getElementById('heroShowMore');
+        if (heroBtn) {
+            var heroCarousel = document.getElementById('heroCarousel');
+            var isExpanded = heroCarousel && heroCarousel.classList.contains('show-all');
+            var spanEl = heroBtn.querySelector('span');
+            if (spanEl) {
+                spanEl.textContent = isExpanded ? T[lang].hero_show_less : T[lang].hero_show_more;
+            }
+        }
+
+        // Update toggleAuthorBio button text if expanded
+        var authorExtra = document.getElementById('authorBioExtra');
+        var authorBtn = document.getElementById('authorReadMore');
+        if (authorExtra && authorBtn) {
+            var bioExpanded = authorExtra.classList.contains('expanded');
+            authorBtn.textContent = bioExpanded ? T[lang].author_read_less : T[lang].author_read_more;
+        }
+
+        // Update document lang attribute
+        document.documentElement.setAttribute('lang', lang);
+    }
+
+    // Toggle click handler
+    var toggle = document.getElementById('langToggle');
+    if (toggle) {
+        toggle.addEventListener('click', function() {
+            applyLanguage(currentLang === 'sk' ? 'en' : 'sk');
+        });
+    }
+
+    // Apply saved language on load
+    if (currentLang !== 'sk') {
+        applyLanguage(currentLang);
+    }
+
+    // Expose for external use
+    window.applyLanguage = applyLanguage;
+    window.getCurrentLang = function() { return currentLang; };
+    window.T = T;
 })();
 </script>
 
