@@ -62,7 +62,7 @@
     .nav {
         position: fixed; top:0; left:0; right:0; z-index:100;
         padding: 20px 48px;
-        display: flex; align-items: center; justify-content: space-between;
+        display: flex; align-items: center;
         background: rgba(232, 229, 223, 0.85);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -75,8 +75,13 @@
     .nav-links {
         display: flex; align-items: center; gap: 36px;
         font-size: 0.9rem; font-weight: 400; color: var(--text-light);
+        flex: 1;
+        justify-content: center;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-right {
+        display: flex; align-items: center; gap: 20px;
+    }
     .nav-cta {
         display: inline-flex; align-items: center; gap: 8px;
         padding: 12px 24px;
@@ -738,6 +743,13 @@
     }
     .fs-reader-settings-btn svg {
         width: 18px; height: 18px;
+    }
+    .aa-icon {
+        font-family: var(--font);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1;
     }
 
     /* Settings panel */
@@ -1576,7 +1588,8 @@
         .container { padding: 0 20px; }
         .nav { padding: 14px 20px; }
         .nav-links { display: none; }
-        .nav-cta { display: none; }
+        .nav-right .nav-cta { display: none; }
+        .nav-right { gap: 12px; }
         .nav-mobile-toggle { display: flex; }
         .hero { padding-top: 90px; }
         .hero-card { padding: 28px; }
@@ -1727,16 +1740,18 @@
         <a href="#autor" data-i18n="nav_author">Autor</a>
         <a href="#faq">FAQ</a>
     </div>
-    <button class="lang-toggle" id="langToggle" aria-label="Switch language">
-        <span class="active" data-lang="sk">SK</span>
-        <span data-lang="en">EN</span>
-    </button>
-    <a href="#objednat" class="nav-cta" data-i18n="nav_cta">
-        Objednať
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 12L12 4M12 4H5M12 4v7"/>
-        </svg>
-    </a>
+    <div class="nav-right">
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+            <span class="active" data-lang="sk">SK</span>
+            <span data-lang="en">EN</span>
+        </button>
+        <a href="#objednat" class="nav-cta" data-i18n="nav_cta">
+            Objednať
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 12L12 4M12 4H5M12 4v7"/>
+            </svg>
+        </a>
+    </div>
     <button class="nav-mobile-toggle" id="mobileMenuToggle" aria-label="Menu">
         <svg viewBox="0 0 24 24" id="menuIcon"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -2134,7 +2149,7 @@
         <div class="fs-reader-booktitle" data-i18n="fs_booktitle">JA – Evolúcia vedomia</div>
         <div class="fs-reader-actions">
             <button class="fs-reader-settings-btn" id="openReaderSettings" aria-label="Nastavenia">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                <span class="aa-icon">Aa</span>
             </button>
             <button class="fs-reader-close" id="closeFullReader" aria-label="Zavrieť">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
