@@ -411,6 +411,13 @@
         background: var(--card);
         border-radius: 24px;
         padding: 56px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+    }
+    .learn-content {
+        min-width: 0;
     }
     .learn-eyebrow {
         font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;
@@ -424,7 +431,6 @@
     }
     .learn-list {
         list-style: none;
-        max-width: 720px;
     }
     .learn-list li {
         display: flex; align-items: flex-start; gap: 16px;
@@ -438,6 +444,17 @@
         width: 20px; height: 20px; min-width: 20px;
         stroke: var(--text-muted); fill: none; stroke-width: 2;
         margin-top: 2px;
+    }
+    .learn-image {
+        border-radius: 16px;
+        overflow: hidden;
+        height: 100%;
+        min-height: 400px;
+    }
+    .learn-image img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
     }
 
     /* ===== UKÁŽKY Z KNIHY ===== */
@@ -481,7 +498,8 @@
 
     @media (max-width: 768px) {
         .excerpts-grid { grid-template-columns: 1fr; }
-        .learn-card { padding: 32px; }
+        .learn-card { padding: 32px; grid-template-columns: 1fr; }
+        .learn-image { min-height: 250px; }
     }
 
     /* ===== STATS ===== */
@@ -1449,42 +1467,47 @@
 <section class="learn-section fade-in">
     <div class="container">
         <div class="learn-card">
-            <p class="learn-eyebrow">/Čo sa dozviete</p>
-            <h2 class="learn-title">Otázky, na ktoré kniha odpovedá</h2>
-            <ul class="learn-list">
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Aký základný biologický mechanizmus skryto riadi naše životy?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Prečo túžime po sláve, uznaní a materiálnom úspechu?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Čo stojí za žiarlivosťou, závisťou a neustálym súperením?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?
-                </li>
-                <li>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Ako pokročiť v evolučnom vývoji a dosiahnuť „prebudenie" alebo „osvietenie"?
-                </li>
-            </ul>
+            <div class="learn-content">
+                <p class="learn-eyebrow">/Čo sa dozviete</p>
+                <h2 class="learn-title">Otázky, na ktoré kniha odpovedá</h2>
+                <ul class="learn-list">
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Aký základný biologický mechanizmus skryto riadi naše životy?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Prečo túžime po sláve, uznaní a materiálnom úspechu?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Čo stojí za žiarlivosťou, závisťou a neustálym súperením?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Kde sa formujú naše deštruktívne zlozvyky, ktoré nám ničia život?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Ako prekonať inštinktívne mechanizmy, ktoré nás ťahajú späť k utrpeniu?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Aké emócie pribudli v evolučnom vývoji len nedávno a sú prístupné menej ako 1% populácie?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Ako utíšiť vlastnú myseľ a dosiahnuť výnimočný vnútorný pokoj?
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Ako pokročiť v evolučnom vývoji a dosiahnuť „prebudenie" alebo „osvietenie"?
+                    </li>
+                </ul>
+            </div>
+            <div class="learn-image">
+                <img src="forest-questions.jpg" alt="Les" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
