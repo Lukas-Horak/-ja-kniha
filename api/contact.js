@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        from: 'Evolvium web <onboarding@resend.dev>',
+                        from: 'Evolvium <info@evolvium.com>',
                         to: ['info@evolvium.com'],
                         reply_to: email,
                         subject: `[Evolvium] ${subjectLine}`,
