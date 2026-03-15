@@ -1261,8 +1261,8 @@
 <section class="content-section fade-in">
     <div class="container">
         <p class="content-eyebrow">/Obsah</p>
-        <p class="content-text">
-            Táto kniha nie je povrchnou motivačnou publikáciou, <span class="muted">ale výsledkom dôkladného skúmania vedomia – jeho mechanizmov a dosahu na život jednotlivca i spoločnosti. Opiera sa o najnovšie poznatky v oblasti neurovedy, evolučnej biológie, psychológie a systémovej teórie.</span>
+        <p class="content-text scroll-reveal-text">
+            Táto kniha nie je povrchnou motivačnou publikáciou, ale výsledkom dôkladného skúmania vedomia – jeho mechanizmov a dosahu na život jednotlivca i spoločnosti. Opiera sa o najnovšie poznatky v oblasti neurovedy, evolučnej biológie, psychológie a systémovej teórie.
         </p>
     </div>
 </section>
@@ -1271,7 +1271,7 @@
 <section class="review-video-section fade-in">
     <div class="container">
         <div class="rv-grid">
-            <div class="rv-video" style="background-image: url('https://www.evolvium.com/images/photo-3.jpg'); background-position: center;">
+            <div class="rv-video" style="background-image: url('https://www.evolvium.com/images/photo-3.jpg'); background-position: center 35%;">
                 <div class="video-overlay">
                     <div class="video-person">
                         <div class="video-avatar">MK</div>
@@ -1361,6 +1361,13 @@
                 <div class="stat-value">
                     <span class="stat-number">500+</span>
                     <span class="stat-label">Predaných kópií</span>
+                </div>
+            </div>
+            <div class="stat-row">
+                <p class="stat-text">Výsledok piatich rokov intenzívneho štúdia psychologických mechanizmov, neurovedy a rozsiahleho výskumu ľudského vedomia naprieč vedeckými disciplínami.</p>
+                <div class="stat-value">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Rokov výskumu</span>
                 </div>
             </div>
         </div>
@@ -1747,7 +1754,7 @@
 </div>
 
 <script>
-// ===== HERO CAROUSEL (infinite loop with fade-slide) =====
+// ===== HERO CAROUSEL (click-only, simultaneous slide) =====
 (function() {
     const carousel = document.getElementById('heroCarousel');
     const prevBtn = document.getElementById('heroPrev');
@@ -1755,10 +1762,9 @@
     if (!carousel || !prevBtn || !nextBtn) return;
 
     const cards = Array.from(carousel.querySelectorAll('.hero-image-card'));
-    const total = cards.length;
-    let offset = 0;
     let isAnimating = false;
-    let autoPlayTimer = null;
+    const DURATION = 700; // ms
+    const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
     function getVisible() {
         const w = window.innerWidth;
@@ -1781,13 +1787,10 @@
     function positionCards(animate) {
         const gap = getGap();
         const cardW = getCardWidth();
+        const trans = animate ? 'transform ' + DURATION + 'ms ' + EASE + ', opacity ' + DURATION + 'ms ' + EASE : 'none';
         cards.forEach(function(card, i) {
-            var pos = (i - offset) * (cardW + gap);
-            if (animate !== false) {
-                card.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.4s ease';
-            } else {
-                card.style.transition = 'none';
-            }
+            var pos = i * (cardW + gap);
+            card.style.transition = trans;
             card.style.position = 'absolute';
             card.style.left = '0';
             card.style.width = cardW + 'px';
@@ -1802,44 +1805,35 @@
         var vis = getVisible();
         var gap = getGap();
         var cardW = getCardWidth();
+        var step = cardW + gap;
 
-        // Fade out the leftmost visible card
-        var leavingCard = cards[0];
-        leavingCard.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-        leavingCard.style.opacity = '0';
-        leavingCard.style.transform = 'translateX(' + (-(cardW * 0.3)) + 'px)';
+        // Move the last card to end position instantly (off-screen right)
+        var lastCard = cards[cards.length - 1];
+        // It's already at the end, just make sure it's placed correctly
 
-        // After fade-out, shift remaining cards left and move leaving card to end
+        // Animate ALL cards one step left simultaneously
+        cards.forEach(function(card, i) {
+            var currentPos = i * step;
+            var newPos = currentPos - step;
+            card.style.transition = 'transform ' + DURATION + 'ms ' + EASE + ', opacity ' + DURATION + 'ms ' + EASE;
+            card.style.transform = 'translateX(' + newPos + 'px)';
+            // Fade out the leaving card (index 0)
+            if (i === 0) {
+                card.style.opacity = '0';
+            }
+        });
+
         setTimeout(function() {
-            // Move the first card to the end of the array
+            // Move first card to end of array and DOM
+            var leavingCard = cards.shift();
+            cards.push(leavingCard);
             carousel.appendChild(leavingCard);
-            cards.push(cards.shift());
 
-            // Reset leaving card position to far right (no transition)
-            leavingCard.style.transition = 'none';
-            leavingCard.style.opacity = '0';
-            var endPos = (cards.length - 1) * (cardW + gap);
-            leavingCard.style.transform = 'translateX(' + endPos + 'px)';
-
-            // Position all cards without animation first
+            // Reset all positions without animation
             positionCards(false);
 
-            // Force reflow
-            void carousel.offsetHeight;
-
-            // Animate entering card (last visible) from right
-            var enteringCard = cards[vis - 1];
-            enteringCard.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s ease';
-            enteringCard.style.opacity = '1';
-
-            // Also fade in the moved card if it's visible
-            leavingCard.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s ease';
-            leavingCard.style.opacity = '1';
-
-            setTimeout(function() {
-                isAnimating = false;
-            }, 550);
-        }, 420);
+            isAnimating = false;
+        }, DURATION + 20);
     }
 
     function slidePrev() {
@@ -1848,87 +1842,56 @@
         var vis = getVisible();
         var gap = getGap();
         var cardW = getCardWidth();
+        var step = cardW + gap;
 
-        // Move last card to the beginning
-        var lastCard = cards[cards.length - 1];
-        cards.pop();
+        // Take the last card, move it to the beginning
+        var lastCard = cards.pop();
         cards.unshift(lastCard);
         carousel.insertBefore(lastCard, carousel.firstChild);
 
-        // Position the incoming card off-screen to the left
+        // Position the incoming card at -1 step (off-screen left), invisible
         lastCard.style.transition = 'none';
+        lastCard.style.transform = 'translateX(' + (-step) + 'px)';
         lastCard.style.opacity = '0';
-        lastCard.style.transform = 'translateX(' + (-(cardW * 0.3)) + 'px)';
 
-        // Position all other cards shifted right by one
-        positionCards(false);
+        // Position all other cards at their shifted positions (i-1) without animation
+        cards.forEach(function(card, i) {
+            if (card === lastCard) return;
+            card.style.transition = 'none';
+            card.style.transform = 'translateX(' + ((i - 1) * step) + 'px)';
+        });
 
         // Force reflow
         void carousel.offsetHeight;
 
-        // Animate all cards into position
-        positionCards(true);
-        lastCard.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s ease';
-        lastCard.style.opacity = '1';
+        // Animate all cards one step right to their final positions
+        cards.forEach(function(card, i) {
+            card.style.transition = 'transform ' + DURATION + 'ms ' + EASE + ', opacity ' + DURATION + 'ms ' + EASE;
+            card.style.transform = 'translateX(' + (i * step) + 'px)';
+            card.style.opacity = '1';
+        });
 
         setTimeout(function() {
+            positionCards(false);
             isAnimating = false;
-        }, 550);
+        }, DURATION + 20);
     }
 
     // Set carousel to relative positioning
     carousel.style.position = 'relative';
     carousel.style.display = 'block';
-    var cardW = getCardWidth();
-    var vis = getVisible();
-    carousel.style.height = '';
 
-    // Initial positioning
     function initCarousel() {
         var cw = getCardWidth();
-        var v = getVisible();
-        // Set height based on first card's aspect ratio
         carousel.style.height = (cw * 4 / 3) + 'px';
         positionCards(false);
     }
 
     initCarousel();
 
-    nextBtn.addEventListener('click', function() {
-        slideNext();
-        resetAutoPlay();
-    });
-
-    prevBtn.addEventListener('click', function() {
-        slidePrev();
-        resetAutoPlay();
-    });
-
-    // Auto-play
-    function startAutoPlay() {
-        stopAutoPlay();
-        autoPlayTimer = setInterval(slideNext, 4500);
-    }
-
-    function stopAutoPlay() {
-        if (autoPlayTimer) {
-            clearInterval(autoPlayTimer);
-            autoPlayTimer = null;
-        }
-    }
-
-    function resetAutoPlay() {
-        stopAutoPlay();
-        startAutoPlay();
-    }
-
-    // Pause on hover
-    var wrap = carousel.parentElement;
-    wrap.addEventListener('mouseenter', stopAutoPlay);
-    wrap.addEventListener('mouseleave', startAutoPlay);
-
-    // Start auto-play
-    startAutoPlay();
+    // Click only — no auto-play
+    nextBtn.addEventListener('click', slideNext);
+    prevBtn.addEventListener('click', slidePrev);
 
     // Arrows always active (infinite loop)
     prevBtn.style.opacity = '1';
@@ -1936,9 +1899,7 @@
     nextBtn.style.opacity = '1';
     nextBtn.style.pointerEvents = 'auto';
 
-    window.addEventListener('resize', function() {
-        initCarousel();
-    });
+    window.addEventListener('resize', initCarousel);
 })();
 
 // ===== AUDIO PLAYER =====
@@ -2062,6 +2023,46 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ===== SCROLL REVEAL TEXT (grey to black fill on scroll) =====
+(function() {
+    const el = document.querySelector('.scroll-reveal-text');
+    if (!el) return;
+
+    // Split text into individual words wrapped in spans
+    const text = el.textContent.trim();
+    const words = text.split(/\s+/);
+    el.innerHTML = words.map(function(word) {
+        return '<span class="sr-word" style="color: var(--text-muted); transition: color 0.15s ease;">' + word + '</span>';
+    }).join(' ');
+
+    const wordEls = el.querySelectorAll('.sr-word');
+    const totalWords = wordEls.length;
+
+    function updateWords() {
+        var rect = el.getBoundingClientRect();
+        var winH = window.innerHeight;
+
+        // Start revealing when element enters viewport, complete when it's at ~30% from top
+        var start = winH * 0.85;
+        var end = winH * 0.25;
+        var progress = (start - rect.top) / (start - end);
+        progress = Math.max(0, Math.min(1, progress));
+
+        var activeCount = Math.floor(progress * totalWords);
+
+        wordEls.forEach(function(span, i) {
+            if (i < activeCount) {
+                span.style.color = 'var(--text)';
+            } else {
+                span.style.color = 'var(--text-muted)';
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateWords, { passive: true });
+    updateWords();
+})();
 
 // ===== CONTACT FORM =====
 (function() {
