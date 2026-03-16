@@ -3536,19 +3536,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             el.setAttribute('placeholder', T[lang][key]);
         });
 
-        // Audio source swap
+        // Audio source swap — reset to start on language change
         var audioEl = document.getElementById('audioElement');
         if (audioEl) {
             var src = audioEl.querySelector('source');
             if (src) {
-                var wasPlaying = !audioEl.paused;
-                var currentTime = audioEl.currentTime;
+                audioEl.pause();
                 src.setAttribute('src', lang === 'en' ? 'audio-sample-en.mp3' : 'audio-ukazka.mp3');
                 audioEl.load();
-                if (wasPlaying) {
-                    audioEl.currentTime = currentTime;
-                    audioEl.play();
-                }
+                audioEl.currentTime = 0;
+                // Reset UI
+                var fill = document.getElementById('audioProgressFill');
+                var curTime = document.getElementById('audioCurrentTime');
+                if (fill) fill.style.width = '0%';
+                if (curTime) curTime.textContent = '0:00';
+                // Reset play button to play icon
+                var playIcon = document.getElementById('audioPlayIcon');
+                if (playIcon) playIcon.innerHTML = '<polygon points="6 3 20 12 6 21 6 3"/>';
             }
         }
 
