@@ -1158,32 +1158,7 @@
         font-size: 0.9rem; color: var(--text-light);
         line-height: 1.7; margin-bottom: 32px;
     }
-    .author-bio-hidden {
-        display: none;
-    }
-    .author-bio-hidden.expanded {
-        display: block;
-    }
-    .author-read-more {
-        display: inline;
-        font-size: inherit;
-        color: var(--text);
-        cursor: pointer;
-        border: none;
-        background: none;
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-        font-weight: 500;
-        letter-spacing: 0.01em;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        text-decoration-thickness: 1px;
-        transition: color 0.2s;
-    }
-    .author-read-more:hover {
-        color: var(--accent, #8B7355);
-    }
+
     .author-stats {
         display: flex; gap: 32px; margin-bottom: 32px;
         align-items: flex-start;
@@ -2147,8 +2122,8 @@
                 <div>
                     <p class="author-eyebrow" data-i18n="author_eyebrow">/O autorovi</p>
 
-                    <p class="author-bio" data-i18n-html="author_bio">Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Čítaj ďalej…</button></p>
-                    <div class="author-bio author-bio-hidden" id="authorBioExtra" data-i18n-html="author_bio_extra">
+                    <p class="author-bio" data-i18n-html="author_bio">Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť.</p>
+                    <div class="author-bio" id="authorBioExtra" data-i18n-html="author_bio_extra">
                         <p>Zásadná zmena prišla, keď sa Lukáš vydal na cestu zvyšovania úrovne vedomia, čo vyvrcholilo absolútnou transformáciou jeho života. Tento proces by sa dal pokojne nazvať znovuzrodením.</p>
                         <p style="margin-top: 12px;">Vo veku 36 rokov napokon došlo k náhlemu, šokujúcemu a ťažko opísateľnému prechodu z bežného stavu vedomia do vysokého stavu vedomia, ktorý so sebou priniesol dovtedy nepredstaviteľnú vnútornú spokojnosť, šťastie, pokoj, mier a pocit jednoty so všetkým, čo existuje.</p>
                         <p style="margin-top: 12px;">Osobnosť, ako ju poznal, sa rozplynula. Myseľ stíchla a prišiel natoľko výnimočný a nezabudnuteľný stav, že by ho nevymenil za nič na svete. Tento stav vedomia sa stal trvalým a stabilným, absolútne nezávislým od vonkajších okolností.</p>
@@ -2538,29 +2513,6 @@ function toggleHeroCards() {
     }
 }
 
-function toggleAuthorBio() {
-    var extra = document.getElementById('authorBioExtra');
-    var btn = document.getElementById('authorReadMore');
-    if (!extra || !btn) return;
-    var isExpanded = extra.classList.toggle('expanded');
-    var lang = (typeof getCurrentLang === 'function') ? getCurrentLang() : 'sk';
-    if (isExpanded) {
-        btn.textContent = (window.T && window.T[lang]) ? window.T[lang].author_read_less : 'Zobraziť menej';
-        // Move button after the expanded block
-        extra.parentNode.insertBefore(btn, extra.nextSibling);
-        btn.style.display = 'inline-block';
-        btn.style.marginTop = '16px';
-        btn.style.marginBottom = '24px';
-    } else {
-        btn.textContent = (window.T && window.T[lang]) ? window.T[lang].author_read_more : 'Čítaj ďalej…';
-        // Move button back inside the first paragraph
-        var firstP = extra.previousElementSibling;
-        firstP.appendChild(btn);
-        btn.style.display = '';
-        btn.style.marginTop = '';
-        btn.style.marginBottom = '';
-    }
-}
 
 // ===== FULLSCREEN READER WITH SETTINGS =====
 (function() {
@@ -3260,8 +3212,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             author_stat_1: 'Strán',
             author_stat_2: 'Rokov písania',
             author_stat_3: 'Rozšírené vydanie',
-            author_read_more: 'Čítaj ďalej…',
-            author_read_less: 'Zobraziť menej',
+
             author_caption_name: 'Lukáš Horák',
             author_order_btn: 'Objednať knihu',
 
@@ -3419,8 +3370,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             author_stat_1: 'Pages',
             author_stat_2: 'Years of writing',
             author_stat_3: 'Expanded edition',
-            author_read_more: 'Read more\u2026',
-            author_read_less: 'Show less',
+
             author_caption_name: 'Lukas Horak',
             author_order_btn: 'Order the book',
 
@@ -3513,7 +3463,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     // HTML translations (innerHTML)
     var TH = {
         sk: {
-            author_bio: 'Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Čítaj ďalej…</button>',
+            author_bio: 'Lukáš si do svojej tridsiatky splnil všetky materiálne a kariérne sny, zažil finančný úspech, prestíž aj obdiv. Na prvý pohľad mal všetko. Neprinieslo mu to však skutočné šťastie, ako by mnohí predpokladali. Práve naopak. To, čo svet prezentoval ako zdroj šťastia, viedlo v skutočnosti iba k nekonečnému cyklu túžby po niečom viac, niečom lepšom, krajšom alebo väčšom. Namiesto naplnenia prišlo sklamanie, prázdnota a nespokojnosť.',
             author_bio_extra: '<p>Zásadná zmena prišla, keď sa Lukáš vydal na cestu zvyšovania úrovne vedomia, čo vyvrcholilo absolútnou transformáciou jeho života. Tento proces by sa dal pokojne nazvať znovuzrodením.</p><p style="margin-top: 12px;">Vo veku 36 rokov napokon došlo k náhlemu, šokujúcemu a ťažko opísateľnému prechodu z bežného stavu vedomia do vysokého stavu vedomia, ktorý so sebou priniesol dovtedy nepredstaviteľnú vnútornú spokojnosť, šťastie, pokoj, mier a pocit jednoty so všetkým, čo existuje.</p><p style="margin-top: 12px;">Osobnosť, ako ju poznal, sa rozplynula. Myseľ stíchla a prišiel natoľko výnimočný a nezabudnuteľný stav, že by ho nevymenil za nič na svete. Tento stav vedomia sa stal trvalým a stabilným, absolútne nezávislým od vonkajších okolností.</p>',
             faq_a1: '<p>Pre každého, kto chce pochopiť mechanizmy vlastného vedomia \u2013 prečo cítime hnev, závisť či strach a ako tieto inštinktívne vzorce prekonať. Kniha nie je povrchnou motivačnou publikáciou, ale vedecky podloženým sprievodcom od primitívnych inštinktov po najvyššie stavy vedomia. Nie je potrebná žiadna predchádzajúca skúsenosť.</p>',
             faq_a2: '<p>Doručenie na Slovensku trvá zvyčajne 2\u20134 pracovné dni, do Česka 3\u20135 pracovných dní. Poštovné je \u20AC3,90 alebo zadarmo pri objednávke nad \u20AC50.</p>',
@@ -3530,7 +3480,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             reviews_title: 'Čo hovoria čitatelia <span class="muted">o knihe, ktorá mení pohľad na seba samého</span>'
         },
         en: {
-            author_bio: 'By the age of thirty, Lukas had fulfilled all his material and career dreams \u2013 financial success, prestige, and admiration. On the surface, he had it all. Yet it brought him no real happiness, contrary to what most would expect. Quite the opposite. What the world presented as a source of happiness only led to an endless cycle of craving for something more, something better, bigger, or more beautiful. Instead of fulfillment came disappointment, emptiness, and dissatisfaction. <button class="author-read-more" id="authorReadMore" onclick="toggleAuthorBio()" data-i18n="author_read_more">Read more\u2026</button>',
+            author_bio: 'By the age of thirty, Lukas had fulfilled all his material and career dreams \u2013 financial success, prestige, and admiration. On the surface, he had it all. Yet it brought him no real happiness, contrary to what most would expect. Quite the opposite. What the world presented as a source of happiness only led to an endless cycle of craving for something more, something better, bigger, or more beautiful. Instead of fulfillment came disappointment, emptiness, and dissatisfaction.',
             author_bio_extra: '<p>A fundamental shift came when Lukas embarked on a journey of raising his level of consciousness, which culminated in a complete transformation of his life. This process could rightly be called a rebirth.</p><p style="margin-top: 12px;">At the age of 36, a sudden, shocking, and nearly indescribable transition occurred \u2013 from an ordinary state of consciousness to a higher state, bringing with it previously unimaginable inner contentment, happiness, peace, tranquility, and a sense of unity with everything that exists.</p><p style="margin-top: 12px;">The personality as he knew it dissolved. The mind went silent and such an extraordinary and unforgettable state arrived that he would not trade it for anything in the world. This state of consciousness became permanent and stable, completely independent of external circumstances.</p>',
             faq_a1: '<p>For anyone who wants to understand the mechanisms of their own consciousness \u2013 why we feel anger, envy, or fear and how to overcome these instinctive patterns. The book is not a superficial motivational publication, but a scientifically grounded guide from primitive instincts to the highest states of consciousness. No prior experience is needed.</p>',
             faq_a2: '<p>Delivery in Slovakia typically takes 2\u20134 business days, to the Czech Republic 3\u20135 business days. Shipping is \u20AC3.90 or free for orders over \u20AC50.</p>',
@@ -3638,17 +3588,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             if (spanEl) {
                 spanEl.textContent = isExpanded ? T[lang].hero_show_less : T[lang].hero_show_more;
             }
-        }
-
-        // Reset author bio to collapsed state on language change
-        // (data-i18n-html re-creates the button inside the paragraph,
-        //  so we must remove any orphaned standalone button and collapse)
-        var authorExtra = document.getElementById('authorBioExtra');
-        if (authorExtra) {
-            authorExtra.classList.remove('expanded');
-            // Remove any orphaned button that was moved outside the paragraph
-            var orphanBtn = authorExtra.parentNode.querySelector(':scope > .author-read-more');
-            if (orphanBtn) orphanBtn.remove();
         }
 
         // Update document lang attribute
