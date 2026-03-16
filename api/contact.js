@@ -34,9 +34,10 @@ module.exports = async (req, res) => {
         console.log(`Message: ${message}`);
         console.log('===============================');
 
-        // Try to send via Resend if API key is configured
+        // Send via Resend
         if (process.env.RESEND_API_KEY) {
             try {
+                console.log('Resend: sending email...');
                 const response = await fetch('https://api.resend.com/emails', {
                     method: 'POST',
                     headers: {
@@ -61,14 +62,17 @@ module.exports = async (req, res) => {
                     }),
                 });
 
-                if (!response.ok) {
-                    const errData = await response.json();
-                    console.error('Resend error:', errData);
+                const resData = await response.json();
+                if (response.ok) {
+                    console.log('Resend: email sent, id:', resData.id);
+                } else {
+                    console.error('Resend error:', JSON.stringify(resData));
                 }
             } catch (emailErr) {
                 console.error('Email send failed:', emailErr.message);
-                // Don't fail the request — the submission is still logged
             }
+        } else {
+            console.warn('RESEND_API_KEY not set — email not sent');
         }
 
         return res.status(200).json({ success: true, message: 'Správa bola odoslaná.' });
