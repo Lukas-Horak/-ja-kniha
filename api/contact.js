@@ -35,13 +35,14 @@ module.exports = async (req, res) => {
         console.log('===============================');
 
         // Send via Resend
-        if (process.env.RESEND_API_KEY) {
+        const RESEND_KEY = process.env.RESEND_API_KEY || 're_HM6ujas4_KGD5YgaMN4hDeeG6f7CFWaZW';
+        if (RESEND_KEY) {
             try {
                 console.log('Resend: sending email...');
                 const response = await fetch('https://api.resend.com/emails', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                        'Authorization': `Bearer ${RESEND_KEY}`,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
