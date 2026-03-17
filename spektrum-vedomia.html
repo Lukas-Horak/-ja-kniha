@@ -118,12 +118,21 @@
     .content {
         max-width: 1100px;
         margin: 0 auto;
-        padding: 48px 32px 120px;
+        padding: 24px 32px 120px;
     }
 
     /* ===== DESKTOP TABLE (grid-based, matching PDF) ===== */
     .spectrum-grid {
         width: 100%;
+    }
+
+    /* Sticky wrapper for header + pills on desktop */
+    .grid-sticky {
+        position: sticky;
+        top: 60px; /* below topbar */
+        z-index: 50;
+        background: var(--bg);
+        padding-bottom: 2px;
     }
 
     .grid-header {
@@ -135,11 +144,11 @@
     .grid-header-title {
         display: flex;
         align-items: center;
-        padding: 20px 20px;
+        padding: 10px 16px;
     }
 
     .grid-header-title h1 {
-        font-size: 1.35rem;
+        font-size: 0.85rem;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -150,30 +159,30 @@
     .grid-col-header {
         background: var(--col-header-bg);
         color: #FFFFFF;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         font-weight: 600;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         text-align: center;
-        padding: 20px 12px;
+        padding: 10px 8px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .grid-col-header:nth-child(2) {
-        border-radius: 8px 0 0 0;
+        border-radius: 6px 0 0 0;
     }
 
     .grid-col-header:last-child {
-        border-radius: 0 8px 0 0;
+        border-radius: 0 6px 0 0;
     }
 
     .grid-pills {
         display: grid;
         grid-template-columns: 22% 26% 26% 26%;
         gap: 0;
-        margin-bottom: 4px;
+        margin-bottom: 0;
     }
 
     .grid-pills-spacer { }
@@ -181,17 +190,17 @@
     .grid-pill-cell {
         display: flex;
         justify-content: center;
-        padding: 8px 8px 12px;
+        padding: 4px 8px 6px;
     }
 
     .grid-pill {
         display: inline-block;
         background: var(--pill-bg);
         color: var(--pill-text);
-        font-size: 0.72rem;
+        font-size: 0.65rem;
         font-weight: 500;
         letter-spacing: 0.02em;
-        padding: 4px 12px;
+        padding: 2px 10px;
         border-radius: 20px;
         white-space: nowrap;
     }
@@ -442,20 +451,22 @@
 
         <!-- ===== DESKTOP: Full grid table ===== -->
         <div class="spectrum-grid">
-            <div class="grid-header">
-                <div class="grid-header-title">
-                    <h1>Spektrum<br>Vedomia</h1>
+            <div class="grid-sticky">
+                <div class="grid-header">
+                    <div class="grid-header-title">
+                        <h1>Spektrum Vedomia</h1>
+                    </div>
+                    <div class="grid-col-header">Primitívne Ja</div>
+                    <div class="grid-col-header">Rozumové Ja</div>
+                    <div class="grid-col-header">Vyššie Ja</div>
                 </div>
-                <div class="grid-col-header">Primitívne Ja</div>
-                <div class="grid-col-header">Rozumové Ja</div>
-                <div class="grid-col-header">Vyššie Ja</div>
-            </div>
 
-            <div class="grid-pills">
-                <div class="grid-pills-spacer"></div>
-                <div class="grid-pill-cell"><span class="grid-pill">70 % populácie</span></div>
-                <div class="grid-pill-cell"><span class="grid-pill">29 % populácie</span></div>
-                <div class="grid-pill-cell"><span class="grid-pill">&lt; 1 % populácie</span></div>
+                <div class="grid-pills">
+                    <div class="grid-pills-spacer"></div>
+                    <div class="grid-pill-cell"><span class="grid-pill">70 % populácie</span></div>
+                    <div class="grid-pill-cell"><span class="grid-pill">29 % populácie</span></div>
+                    <div class="grid-pill-cell"><span class="grid-pill">&lt; 1 % populácie</span></div>
+                </div>
             </div>
 
             <table class="data-table">
