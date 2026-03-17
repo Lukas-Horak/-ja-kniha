@@ -4,6 +4,5 @@
     "private": true,
     "dependencies": {
         "stripe": "^14.0.0"
-    },
-  "deploy_trigger": "1773784593"
+    }
 }
