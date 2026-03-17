@@ -11,7 +11,23 @@ module.exports = async (req, res) => {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
     try {
-        const { name, email, subject, message } = req.body;
+        const { name, email, subject, message, website, _t } = req.body;
+
+        // Bot protection: honeypot field must be empty
+        if (website) {
+            console.log('Bot detected: honeypot field filled');
+            // Return 200 to not tip off bots
+            return res.status(200).json({ success: true, message: 'Správa bola odoslaná.' });
+        }
+
+        // Bot protection: timestamp check (must be > 3 seconds)
+        if (_t) {
+            const elapsed = Date.now() - parseInt(_t, 10);
+            if (elapsed < 3000) {
+                console.log('Bot detected: form submitted too fast (' + elapsed + 'ms)');
+                return res.status(200).json({ success: true, message: 'Správa bola odoslaná.' });
+            }
+        }
 
         if (!name || !email || !message) {
             return res.status(400).json({ error: 'Vyplňte prosím všetky povinné polia.' });
