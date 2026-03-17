@@ -99,6 +99,16 @@
         justify-self: center;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links .nav-spectrum {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--text); font-weight: 500;
+    }
+    .nav-links .nav-spectrum::before {
+        content: ''; display: block;
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #5C8A6E; flex-shrink: 0;
+    }
+    .nav-links .nav-spectrum:hover { color: #5C8A6E; }
     .mobile-lang-toggle { display: none; }
     .nav-right {
         display: flex; align-items: center; gap: 20px;
@@ -1566,6 +1576,13 @@
         padding: 20px 0;
         letter-spacing: -0.01em;
     }
+    .nav-links.mobile-open .nav-spectrum {
+        display: inline-flex; align-items: center; gap: 8px;
+        color: #5C8A6E; font-weight: 600;
+    }
+    .nav-links.mobile-open .nav-spectrum::before {
+        width: 8px; height: 8px;
+    }
 
     /* ===== ANIMATIONS ===== */
     .fade-in {
@@ -1777,6 +1794,7 @@
         <a href="#recenzie" data-i18n="nav_reviews">Recenzie</a>
         <a href="#autor" data-i18n="nav_author">Autor</a>
         <a href="#faq">FAQ</a>
+        <a href="/spektrum-vedomia" class="nav-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
         <button class="mobile-lang-toggle" id="mobileLangToggle" aria-label="Switch language">
             <span class="active" data-lang="sk">SK</span>
             <span data-lang="en">EN</span>
@@ -3198,6 +3216,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             nav_reviews: 'Recenzie',
             nav_author: 'Autor',
             nav_cta: 'Objednať',
+            nav_spectrum: 'Spektrum vedomia',
 
             // Hero
             hero_eyebrow: 'Cesta rozvoja vedomia a sebapoznania',
@@ -3368,6 +3387,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             nav_reviews: 'Reviews',
             nav_author: 'Author',
             nav_cta: 'Order',
+            nav_spectrum: 'Spectrum of Consciousness',
 
             // Hero
             hero_eyebrow: 'The Evolution of Consciousness',
