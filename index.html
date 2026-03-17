@@ -2902,20 +2902,22 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // ===== SCROLL REVEAL TEXT (grey to black fill on scroll) =====
 (function() {
-    const el = document.querySelector('.scroll-reveal-text');
+    var el = document.querySelector('.scroll-reveal-text');
     if (!el) return;
 
     // Split text into individual words wrapped in spans
-    const text = el.textContent.trim();
-    const words = text.split(/\s+/);
+    var text = el.textContent.trim();
+    var words = text.split(/\s+/);
     el.innerHTML = words.map(function(word) {
         return '<span class="sr-word" style="color: var(--text-muted); transition: color 0.15s ease;">' + word + '</span>';
     }).join(' ');
 
-    const wordEls = el.querySelectorAll('.sr-word');
-    const totalWords = wordEls.length;
-
     function updateWords() {
+        // Re-query each time — language switch may replace the spans
+        var wordEls = el.querySelectorAll('.sr-word');
+        var totalWords = wordEls.length;
+        if (!totalWords) return;
+
         var rect = el.getBoundingClientRect();
         var winH = window.innerHeight;
 
