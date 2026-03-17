@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GF9CWN6F0L"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GF9CWN6F0L');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spektrum vedomia | Evolvium</title>
+    <meta name="description" content="Spektrum Vedomia – porovnanie troch úrovní vedomia: Primitívne Ja, Rozumové Ja a Vyššie Ja.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Lukáš Horák">
+    <meta name="theme-color" content="#FDFBF7">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='60' cy='50' r='30' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3Ccircle cx='40' cy='50' r='30' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3Cpath d='M 50 78.28 A 30 30 0 0 0 50 21.72' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+        --bg: #FDFBF7;
+        --text: #3D3632;
+        --text-muted: #8C7E72;
+        --heading: #1A1A1A;
+        --border: #EBE6DE;
+        --hover-bg: #F0EBE4;
+        --card-bg: #FFFFFF;
+        --topbar-bg: rgba(253, 251, 247, 0.92);
+        --pill-bg: #F0EBE4;
+        --pill-text: #8C7E72;
+        --col-header-bg: #1A1A1A;
+        --font: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+        --accent-primitive: #B8A898;
+        --accent-rational: #8C7E72;
+        --accent-higher: #5C8A6E;
+    }
+
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 32px;
+        height: 60px;
+        background: var(--topbar-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-title {
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        color: var(--text-muted);
+        font-variant: small-caps;
+        text-transform: lowercase;
+    }
+
+    .topbar-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1.5px solid #E8E0D6;
+        background: transparent;
+        cursor: pointer;
+        transition: background 0.2s ease, border-color 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .topbar-close:hover {
+        background: var(--hover-bg);
+        border-color: var(--text-muted);
+    }
+
+    .topbar-close svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--text);
+        stroke-width: 1.8;
+    }
+
+    /* ===== CONTENT ===== */
+    .content {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 32px 120px;
+    }
+
+    /* ===== TABLE HEADER ===== */
+    .table-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--heading);
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .col-headers {
+        display: grid;
+        grid-template-columns: 22% 26% 26% 26%;
+        gap: 0;
+        margin-bottom: 0;
+    }
+
+    .col-headers-spacer {
+        /* empty first cell for the label column */
+    }
+
+    .col-header {
+        background: var(--col-header-bg);
+        color: #FFFFFF;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 14px 12px 10px;
+    }
+
+    .col-header:first-of-type {
+        border-radius: 8px 0 0 0;
+    }
+
+    .col-header:last-of-type {
+        border-radius: 0 8px 0 0;
+    }
+
+    .col-pills {
+        display: grid;
+        grid-template-columns: 22% 26% 26% 26%;
+        gap: 0;
+        margin-bottom: 4px;
+    }
+
+    .col-pills-spacer {
+        /* empty first cell */
+    }
+
+    .col-pill-cell {
+        display: flex;
+        justify-content: center;
+        padding: 8px 8px 12px;
+    }
+
+    .col-pill {
+        display: inline-block;
+        background: var(--pill-bg);
+        color: var(--pill-text);
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        padding: 4px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
+    }
+
+    /* ===== DESKTOP TABLE ===== */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table tr {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .data-table tr:last-child {
+        border-bottom: none;
+    }
+
+    .data-table tr:nth-child(odd) {
+        background: var(--card-bg);
+    }
+
+    .data-table tr:nth-child(even) {
+        background: transparent;
+    }
+
+    .data-table td {
+        padding: 16px 20px;
+        font-size: 0.88rem;
+        color: var(--text);
+        line-height: 1.5;
+        vertical-align: top;
+    }
+
+    .data-table td:first-child {
+        width: 22%;
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--heading);
+    }
+
+    .data-table td:nth-child(2),
+    .data-table td:nth-child(3),
+    .data-table td:nth-child(4) {
+        width: 26%;
+    }
+
+    /* ===== MOBILE CARDS ===== */
+    .mobile-cards {
+        display: none;
+    }
+
+    .mobile-card {
+        background: var(--card-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        margin-bottom: 12px;
+        overflow: hidden;
+    }
+
+    .mobile-card-label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--heading);
+        padding: 14px 16px 10px;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg);
+        letter-spacing: 0.01em;
+    }
+
+    .mobile-card-item {
+        padding: 12px 16px;
+        border-left: 3px solid transparent;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-card-item:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-card-item--primitive {
+        border-left-color: var(--accent-primitive);
+    }
+
+    .mobile-card-item--rational {
+        border-left-color: var(--accent-rational);
+    }
+
+    .mobile-card-item--higher {
+        border-left-color: var(--accent-higher);
+    }
+
+    .mobile-card-col-label {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+    }
+
+    .mobile-card-value {
+        font-size: 0.86rem;
+        color: var(--text);
+        line-height: 1.5;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+        text-align: center;
+        padding: 0 32px 48px;
+    }
+
+    .footer-copyright {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+    }
+
+    .footer-link {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+        color: var(--text);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 899px) {
+        .col-headers,
+        .col-pills,
+        .data-table {
+            display: none;
+        }
+
+        .mobile-cards {
+            display: block;
+        }
+
+        .table-title {
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+        }
+
+        .content {
+            padding: 32px 16px 80px;
+        }
+
+        .topbar {
+            padding: 0 16px;
+        }
+
+        /* Mobile header pills row */
+        .mobile-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .mobile-header-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--pill-bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .mobile-header-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .mobile-header-dot--primitive { background: var(--accent-primitive); }
+        .mobile-header-dot--rational { background: var(--accent-rational); }
+        .mobile-header-dot--higher { background: var(--accent-higher); }
+
+        .mobile-header-text {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+    }
+
+    @media (min-width: 900px) {
+        .mobile-header {
+            display: none;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Topbar -->
+    <header class="topbar">
+        <span class="topbar-title">Spektrum vedomia</span>
+        <button class="topbar-close" onclick="window.location.href='https://www.evolvium.com'" aria-label="Zavrieť">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+        <h1 class="table-title">Spektrum Vedomia</h1>
+
+        <!-- Mobile legend -->
+        <div class="mobile-header">
+            <div class="mobile-header-pill">
+                <span class="mobile-header-dot mobile-header-dot--primitive"></span>
+                <span class="mobile-header-text">Primitívne Ja · 70 %</span>
+            </div>
+            <div class="mobile-header-pill">
+                <span class="mobile-header-dot mobile-header-dot--rational"></span>
+                <span class="mobile-header-text">Rozumové Ja · 29 %</span>
+            </div>
+            <div class="mobile-header-pill">
+                <span class="mobile-header-dot mobile-header-dot--higher"></span>
+                <span class="mobile-header-text">Vyššie Ja · &lt; 1 %</span>
+            </div>
+        </div>
+
+        <!-- Desktop: Column headers -->
+        <div class="col-headers">
+            <div class="col-headers-spacer"></div>
+            <div class="col-header">Primitívne Ja</div>
+            <div class="col-header">Rozumové Ja</div>
+            <div class="col-header">Vyššie Ja</div>
+        </div>
+
+        <!-- Desktop: Population pills -->
+        <div class="col-pills">
+            <div class="col-pills-spacer"></div>
+            <div class="col-pill-cell"><span class="col-pill">70 % populácie</span></div>
+            <div class="col-pill-cell"><span class="col-pill">29 % populácie</span></div>
+            <div class="col-pill-cell"><span class="col-pill">&lt; 1 % populácie</span></div>
+        </div>
+
+        <!-- Desktop: Data table -->
+        <table class="data-table">
+            <tbody>
+                <tr>
+                    <td>Sebaidentifikácia</td>
+                    <td>Fyzické telo</td>
+                    <td>Myseľ</td>
+                    <td>Vedomie</td>
+                </tr>
+                <tr>
+                    <td>Zameranie</td>
+                    <td>Stav vlastnenia (čo mám)</td>
+                    <td>Stav konania (čo robím)</td>
+                    <td>Stav bytia (kým som)</td>
+                </tr>
+                <tr>
+                    <td>Prevládajúci systém</td>
+                    <td>Staré štruktúry mozgu</td>
+                    <td>Nové štruktúry mozgu</td>
+                    <td>Energetické pole vedomia</td>
+                </tr>
+                <tr>
+                    <td>Prevládajúce správanie a uvažovanie</td>
+                    <td>Inštinktívne, sebecké, detinské, nemorálne, konfliktné až agresívne</td>
+                    <td>Inteligentné, logické, selektívne, morálne, kreatívne, zmysluplné</td>
+                    <td>Uvedomelé, zmierlivé, nezaujaté, vysoko kreatívne, nezištné a láskyplné</td>
+                </tr>
+                <tr>
+                    <td>Vyhľadáva</td>
+                    <td>Drámu, neustále aktivity, konflikty, súťaženie, kritiku a psychologický zisk</td>
+                    <td>Myšlienkové koncepty, vedomosti, názory, postoje, ciele, význam a zmysel</td>
+                    <td>Pokoj, mier, radosť, lásku, úprimnosť, harmóniu, zámer, porozumenie</td>
+                </tr>
+                <tr>
+                    <td>Spôsob riešenia konfliktov</td>
+                    <td>Útok (agresívna konfrontácia) alebo útek</td>
+                    <td>Diskusia, argumentácia, kompromis</td>
+                    <td>Hlboké pochopenie, empatia, hľadanie spoločného základu</td>
+                </tr>
+                <tr>
+                    <td>Kognitívna otvorenosť</td>
+                    <td>Uzavretá myseľ, dogmatizmus, nízka tolerancia neznámeho</td>
+                    <td>Otvorenosť novým názorom, holistické až adaptívne myslenie</td>
+                    <td>Transracionálne myslenie, prijímanie paradoxov až plne vedomé vnímanie</td>
+                </tr>
+                <tr>
+                    <td>Vnímanie reality (otvorenosť k pravde)</td>
+                    <td>Uväznenie v ilúziách a sebaklamoch</td>
+                    <td>Schopnosť prijímať nové a zložité informácie</td>
+                    <td>Túžba po hlbokej pravde a prijímanie reality, aká „je"</td>
+                </tr>
+                <tr>
+                    <td>Porozumenie svetu</td>
+                    <td>Veľmi obmedzené, jednoduché až primitívne</td>
+                    <td>Obmedzené, lineárne, kauzálne a dualistické</td>
+                    <td>Transcendentné, nelineárne a nedualistické</td>
+                </tr>
+                <tr>
+                    <td>Vplyv na svet</td>
+                    <td>Ja a moja svorka</td>
+                    <td>Lokálny až globálny</td>
+                    <td>Neobmedzený</td>
+                </tr>
+                <tr>
+                    <td>Ostatných vníma ako</td>
+                    <td>Konkurenciu, ohrozenie, nepriateľov</td>
+                    <td>Súčasť celku, pomocníkov a spolupracovníkov</td>
+                    <td>Súčasť jednotného a dokonalého celku</td>
+                </tr>
+                <tr>
+                    <td>Prevládajúce emócie</td>
+                    <td>Nízke a negatívne (prázdnota, beznádej, vina, frustrácia, žiarlivosť, strach, hnev, osobné túžby, pýcha)</td>
+                    <td>Neutrálne a pozitívne (nádej, vďačnosť, úcta, akceptácia, odvaha, spokojnosť, zištná láska)</td>
+                    <td>Vyššie až transcendentné (bezpodmienečná láska, empatia, súcit, radosť, blaženosť, mier, jednota)</td>
+                </tr>
+                <tr>
+                    <td>Názor na život</td>
+                    <td>Náročný až tragický</td>
+                    <td>Zmysluplný</td>
+                    <td>Harmonický až dokonalý</td>
+                </tr>
+                <tr>
+                    <td>Zmysel života</td>
+                    <td>Prežitie a získavanie</td>
+                    <td>Poznanie, zážitky a úspech</td>
+                    <td>Čistá existencia a jednota</td>
+                </tr>
+                <tr>
+                    <td>Kvalita života</td>
+                    <td>Nízka a neuspokojivá</td>
+                    <td>Uspokojivá a rastúca</td>
+                    <td>Mimoriadna</td>
+                </tr>
+                <tr>
+                    <td>Fyzické a mentálne zdravie</td>
+                    <td>Slabé, náchylné na zdravotné problémy, ochorenia a úrazy</td>
+                    <td>Dobré až výborné fyzické a mentálne zdravie, emocionálna regulácia</td>
+                    <td>Optimálne fyzické, mentálne a duševné zdravie, emocionálna stabilita</td>
+                </tr>
+                <tr>
+                    <td>Spoločenská zodpovednosť</td>
+                    <td>Sebectvo a malý záujem o iných ľudí</td>
+                    <td>Neutrálna angažovanosť až prosociálne správanie</td>
+                    <td>Každodenné láskavosti a silné altruistické správanie</td>
+                </tr>
+                <tr>
+                    <td>Duchovný proces</td>
+                    <td>Nezáujem a skepticizmus</td>
+                    <td>Exploratívny záujem</td>
+                    <td>Duchovný rast a osvietenie</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Mobile: Card view -->
+        <div class="mobile-cards">
+            <div class="mobile-card">
+                <div class="mobile-card-label">Sebaidentifikácia</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Fyzické telo</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Myseľ</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Vedomie</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Zameranie</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Stav vlastnenia (čo mám)</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Stav konania (čo robím)</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Stav bytia (kým som)</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Prevládajúci systém</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Staré štruktúry mozgu</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Nové štruktúry mozgu</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Energetické pole vedomia</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Prevládajúce správanie a uvažovanie</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Inštinktívne, sebecké, detinské, nemorálne, konfliktné až agresívne</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Inteligentné, logické, selektívne, morálne, kreatívne, zmysluplné</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Uvedomelé, zmierlivé, nezaujaté, vysoko kreatívne, nezištné a láskyplné</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Vyhľadáva</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Drámu, neustále aktivity, konflikty, súťaženie, kritiku a psychologický zisk</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Myšlienkové koncepty, vedomosti, názory, postoje, ciele, význam a zmysel</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Pokoj, mier, radosť, lásku, úprimnosť, harmóniu, zámer, porozumenie</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Spôsob riešenia konfliktov</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Útok (agresívna konfrontácia) alebo útek</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Diskusia, argumentácia, kompromis</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Hlboké pochopenie, empatia, hľadanie spoločného základu</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Kognitívna otvorenosť</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Uzavretá myseľ, dogmatizmus, nízka tolerancia neznámeho</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Otvorenosť novým názorom, holistické až adaptívne myslenie</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Transracionálne myslenie, prijímanie paradoxov až plne vedomé vnímanie</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Vnímanie reality (otvorenosť k pravde)</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Uväznenie v ilúziách a sebaklamoch</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Schopnosť prijímať nové a zložité informácie</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Túžba po hlbokej pravde a prijímanie reality, aká „je"</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Porozumenie svetu</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Veľmi obmedzené, jednoduché až primitívne</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Obmedzené, lineárne, kauzálne a dualistické</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Transcendentné, nelineárne a nedualistické</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Vplyv na svet</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Ja a moja svorka</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Lokálny až globálny</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Neobmedzený</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Ostatných vníma ako</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Konkurenciu, ohrozenie, nepriateľov</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Súčasť celku, pomocníkov a spolupracovníkov</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Súčasť jednotného a dokonalého celku</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Prevládajúce emócie</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Nízke a negatívne (prázdnota, beznádej, vina, frustrácia, žiarlivosť, strach, hnev, osobné túžby, pýcha)</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Neutrálne a pozitívne (nádej, vďačnosť, úcta, akceptácia, odvaha, spokojnosť, zištná láska)</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Vyššie až transcendentné (bezpodmienečná láska, empatia, súcit, radosť, blaženosť, mier, jednota)</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Názor na život</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Náročný až tragický</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Zmysluplný</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Harmonický až dokonalý</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Zmysel života</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Prežitie a získavanie</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Poznanie, zážitky a úspech</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Čistá existencia a jednota</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Kvalita života</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Nízka a neuspokojivá</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Uspokojivá a rastúca</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Mimoriadna</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Fyzické a mentálne zdravie</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Slabé, náchylné na zdravotné problémy, ochorenia a úrazy</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Dobré až výborné fyzické a mentálne zdravie, emocionálna regulácia</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Optimálne fyzické, mentálne a duševné zdravie, emocionálna stabilita</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Spoločenská zodpovednosť</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Sebectvo a malý záujem o iných ľudí</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Neutrálna angažovanosť až prosociálne správanie</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Každodenné láskavosti a silné altruistické správanie</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-label">Duchovný proces</div>
+                <div class="mobile-card-item mobile-card-item--primitive">
+                    <div class="mobile-card-col-label">Primitívne Ja</div>
+                    <div class="mobile-card-value">Nezáujem a skepticizmus</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--rational">
+                    <div class="mobile-card-col-label">Rozumové Ja</div>
+                    <div class="mobile-card-value">Exploratívny záujem</div>
+                </div>
+                <div class="mobile-card-item mobile-card-item--higher">
+                    <div class="mobile-card-col-label">Vyššie Ja</div>
+                    <div class="mobile-card-value">Duchovný rast a osvietenie</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-copyright">Copyright &copy; Lukáš Horák, Evolvium, s. r. o.</p>
+        <a href="https://www.evolvium.com" class="footer-link" target="_blank" rel="noopener noreferrer">www.evolvium.com</a>
+    </footer>
+
+</body>
+</html>
