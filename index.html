@@ -2434,12 +2434,12 @@
                 <p class="contact-eyebrow" data-i18n="contact_eyebrow">/Kontakt</p>
                 <h2 class="contact-title" data-i18n="contact_title">Máte otázku pre autora?</h2>
                 <p class="contact-desc" data-i18n="contact_desc">Či vás táto kniha inšpirovala, potrebujete si niečo ujasniť, alebo len máte otázku ešte predtým, ako sa do nej pustíte – neváhajte napísať. Každá otázka, ktorú si položíme, prispieva k hlbšiemu pochopeniu toho, čo znamená byť človekom v nekonečnej evolúcii vedomia.</p>
-                <a href="mailto:info@evolvium.com" class="contact-email-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
-                    info@evolvium.com
-                </a>
+
             </div>
             <form class="contact-form" id="contactForm">
+                <!-- Honeypot — hidden from humans, bots fill it -->
+                <input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0;">
+                <input type="hidden" name="_ts" id="formTimestamp">
                 <div class="form-row">
                     <input type="text" name="name" placeholder="Meno" data-i18n-ph="form_name" required>
                     <input type="email" name="email" placeholder="Váš e-mail" data-i18n-ph="form_email" required>
@@ -2921,46 +2921,73 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // ===== CONTACT FORM =====
 (function() {
-    const form = document.getElementById('contactForm');
-    const success = document.getElementById('contactSuccess');
+    var form = document.getElementById('contactForm');
+    var success = document.getElementById('contactSuccess');
     if (!form) return;
+
+    // Set timestamp when form loads (bot detection — submissions < 3s are rejected)
+    var tsField = document.getElementById('formTimestamp');
+    if (tsField) tsField.value = Date.now();
+
+    // Obfuscated email for mailto fallback
+    var _m = ['info','evolvium','com'].join(String.fromCharCode(64,46).charAt(0) === '@' ? '' : '.');
+    _m = 'info' + '@' + 'evolvium.com';
 
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const name = form.querySelector('[name="name"]').value.trim();
-        const email = form.querySelector('[name="email"]').value.trim();
-        const subject = form.querySelector('[name="subject"]').value.trim() || 'Otázka z evolvium.com';
-        const message = form.querySelector('[name="message"]').value.trim();
+
+        // Honeypot check — if filled, silently reject
+        var honeypot = form.querySelector('[name="website"]');
+        if (honeypot && honeypot.value) {
+            // Fake success for bots
+            if (success) success.classList.add('visible');
+            form.reset();
+            if (tsField) tsField.value = Date.now();
+            return;
+        }
+
+        // Timing check — reject if submitted in < 3 seconds
+        var ts = parseInt(tsField ? tsField.value : '0', 10);
+        if (ts && (Date.now() - ts) < 3000) {
+            if (success) success.classList.add('visible');
+            form.reset();
+            if (tsField) tsField.value = Date.now();
+            return;
+        }
+
+        var name = form.querySelector('[name="name"]').value.trim();
+        var email = form.querySelector('[name="email"]').value.trim();
+        var subject = form.querySelector('[name="subject"]').value.trim() || 'Otázka z evolvium.com';
+        var message = form.querySelector('[name="message"]').value.trim();
 
         if (!name || !email || !message) return;
 
-        const submitBtn = form.querySelector('.contact-submit');
-        const originalText = submitBtn.innerHTML;
+        var submitBtn = form.querySelector('.contact-submit');
+        var originalText = submitBtn.innerHTML;
         submitBtn.disabled = true;
         submitBtn.innerHTML = 'Odosiela sa...';
 
         try {
-            const res = await fetch('/api/contact', {
+            var res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, subject, message })
+                body: JSON.stringify({ name: name, email: email, subject: subject, message: message })
             });
 
             if (res.ok) {
                 success.classList.add('visible');
                 form.reset();
+                if (tsField) tsField.value = Date.now();
                 setTimeout(function() {
                     success.classList.remove('visible');
                 }, 5000);
             } else {
-                // Fallback to mailto
-                const body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
-                window.location.href = 'mailto:info@evolvium.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+                var body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
+                window.location.href = 'mai' + 'lto:' + _m + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
             }
         } catch (err) {
-            // Fallback to mailto on network error
-            const body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
-            window.location.href = 'mailto:info@evolvium.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            var body = 'Meno: ' + name + '\nE-mail: ' + email + '\n\n' + message;
+            window.location.href = 'mai' + 'lto:' + _m + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         }
 
         submitBtn.disabled = false;
