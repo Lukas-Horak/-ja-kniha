@@ -263,9 +263,16 @@
     }
 
     .hero-nav {
-        display: flex; gap: 8px; justify-content: center;
+        display: flex; align-items: center; justify-content: space-between;
         padding: 20px 0 0;
     }
+    .hero-nav-arrows { display: flex; gap: 8px; }
+    .hero-nav-counter {
+        font-family: 'Urbanist', sans-serif;
+        font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+        letter-spacing: 0.03em;
+    }
+    .hero-nav-counter .current { color: var(--text); font-weight: 600; }
     .hero-arrow {
         width: 48px; height: 48px; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
@@ -1921,8 +1928,11 @@
             </div>
         </div>
         <div class="hero-nav">
-            <div class="hero-arrow" id="heroPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
-            <div class="hero-arrow" id="heroNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+            <div class="hero-nav-counter" id="heroCounter"><span class="current">01</span> / 10</div>
+            <div class="hero-nav-arrows">
+                <div class="hero-arrow" id="heroPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+                <div class="hero-arrow" id="heroNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+            </div>
         </div>
         <button class="hero-show-more" id="heroShowMore" onclick="toggleHeroCards()">
             <span data-i18n="hero_show_more">Zobraziť viac</span>
@@ -2601,8 +2611,18 @@ function toggleHeroCards() {
     if (!carousel || !prevBtn || !nextBtn) return;
 
     const cards = Array.from(carousel.querySelectorAll('.hero-image-card'));
+    const totalCards = cards.length;
+    const counterEl = document.getElementById('heroCounter');
     let isAnimating = false;
     const DURATION = 700; // ms
+
+    function updateCounter() {
+        if (!counterEl) return;
+        // The first card in the array is currently visible at position 0
+        var num = cards[0].querySelector('.card-number');
+        var idx = num ? num.textContent.trim() : '01';
+        counterEl.innerHTML = '<span class="current">' + idx + '</span> / ' + String(totalCards).padStart(2, '0');
+    }
     const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
     function getVisible() {
@@ -2670,6 +2690,7 @@ function toggleHeroCards() {
 
             // Reset all positions without animation
             positionCards(false);
+            updateCounter();
 
             isAnimating = false;
         }, DURATION + 20);
@@ -2712,6 +2733,7 @@ function toggleHeroCards() {
 
         setTimeout(function() {
             positionCards(false);
+            updateCounter();
             isAnimating = false;
         }, DURATION + 20);
     }
