@@ -525,9 +525,13 @@
             }
         };
 
-        // Auto-detect: sk/cs -> Slovak, else -> English
+        // Respect main site language choice, then auto-detect
+        var savedLang = null;
+        try { savedLang = localStorage.getItem('ev-lang'); } catch(e) {}
         var userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-        var lang = (userLang.startsWith('sk') || userLang.startsWith('cs')) ? 'sk' : 'en';
+        var lang = savedLang === 'sk' || savedLang === 'en'
+            ? savedLang
+            : (userLang.startsWith('sk') || userLang.startsWith('cs')) ? 'sk' : 'en';
 
         function applyLang(l) {
             var dict = T[l];
