@@ -3068,9 +3068,11 @@
 
         function syncSettingsTheme(theme) {
             if (!settingsPanel) return;
-            settingsPanel.className = 'fs-settings-panel' + (settingsPanel.classList.contains('open') ? ' open' : '') + (theme ? ' ' + theme : '');
+            var panelOpen = settingsPanel.classList.contains('open');
+            settingsPanel.className = 'fs-settings-panel' + (panelOpen ? ' open' : '') + (theme ? ' ' + theme : '');
             if (settingsBackdrop) {
-                settingsBackdrop.className = 'fs-settings-backdrop' + (settingsBackdrop.style.display === 'block' ? '' : '') + (theme ? ' ' + theme : '');
+                var bdOpen = settingsBackdrop.classList.contains('open');
+                settingsBackdrop.className = 'fs-settings-backdrop' + (bdOpen ? ' open' : '') + (theme ? ' ' + theme : '');
             }
         }
 
