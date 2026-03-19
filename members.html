@@ -565,10 +565,12 @@
     .book-mini-cover {
         width: 48px; height: 64px;
         border-radius: 6px;
-        display: flex; align-items: center; justify-content: center;
         flex-shrink: 0;
         box-shadow: 3px 3px 12px rgba(0,0,0,0.1);
         position: relative; overflow: hidden;
+    }
+    .book-mini-cover img {
+        width: 100%; height: 100%; object-fit: cover; border-radius: 6px;
     }
     .book-mini-cover::before {
         content: '';
@@ -582,10 +584,7 @@
     .book-mini-cover.book-je {
         background: linear-gradient(145deg, #3D3A36 0%, #2A2723 100%);
     }
-    .book-mini-cover span {
-        font-size: 0.7rem; font-weight: 300; font-style: italic;
-        color: #fff; letter-spacing: -0.02em;
-    }
+
     .book-category-info h3 {
         font-size: 1.25rem; font-weight: 400; font-style: italic;
         letter-spacing: -0.02em; margin-bottom: 4px;
@@ -727,6 +726,7 @@
     }
     .reader-detail-tag.thought { background: rgba(92, 138, 110, 0.08); color: var(--accent-higher); }
     .reader-detail-tag.insight { background: rgba(184, 168, 152, 0.08); color: var(--accent-primitive); }
+    .reader-detail-tag.chapter { background: rgba(140, 126, 114, 0.08); color: var(--accent-rational); }
     .reader-detail-title {
         font-size: clamp(1.8rem, 4vw, 2.4rem);
         font-weight: 400; font-style: italic;
@@ -1422,19 +1422,19 @@
             <!-- Book 1: Evolúcia vedomia – JA -->
             <div class="book-category">
                 <div class="book-category-header">
-                    <div class="book-mini-cover book-ja"><span>JA</span></div>
+                    <div class="book-mini-cover book-ja"><img src="cover-JA.jpg" alt="Evolúcia vedomia – JA"></div>
                     <div class="book-category-info">
                         <h3 data-i18n="book_ja_title">Evolúcia vedomia – JA</h3>
                         <p data-i18n="book_ja_desc">Ukážky z prvej knihy. Vybrané kapitoly, ktoré môžete čítať priamo tu.</p>
                     </div>
                 </div>
                 <div class="preview-list">
-                    <div class="preview-row" data-preview-id="ja-1">
+                    <div class="preview-row" data-preview-id="ja-tuzby">
                         <div class="preview-row-left">
                             <span class="preview-row-num">01</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_preview_1_title">Predhovor autora</span>
-                                <span class="preview-row-desc" data-i18n="ja_preview_1_desc">Prečo som napísal túto knihu a čo v nej nájdete.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_tuzby_title">Túžby</span>
+                                <span class="preview-row-desc" data-i18n="ja_ch_tuzby_desc">O mechanizme túžob, závislostí a ich vplyve na náš život.</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
@@ -1448,12 +1448,12 @@
                             </button>
                         </div>
                     </div>
-                    <div class="preview-row" data-preview-id="ja-2">
+                    <div class="preview-row" data-preview-id="ja-odpustenie">
                         <div class="preview-row-left">
                             <span class="preview-row-num">02</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_preview_2_title">Kapitola 3 – Túžby</span>
-                                <span class="preview-row-desc" data-i18n="ja_preview_2_desc">Ukážka z kapitoly o mechanizme túžob a ich vplyve na vedomie.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_odpustenie_title">Odpustenie ako akt sily</span>
+                                <span class="preview-row-desc" data-i18n="ja_ch_odpustenie_desc">Prečo je odpustenie najsilnejším nástrojom vnútornej slobody.</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
@@ -1467,20 +1467,58 @@
                             </button>
                         </div>
                     </div>
-                    <div class="preview-row" data-preview-id="ja-3">
+                    <div class="preview-row" data-preview-id="ja-rozum-prekazka">
                         <div class="preview-row-left">
                             <span class="preview-row-num">03</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_preview_3_title">Kapitola 7 – Vyššie vedomie</span>
-                                <span class="preview-row-desc" data-i18n="ja_preview_3_desc">Záverečná kapitola o prechode k vyššiemu stavu vedomia.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_rozum_title">Rozum ako prekážka</span>
+                                <span class="preview-row-desc" data-i18n="ja_ch_rozum_desc">Keď sa rozum z pomocníka stane najväčšou brzdou.</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
-                            <div class="preview-row-status coming-soon">
+                            <div class="preview-row-status">
                                 <span class="pulse"></span>
-                                <span data-i18n="preview_coming_soon">Pripravuje sa</span>
+                                <span data-i18n="preview_available">Dostupné</span>
                             </div>
-                            <button class="preview-open-btn" data-i18n="reader_open" disabled style="opacity:0.4;cursor:default;">
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-row" data-preview-id="ja-rozum-cas">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">04</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_cas_title">Môj rozum vníma čas</span>
+                                <span class="preview-row-desc" data-i18n="ja_ch_cas_desc">O ilúzii času a o tom, prečo skutočný život existuje len v prítomnosti.</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_available">Dostupné</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-row" data-preview-id="ja-autenticnost">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">05</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_autenticnost_title">Autentickosť</span>
+                                <span class="preview-row-desc" data-i18n="ja_ch_autenticnost_desc">Jediná cesta, ktorá vedie ku skutočnému šťastiu a slobode.</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_available">Dostupné</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
                                 Otvoriť
                                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
                             </button>
@@ -1492,7 +1530,7 @@
             <!-- Book 2: Realita – JE -->
             <div class="book-category">
                 <div class="book-category-header">
-                    <div class="book-mini-cover book-je"><span>JE</span></div>
+                    <div class="book-mini-cover book-je"><img src="Realita-JE.jpg" alt="Realita – JE"></div>
                     <div class="book-category-info">
                         <h3 data-i18n="book_je_title">Realita – JE</h3>
                         <p data-i18n="book_je_desc">Pripravovaná kniha. Exkluzívne ukážky ešte pred oficiálnym vydaním.</p>
@@ -1666,12 +1704,16 @@
             reader_author_name: 'Lukáš Horák',
             book_ja_title: 'Evolúcia vedomia – JA',
             book_ja_desc: 'Ukážky z prvej knihy. Vybrané kapitoly, ktoré môžete čítať priamo tu.',
-            ja_preview_1_title: 'Predhovor autora',
-            ja_preview_1_desc: 'Prečo som napísal túto knihu a čo v nej nájdete.',
-            ja_preview_2_title: 'Kapitola 3 – Túžby',
-            ja_preview_2_desc: 'Ukážka z kapitoly o mechanizme túžob a ich vplyve na vedomie.',
-            ja_preview_3_title: 'Kapitola 7 – Vyššie vedomie',
-            ja_preview_3_desc: 'Záverečná kapitola o prechode k vyššiemu stavu vedomia.',
+            ja_ch_tuzby_title: 'Túžby',
+            ja_ch_tuzby_desc: 'O mechanizme túžob, závislostí a ich vplyve na náš život.',
+            ja_ch_odpustenie_title: 'Odpustenie ako akt sily',
+            ja_ch_odpustenie_desc: 'Prečo je odpustenie najsilnejším nástrojom vnútornej slobody.',
+            ja_ch_rozum_title: 'Rozum ako prekážka',
+            ja_ch_rozum_desc: 'Keď sa rozum z pomocníka stane najväčšou brzdou.',
+            ja_ch_cas_title: 'Môj rozum vníma čas',
+            ja_ch_cas_desc: 'O ilúzii času a o tom, prečo skutočný život existuje len v prítomnosti.',
+            ja_ch_autenticnost_title: 'Autentickosť',
+            ja_ch_autenticnost_desc: 'Jediná cesta, ktorá vedie ku skutočnému šťastiu a slobode.',
             book_je_title: 'Realita – JE',
             book_je_desc: 'Pripravovaná kniha. Exkluzívne ukážky ešte pred oficiálnym vydaním.',
             je_preview_1_title: 'Kolektívne vedomie',
@@ -1778,13 +1820,17 @@
             reader_author_name: 'Lukas Horak',
             book_ja_title: 'Evolution of Consciousness – I AM',
             book_ja_desc: 'Excerpts from the first book. Selected chapters you can read right here.',
-            ja_preview_1_title: 'Author\'s foreword',
-            ja_preview_1_desc: 'Why I wrote this book and what you will find in it.',
-            ja_preview_2_title: 'Chapter 3 – Desires',
-            ja_preview_2_desc: 'An excerpt from the chapter on the mechanism of desires and their impact on consciousness.',
-            ja_preview_3_title: 'Chapter 7 – Higher consciousness',
-            ja_preview_3_desc: 'The final chapter on the transition to a higher state of consciousness.',
-            book_je_title: 'Reality – IT IS',
+            ja_ch_tuzby_title: 'Desires',
+            ja_ch_tuzby_desc: 'On the mechanism of desires, addictions, and their impact on our lives.',
+            ja_ch_odpustenie_title: 'Forgiveness as an Act of Strength',
+            ja_ch_odpustenie_desc: 'Why forgiveness is the most powerful tool of inner freedom.',
+            ja_ch_rozum_title: 'Reason as an Obstacle',
+            ja_ch_rozum_desc: 'When reason turns from helper to the biggest brake.',
+            ja_ch_cas_title: 'My Reason Perceives Time',
+            ja_ch_cas_desc: 'On the illusion of time and why true life exists only in the present.',
+            ja_ch_autenticnost_title: 'Authenticity',
+            ja_ch_autenticnost_desc: 'The only path that leads to true happiness and freedom.',
+            book_je_title: 'Reality – IS',
             book_je_desc: 'Upcoming book. Exclusive previews before the official release.',
             je_preview_1_title: 'Collective consciousness',
             je_preview_1_desc: 'What happens when individual consciousnesses begin to cooperate?',
@@ -2396,6 +2442,118 @@
             row.addEventListener('click', function() {
                 openReaderDetail(id);
             });
+        }
+    });
+
+    // ===== PREVIEW ROW (BOOK CHAPTERS) HANDLERS =====
+    var chapterFileMap = {
+        'ja-tuzby': 'chapters/tuzby.html',
+        'ja-odpustenie': 'chapters/odpustenie.html',
+        'ja-rozum-prekazka': 'chapters/rozum-prekazka.html',
+        'ja-rozum-cas': 'chapters/rozum-cas.html',
+        'ja-autenticnost': 'chapters/autenticnost.html'
+    };
+
+    var chapterTitles = {
+        sk: {
+            'ja-tuzby': 'Túžby',
+            'ja-odpustenie': 'Odpustenie ako akt sily',
+            'ja-rozum-prekazka': 'Rozum ako prekážka',
+            'ja-rozum-cas': 'Môj rozum vníma čas',
+            'ja-autenticnost': 'Autentickosť'
+        },
+        en: {
+            'ja-tuzby': 'Desires',
+            'ja-odpustenie': 'Forgiveness as an Act of Strength',
+            'ja-rozum-prekazka': 'Reason as an Obstacle',
+            'ja-rozum-cas': 'My Reason Perceives Time',
+            'ja-autenticnost': 'Authenticity'
+        }
+    };
+
+    var chapterCache = {};
+
+    function openChapterReader(previewId) {
+        var file = chapterFileMap[previewId];
+        if (!file) return;
+
+        var titles = chapterTitles[lang] || chapterTitles['en'];
+        var title = titles[previewId] || previewId;
+        var authorName = lang === 'sk' ? 'Lukáš Horák' : 'Lukas Horak';
+
+        currentReadingId = previewId;
+
+        // Show loading state
+        var loadingHtml = '<div class="reader-detail-meta">'
+            + '<span class="reader-detail-tag chapter">' + (lang === 'sk' ? 'Kapitola' : 'Chapter') + '</span>'
+            + '<h1 class="reader-detail-title">' + title + '</h1>'
+            + '<div class="reader-detail-author">' + authorName + '</div>'
+            + '</div>'
+            + '<div class="reader-detail-content" style="text-align:center;padding:60px 0;color:var(--text-muted);">'
+            + '<div style="width:24px;height:24px;border:2px solid var(--text-muted);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>'
+            + (lang === 'sk' ? 'Načítavam...' : 'Loading...')
+            + '</div>';
+
+        readerDetailBody.innerHTML = loadingHtml;
+        readerOverlay.classList.add('open');
+        readerOverlay.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+
+        if (chapterCache[previewId]) {
+            renderChapter(previewId, chapterCache[previewId], title, authorName);
+            return;
+        }
+
+        fetch('/' + file)
+            .then(function(r) { return r.text(); })
+            .then(function(html) {
+                chapterCache[previewId] = html;
+                if (currentReadingId === previewId) {
+                    renderChapter(previewId, html, title, authorName);
+                }
+            })
+            .catch(function() {
+                if (currentReadingId === previewId) {
+                    readerDetailBody.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-muted);">'
+                        + (lang === 'sk' ? 'Nepodarilo sa načítať kapitolu.' : 'Failed to load chapter.')
+                        + '</div>';
+                }
+            });
+    }
+
+    function renderChapter(previewId, bodyHtml, title, authorName) {
+        var html = '<div class="reader-detail-meta">'
+            + '<span class="reader-detail-tag chapter">' + (lang === 'sk' ? 'Kapitola' : 'Chapter') + '</span>'
+            + '<h1 class="reader-detail-title">' + title + '</h1>'
+            + '<div class="reader-detail-author">' + authorName + '</div>'
+            + '</div>'
+            + '<div class="reader-detail-content">' + bodyHtml + '</div>'
+            + '<div class="reader-detail-end">'
+            + '<div class="reader-detail-end-icon">&#10044;</div>'
+            + '<div class="reader-detail-end-text">' + (T[lang].reader_end || 'End of text') + '</div>'
+            + '</div>';
+
+        readerDetailBody.innerHTML = html;
+        readerOverlay.scrollTop = 0;
+        updateScrollProgress();
+    }
+
+    // Attach click handlers to preview rows
+    document.querySelectorAll('.preview-row').forEach(function(row) {
+        var id = row.getAttribute('data-preview-id');
+        if (id && chapterFileMap[id]) {
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', function(e) {
+                if (e.target.closest('.preview-open-btn')) return; // let button handle it
+                openChapterReader(id);
+            });
+            var btn = row.querySelector('.preview-open-btn');
+            if (btn) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openChapterReader(id);
+                });
+            }
         }
     });
 
