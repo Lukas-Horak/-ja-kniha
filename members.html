@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GF9CWN6F0L"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GF9CWN6F0L');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members | Evolvium</title>
+    <meta name="description" content="Exkluzívny obsah pre členov Evolvium – audiokniha, blog, myšlienky autora a ukážky z pripravovanej knihy.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='60' cy='50' r='30' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3Ccircle cx='40' cy='50' r='30' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3Cpath d='M 50 78.28 A 30 30 0 0 0 50 21.72' stroke='%231a1a1a' stroke-width='6' fill='none'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+        --bg: #E8E5DF;
+        --card: #FFFFFF;
+        --text: #1A1A1A;
+        --text-light: #6B6B6B;
+        --text-muted: #999999;
+        --border: #E0DCD6;
+        --dark: #1A1A1A;
+        --font: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+        --accent-higher: #5C8A6E;
+        --accent-higher-soft: rgba(92, 138, 110, 0.08);
+        --accent-rational: #8C7E72;
+        --accent-primitive: #B8A898;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
+    img { max-width:100%; height:auto; display:block; }
+    a { color:inherit; text-decoration:none; }
+
+    /* ===== NAV ===== */
+    .nav {
+        position: fixed; top:0; left:0; right:0; z-index:100;
+        display: flex; justify-content: center;
+        background: rgba(232, 229, 223, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    .nav-inner {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        width: 100%;
+        max-width: 1340px;
+        padding: 20px 48px;
+    }
+    .nav-logo {
+        display: flex; align-items: center; gap: 10px;
+        font-size: 1.125rem; font-weight: 500; letter-spacing: -0.01em;
+        justify-self: start;
+    }
+    .nav-logo svg { width: 32px; height: 32px; }
+    .nav-links {
+        display: flex; align-items: center; gap: 36px;
+        font-size: 0.9rem; font-weight: 400; color: var(--text-light);
+        justify-self: center;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links .nav-spectrum {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--text); font-weight: 500;
+    }
+    .nav-links .nav-spectrum::before {
+        content: ''; display: block;
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #5C8A6E; flex-shrink: 0;
+    }
+    .nav-links .nav-spectrum:hover { color: #5C8A6E; }
+    .nav-links .nav-members {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--text); font-weight: 500;
+    }
+    .nav-links .nav-members::before {
+        content: ''; display: block;
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--accent-rational); flex-shrink: 0;
+    }
+    .nav-links .nav-members:hover { color: var(--accent-rational); }
+    .mobile-lang-toggle { display: none; }
+    .nav-right {
+        display: flex; align-items: center; gap: 20px;
+        justify-self: end;
+    }
+    .nav-cta {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 12px 24px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+        transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .nav-cta svg { width: 14px; height: 14px; }
+    .lang-toggle {
+        display: flex; align-items: center; gap: 2px;
+        background: rgba(0,0,0,0.06); border-radius: 100px;
+        padding: 4px; border: none; cursor: pointer;
+        font-family: var(--font); font-size: 0.75rem;
+        font-weight: 600; letter-spacing: 0.05em;
+    }
+    .lang-toggle span {
+        padding: 4px 10px; border-radius: 100px;
+        transition: all 0.2s; color: var(--text-muted);
+    }
+    .lang-toggle span.active { background: var(--dark); color: #fff; }
+
+    .nav-mobile-toggle {
+        display: none;
+        background: none; border: none; cursor: pointer;
+        width: 40px; height: 40px;
+        align-items: center; justify-content: center;
+        position: relative; z-index: 201;
+    }
+    .nav-mobile-toggle svg { width: 24px; height: 24px; stroke: var(--text); stroke-width: 2; fill: none; }
+
+    .container { max-width: 1340px; margin: 0 auto; padding: 0 48px; }
+
+    /* ===== LOGIN VIEW ===== */
+    .login-view { padding-top: 140px; padding-bottom: 80px; min-height: 100vh; }
+
+    .login-container {
+        max-width: 440px;
+        margin: 0 auto;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .login-icon {
+        width: 64px; height: 64px;
+        margin: 0 auto 20px;
+        background: var(--accent-higher-soft);
+        border-radius: 20px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .login-icon svg { width: 28px; height: 28px; stroke: var(--accent-higher); stroke-width: 1.8; fill: none; }
+    .login-title {
+        font-size: 1.8rem; font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .login-subtitle {
+        font-size: 0.95rem; color: var(--text-light); line-height: 1.6;
+    }
+
+    .login-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 40px;
+    }
+
+    .login-google {
+        display: flex; align-items: center; justify-content: center; gap: 12px;
+        width: 100%; padding: 16px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.95rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .login-google:hover { opacity: 0.85; }
+    .login-google svg { width: 20px; height: 20px; }
+
+    .login-divider {
+        display: flex; align-items: center; gap: 16px;
+        margin: 28px 0;
+        font-size: 0.8rem; color: var(--text-muted); font-weight: 400;
+    }
+    .login-divider::before, .login-divider::after {
+        content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .login-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+        font-size: 0.8rem; font-weight: 500; color: var(--text-light);
+    }
+    .form-input {
+        padding: 14px 18px;
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        font-size: 0.95rem; font-family: var(--font);
+        background: transparent;
+        transition: border-color 0.2s;
+        color: var(--text);
+    }
+    .form-input:focus {
+        outline: none; border-color: var(--accent-higher);
+    }
+    .form-input::placeholder { color: var(--text-muted); }
+
+    .login-submit {
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        width: 100%; padding: 16px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.95rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+        margin-top: 4px;
+    }
+    .login-submit:hover { opacity: 0.85; }
+    .login-submit svg { width: 14px; height: 14px; }
+
+    .login-footer-text {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 0.85rem; color: var(--text-muted);
+    }
+    .login-footer-text a { color: var(--accent-higher); font-weight: 500; }
+    .login-footer-text a:hover { text-decoration: underline; }
+
+    .login-benefits {
+        margin-top: 40px;
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .login-benefit {
+        display: flex; align-items: flex-start; gap: 10px;
+        padding: 16px;
+        background: var(--card);
+        border-radius: 16px;
+    }
+    .login-benefit-icon {
+        width: 36px; height: 36px; min-width: 36px;
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .login-benefit-icon svg { width: 18px; height: 18px; stroke-width: 1.8; fill: none; }
+    .login-benefit-icon.audio { background: rgba(140, 126, 114, 0.1); }
+    .login-benefit-icon.audio svg { stroke: var(--accent-rational); }
+    .login-benefit-icon.reader { background: rgba(92, 138, 110, 0.1); }
+    .login-benefit-icon.reader svg { stroke: var(--accent-higher); }
+    .login-benefit-icon.blog { background: rgba(184, 168, 152, 0.1); }
+    .login-benefit-icon.blog svg { stroke: var(--accent-primitive); }
+    .login-benefit-icon.preview { background: rgba(26, 26, 26, 0.06); }
+    .login-benefit-icon.preview svg { stroke: var(--text); }
+    .login-benefit-text {
+        font-size: 0.8rem; color: var(--text-light); line-height: 1.5;
+    }
+    .login-benefit-text strong {
+        display: block; font-size: 0.85rem; color: var(--text); font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    /* ===== DASHBOARD VIEW ===== */
+    .dashboard-view { display: none; padding-top: 120px; padding-bottom: 80px; }
+
+    .dashboard-header {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 40px;
+    }
+    .dashboard-greeting {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 300; font-style: italic;
+        letter-spacing: -0.02em;
+    }
+    .dashboard-greeting strong { font-weight: 600; }
+    .dashboard-user {
+        display: flex; align-items: center; gap: 12px;
+    }
+    .dashboard-avatar {
+        width: 44px; height: 44px; border-radius: 50%;
+        background: var(--accent-higher);
+        color: #fff; display: flex; align-items: center; justify-content: center;
+        font-size: 0.85rem; font-weight: 600;
+    }
+    .dashboard-logout {
+        font-size: 0.85rem; color: var(--text-muted);
+        background: none; border: none; cursor: pointer;
+        font-family: var(--font); font-weight: 400;
+    }
+    .dashboard-logout:hover { color: var(--text); }
+
+    /* Sections nav */
+    .section-tabs {
+        display: flex; gap: 8px;
+        margin-bottom: 32px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .section-tabs::-webkit-scrollbar { display: none; }
+    .section-tab {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 12px 24px;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 100px;
+        font-size: 0.85rem; font-weight: 500;
+        color: var(--text-light);
+        cursor: pointer; white-space: nowrap;
+        font-family: var(--font);
+        transition: all 0.2s;
+    }
+    .section-tab:hover { border-color: var(--text-muted); color: var(--text); }
+    .section-tab.active {
+        background: var(--dark); color: #fff; border-color: var(--dark);
+    }
+    .section-tab svg { width: 16px; height: 16px; stroke-width: 1.8; fill: none; }
+    .section-tab.active svg { stroke: #fff; }
+    .section-tab .tab-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+    }
+
+    /* Tab panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ===== AUDIOBOOK SECTION ===== */
+    .audio-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+    .audio-chapter-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 28px;
+        display: flex; flex-direction: column; gap: 16px;
+        transition: box-shadow 0.2s;
+        cursor: pointer;
+    }
+    .audio-chapter-card:hover {
+        box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .audio-chapter-card.locked {
+        opacity: 0.5; cursor: default;
+    }
+    .audio-chapter-top {
+        display: flex; align-items: flex-start; justify-content: space-between;
+    }
+    .audio-chapter-number {
+        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+        text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .audio-chapter-badge {
+        font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.08em; padding: 4px 12px;
+        border-radius: 100px;
+    }
+    .audio-chapter-badge.free {
+        background: rgba(92, 138, 110, 0.1); color: var(--accent-higher);
+    }
+    .audio-chapter-badge.members {
+        background: rgba(140, 126, 114, 0.1); color: var(--accent-rational);
+    }
+    .audio-chapter-badge.soon {
+        background: rgba(0,0,0,0.04); color: var(--text-muted);
+    }
+    .audio-chapter-title {
+        font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em;
+        margin-bottom: 4px;
+    }
+    .audio-chapter-duration {
+        font-size: 0.8rem; color: var(--text-muted);
+    }
+    .audio-chapter-play {
+        display: flex; align-items: center; gap: 10px;
+        margin-top: auto;
+    }
+    .audio-play-btn {
+        width: 44px; height: 44px; min-width: 44px;
+        border-radius: 50%;
+        background: var(--dark); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        border: none; cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    .audio-play-btn:hover { opacity: 0.85; }
+    .audio-play-btn svg { width: 18px; height: 18px; fill: #fff; stroke: none; }
+    .audio-progress-mini {
+        flex: 1; height: 3px;
+        background: var(--border); border-radius: 3px;
+    }
+    .audio-progress-mini-fill {
+        height: 100%; width: 0%; border-radius: 3px;
+        background: var(--accent-higher);
+    }
+
+    /* Featured audio player */
+    .audio-featured {
+        grid-column: 1 / -1;
+        background: #2A2A2A;
+        border-radius: 20px;
+        padding: 32px;
+        display: flex; flex-direction: column; gap: 20px;
+    }
+    .audio-featured .af-top {
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .audio-featured .af-label {
+        font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.4);
+        text-transform: uppercase; letter-spacing: 0.12em;
+    }
+    .audio-featured .af-badge {
+        font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.08em; padding: 4px 12px;
+        border-radius: 100px;
+        background: rgba(92, 138, 110, 0.2); color: #5C8A6E;
+    }
+    .audio-featured .af-title {
+        font-size: 1.3rem; font-weight: 500; color: #fff;
+        letter-spacing: -0.01em;
+    }
+    .audio-featured .af-author {
+        font-size: 0.85rem; color: rgba(255,255,255,0.4);
+    }
+    .audio-featured .af-controls {
+        display: flex; align-items: center; gap: 16px;
+    }
+    .audio-featured .af-play {
+        width: 52px; height: 52px; min-width: 52px;
+        border-radius: 50%; background: #fff; color: #1a1a1a;
+        display: flex; align-items: center; justify-content: center;
+        border: none; cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    .audio-featured .af-play:hover { opacity: 0.9; }
+    .audio-featured .af-play svg { width: 22px; height: 22px; fill: #1a1a1a; }
+    .audio-featured .af-progress-wrap {
+        flex: 1; display: flex; flex-direction: column; gap: 6px;
+    }
+    .audio-featured .af-bar {
+        width: 100%; height: 4px; background: rgba(255,255,255,0.1);
+        border-radius: 4px; cursor: pointer; overflow: hidden;
+    }
+    .audio-featured .af-bar-fill {
+        height: 100%; width: 35%; background: #fff; border-radius: 4px;
+    }
+    .audio-featured .af-times {
+        display: flex; justify-content: space-between;
+        font-size: 0.7rem; color: rgba(255,255,255,0.35);
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== BLOG SECTION ===== */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+    }
+    .blog-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 32px;
+        display: flex; flex-direction: column;
+        transition: box-shadow 0.2s;
+        cursor: pointer;
+    }
+    .blog-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+    .blog-card-top {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .blog-date {
+        font-size: 0.75rem; color: var(--text-muted); font-weight: 400;
+    }
+    .blog-tag {
+        font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.08em; padding: 4px 12px;
+        border-radius: 100px;
+    }
+    .blog-tag.thought { background: rgba(92, 138, 110, 0.08); color: var(--accent-higher); }
+    .blog-tag.excerpt { background: rgba(140, 126, 114, 0.08); color: var(--accent-rational); }
+    .blog-tag.insight { background: rgba(184, 168, 152, 0.08); color: var(--accent-primitive); }
+    .blog-title {
+        font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em;
+        line-height: 1.4; margin-bottom: 12px;
+    }
+    .blog-excerpt {
+        font-size: 0.9rem; color: var(--text-light); line-height: 1.7;
+        flex: 1;
+    }
+    .blog-read-more {
+        display: inline-flex; align-items: center; gap: 6px;
+        margin-top: 20px;
+        font-size: 0.85rem; color: var(--text-muted); font-weight: 500;
+    }
+    .blog-read-more svg { width: 14px; height: 14px; }
+    .blog-card:hover .blog-read-more { color: var(--text); }
+
+    /* Featured blog post */
+    .blog-featured {
+        grid-column: 1 / -1;
+        background: var(--card);
+        border-radius: 20px;
+        padding: 48px;
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 40px; align-items: center;
+        margin-bottom: 0;
+    }
+    .blog-featured-visual {
+        background: linear-gradient(135deg, rgba(92,138,110,0.08) 0%, rgba(140,126,114,0.08) 100%);
+        border-radius: 16px;
+        aspect-ratio: 4/3;
+        display: flex; align-items: center; justify-content: center;
+        position: relative; overflow: hidden;
+    }
+    .blog-featured-visual .quote-mark {
+        font-size: 12rem; font-weight: 200; font-style: italic;
+        color: rgba(92, 138, 110, 0.15); line-height: 1;
+        position: absolute; top: -20px; left: 20px;
+    }
+    .blog-featured-visual .quote-text {
+        font-size: 1.2rem; font-style: italic; font-weight: 300;
+        color: var(--text); line-height: 1.6;
+        padding: 40px; text-align: center;
+        max-width: 340px;
+        position: relative; z-index: 1;
+    }
+    .blog-featured-content .blog-tag { margin-bottom: 16px; display: inline-block; }
+    .blog-featured-content .blog-title {
+        font-size: 1.5rem; margin-bottom: 16px;
+    }
+    .blog-featured-content .blog-excerpt {
+        margin-bottom: 24px;
+    }
+    .blog-featured-content .blog-read-more {
+        margin-top: 0;
+        font-size: 0.9rem; font-weight: 500; color: var(--accent-higher);
+    }
+
+    /* ===== READER SECTION ===== */
+    .reader-grid {
+        display: grid; grid-template-columns: 1fr; gap: 16px;
+    }
+    .reader-promo {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 48px;
+        display: grid; grid-template-columns: auto 1fr;
+        gap: 40px; align-items: center;
+    }
+    .reader-book-visual {
+        width: 180px;
+        aspect-ratio: 3/4;
+        background: linear-gradient(145deg, #2A2A2A 0%, #1a1a1a 100%);
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 8px 8px 24px rgba(0,0,0,0.15);
+        position: relative;
+        overflow: hidden;
+    }
+    .reader-book-visual::before {
+        content: '';
+        position: absolute; left: 0; top: 0; bottom: 0;
+        width: 12px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
+    }
+    .reader-book-visual .book-title {
+        font-size: 1.4rem; font-weight: 300; font-style: italic;
+        color: #fff; text-align: center;
+        padding: 24px; letter-spacing: -0.02em;
+    }
+    .reader-book-visual .book-author {
+        position: absolute; bottom: 20px;
+        font-size: 0.65rem; font-weight: 500; color: rgba(255,255,255,0.4);
+        text-transform: uppercase; letter-spacing: 0.15em;
+    }
+    .reader-info h3 {
+        font-size: 1.5rem; font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .reader-info p {
+        font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
+        margin-bottom: 24px;
+    }
+    .reader-chapters {
+        display: flex; flex-direction: column; gap: 0;
+    }
+    .reader-chapter-row {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .reader-chapter-row:last-child { border-bottom: none; }
+    .reader-chapter-left {
+        display: flex; align-items: center; gap: 14px;
+    }
+    .reader-chapter-num {
+        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+        min-width: 24px;
+    }
+    .reader-chapter-name {
+        font-size: 0.95rem; font-weight: 500;
+    }
+    .reader-chapter-row.locked .reader-chapter-name { color: var(--text-muted); }
+    .reader-chapter-right {
+        display: flex; align-items: center; gap: 12px;
+    }
+    .reader-chapter-pages {
+        font-size: 0.75rem; color: var(--text-muted);
+    }
+    .reader-open-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 18px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .reader-open-btn:hover { opacity: 0.85; }
+    .reader-open-btn svg { width: 12px; height: 12px; }
+    .reader-lock-icon {
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.04);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .reader-lock-icon svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
+
+    /* ===== PREVIEW / NEW BOOK SECTION ===== */
+    .preview-section {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 48px;
+        text-align: center;
+    }
+    .preview-label {
+        font-size: 0.7rem; font-weight: 600; color: var(--accent-higher);
+        text-transform: uppercase; letter-spacing: 0.12em;
+        margin-bottom: 16px;
+    }
+    .preview-title {
+        font-size: 1.5rem; font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .preview-desc {
+        font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
+        max-width: 560px; margin: 0 auto 32px;
+    }
+    .preview-cards {
+        display: grid; grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px; text-align: left;
+    }
+    .preview-card {
+        background: var(--bg);
+        border-radius: 16px;
+        padding: 28px;
+    }
+    .preview-card-num {
+        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+        text-transform: uppercase; letter-spacing: 0.1em;
+        margin-bottom: 12px;
+    }
+    .preview-card-title {
+        font-size: 1.05rem; font-weight: 500;
+        margin-bottom: 8px;
+    }
+    .preview-card-text {
+        font-size: 0.85rem; color: var(--text-light); line-height: 1.6;
+    }
+    .preview-card-status {
+        display: inline-flex; align-items: center; gap: 6px;
+        margin-top: 16px;
+        font-size: 0.75rem; font-weight: 500; color: var(--accent-higher);
+    }
+    .preview-card-status .pulse {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--accent-higher);
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+
+    /* ===== FOOTER ===== */
+    .footer { padding: 0 0 48px; }
+    .footer-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 32px 48px;
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-left { font-size: 0.9rem; font-weight: 500; }
+    .footer-left span { color: var(--text-muted); font-weight: 300; }
+    .footer-center { display: flex; gap: 32px; }
+    .footer-center a { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-center a:hover { color: var(--text); }
+    .footer-right { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ===== MOBILE NAV OVERLAY ===== */
+    .nav-links.mobile-open {
+        display: flex !important;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100vw; height: 100vh; height: 100dvh;
+        z-index: 200;
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 0; background: #E8E5DF;
+        padding: 0; margin: 0;
+    }
+    .nav-links.mobile-open a {
+        font-size: 1.5rem; font-weight: 500; color: var(--text);
+        padding: 20px 0; letter-spacing: -0.01em;
+    }
+    .nav-links.mobile-open .nav-spectrum {
+        display: inline-flex; align-items: center; gap: 8px;
+        color: #5C8A6E; font-weight: 600;
+    }
+    .nav-links.mobile-open .nav-spectrum::before { width: 8px; height: 8px; }
+    .nav-links.mobile-open .nav-members {
+        display: inline-flex; align-items: center; gap: 8px;
+        color: var(--accent-rational); font-weight: 600;
+    }
+    .nav-links.mobile-open .nav-members::before { width: 8px; height: 8px; }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-in {
+        opacity: 0; transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+        .container { padding: 0 32px; }
+        .nav-inner { padding: 16px 32px; }
+        .audio-grid { grid-template-columns: 1fr; }
+        .blog-grid { grid-template-columns: 1fr 1fr; }
+        .blog-featured { grid-template-columns: 1fr; }
+        .blog-featured-visual { display: none; }
+        .preview-cards { grid-template-columns: 1fr 1fr; }
+        .reader-promo { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+        .reader-info { text-align: left; }
+    }
+
+    @media (max-width: 768px) {
+        .container { padding: 0 20px; }
+        .nav-inner {
+            padding: 14px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-links { display: none; }
+        .nav-right { display: none; }
+        .nav-mobile-toggle { display: flex; order: 99; }
+        .mobile-lang-toggle {
+            display: flex; align-items: center; gap: 2px;
+            background: rgba(0,0,0,0.06); border-radius: 100px;
+            padding: 6px; border: none; cursor: pointer;
+            font-family: var(--font); font-size: 0.85rem;
+            font-weight: 600; letter-spacing: 0.05em;
+            margin-top: 32px;
+        }
+        .mobile-lang-toggle span {
+            padding: 6px 14px; border-radius: 100px;
+            transition: all 0.2s; color: var(--text-muted);
+        }
+        .mobile-lang-toggle span.active { background: var(--dark); color: #fff; }
+
+        .login-view { padding-top: 100px; padding-bottom: 60px; }
+        .login-card { padding: 28px; }
+        .login-benefits { grid-template-columns: 1fr; }
+        .login-title { font-size: 1.5rem; }
+
+        .dashboard-view { padding-top: 90px; }
+        .dashboard-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+        .section-tabs { gap: 6px; }
+        .section-tab { padding: 10px 18px; font-size: 0.8rem; }
+
+        .audio-grid { grid-template-columns: 1fr; }
+        .audio-featured { padding: 24px; }
+        .blog-grid { grid-template-columns: 1fr; }
+        .blog-featured { padding: 28px; grid-template-columns: 1fr; }
+        .blog-featured-visual { display: none; }
+        .blog-card { padding: 24px; }
+        .preview-cards { grid-template-columns: 1fr; }
+        .preview-section { padding: 28px; }
+        .reader-promo { padding: 28px; grid-template-columns: 1fr; }
+        .reader-book-visual { width: 140px; }
+
+        .footer-card {
+            flex-direction: column; gap: 16px;
+            text-align: center; padding: 28px;
+        }
+        .footer-center { flex-wrap: wrap; justify-content: center; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+        <svg viewBox="0 0 100 100" fill="none">
+            <circle cx="60" cy="50" r="30" stroke="rgba(0,0,0,0.06)" stroke-width="8" fill="none"/>
+            <circle cx="60" cy="50" r="30" stroke="currentColor" stroke-width="6" fill="none"/>
+            <circle cx="40" cy="50" r="30" stroke="rgba(0,0,0,0.06)" stroke-width="8" fill="none"/>
+            <circle cx="40" cy="50" r="30" stroke="currentColor" stroke-width="6" fill="none"/>
+            <path d="M 50 78.28 A 30 30 0 0 0 50 21.72" stroke="rgba(0,0,0,0.06)" stroke-width="8" fill="none"/>
+            <path d="M 50 78.28 A 30 30 0 0 0 50 21.72" stroke="currentColor" stroke-width="6" fill="none"/>
+        </svg>
+        Evolvium
+    </a>
+    <div class="nav-links" id="navLinks">
+        <a href="/#obsah" data-i18n="nav_about">O knihe</a>
+        <a href="/#recenzie" data-i18n="nav_reviews">Recenzie</a>
+        <a href="/#autor" data-i18n="nav_author">Autor</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/spektrum-vedomia" class="nav-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
+        <a href="/members" class="nav-members" data-i18n="nav_members">Members</a>
+        <button class="mobile-lang-toggle" id="mobileLangToggle" aria-label="Switch language">
+            <span class="active" data-lang="sk">SK</span>
+            <span data-lang="en">EN</span>
+        </button>
+    </div>
+    <div class="nav-right">
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+            <span class="active" data-lang="sk">SK</span>
+            <span data-lang="en">EN</span>
+        </button>
+        <a href="/#objednat" class="nav-cta" data-i18n="nav_cta">
+            Objednať
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 12L12 4M12 4H5M12 4v7"/>
+            </svg>
+        </a>
+    </div>
+    <button class="nav-mobile-toggle" id="mobileMenuToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" id="menuIcon"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== LOGIN VIEW ===== -->
+<section class="login-view" id="loginView">
+<div class="container">
+    <div class="login-container">
+        <div class="login-header fade-in">
+            <div class="login-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z"/><path d="M12 14c-5 0-9 2.24-9 5v2h18v-2c0-2.76-4-5-9-5z"/></svg>
+            </div>
+            <h1 class="login-title" data-i18n="members_title">Vstúpte do vnútra</h1>
+            <p class="login-subtitle" data-i18n="members_subtitle">Exkluzívny obsah pre tých, ktorí chcú ísť hlbšie. Audiokniha, myšlienky autora a ukážky z pripravovanej knihy.</p>
+        </div>
+
+        <div class="login-card fade-in">
+            <button class="login-google" id="googleLogin">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 001 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                <span data-i18n="login_google">Pokračovať s Google</span>
+            </button>
+
+            <div class="login-divider" data-i18n="login_or">alebo s emailom</div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="login_email_label">Email</label>
+                    <input type="email" class="form-input" placeholder="vas@email.com" data-i18n-placeholder="login_email_placeholder" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="login_password_label">Heslo</label>
+                    <input type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="login-submit" data-i18n="login_submit">
+                    Prihlásiť sa
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12L12 4M12 4H5M12 4v7"/>
+                    </svg>
+                </button>
+            </form>
+
+            <p class="login-footer-text">
+                <span data-i18n="login_no_account">Nemáte účet?</span>
+                <a href="#" id="switchToRegister" data-i18n="login_register_link">Zaregistrujte sa</a>
+            </p>
+        </div>
+
+        <div class="login-benefits fade-in">
+            <div class="login-benefit">
+                <div class="login-benefit-icon audio">
+                    <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <div class="login-benefit-text">
+                    <strong data-i18n="benefit_audio">Audiokniha</strong>
+                    <span data-i18n="benefit_audio_desc">Exkluzívne kapitoly v audio formáte</span>
+                </div>
+            </div>
+            <div class="login-benefit">
+                <div class="login-benefit-icon reader">
+                    <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                </div>
+                <div class="login-benefit-text">
+                    <strong data-i18n="benefit_reader">Čítačka</strong>
+                    <span data-i18n="benefit_reader_desc">Ďalšie kapitoly knihy v online čítačke</span>
+                </div>
+            </div>
+            <div class="login-benefit">
+                <div class="login-benefit-icon blog">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="login-benefit-text">
+                    <strong data-i18n="benefit_blog">Myšlienky autora</strong>
+                    <span data-i18n="benefit_blog_desc">Krátke úvahy a hlbšie postrehy</span>
+                </div>
+            </div>
+            <div class="login-benefit">
+                <div class="login-benefit-icon preview">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="login-benefit-text">
+                    <strong data-i18n="benefit_preview">Pripravovaná kniha</strong>
+                    <span data-i18n="benefit_preview_desc">Ukážky z nového diela ešte pred vydaním</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ===== DASHBOARD VIEW ===== -->
+<section class="dashboard-view" id="dashboardView">
+<div class="container">
+    <div class="dashboard-header fade-in">
+        <h1 class="dashboard-greeting" data-i18n-html="dashboard_greeting">Vitajte, <strong>Lukáš</strong></h1>
+        <div class="dashboard-user">
+            <div class="dashboard-avatar">LH</div>
+            <button class="dashboard-logout" id="logoutBtn" data-i18n="dashboard_logout">Odhlásiť sa</button>
+        </div>
+    </div>
+
+    <!-- Section tabs -->
+    <div class="section-tabs fade-in">
+        <button class="section-tab active" data-tab="audio">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            <span data-i18n="tab_audio">Audiokniha</span>
+        </button>
+        <button class="section-tab" data-tab="blog">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span data-i18n="tab_blog">Myšlienky autora</span>
+        </button>
+        <button class="section-tab" data-tab="reader">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            <span data-i18n="tab_reader">Čítačka</span>
+        </button>
+        <button class="section-tab" data-tab="preview">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span data-i18n="tab_preview">Pripravovaná kniha</span>
+        </button>
+    </div>
+
+    <!-- ===== AUDIO TAB ===== -->
+    <div class="tab-panel active" id="panel-audio">
+        <div class="audio-grid">
+            <div class="audio-featured">
+                <div class="af-top">
+                    <span class="af-label" data-i18n="af_now_playing">Práve prehráva</span>
+                    <span class="af-badge" data-i18n="af_members_only">Pre členov</span>
+                </div>
+                <div>
+                    <div class="af-title" data-i18n="af_chapter_title">Kapitola 4 – Hranice ega</div>
+                    <div class="af-author" data-i18n="af_read_by">Číta Lukáš Horák</div>
+                </div>
+                <div class="af-controls">
+                    <button class="af-play">
+                        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                    </button>
+                    <div class="af-progress-wrap">
+                        <div class="af-bar"><div class="af-bar-fill"></div></div>
+                        <div class="af-times">
+                            <span>14:22</span>
+                            <span>41:08</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_1">Kapitola 1</span>
+                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_1">Úvod – Prečo táto kniha</div>
+                <div class="audio-chapter-duration">18:24</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 100%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_2">Kapitola 2</span>
+                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_2">Biologický mechanizmus</div>
+                <div class="audio-chapter-duration">32:15</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 60%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_3">Kapitola 3</span>
+                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_3">Túžby</div>
+                <div class="audio-chapter-duration">40:43</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_4">Kapitola 4</span>
+                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_4">Hranice ega</div>
+                <div class="audio-chapter-duration">41:08</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 35%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_5">Kapitola 5</span>
+                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_5">Hierarchia a moc</div>
+                <div class="audio-chapter-duration">38:51</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card locked">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_6">Kapitola 6</span>
+                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_6">Sociálne emócie</div>
+                <div class="audio-chapter-duration">–:––</div>
+            </div>
+
+            <div class="audio-chapter-card locked">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_7">Kapitola 7</span>
+                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_7">Vyššie vedomie</div>
+                <div class="audio-chapter-duration">–:––</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BLOG TAB ===== -->
+    <div class="tab-panel" id="panel-blog">
+        <div class="blog-grid">
+            <div class="blog-featured">
+                <div class="blog-featured-visual">
+                    <div class="quote-mark">"</div>
+                    <div class="quote-text" data-i18n="blog_featured_quote">Najväčšia ilúzia je presvedčenie, že sme oddelení od toho, čo pozorujeme.</div>
+                </div>
+                <div class="blog-featured-content">
+                    <span class="blog-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                    <h3 class="blog-title" data-i18n="blog_featured_title">O ilúzii oddelenia</h3>
+                    <p class="blog-excerpt" data-i18n="blog_featured_excerpt">Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle? Čo ak je samotné rozdelenie príčinou väčšiny nášho utrpenia?</p>
+                    <a href="#" class="blog-read-more" data-i18n="blog_read_more">
+                        Čítať celé
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-card-top">
+                    <span class="blog-date">14. marca 2026</span>
+                    <span class="blog-tag insight" data-i18n="tag_insight">Postřeh</span>
+                </div>
+                <h3 class="blog-title" data-i18n="blog_2_title">Prečo sa bojíme ticha</h3>
+                <p class="blog-excerpt" data-i18n="blog_2_excerpt">Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene...</p>
+                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
+                    Čítať celé
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </a>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-card-top">
+                    <span class="blog-date">7. marca 2026</span>
+                    <span class="blog-tag excerpt" data-i18n="tag_excerpt">Ukážka z knihy 2</span>
+                </div>
+                <h3 class="blog-title" data-i18n="blog_3_title">Emócie, ktoré ešte nemajú meno</h3>
+                <p class="blog-excerpt" data-i18n="blog_3_excerpt">V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi...</p>
+                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
+                    Čítať celé
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </a>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-card-top">
+                    <span class="blog-date">28. februára 2026</span>
+                    <span class="blog-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                </div>
+                <h3 class="blog-title" data-i18n="blog_4_title">Paradox sebarozvoja</h3>
+                <p class="blog-excerpt" data-i18n="blog_4_excerpt">Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť. Je to ako snažiť sa zabudnúť...</p>
+                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
+                    Čítať celé
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </a>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-card-top">
+                    <span class="blog-date">20. februára 2026</span>
+                    <span class="blog-tag excerpt" data-i18n="tag_excerpt">Ukážka z knihy 2</span>
+                </div>
+                <h3 class="blog-title" data-i18n="blog_5_title">Neuroplasticita a vedomie</h3>
+                <p class="blog-excerpt" data-i18n="blog_5_excerpt">Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí...</p>
+                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
+                    Čítať celé
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </a>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-card-top">
+                    <span class="blog-date">12. februára 2026</span>
+                    <span class="blog-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                </div>
+                <h3 class="blog-title" data-i18n="blog_6_title">Čo je skutočná sloboda</h3>
+                <p class="blog-excerpt" data-i18n="blog_6_excerpt">Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť...</p>
+                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
+                    Čítať celé
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== READER TAB ===== -->
+    <div class="tab-panel" id="panel-reader">
+        <div class="reader-grid">
+            <div class="reader-promo">
+                <div class="reader-book-visual">
+                    <div class="book-title">JA</div>
+                    <div class="book-author" data-i18n="reader_author">Lukáš Horák</div>
+                </div>
+                <div class="reader-info">
+                    <h3 data-i18n="reader_title">Online čítačka</h3>
+                    <p data-i18n="reader_desc">Čítajte vybrané kapitoly priamo v prehliadači. Ako člen máte prístup k rozšírenému obsahu, ktorý nie je dostupný vo verejnej ukážke.</p>
+                    <div class="reader-chapters">
+                        <div class="reader-chapter-row">
+                            <div class="reader-chapter-left">
+                                <span class="reader-chapter-num">01</span>
+                                <span class="reader-chapter-name" data-i18n="rch_1">Predhovor autora</span>
+                            </div>
+                            <div class="reader-chapter-right">
+                                <span class="reader-chapter-pages" data-i18n="rch_1_pages">12 strán</span>
+                                <button class="reader-open-btn" data-i18n="reader_open">
+                                    Otvoriť
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reader-chapter-row">
+                            <div class="reader-chapter-left">
+                                <span class="reader-chapter-num">02</span>
+                                <span class="reader-chapter-name" data-i18n="rch_2">Kapitola 1 – Úvod</span>
+                            </div>
+                            <div class="reader-chapter-right">
+                                <span class="reader-chapter-pages" data-i18n="rch_2_pages">18 strán</span>
+                                <button class="reader-open-btn" data-i18n="reader_open">
+                                    Otvoriť
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reader-chapter-row">
+                            <div class="reader-chapter-left">
+                                <span class="reader-chapter-num">03</span>
+                                <span class="reader-chapter-name" data-i18n="rch_3">Kapitola 2 – Biologický mechanizmus</span>
+                            </div>
+                            <div class="reader-chapter-right">
+                                <span class="reader-chapter-pages" data-i18n="rch_3_pages">24 strán</span>
+                                <button class="reader-open-btn" data-i18n="reader_open">
+                                    Otvoriť
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reader-chapter-row">
+                            <div class="reader-chapter-left">
+                                <span class="reader-chapter-num">04</span>
+                                <span class="reader-chapter-name" data-i18n="rch_4">Kapitola 3 – Túžby</span>
+                            </div>
+                            <div class="reader-chapter-right">
+                                <span class="reader-chapter-pages" data-i18n="rch_4_pages">28 strán</span>
+                                <button class="reader-open-btn" data-i18n="reader_open">
+                                    Otvoriť
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reader-chapter-row locked">
+                            <div class="reader-chapter-left">
+                                <span class="reader-chapter-num">05</span>
+                                <span class="reader-chapter-name" data-i18n="rch_5">Kapitola 4 – Hranice ega</span>
+                            </div>
+                            <div class="reader-chapter-right">
+                                <span class="reader-chapter-pages" data-i18n="rch_5_pages">Members only</span>
+                                <button class="reader-open-btn" data-i18n="reader_open">
+                                    Otvoriť
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reader-chapter-row locked">
+                            <div class="reader-chapter-left">
+                                <span class="reader-chapter-num">06</span>
+                                <span class="reader-chapter-name" data-i18n="rch_6">Kapitola 5 – Hierarchia a moc</span>
+                            </div>
+                            <div class="reader-chapter-right">
+                                <span class="reader-chapter-pages" data-i18n="rch_6_pages">Members only</span>
+                                <button class="reader-open-btn" data-i18n="reader_open">
+                                    Otvoriť
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PREVIEW TAB ===== -->
+    <div class="tab-panel" id="panel-preview">
+        <div class="preview-section">
+            <div class="preview-label" data-i18n="preview_label">Exkluzívny prístup</div>
+            <h2 class="preview-title" data-i18n="preview_title">Pripravovaná kniha</h2>
+            <p class="preview-desc" data-i18n="preview_desc">Ako člen máte možnosť nahliadnuť do procesu tvorby novej knihy. Zdieľam s vami vybrané časti ešte pred oficiálnym vydaním.</p>
+            <div class="preview-cards">
+                <div class="preview-card">
+                    <div class="preview-card-num" data-i18n="preview_ch_1">Ukážka 1</div>
+                    <div class="preview-card-title" data-i18n="preview_ch_1_title">Kolektívne vedomie</div>
+                    <div class="preview-card-text" data-i18n="preview_ch_1_text">Čo sa stane, keď jednotlivé vedomia začnú spolupracovať? Existuje niečo ako skupinové vedomie a ak áno, ako funguje?</div>
+                    <div class="preview-card-status">
+                        <span class="pulse"></span>
+                        <span data-i18n="preview_available">Dostupné</span>
+                    </div>
+                </div>
+                <div class="preview-card">
+                    <div class="preview-card-num" data-i18n="preview_ch_2">Ukážka 2</div>
+                    <div class="preview-card-title" data-i18n="preview_ch_2_title">Technológia a vedomie</div>
+                    <div class="preview-card-text" data-i18n="preview_ch_2_text">Ako umelá inteligencia a technológie ovplyvňujú evolúciu ľudského vedomia. Je to hrozba alebo príležitosť?</div>
+                    <div class="preview-card-status">
+                        <span class="pulse"></span>
+                        <span data-i18n="preview_available">Dostupné</span>
+                    </div>
+                </div>
+                <div class="preview-card">
+                    <div class="preview-card-num" data-i18n="preview_ch_3">Ukážka 3</div>
+                    <div class="preview-card-title" data-i18n="preview_ch_3_title">Za hranicou mysle</div>
+                    <div class="preview-card-text" data-i18n="preview_ch_3_text">Najnovšie poznatky o tom, čo sa deje s vedomím, keď prekročíme bežné hranice vnímania.</div>
+                    <div class="preview-card-status" style="color: var(--text-muted);">
+                        <span class="pulse" style="background: var(--text-muted);"></span>
+                        <span data-i18n="preview_coming_soon">Pripravuje sa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-card">
+            <div class="footer-left" data-i18n-html="footer_left">JA <span>/ Evolúcia vedomia</span></div>
+            <div class="footer-center">
+                <a href="/#" data-i18n="footer_terms">Obchodné podmienky</a>
+                <a href="/#" data-i18n="footer_privacy">Ochrana súkromia</a>
+                <a href="/#kontakt" data-i18n="footer_contact">Kontakt</a>
+            </div>
+            <div class="footer-right">© 2026 Evolvium, s. r. o.</div>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function() {
+    // ===== TRANSLATIONS =====
+    var T = {
+        sk: {
+            nav_about: 'O knihe',
+            nav_reviews: 'Recenzie',
+            nav_author: 'Autor',
+            nav_spectrum: 'Spektrum vedomia',
+            nav_members: 'Members',
+            nav_cta: 'Objednať',
+            members_title: 'Vstúpte do vnútra',
+            members_subtitle: 'Exkluzívny obsah pre tých, ktorí chcú ísť hlbšie. Audiokniha, myšlienky autora a ukážky z pripravovanej knihy.',
+            login_google: 'Pokračovať s Google',
+            login_or: 'alebo s emailom',
+            login_email_label: 'Email',
+            login_email_placeholder: 'vas@email.com',
+            login_password_label: 'Heslo',
+            login_submit: 'Prihlásiť sa',
+            login_no_account: 'Nemáte účet?',
+            login_register_link: 'Zaregistrujte sa',
+            benefit_audio: 'Audiokniha',
+            benefit_audio_desc: 'Exkluzívne kapitoly v audio formáte',
+            benefit_reader: 'Čítačka',
+            benefit_reader_desc: 'Ďalšie kapitoly knihy v online čítačke',
+            benefit_blog: 'Myšlienky autora',
+            benefit_blog_desc: 'Krátke úvahy a hlbšie postrehy',
+            benefit_preview: 'Pripravovaná kniha',
+            benefit_preview_desc: 'Ukážky z nového diela ešte pred vydaním',
+            dashboard_greeting: 'Vitajte, <strong>Lukáš</strong>',
+            dashboard_logout: 'Odhlásiť sa',
+            tab_audio: 'Audiokniha',
+            tab_blog: 'Myšlienky autora',
+            tab_reader: 'Čítačka',
+            tab_preview: 'Pripravovaná kniha',
+            af_now_playing: 'Práve prehráva',
+            af_members_only: 'Pre členov',
+            af_chapter_title: 'Kapitola 4 – Hranice ega',
+            af_read_by: 'Číta Lukáš Horák',
+            ch_label_1: 'Kapitola 1', ch_title_1: 'Úvod – Prečo táto kniha',
+            ch_label_2: 'Kapitola 2', ch_title_2: 'Biologický mechanizmus',
+            ch_label_3: 'Kapitola 3', ch_title_3: 'Túžby',
+            ch_label_4: 'Kapitola 4', ch_title_4: 'Hranice ega',
+            ch_label_5: 'Kapitola 5', ch_title_5: 'Hierarchia a moc',
+            ch_label_6: 'Kapitola 6', ch_title_6: 'Sociálne emócie',
+            ch_label_7: 'Kapitola 7', ch_title_7: 'Vyššie vedomie',
+            badge_free: 'Voľný prístup',
+            badge_members: 'Members',
+            badge_soon: 'Čoskoro',
+            blog_featured_quote: 'Najväčšia ilúzia je presvedčenie, že sme oddelení od toho, čo pozorujeme.',
+            blog_featured_title: 'O ilúzii oddelenia',
+            blog_featured_excerpt: 'Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle?',
+            blog_read_more: 'Čítať celé',
+            tag_thought: 'Myšlienka',
+            tag_excerpt: 'Ukážka z knihy 2',
+            tag_insight: 'Postreh',
+            blog_2_title: 'Prečo sa bojíme ticha',
+            blog_2_excerpt: 'Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene...',
+            blog_3_title: 'Emócie, ktoré ešte nemajú meno',
+            blog_3_excerpt: 'V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi...',
+            blog_4_title: 'Paradox sebarozvoja',
+            blog_4_excerpt: 'Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť...',
+            blog_5_title: 'Neuroplasticita a vedomie',
+            blog_5_excerpt: 'Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí...',
+            blog_6_title: 'Čo je skutočná sloboda',
+            blog_6_excerpt: 'Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť...',
+            reader_author: 'Lukáš Horák',
+            reader_title: 'Online čítačka',
+            reader_desc: 'Čítajte vybrané kapitoly priamo v prehliadači. Ako člen máte prístup k rozšírenému obsahu, ktorý nie je dostupný vo verejnej ukážke.',
+            reader_open: 'Otvoriť',
+            rch_1: 'Predhovor autora', rch_1_pages: '12 strán',
+            rch_2: 'Kapitola 1 – Úvod', rch_2_pages: '18 strán',
+            rch_3: 'Kapitola 2 – Biologický mechanizmus', rch_3_pages: '24 strán',
+            rch_4: 'Kapitola 3 – Túžby', rch_4_pages: '28 strán',
+            rch_5: 'Kapitola 4 – Hranice ega', rch_5_pages: 'Len pre členov',
+            rch_6: 'Kapitola 5 – Hierarchia a moc', rch_6_pages: 'Len pre členov',
+            preview_label: 'Exkluzívny prístup',
+            preview_title: 'Pripravovaná kniha',
+            preview_desc: 'Ako člen máte možnosť nahliadnuť do procesu tvorby novej knihy. Zdieľam s vami vybrané časti ešte pred oficiálnym vydaním.',
+            preview_ch_1: 'Ukážka 1', preview_ch_1_title: 'Kolektívne vedomie',
+            preview_ch_1_text: 'Čo sa stane, keď jednotlivé vedomia začnú spolupracovať? Existuje niečo ako skupinové vedomie a ak áno, ako funguje?',
+            preview_ch_2: 'Ukážka 2', preview_ch_2_title: 'Technológia a vedomie',
+            preview_ch_2_text: 'Ako umelá inteligencia a technológie ovplyvňujú evolúciu ľudského vedomia. Je to hrozba alebo príležitosť?',
+            preview_ch_3: 'Ukážka 3', preview_ch_3_title: 'Za hranicou mysle',
+            preview_ch_3_text: 'Najnovšie poznatky o tom, čo sa deje s vedomím, keď prekročíme bežné hranice vnímania.',
+            preview_available: 'Dostupné',
+            preview_coming_soon: 'Pripravuje sa',
+            footer_left: 'JA <span>/ Evolúcia vedomia</span>',
+            footer_terms: 'Obchodné podmienky',
+            footer_privacy: 'Ochrana súkromia',
+            footer_contact: 'Kontakt',
+        },
+        en: {
+            nav_about: 'About',
+            nav_reviews: 'Reviews',
+            nav_author: 'Author',
+            nav_spectrum: 'Spectrum of Consciousness',
+            nav_members: 'Members',
+            nav_cta: 'Order',
+            members_title: 'Step inside',
+            members_subtitle: 'Exclusive content for those who want to go deeper. Audiobook, author\'s thoughts, and previews from the upcoming book.',
+            login_google: 'Continue with Google',
+            login_or: 'or with email',
+            login_email_label: 'Email',
+            login_email_placeholder: 'your@email.com',
+            login_password_label: 'Password',
+            login_submit: 'Sign in',
+            login_no_account: 'Don\'t have an account?',
+            login_register_link: 'Register',
+            benefit_audio: 'Audiobook',
+            benefit_audio_desc: 'Exclusive chapters in audio format',
+            benefit_reader: 'Reader',
+            benefit_reader_desc: 'Additional book chapters in the online reader',
+            benefit_blog: 'Author\'s thoughts',
+            benefit_blog_desc: 'Short reflections and deeper insights',
+            benefit_preview: 'Upcoming book',
+            benefit_preview_desc: 'Previews of the new work before release',
+            dashboard_greeting: 'Welcome, <strong>Lukas</strong>',
+            dashboard_logout: 'Sign out',
+            tab_audio: 'Audiobook',
+            tab_blog: 'Author\'s thoughts',
+            tab_reader: 'Reader',
+            tab_preview: 'Upcoming book',
+            af_now_playing: 'Now playing',
+            af_members_only: 'Members only',
+            af_chapter_title: 'Chapter 4 – Boundaries of the ego',
+            af_read_by: 'Read by Lukas Horak',
+            ch_label_1: 'Chapter 1', ch_title_1: 'Introduction – Why this book',
+            ch_label_2: 'Chapter 2', ch_title_2: 'The biological mechanism',
+            ch_label_3: 'Chapter 3', ch_title_3: 'Desires',
+            ch_label_4: 'Chapter 4', ch_title_4: 'Boundaries of the ego',
+            ch_label_5: 'Chapter 5', ch_title_5: 'Hierarchy and power',
+            ch_label_6: 'Chapter 6', ch_title_6: 'Social emotions',
+            ch_label_7: 'Chapter 7', ch_title_7: 'Higher consciousness',
+            badge_free: 'Free access',
+            badge_members: 'Members',
+            badge_soon: 'Coming soon',
+            blog_featured_quote: 'The greatest illusion is the belief that we are separate from what we observe.',
+            blog_featured_title: 'On the illusion of separation',
+            blog_featured_excerpt: 'When you observe the world, you feel separate from it – that there is an observer and that which is observed. But what if this division is just a construct of your mind?',
+            blog_read_more: 'Read full',
+            tag_thought: 'Thought',
+            tag_excerpt: 'Book 2 preview',
+            tag_insight: 'Insight',
+            blog_2_title: 'Why we fear silence',
+            blog_2_excerpt: 'Have you noticed how we immediately reach for our phone when silence occurs? This mechanism has deep evolutionary roots...',
+            blog_3_title: 'Emotions that have no name yet',
+            blog_3_excerpt: 'In the upcoming book, I explore emotions that most languages cannot name. They exist at the boundary between...',
+            blog_4_title: 'The paradox of self-improvement',
+            blog_4_excerpt: 'The more you try to change yourself, the more you reinforce the very aspect you want to change...',
+            blog_5_title: 'Neuroplasticity and consciousness',
+            blog_5_excerpt: 'New research shows that meditation literally changes the structure of the brain. But not in the way most people think...',
+            blog_6_title: 'What true freedom is',
+            blog_6_excerpt: 'Freedom is not doing what we want. True freedom is liberation from the mechanisms that make us want...',
+            reader_author: 'Lukas Horak',
+            reader_title: 'Online reader',
+            reader_desc: 'Read selected chapters directly in your browser. As a member, you have access to extended content not available in the public preview.',
+            reader_open: 'Open',
+            rch_1: 'Author\'s foreword', rch_1_pages: '12 pages',
+            rch_2: 'Chapter 1 – Introduction', rch_2_pages: '18 pages',
+            rch_3: 'Chapter 2 – The biological mechanism', rch_3_pages: '24 pages',
+            rch_4: 'Chapter 3 – Desires', rch_4_pages: '28 pages',
+            rch_5: 'Chapter 4 – Boundaries of the ego', rch_5_pages: 'Members only',
+            rch_6: 'Chapter 5 – Hierarchy and power', rch_6_pages: 'Members only',
+            preview_label: 'Exclusive access',
+            preview_title: 'Upcoming book',
+            preview_desc: 'As a member, you can peek into the creation process of the new book. I share selected parts with you before the official release.',
+            preview_ch_1: 'Preview 1', preview_ch_1_title: 'Collective consciousness',
+            preview_ch_1_text: 'What happens when individual consciousnesses begin to cooperate? Is there such a thing as group consciousness, and if so, how does it work?',
+            preview_ch_2: 'Preview 2', preview_ch_2_title: 'Technology and consciousness',
+            preview_ch_2_text: 'How artificial intelligence and technology affect the evolution of human consciousness. Is it a threat or an opportunity?',
+            preview_ch_3: 'Preview 3', preview_ch_3_title: 'Beyond the mind',
+            preview_ch_3_text: 'The latest findings about what happens to consciousness when we go beyond the usual boundaries of perception.',
+            preview_available: 'Available',
+            preview_coming_soon: 'Coming soon',
+            footer_left: 'I AM <span>/ Evolution of Consciousness</span>',
+            footer_terms: 'Terms & Conditions',
+            footer_privacy: 'Privacy Policy',
+            footer_contact: 'Contact',
+        }
+    };
+
+    // ===== LANGUAGE =====
+    var savedLang = null;
+    try { savedLang = localStorage.getItem('ev-lang'); } catch(e) {}
+    var userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    var lang = savedLang === 'sk' || savedLang === 'en'
+        ? savedLang
+        : (userLang.startsWith('sk') || userLang.startsWith('cs')) ? 'sk' : 'en';
+
+    function applyLang(l) {
+        var dict = T[l];
+        if (!dict) return;
+        document.documentElement.lang = l;
+        document.title = l === 'sk' ? 'Members | Evolvium' : 'Members | Evolvium';
+
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (dict[key] !== undefined) el.textContent = dict[key];
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n-html');
+            if (dict[key] !== undefined) el.innerHTML = dict[key];
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n-placeholder');
+            if (dict[key] !== undefined) el.placeholder = dict[key];
+        });
+
+        // Update toggles
+        document.querySelectorAll('.lang-toggle span, .mobile-lang-toggle span').forEach(function(s) {
+            s.classList.toggle('active', s.getAttribute('data-lang') === l);
+        });
+    }
+
+    applyLang(lang);
+
+    function setLang(l) {
+        lang = l;
+        try { localStorage.setItem('ev-lang', l); } catch(e) {}
+        applyLang(l);
+    }
+
+    // Lang toggles
+    document.querySelectorAll('.lang-toggle, .mobile-lang-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            setLang(lang === 'sk' ? 'en' : 'sk');
+        });
+    });
+
+    // ===== MOBILE MENU =====
+    var mobileToggle = document.getElementById('mobileMenuToggle');
+    var navLinks = document.getElementById('navLinks');
+    var menuIcon = document.getElementById('menuIcon');
+    var menuOpen = false;
+
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', function() {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                navLinks.classList.add('mobile-open');
+                menuIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+            } else {
+                navLinks.classList.remove('mobile-open');
+                menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+            }
+        });
+        navLinks.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                if (menuOpen) {
+                    menuOpen = false;
+                    navLinks.classList.remove('mobile-open');
+                    menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+                }
+            });
+        });
+    }
+
+    // ===== DEMO: LOGIN / DASHBOARD TOGGLE =====
+    var loginView = document.getElementById('loginView');
+    var dashboardView = document.getElementById('dashboardView');
+    var loginForm = document.getElementById('loginForm');
+    var googleLogin = document.getElementById('googleLogin');
+    var logoutBtn = document.getElementById('logoutBtn');
+
+    function showDashboard() {
+        loginView.style.display = 'none';
+        dashboardView.style.display = 'block';
+        // Trigger fade-in
+        setTimeout(function() {
+            dashboardView.querySelectorAll('.fade-in').forEach(function(el) {
+                el.classList.add('visible');
+            });
+        }, 100);
+    }
+
+    function showLogin() {
+        dashboardView.style.display = 'none';
+        loginView.style.display = 'block';
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showDashboard();
+        });
+    }
+    if (googleLogin) {
+        googleLogin.addEventListener('click', function() {
+            showDashboard();
+        });
+    }
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            showLogin();
+        });
+    }
+
+    // ===== TAB SWITCHING =====
+    var tabs = document.querySelectorAll('.section-tab');
+    var panels = document.querySelectorAll('.tab-panel');
+
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var target = this.getAttribute('data-tab');
+            tabs.forEach(function(t) { t.classList.remove('active'); });
+            panels.forEach(function(p) { p.classList.remove('active'); });
+            this.classList.add('active');
+            var panel = document.getElementById('panel-' + target);
+            if (panel) panel.classList.add('active');
+        });
+    });
+
+    // ===== FADE IN ANIMATIONS =====
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(function(el) {
+        observer.observe(el);
+    });
+})();
+</script>
+</body>
+</html>
