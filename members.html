@@ -2942,10 +2942,20 @@
             var chapterLabel = lang === 'sk' ? 'Kapitola' : 'Chapter';
             var nextChapter = getNextChapter(chapterId);
 
+            // Extract first <p> as a quote
+            var quoteHtml = '';
+            var restHtml = bodyHtml;
+            var firstP = bodyHtml.match(/^\s*<p>(.*?)<\/p>/);
+            if (firstP) {
+                quoteHtml = firstP[1];
+                restHtml = bodyHtml.substring(firstP[0].length);
+            }
+
             var html = '<div class="fs-chapter">'
                 + '<div class="fs-chapter-label">' + chapterLabel + '</div>'
                 + '<div class="fs-chapter-heading">' + title + '</div>'
-                + '<div class="fs-chapter-text">' + bodyHtml + '</div>'
+                + (quoteHtml ? '<div class="fs-chapter-quote">' + quoteHtml + '</div>' : '')
+                + '<div class="fs-chapter-text">' + restHtml + '</div>'
                 + '</div>';
 
             // Add next chapter navigation if there is one
