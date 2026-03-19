@@ -5,5 +5,5 @@
   "dependencies": {
     "stripe": "^14.0.0"
   },
-  "deploy_trigger": "reader-detail-1773925740"
+  "deploy_trigger": "blog-first-1773927511"
 }
