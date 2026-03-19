@@ -284,11 +284,17 @@
         font-size: 0.85rem; font-weight: 600;
     }
     .dashboard-logout {
-        font-size: 0.85rem; color: var(--text-muted);
-        background: none; border: none; cursor: pointer;
+        font-size: 0.8rem; color: var(--text-muted);
+        background: none; border: 1.5px solid #DDD6CC; cursor: pointer;
         font-family: var(--font); font-weight: 400;
+        padding: 8px 18px; border-radius: 100px;
+        transition: all 0.2s ease;
+        letter-spacing: 0.01em;
     }
-    .dashboard-logout:hover { color: var(--text); }
+    .dashboard-logout:hover {
+        color: var(--text); border-color: var(--text-muted);
+        background: rgba(0,0,0,0.02);
+    }
 
     /* Sections nav */
     .section-tabs {
@@ -655,120 +661,446 @@
         50% { opacity: 0.3; }
     }
 
-    /* ===== READER DETAIL OVERLAY ===== */
-    .reader-overlay {
+    /* ===== FULLSCREEN READER OVERLAY ===== */
+    .fs-reader-overlay {
         display: none;
         position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 500;
-        background: var(--bg);
+        inset: 0;
+        z-index: 10000;
+        background: #FDFBF7;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
-    .reader-overlay.open {
+    .fs-reader-overlay.open {
         display: block;
-        animation: readerFadeIn 0.35s ease;
+        animation: fsReaderIn 0.35s ease;
     }
-    @keyframes readerFadeIn {
+    @keyframes fsReaderIn {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    .reader-overlay-nav {
-        position: sticky; top: 0; z-index: 10;
-        background: rgba(232, 229, 223, 0.92);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        padding: 16px 48px;
-        display: flex; align-items: center; justify-content: space-between;
+    .fs-reader-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(253,251,247,0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 32px;
+        border-bottom: 1px solid #EBE6DE;
     }
-    .reader-back-btn {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 10px 20px;
-        background: var(--card); border: 1.5px solid var(--border);
-        border-radius: 100px; font-size: 0.85rem; font-weight: 500;
-        color: var(--text); cursor: pointer; font-family: var(--font);
-        transition: border-color 0.2s;
+    .fs-reader-booktitle {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #8C7E72;
+        letter-spacing: 0.02em;
     }
-    .reader-back-btn:hover { border-color: var(--text-muted); }
-    .reader-back-btn svg { width: 14px; height: 14px; }
-    .reader-scroll-progress {
-        display: flex; align-items: center; gap: 8px;
+    .fs-reader-close {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        border: 1.5px solid #E8E0D6;
+        background: transparent;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        color: #8C7E72;
+        transition: all 0.2s;
     }
-    .reader-scroll-bar {
-        width: 120px; height: 3px; border-radius: 3px;
-        background: var(--border); overflow: hidden;
+    .fs-reader-close:hover {
+        background: #F0EBE4;
+        color: #3D3632;
     }
-    .reader-scroll-fill {
-        height: 100%; border-radius: 3px;
-        background: var(--accent-higher);
-        width: 0%; transition: width 0.1s;
+    .fs-reader-close svg {
+        width: 18px; height: 18px;
     }
-    .reader-scroll-pct {
-        font-size: 0.75rem; color: var(--text-muted);
-        font-variant-numeric: tabular-nums;
-        min-width: 32px;
-    }
-    .reader-detail-body {
+    .fs-reader-content {
         max-width: 680px;
         margin: 0 auto;
-        padding: 64px 32px 120px;
+        padding: 48px 32px 120px;
     }
-    .reader-detail-meta {
-        margin-bottom: 40px;
-        padding-bottom: 32px;
-        border-bottom: 1px solid var(--border);
+    .fs-chapter {
+        margin-bottom: 56px;
     }
-    .reader-detail-tag {
-        font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
-        letter-spacing: 0.08em; padding: 4px 12px;
-        border-radius: 100px; display: inline-block;
-        margin-bottom: 16px;
+    .fs-chapter-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #B8A898;
+        margin-bottom: 24px;
     }
-    .reader-detail-tag.thought { background: rgba(92, 138, 110, 0.08); color: var(--accent-higher); }
-    .reader-detail-tag.insight { background: rgba(184, 168, 152, 0.08); color: var(--accent-primitive); }
-    .reader-detail-tag.chapter { background: rgba(140, 126, 114, 0.08); color: var(--accent-rational); }
-    .reader-detail-title {
-        font-size: clamp(1.8rem, 4vw, 2.4rem);
-        font-weight: 400; font-style: italic;
+    .fs-chapter-heading {
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        font-weight: 300;
+        font-style: italic;
+        color: #1A1A1A;
+        margin-bottom: 32px;
         letter-spacing: -0.02em;
-        line-height: 1.3;
-        margin-bottom: 16px;
     }
-    .reader-detail-author {
-        font-size: 0.85rem; color: var(--text-muted);
+    .fs-chapter-quote {
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        font-style: italic;
+        color: #8C7E72;
+        line-height: 1.6;
+        margin-bottom: 36px;
+        padding-left: 20px;
+        border-left: 2px solid #DDD6CC;
     }
-    .reader-detail-content {
-        font-size: 1.1rem;
-        line-height: 1.9;
-        color: var(--text);
+    .fs-chapter-text {
+        font-size: 1.05rem;
+        line-height: 2;
+        color: #3D3632;
+        font-weight: 400;
     }
-    .reader-detail-content p {
-        margin-bottom: 1.6em;
+    .fs-chapter-text p {
+        margin-bottom: 20px;
+        text-indent: 1.5em;
     }
-    .reader-detail-content p:last-child {
-        margin-bottom: 0;
+    .fs-chapter-text p:first-child {
+        text-indent: 0;
     }
-    .reader-detail-end {
+    .fs-divider {
+        width: 60px;
+        height: 1px;
+        background: #DDD6CC;
+        margin: 48px auto;
+    }
+    .fs-cta {
         text-align: center;
-        margin-top: 64px;
-        padding-top: 32px;
-        border-top: 1px solid var(--border);
+        padding: 48px 0;
     }
-    .reader-detail-end-icon {
-        font-size: 1.2rem; color: var(--text-muted);
-        margin-bottom: 12px;
-    }
-    .reader-detail-end-text {
-        font-size: 0.85rem; color: var(--text-muted);
+    .fs-cta p {
+        font-size: 1rem;
+        color: #8C7E72;
+        margin-bottom: 24px;
+        font-style: italic;
     }
 
-    @media (max-width: 768px) {
-        .reader-overlay-nav { padding: 12px 20px; }
-        .reader-back-btn { padding: 8px 16px; font-size: 0.8rem; }
-        .reader-scroll-bar { width: 80px; }
-        .reader-detail-body { padding: 40px 20px 100px; }
-        .reader-detail-content { font-size: 1rem; line-height: 1.85; }
+    /* Reader settings button */
+    .fs-reader-actions {
+        display: flex; align-items: center; gap: 12px;
     }
+    .fs-reader-settings-btn {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        border: 1.5px solid var(--r-border, #E8E0D6);
+        background: transparent;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        color: var(--r-muted, #8C7E72);
+        transition: all 0.2s;
+    }
+    .fs-reader-settings-btn:hover {
+        background: var(--r-hover, #F0EBE4);
+        color: var(--r-text, #3D3632);
+    }
+    .fs-reader-settings-btn svg {
+        width: 18px; height: 18px;
+    }
+    .aa-icon {
+        font-family: var(--font);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1;
+    }
+
+    /* Settings panel */
+    .fs-settings-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10001;
+        background: rgba(0,0,0,0);
+        transition: background 0.3s;
+    }
+    .fs-settings-backdrop.open {
+        display: block;
+        background: rgba(0,0,0,0.3);
+    }
+    .fs-settings-panel {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 10002;
+        background: var(--r-card, #fff);
+        border-radius: 20px 20px 0 0;
+        padding: 0 28px 36px;
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        max-width: 480px;
+        margin: 0 auto;
+        box-shadow: 0 -4px 40px rgba(0,0,0,0.12);
+    }
+    .fs-settings-panel.open {
+        transform: translateY(0);
+    }
+    .fs-settings-handle {
+        width: 36px; height: 4px;
+        background: var(--r-border, #DDD6CC);
+        border-radius: 4px;
+        margin: 12px auto 20px;
+    }
+    .fs-settings-title {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--r-muted, #8C7E72);
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    /* Font size control */
+    .fs-settings-row {
+        margin-bottom: 28px;
+    }
+    .fs-font-size-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .fs-font-label {
+        font-family: 'Urbanist', sans-serif;
+        color: var(--r-muted, #8C7E72);
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+    .fs-font-label-sm { font-size: 0.8rem; }
+    .fs-font-label-lg { font-size: 1.3rem; }
+    .fs-font-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 4px;
+        background: var(--r-border, #DDD6CC);
+        border-radius: 4px;
+        outline: none;
+    }
+    .fs-font-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px; height: 24px;
+        background: var(--r-accent, #8C7E72);
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid var(--r-card, #fff);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .fs-font-slider::-moz-range-thumb {
+        width: 24px; height: 24px;
+        background: var(--r-accent, #8C7E72);
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid var(--r-card, #fff);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+
+    /* Theme picker */
+    .fs-theme-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+    .fs-theme-btn {
+        width: 52px; height: 52px;
+        border-radius: 50%;
+        border: 2.5px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .fs-theme-btn.active {
+        border-color: var(--r-accent, #8C7E72);
+    }
+    .fs-theme-btn::after {
+        content: '';
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        display: block;
+    }
+    .fs-theme-light::after { background: #FDFBF7; border: 1px solid #E8E0D6; }
+    .fs-theme-dark::after { background: #1C1C1E; }
+    .fs-theme-sepia::after { background: #F4E8D3; }
+    .fs-theme-forest::after { background: #2C3E2D; }
+
+    /* Theme: Light (default) */
+    .fs-reader-overlay {
+        --r-bg: #FDFBF7;
+        --r-text: #3D3632;
+        --r-muted: #8C7E72;
+        --r-heading: #1A1A1A;
+        --r-border: #EBE6DE;
+        --r-hover: #F0EBE4;
+        --r-card: #FFFFFF;
+        --r-topbar: rgba(253,251,247,0.92);
+        --r-divider: #DDD6CC;
+        --r-accent: #8C7E72;
+        --r-quote-border: #DDD6CC;
+    }
+
+    /* Theme: Dark */
+    .fs-reader-overlay.theme-dark {
+        --r-bg: #1C1C1E;
+        --r-text: #D4D2CE;
+        --r-muted: #8E8E93;
+        --r-heading: #F5F5F7;
+        --r-border: #38383A;
+        --r-hover: #2C2C2E;
+        --r-card: #2C2C2E;
+        --r-topbar: rgba(28,28,30,0.92);
+        --r-divider: #38383A;
+        --r-accent: #A8A29E;
+        --r-quote-border: #48484A;
+    }
+
+    /* Theme: Sepia */
+    .fs-reader-overlay.theme-sepia {
+        --r-bg: #F4E8D3;
+        --r-text: #5B4636;
+        --r-muted: #8B7355;
+        --r-heading: #3C2A1A;
+        --r-border: #DFD0B8;
+        --r-hover: #EBD9BE;
+        --r-card: #F9F0E0;
+        --r-topbar: rgba(244,232,211,0.92);
+        --r-divider: #D4C4A8;
+        --r-accent: #8B7355;
+        --r-quote-border: #C9B898;
+    }
+
+    /* Theme: Forest */
+    .fs-reader-overlay.theme-forest {
+        --r-bg: #2C3E2D;
+        --r-text: #C8D5C0;
+        --r-muted: #8BA07E;
+        --r-heading: #E8F0E4;
+        --r-border: #3D5240;
+        --r-hover: #3A4F3C;
+        --r-card: #344838;
+        --r-topbar: rgba(44,62,45,0.92);
+        --r-divider: #3D5240;
+        --r-accent: #8BA07E;
+        --r-quote-border: #4A6548;
+    }
+
+    /* Apply theme variables to reader elements */
+    .fs-reader-overlay {
+        background: var(--r-bg);
+        transition: background 0.4s, color 0.4s;
+    }
+    .fs-reader-topbar {
+        background: var(--r-topbar);
+        border-bottom-color: var(--r-border);
+        transition: background 0.4s, border-color 0.4s;
+    }
+    .fs-reader-booktitle {
+        color: var(--r-muted);
+        transition: color 0.4s;
+    }
+    .fs-reader-close {
+        border-color: var(--r-border);
+        color: var(--r-muted);
+    }
+    .fs-reader-close:hover {
+        background: var(--r-hover);
+        color: var(--r-text);
+    }
+    .fs-chapter-label {
+        color: var(--r-muted);
+        transition: color 0.4s;
+    }
+    .fs-chapter-heading {
+        color: var(--r-heading);
+        transition: color 0.4s;
+    }
+    .fs-chapter-quote {
+        color: var(--r-muted);
+        border-left-color: var(--r-quote-border);
+        transition: color 0.4s, border-color 0.4s;
+    }
+    .fs-chapter-text {
+        color: var(--r-text);
+        transition: color 0.4s;
+    }
+    .fs-divider {
+        background: var(--r-divider);
+        transition: background 0.4s;
+    }
+    .fs-settings-panel {
+        background: var(--r-card);
+    }
+
+    /* Progress bar under topbar */
+    .fs-reader-progress {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 3px;
+        background: var(--r-border, #EBE6DE);
+    }
+    .fs-reader-progress-fill {
+        height: 100%;
+        background: var(--r-accent, #8C7E72);
+        transition: width 0.15s ease;
+        width: 0%;
+    }
+    .fs-reader-pct {
+        font-size: 0.75rem;
+        color: var(--r-muted, #8C7E72);
+        font-weight: 500;
+        min-width: 32px;
+        text-align: right;
+    }
+
+    /* Next chapter CTA */
+    .fs-next-chapter {
+        text-align: center;
+        padding: 48px 0 32px;
+        border-top: 1px solid var(--r-divider, #DDD6CC);
+        margin-top: 48px;
+    }
+    .fs-next-chapter p {
+        font-size: 0.85rem;
+        color: var(--r-muted);
+        margin-bottom: 8px;
+    }
+    .fs-next-chapter-title {
+        font-size: 1.2rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--r-heading);
+        margin-bottom: 20px;
+    }
+    .fs-next-chapter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 28px;
+        background: var(--r-text, #3D3632);
+        color: var(--r-bg, #FDFBF7);
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .fs-next-chapter-btn:hover { opacity: 0.85; }
+    .fs-next-chapter-btn svg { width: 14px; height: 14px; }
+
+    /* Responsive reader */
+    @media (max-width: 768px) {
+        .fs-reader-topbar { padding: 12px 20px; }
+        .fs-reader-content { padding: 32px 20px 100px; }
+        .fs-reader-close, .fs-reader-settings-btn { width: 36px; height: 36px; }
+        .fs-reader-close svg, .fs-reader-settings-btn svg { width: 16px; height: 16px; }
+        .fs-reader-booktitle { font-size: 0.8rem; }
+        .aa-icon { font-size: 13px; }
+    }
+
 
     /* ===== FOOTER ===== */
     .footer { padding: 0 0 48px; }
@@ -1603,22 +1935,50 @@
 </div>
 </section>
 
-<!-- ===== READER DETAIL OVERLAY ===== -->
-<div class="reader-overlay" id="readerOverlay">
-    <div class="reader-overlay-nav">
-        <button class="reader-back-btn" id="readerBackBtn">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4L4 12M4 12h7M4 12V5"/></svg>
-            <span data-i18n="reader_back">Späť</span>
-        </button>
-        <div class="reader-scroll-progress">
-            <div class="reader-scroll-bar"><div class="reader-scroll-fill" id="readerScrollFill"></div></div>
-            <span class="reader-scroll-pct" id="readerScrollPct">0%</span>
+<!-- ===== FULLSCREEN READER OVERLAY ===== -->
+<div class="fs-reader-overlay" id="fsChapterReader">
+    <div class="fs-reader-topbar">
+        <div class="fs-reader-booktitle">JA – Evolúcia vedomia</div>
+        <div class="fs-reader-actions">
+            <span class="fs-reader-pct" id="chapterPct">0%</span>
+            <button class="fs-reader-settings-btn" id="chapterSettingsBtn" aria-label="Nastavenia">
+                <span class="aa-icon">Aa</span>
+            </button>
+            <button class="fs-reader-close" id="chapterCloseBtn" aria-label="Zavrieť">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="fs-reader-progress" id="chapterProgressBar">
+            <div class="fs-reader-progress-fill" id="chapterProgressFill"></div>
         </div>
     </div>
-    <div class="reader-detail-body" id="readerDetailBody">
-        <!-- Content is injected by JS -->
+    <div class="fs-reader-content" id="chapterReaderContent">
+        <!-- Content injected by JS -->
     </div>
 </div>
+
+<!-- Reader Settings Panel -->
+<div class="fs-settings-backdrop" id="chapterSettingsBackdrop"></div>
+<div class="fs-settings-panel" id="chapterSettingsPanel">
+    <div class="fs-settings-handle"></div>
+    <div class="fs-settings-title" data-i18n="fs_settings_title">Nastavenia</div>
+    <div class="fs-settings-row">
+        <div class="fs-font-size-row">
+            <span class="fs-font-label fs-font-label-sm">Aa</span>
+            <input type="range" class="fs-font-slider" id="chapterFontSlider" min="0" max="4" step="1" value="2">
+            <span class="fs-font-label fs-font-label-lg">Aa</span>
+        </div>
+    </div>
+    <div class="fs-settings-row">
+        <div class="fs-theme-row">
+            <button class="fs-theme-btn fs-theme-light active" data-theme="" aria-label="Svetlá"></button>
+            <button class="fs-theme-btn fs-theme-dark" data-theme="theme-dark" aria-label="Tmavá"></button>
+            <button class="fs-theme-btn fs-theme-forest" data-theme="theme-forest" aria-label="Les"></button>
+            <button class="fs-theme-btn fs-theme-sepia" data-theme="theme-sepia" aria-label="Sépia"></button>
+        </div>
+    </div>
+</div>
+
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
@@ -1702,6 +2062,7 @@
             reader_back: 'Späť',
             reader_end: 'Koniec textu',
             reader_author_name: 'Lukáš Horák',
+            fs_settings_title: 'Nastavenia',
             book_ja_title: 'Evolúcia vedomia – JA',
             book_ja_desc: 'Ukážky z prvej knihy. Vybrané kapitoly, ktoré môžete čítať priamo tu.',
             ja_ch_tuzby_title: 'Túžby',
@@ -1818,6 +2179,7 @@
             reader_back: 'Back',
             reader_end: 'End of text',
             reader_author_name: 'Lukas Horak',
+            fs_settings_title: 'Settings',
             book_ja_title: 'Evolution of Consciousness – I AM',
             book_ja_desc: 'Excerpts from the first book. Selected chapters you can read right here.',
             ja_ch_tuzby_title: 'Desires',
@@ -2275,288 +2637,411 @@
 
     loadReadingProgress();
 
-    // ===== READER DETAIL OVERLAY =====
-    var readerOverlay = document.getElementById('readerOverlay');
-    var readerBackBtn = document.getElementById('readerBackBtn');
-    var readerDetailBody = document.getElementById('readerDetailBody');
-    var readerScrollFill = document.getElementById('readerScrollFill');
-    var readerScrollPct = document.getElementById('readerScrollPct');
-    var currentReadingId = null;
+    // ===== FULLSCREEN CHAPTER READER =====
+    (function initReader() {
+        var overlay = document.getElementById('fsChapterReader');
+        var readerContent = document.getElementById('chapterReaderContent');
+        var closeBtn = document.getElementById('chapterCloseBtn');
+        var settingsBtn = document.getElementById('chapterSettingsBtn');
+        var settingsPanel = document.getElementById('chapterSettingsPanel');
+        var settingsBackdrop = document.getElementById('chapterSettingsBackdrop');
+        var fontSlider = document.getElementById('chapterFontSlider');
+        var progressFill = document.getElementById('chapterProgressFill');
+        var pctLabel = document.getElementById('chapterPct');
+        var booktitle = overlay ? overlay.querySelector('.fs-reader-booktitle') : null;
+        if (!overlay || !readerContent) return;
 
-    // Full content for each thought (demo content)
-    var thoughtContent = {
-        sk: {
-            'thought-1': {
-                tag: 'thought', tagLabel: 'Myšlienka',
-                title: 'O ilúzii oddelenia',
-                author: 'Lukáš Horák',
-                body: '<p>Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle? Čo ak je samotné rozdelenie príčinou väčšiny nášho utrpenia?</p><p>Predstavte si, že stojíte pri jazere. Vidíte odraz stromov na hladine. Viete, že odraz nie je skutočný les – je to len obraz. Ale keď sa pozriete na svet okolo seba, robíte presne to isté. Vaša myseľ vytvára obraz reality a vy si ten obraz zamieňate za realitu samotnú.</p><p>Neurovedecké výskumy posledných dvoch desaťročí ukazujú, že mozog neprijíma realitu pasívne. Aktívne ju konštruuje. To, čo vnímate ako "vonkajší svet", je v skutočnosti model – simulácia vytvorená vašimi neurónmi na základe neúplných senzorických dát.</p><p>Keď si toto uvedomíte – naozaj, hlboko si to uvedomíte, nie len intelektuálne – niečo sa zmení. Hranica medzi "ja" a "svet" sa začne rozplývať. Nie je to strata identity. Je to jej rozšírenie.</p><p>Budhistická tradícia to nazýva "prázdnota" – nie v zmysle, že nič neexistuje, ale v zmysle, že nič neexistuje nezávisle, oddelene od všetkého ostatného. Moderná kvantová fyzika dospela k podobnému záveru: na najhlbšej úrovni je všetko prepojené.</p><p>Ilúzia oddelenia nie je chyba. Je to užitočný nástroj – evolučný mechanizmus, ktorý nám umožnil prežiť. Ale keď si ju zamieňame za absolútnu pravdu, začíname trpieť. Začíname bojovať so svetom, namiesto toho, aby sme s ním spolupracovali.</p><p>Prvý krok k oslobodeniu nie je zmena sveta. Je to zmena spôsobu, akým ho vnímame. A to začína jednoduchou otázkou: Kto je ten, kto pozoruje?</p>'
-            },
-            'thought-2': {
-                tag: 'insight', tagLabel: 'Postreh',
-                title: 'Prečo sa bojíme ticha',
-                author: 'Lukáš Horák',
-                body: '<p>Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene, ktoré siahajú tisíce rokov dozadu.</p><p>Pre našich predkov ticho často znamenalo nebezpečenstvo. Keď vtáky prestali spievať, niečo sa blížilo. Tento primitívny alarm je v nás stále aktívny – len sa transformoval do modernej podoby.</p><p>Dnes sa nebojíme predátorov. Bojíme sa konfrontácie so sebou samým. V tichu sa ozývajú myšlienky, ktoré sme celý deň úspešne potláčali. Objavujú sa otázky, na ktoré nechceme odpovedať. A tak siahame po telefóne, pustíme si hudbu, zapneme televíziu – čokoľvek, len aby sme nemuseli počúvať.</p><p>Paradoxne, práve v tichu sa nachádza to, čo hľadáme. Nie odpovede – ale priestor, v ktorom sa odpovede môžu zrodiť.</p>'
-            },
-            'thought-3': {
-                tag: 'thought', tagLabel: 'Myšlienka',
-                title: 'Paradox sebarozvoja',
-                author: 'Lukáš Horák',
-                body: '<p>Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť. Je to ako snažiť sa zabudnúť na ružového slona – samotná snaha zabudnúť ho udržuje vo vašom vedomí.</p><p>Sebarozvoj sa stal priemyslom za miliardy. Knihy, kurzy, aplikácie – všetky sľubujú lepšiu verziu vás. Ale je v tom hlboký paradox: samotná túžba byť lepší predpokladá, že nie ste dosť dobrí. A tento predpoklad sa stáva sebanaplňujúcim proroctvom.</p><p>Skutočná zmena neprichádza z boja so sebou. Prichádza z porozumenia. Keď naozaj pochopíte, prečo robíte to, čo robíte – nie intelektuálne, ale na úrovni celého vášho bytia – zmena sa stane prirodzenou. Nie je to niečo, čo musíte dosiahnuť. Je to niečo, čo sa stane samo.</p>'
-            },
-            'thought-4': {
-                tag: 'thought', tagLabel: 'Myšlienka',
-                title: 'Čo je skutočná sloboda',
-                author: 'Lukáš Horák',
-                body: '<p>Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť. To je zásadný rozdiel, ktorý väčšina ľudí prehliadne.</p><p>Keď sa rozhodnete jesť zdravo, cvičiť, meditovať – je to sloboda, alebo len ďalšia forma kontroly? Keď si kúpite nové auto, pretože "chcete" – je to vaša túžba, alebo dôsledok rokov marketingu, sociálneho tlaku a biologických impulzov?</p><p>Neurológia nám hovorí, že väčšina našich "rozhodnutí" sa odohráva v mozgu ešte predtým, než si ich uvedomíme. To, čo vnímame ako slobodnú vôľu, je často len racionalizácia – príbeh, ktorý si mozog vytvorí, aby vysvetlil rozhodnutie, ktoré už bolo urobené.</p><p>Skutočná sloboda začína uvedomením si týchto mechanizmov. Nie ich potlačením – to je len ďalšia forma neslobody. Ale ich pozorovaním. Keď pozorujete túžbu bez toho, aby ste na ňu automaticky reagovali, objavíte priestor. A v tom priestore je sloboda.</p>'
-            },
-            'thought-5': {
-                tag: 'insight', tagLabel: 'Postreh',
-                title: 'Neuroplasticita a vedomie',
-                author: 'Lukáš Horák',
-                body: '<p>Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí. Nejde o to, že by meditácia "pridala" niečo nové. Skôr odstraňuje vrstvy naučených reakcií a odhaľuje to, čo tam vždy bolo.</p><p>Štúdie z Harvardskej univerzity ukázali, že osem týždňov pravidelnej meditácie vedie k merateľným zmenám v oblasti amygdaly – časti mozgu zodpovednej za strach a stresové reakcie. Amygdala sa zmenšuje. Nie že by zmizla – ale stáva sa menej dominantnou.</p><p>Zároveň sa posilňujú oblasti prefrontálneho kortexu zodpovedné za pozornosť, empatiu a sebauvedomenie. Mozog sa doslova prestavuje – a robí to v smere väčšej rovnováhy a harmónie.</p><p>To, čo je na tom fascinujúce, nie je samotná zmena. Je to jej smer. Akoby mozog "vedel", kam sa má vyvinúť – a meditácia mu jednoducho dá priestor to urobiť.</p>'
-            },
-            'thought-6': {
-                tag: 'thought', tagLabel: 'Myšlienka',
-                title: 'Emócie, ktoré ešte nemajú meno',
-                author: 'Lukáš Horák',
-                body: '<p>V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi tým, čo cítime, a tým, čo dokážeme vyjadriť slovami.</p><p>Poznáte ten pocit, keď sedíte v kaviarni a pozorujete ľudí okolo seba – a náhle si uvedomíte, že každý z nich žije rovnako bohatý vnútorný život ako vy? Ten záblesk uvedomenia, ktorý trvá len sekundu, ale zmení spôsob, akým sa pozeráte na svet?</p><p>Alebo ten pocit, keď počujete hudbu z detstva a na okamih sa vrátite – nie spomienkou, ale celým telom, celou bytosťou – do momentu, ktorý ste dávno zabudli?</p><p>Tieto emócie nie sú okrajové. Sú to možno tie najdôležitejšie – pretože nás spájajú s niečím väčším, než sme my sami. S niečím, čo jazyky nedokážu zachytiť, ale čo je predsa reálnejšie než čokoľvek, čo by sme mohli povedať.</p>'
-            }
-        },
-        en: {
-            'thought-1': {
-                tag: 'thought', tagLabel: 'Thought',
-                title: 'On the illusion of separation',
-                author: 'Lukas Horak',
-                body: '<p>When you observe the world, you feel separate from it – that there is an observer and that which is observed. But what if this division is just a construct of your mind? What if the division itself is the cause of most of our suffering?</p><p>Imagine standing by a lake. You see the reflection of trees on the surface. You know the reflection is not the real forest – it is just an image. But when you look at the world around you, you do exactly the same thing. Your mind creates an image of reality and you mistake that image for reality itself.</p><p>Neuroscience research over the past two decades shows that the brain does not passively receive reality. It actively constructs it. What you perceive as the "external world" is actually a model – a simulation created by your neurons based on incomplete sensory data.</p><p>When you realize this – truly, deeply realize it, not just intellectually – something changes. The boundary between "I" and "world" begins to dissolve. It is not a loss of identity. It is its expansion.</p><p>The Buddhist tradition calls this "emptiness" – not in the sense that nothing exists, but in the sense that nothing exists independently, separately from everything else. Modern quantum physics has arrived at a similar conclusion: at the deepest level, everything is connected.</p><p>The illusion of separation is not a mistake. It is a useful tool – an evolutionary mechanism that allowed us to survive. But when we mistake it for absolute truth, we begin to suffer. We begin to fight the world instead of cooperating with it.</p><p>The first step toward liberation is not changing the world. It is changing the way we perceive it. And that begins with a simple question: Who is the one who observes?</p>'
-            },
-            'thought-2': {
-                tag: 'insight', tagLabel: 'Insight',
-                title: 'Why we fear silence',
-                author: 'Lukas Horak',
-                body: '<p>Have you noticed how we immediately reach for our phone when silence occurs? This mechanism has deep evolutionary roots that go back thousands of years.</p><p>For our ancestors, silence often meant danger. When birds stopped singing, something was approaching. This primitive alarm is still active in us – it has just transformed into a modern form.</p><p>Today we are not afraid of predators. We are afraid of confrontation with ourselves. In silence, thoughts that we have been successfully suppressing all day make themselves heard. Questions we do not want to answer appear. And so we reach for the phone, play music, turn on the TV – anything so we do not have to listen.</p><p>Paradoxically, it is precisely in silence that what we are looking for can be found. Not answers – but the space in which answers can be born.</p>'
-            },
-            'thought-3': {
-                tag: 'thought', tagLabel: 'Thought',
-                title: 'The paradox of self-improvement',
-                author: 'Lukas Horak',
-                body: '<p>The more you try to change yourself, the more you reinforce the very aspect you want to change. It is like trying to forget a pink elephant – the very effort to forget keeps it in your consciousness.</p><p>Self-improvement has become a multi-billion industry. Books, courses, apps – all promise a better version of you. But there is a deep paradox: the very desire to be better presupposes that you are not good enough. And this assumption becomes a self-fulfilling prophecy.</p><p>Real change does not come from fighting yourself. It comes from understanding. When you truly understand why you do what you do – not intellectually, but at the level of your entire being – change becomes natural. It is not something you have to achieve. It is something that happens on its own.</p>'
-            },
-            'thought-4': {
-                tag: 'thought', tagLabel: 'Thought',
-                title: 'What true freedom is',
-                author: 'Lukas Horak',
-                body: '<p>Freedom is not doing what we want. True freedom is liberation from the mechanisms that make us want. That is a fundamental difference that most people overlook.</p><p>When you decide to eat healthy, exercise, meditate – is that freedom, or just another form of control? When you buy a new car because you "want to" – is that your desire, or the result of years of marketing, social pressure, and biological impulses?</p><p>Neurology tells us that most of our "decisions" happen in the brain before we become aware of them. What we perceive as free will is often just rationalization – a story the brain creates to explain a decision that has already been made.</p><p>True freedom begins with becoming aware of these mechanisms. Not suppressing them – that is just another form of unfreedom. But observing them. When you observe a desire without automatically reacting to it, you discover a space. And in that space is freedom.</p>'
-            },
-            'thought-5': {
-                tag: 'insight', tagLabel: 'Insight',
-                title: 'Neuroplasticity and consciousness',
-                author: 'Lukas Horak',
-                body: '<p>New research shows that meditation literally changes the structure of the brain. But not in the way most people think. It is not that meditation "adds" something new. Rather, it removes layers of learned reactions and reveals what was always there.</p><p>Studies from Harvard University showed that eight weeks of regular meditation leads to measurable changes in the amygdala – the part of the brain responsible for fear and stress responses. The amygdala shrinks. Not that it disappears – but it becomes less dominant.</p><p>At the same time, areas of the prefrontal cortex responsible for attention, empathy, and self-awareness are strengthened. The brain literally rebuilds itself – and it does so in the direction of greater balance and harmony.</p><p>What is fascinating about this is not the change itself. It is its direction. As if the brain "knew" where it should develop – and meditation simply gives it the space to do so.</p>'
-            },
-            'thought-6': {
-                tag: 'thought', tagLabel: 'Thought',
-                title: 'Emotions that have no name yet',
-                author: 'Lukas Horak',
-                body: '<p>In the upcoming book, I explore emotions that most languages cannot name. They exist at the boundary between what we feel and what we can express in words.</p><p>You know that feeling when you are sitting in a cafe observing people around you – and suddenly you realize that each of them lives an equally rich inner life as you? That flash of awareness that lasts only a second but changes the way you look at the world?</p><p>Or that feeling when you hear music from your childhood and for a moment you return – not through memory, but with your entire body, your entire being – to a moment you had long forgotten?</p><p>These emotions are not marginal. They may be the most important ones – because they connect us with something greater than ourselves. With something that languages cannot capture, but which is nevertheless more real than anything we could say.</p>'
-            }
-        }
-    };
+        var fontSizes = ['0.88rem', '0.95rem', '1.05rem', '1.18rem', '1.32rem'];
+        var lineHeights = ['1.85', '1.9', '2', '2.1', '2.15'];
 
-    function openReaderDetail(thoughtId) {
-        var dict = thoughtContent[lang] || thoughtContent['en'];
-        var content = dict[thoughtId];
-        if (!content) return;
-
-        currentReadingId = thoughtId;
-
-        var html = '<div class="reader-detail-meta">'
-            + '<span class="reader-detail-tag ' + content.tag + '">' + content.tagLabel + '</span>'
-            + '<h1 class="reader-detail-title">' + content.title + '</h1>'
-            + '<div class="reader-detail-author">' + content.author + '</div>'
-            + '</div>'
-            + '<div class="reader-detail-content">' + content.body + '</div>'
-            + '<div class="reader-detail-end">'
-            + '<div class="reader-detail-end-icon">&#10044;</div>'
-            + '<div class="reader-detail-end-text" data-i18n="reader_end">' + (T[lang].reader_end || 'End of text') + '</div>'
-            + '</div>';
-
-        readerDetailBody.innerHTML = html;
-        readerOverlay.classList.add('open');
-        readerOverlay.scrollTop = 0;
-        document.body.style.overflow = 'hidden';
-        updateScrollProgress();
-    }
-
-    function closeReaderDetail() {
-        readerOverlay.classList.remove('open');
-        document.body.style.overflow = '';
-        // Save final reading progress
-        if (currentReadingId) {
-            var pct = getScrollPercent();
-            saveReadingProgress(currentReadingId, pct);
-        }
-        currentReadingId = null;
-    }
-
-    function getScrollPercent() {
-        var el = readerOverlay;
-        var scrollTop = el.scrollTop;
-        var scrollHeight = el.scrollHeight - el.clientHeight;
-        if (scrollHeight <= 0) return 100;
-        return Math.round((scrollTop / scrollHeight) * 100);
-    }
-
-    function updateScrollProgress() {
-        var pct = getScrollPercent();
-        if (readerScrollFill) readerScrollFill.style.width = pct + '%';
-        if (readerScrollPct) readerScrollPct.textContent = pct + '%';
-    }
-
-    if (readerBackBtn) {
-        readerBackBtn.addEventListener('click', closeReaderDetail);
-    }
-
-    if (readerOverlay) {
-        readerOverlay.addEventListener('scroll', function() {
-            updateScrollProgress();
-            // Auto-save progress as user scrolls
-            if (currentReadingId) {
-                var pct = getScrollPercent();
-                saveReadingProgress(currentReadingId, pct);
-            }
-        });
-    }
-
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && readerOverlay.classList.contains('open')) {
-            closeReaderDetail();
-        }
-    });
-
-    // Attach click handlers to thought rows
-    document.querySelectorAll('.thought-row').forEach(function(row) {
-        var id = row.getAttribute('data-thought-id');
-        if (id) {
-            row.addEventListener('click', function() {
-                openReaderDetail(id);
-            });
-        }
-    });
-
-    // ===== PREVIEW ROW (BOOK CHAPTERS) HANDLERS =====
-    var chapterFileMap = {
+        var chapterFileMap = {
         'ja-tuzby': 'chapters/tuzby.html',
         'ja-odpustenie': 'chapters/odpustenie.html',
         'ja-rozum-prekazka': 'chapters/rozum-prekazka.html',
         'ja-rozum-cas': 'chapters/rozum-cas.html',
         'ja-autenticnost': 'chapters/autenticnost.html'
-    };
+        };
 
-    var chapterTitles = {
+        var chapterOrder = ['ja-tuzby', 'ja-odpustenie', 'ja-rozum-prekazka', 'ja-rozum-cas', 'ja-autenticnost'];
+
+        var chapterTitles = {
         sk: {
-            'ja-tuzby': 'Túžby',
-            'ja-odpustenie': 'Odpustenie ako akt sily',
-            'ja-rozum-prekazka': 'Rozum ako prekážka',
-            'ja-rozum-cas': 'Môj rozum vníma čas',
-            'ja-autenticnost': 'Autentickosť'
+        'ja-tuzby': 'Túžby',
+        'ja-odpustenie': 'Odpustenie ako akt sily',
+        'ja-rozum-prekazka': 'Rozum ako prekážka',
+        'ja-rozum-cas': 'Môj rozum vníma čas',
+        'ja-autenticnost': 'Autentickosť'
         },
         en: {
-            'ja-tuzby': 'Desires',
-            'ja-odpustenie': 'Forgiveness as an Act of Strength',
-            'ja-rozum-prekazka': 'Reason as an Obstacle',
-            'ja-rozum-cas': 'My Reason Perceives Time',
-            'ja-autenticnost': 'Authenticity'
+        'ja-tuzby': 'Desires',
+        'ja-odpustenie': 'Forgiveness as an Act of Strength',
+        'ja-rozum-prekazka': 'Reason as an Obstacle',
+        'ja-rozum-cas': 'My Reason Perceives Time',
+        'ja-autenticnost': 'Authenticity'
         }
-    };
+        };
 
-    var chapterCache = {};
+        var chapterCache = {};
+        var currentChapterId = null;
 
-    function openChapterReader(previewId) {
-        var file = chapterFileMap[previewId];
-        if (!file) return;
+        var thoughtContent = {
+        sk: {
+        'thought-1': {
+        tag: 'thought', tagLabel: 'Myšlienka',
+        title: 'O ilúzii oddelenia',
+        author: 'Lukáš Horák',
+        body: '<p>Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle? Čo ak je samotné rozdelenie príčinou väčšiny nášho utrpenia?</p><p>Predstavte si, že stojíte pri jazere. Vidíte odraz stromov na hladine. Viete, že odraz nie je skutočný les – je to len obraz. Ale keď sa pozriete na svet okolo seba, robíte presne to isté. Vaša myseľ vytvára obraz reality a vy si ten obraz zamieňate za realitu samotnú.</p><p>Neurovedecké výskumy posledných dvoch desaťročí ukazujú, že mozog neprijíma realitu pasívne. Aktívne ju konštruuje. To, čo vnímate ako "vonkajší svet", je v skutočnosti model – simulácia vytvorená vašimi neurónmi na základe neúplných senzorických dát.</p><p>Keď si toto uvedomíte – naozaj, hlboko si to uvedomíte, nie len intelektuálne – niečo sa zmení. Hranica medzi "ja" a "svet" sa začne rozplývať. Nie je to strata identity. Je to jej rozšírenie.</p><p>Budhistická tradícia to nazýva "prázdnota" – nie v zmysle, že nič neexistuje, ale v zmysle, že nič neexistuje nezávisle, oddelene od všetkého ostatného. Moderná kvantová fyzika dospela k podobnému záveru: na najhlbšej úrovni je všetko prepojené.</p><p>Ilúzia oddelenia nie je chyba. Je to užitočný nástroj – evolučný mechanizmus, ktorý nám umožnil prežiť. Ale keď si ju zamieňame za absolútnu pravdu, začíname trpieť. Začíname bojovať so svetom, namiesto toho, aby sme s ním spolupracovali.</p><p>Prvý krok k oslobodeniu nie je zmena sveta. Je to zmena spôsobu, akým ho vnímame. A to začína jednoduchou otázkou: Kto je ten, kto pozoruje?</p>'
+        },
+        'thought-2': {
+        tag: 'insight', tagLabel: 'Postreh',
+        title: 'Prečo sa bojíme ticha',
+        author: 'Lukáš Horák',
+        body: '<p>Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene, ktoré siahajú tisíce rokov dozadu.</p><p>Pre našich predkov ticho často znamenalo nebezpečenstvo. Keď vtáky prestali spievať, niečo sa blížilo. Tento primitívny alarm je v nás stále aktívny – len sa transformoval do modernej podoby.</p><p>Dnes sa nebojíme predátorov. Bojíme sa konfrontácie so sebou samým. V tichu sa ozývajú myšlienky, ktoré sme celý deň úspešne potláčali. Objavujú sa otázky, na ktoré nechceme odpovedať. A tak siahame po telefóne, pustíme si hudbu, zapneme televíziu – čokoľvek, len aby sme nemuseli počúvať.</p><p>Paradoxne, práve v tichu sa nachádza to, čo hľadáme. Nie odpovede – ale priestor, v ktorom sa odpovede môžu zrodiť.</p>'
+        },
+        'thought-3': {
+        tag: 'thought', tagLabel: 'Myšlienka',
+        title: 'Paradox sebarozvoja',
+        author: 'Lukáš Horák',
+        body: '<p>Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť. Je to ako snažiť sa zabudnúť na ružového slona – samotná snaha zabudnúť ho udržuje vo vašom vedomí.</p><p>Sebarozvoj sa stal priemyslom za miliardy. Knihy, kurzy, aplikácie – všetky sľubujú lepšiu verziu vás. Ale je v tom hlboký paradox: samotná túžba byť lepší predpokladá, že nie ste dosť dobrí. A tento predpoklad sa stáva sebanaplňujúcim proroctvom.</p><p>Skutočná zmena neprichádza z boja so sebou. Prichádza z porozumenia. Keď naozaj pochopíte, prečo robíte to, čo robíte – nie intelektuálne, ale na úrovni celého vášho bytia – zmena sa stane prirodzenou. Nie je to niečo, čo musíte dosiahnuť. Je to niečo, čo sa stane samo.</p>'
+        },
+        'thought-4': {
+        tag: 'thought', tagLabel: 'Myšlienka',
+        title: 'Čo je skutočná sloboda',
+        author: 'Lukáš Horák',
+        body: '<p>Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť. To je zásadný rozdiel, ktorý väčšina ľudí prehliadne.</p><p>Keď sa rozhodnete jesť zdravo, cvičiť, meditovať – je to sloboda, alebo len ďalšia forma kontroly? Keď si kúpite nové auto, pretože "chcete" – je to vaša túžba, alebo dôsledok rokov marketingu, sociálneho tlaku a biologických impulzov?</p><p>Neurológia nám hovorí, že väčšina našich "rozhodnutí" sa odohráva v mozgu ešte predtým, než si ich uvedomíme. To, čo vnímame ako slobodnú vôľu, je často len racionalizácia – príbeh, ktorý si mozog vytvorí, aby vysvetlil rozhodnutie, ktoré už bolo urobené.</p><p>Skutočná sloboda začína uvedomením si týchto mechanizmov. Nie ich potlačením – to je len ďalšia forma neslobody. Ale ich pozorovaním. Keď pozorujete túžbu bez toho, aby ste na ňu automaticky reagovali, objavíte priestor. A v tom priestore je sloboda.</p>'
+        },
+        'thought-5': {
+        tag: 'insight', tagLabel: 'Postreh',
+        title: 'Neuroplasticita a vedomie',
+        author: 'Lukáš Horák',
+        body: '<p>Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí. Nejde o to, že by meditácia "pridala" niečo nové. Skôr odstraňuje vrstvy naučených reakcií a odhaľuje to, čo tam vždy bolo.</p><p>Štúdie z Harvardskej univerzity ukázali, že osem týždňov pravidelnej meditácie vedie k merateľným zmenám v oblasti amygdaly – časti mozgu zodpovednej za strach a stresové reakcie. Amygdala sa zmenšuje. Nie že by zmizla – ale stáva sa menej dominantnou.</p><p>Zároveň sa posilňujú oblasti prefrontálneho kortexu zodpovedné za pozornosť, empatiu a sebauvedomenie. Mozog sa doslova prestavuje – a robí to v smere väčšej rovnováhy a harmónie.</p><p>To, čo je na tom fascinujúce, nie je samotná zmena. Je to jej smer. Akoby mozog "vedel", kam sa má vyvinúť – a meditácia mu jednoducho dá priestor to urobiť.</p>'
+        },
+        'thought-6': {
+        tag: 'thought', tagLabel: 'Myšlienka',
+        title: 'Emócie, ktoré ešte nemajú meno',
+        author: 'Lukáš Horák',
+        body: '<p>V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi tým, čo cítime, a tým, čo dokážeme vyjadriť slovami.</p><p>Poznáte ten pocit, keď sedíte v kaviarni a pozorujete ľudí okolo seba – a náhle si uvedomíte, že každý z nich žije rovnako bohatý vnútorný život ako vy? Ten záblesk uvedomenia, ktorý trvá len sekundu, ale zmení spôsob, akým sa pozeráte na svet?</p><p>Alebo ten pocit, keď počujete hudbu z detstva a na okamih sa vrátite – nie spomienkou, ale celým telom, celou bytosťou – do momentu, ktorý ste dávno zabudli?</p><p>Tieto emócie nie sú okrajové. Sú to možno tie najdôležitejšie – pretože nás spájajú s niečím väčším, než sme my sami. S niečím, čo jazyky nedokážu zachytiť, ale čo je predsa reálnejšie než čokoľvek, čo by sme mohli povedať.</p>'
+        }
+        },
+        en: {
+        'thought-1': {
+        tag: 'thought', tagLabel: 'Thought',
+        title: 'On the illusion of separation',
+        author: 'Lukas Horak',
+        body: '<p>When you observe the world, you feel separate from it – that there is an observer and that which is observed. But what if this division is just a construct of your mind? What if the division itself is the cause of most of our suffering?</p><p>Imagine standing by a lake. You see the reflection of trees on the surface. You know the reflection is not the real forest – it is just an image. But when you look at the world around you, you do exactly the same thing. Your mind creates an image of reality and you mistake that image for reality itself.</p><p>Neuroscience research over the past two decades shows that the brain does not passively receive reality. It actively constructs it. What you perceive as the "external world" is actually a model – a simulation created by your neurons based on incomplete sensory data.</p><p>When you realize this – truly, deeply realize it, not just intellectually – something changes. The boundary between "I" and "world" begins to dissolve. It is not a loss of identity. It is its expansion.</p><p>The Buddhist tradition calls this "emptiness" – not in the sense that nothing exists, but in the sense that nothing exists independently, separately from everything else. Modern quantum physics has arrived at a similar conclusion: at the deepest level, everything is connected.</p><p>The illusion of separation is not a mistake. It is a useful tool – an evolutionary mechanism that allowed us to survive. But when we mistake it for absolute truth, we begin to suffer. We begin to fight the world instead of cooperating with it.</p><p>The first step toward liberation is not changing the world. It is changing the way we perceive it. And that begins with a simple question: Who is the one who observes?</p>'
+        },
+        'thought-2': {
+        tag: 'insight', tagLabel: 'Insight',
+        title: 'Why we fear silence',
+        author: 'Lukas Horak',
+        body: '<p>Have you noticed how we immediately reach for our phone when silence occurs? This mechanism has deep evolutionary roots that go back thousands of years.</p><p>For our ancestors, silence often meant danger. When birds stopped singing, something was approaching. This primitive alarm is still active in us – it has just transformed into a modern form.</p><p>Today we are not afraid of predators. We are afraid of confrontation with ourselves. In silence, thoughts that we have been successfully suppressing all day make themselves heard. Questions we do not want to answer appear. And so we reach for the phone, play music, turn on the TV – anything so we do not have to listen.</p><p>Paradoxically, it is precisely in silence that what we are looking for can be found. Not answers – but the space in which answers can be born.</p>'
+        },
+        'thought-3': {
+        tag: 'thought', tagLabel: 'Thought',
+        title: 'The paradox of self-improvement',
+        author: 'Lukas Horak',
+        body: '<p>The more you try to change yourself, the more you reinforce the very aspect you want to change. It is like trying to forget a pink elephant – the very effort to forget keeps it in your consciousness.</p><p>Self-improvement has become a multi-billion industry. Books, courses, apps – all promise a better version of you. But there is a deep paradox: the very desire to be better presupposes that you are not good enough. And this assumption becomes a self-fulfilling prophecy.</p><p>Real change does not come from fighting yourself. It comes from understanding. When you truly understand why you do what you do – not intellectually, but at the level of your entire being – change becomes natural. It is not something you have to achieve. It is something that happens on its own.</p>'
+        },
+        'thought-4': {
+        tag: 'thought', tagLabel: 'Thought',
+        title: 'What true freedom is',
+        author: 'Lukas Horak',
+        body: '<p>Freedom is not doing what we want. True freedom is liberation from the mechanisms that make us want. That is a fundamental difference that most people overlook.</p><p>When you decide to eat healthy, exercise, meditate – is that freedom, or just another form of control? When you buy a new car because you "want to" – is that your desire, or the result of years of marketing, social pressure, and biological impulses?</p><p>Neurology tells us that most of our "decisions" happen in the brain before we become aware of them. What we perceive as free will is often just rationalization – a story the brain creates to explain a decision that has already been made.</p><p>True freedom begins with becoming aware of these mechanisms. Not suppressing them – that is just another form of unfreedom. But observing them. When you observe a desire without automatically reacting to it, you discover a space. And in that space is freedom.</p>'
+        },
+        'thought-5': {
+        tag: 'insight', tagLabel: 'Insight',
+        title: 'Neuroplasticity and consciousness',
+        author: 'Lukas Horak',
+        body: '<p>New research shows that meditation literally changes the structure of the brain. But not in the way most people think. It is not that meditation "adds" something new. Rather, it removes layers of learned reactions and reveals what was always there.</p><p>Studies from Harvard University showed that eight weeks of regular meditation leads to measurable changes in the amygdala – the part of the brain responsible for fear and stress responses. The amygdala shrinks. Not that it disappears – but it becomes less dominant.</p><p>At the same time, areas of the prefrontal cortex responsible for attention, empathy, and self-awareness are strengthened. The brain literally rebuilds itself – and it does so in the direction of greater balance and harmony.</p><p>What is fascinating about this is not the change itself. It is its direction. As if the brain "knew" where it should develop – and meditation simply gives it the space to do so.</p>'
+        },
+        'thought-6': {
+        tag: 'thought', tagLabel: 'Thought',
+        title: 'Emotions that have no name yet',
+        author: 'Lukas Horak',
+        body: '<p>In the upcoming book, I explore emotions that most languages cannot name. They exist at the boundary between what we feel and what we can express in words.</p><p>You know that feeling when you are sitting in a cafe observing people around you – and suddenly you realize that each of them lives an equally rich inner life as you? That flash of awareness that lasts only a second but changes the way you look at the world?</p><p>Or that feeling when you hear music from your childhood and for a moment you return – not through memory, but with your entire body, your entire being – to a moment you had long forgotten?</p><p>These emotions are not marginal. They may be the most important ones – because they connect us with something greater than ourselves. With something that languages cannot capture, but which is nevertheless more real than anything we could say.</p>'
+        }
+        }
+        };
 
-        var titles = chapterTitles[lang] || chapterTitles['en'];
-        var title = titles[previewId] || previewId;
-        var authorName = lang === 'sk' ? 'Lukáš Horák' : 'Lukas Horak';
+        // Load saved settings (shared with homepage)
+        var savedTheme = '';
+        var savedFont = 2;
+        try { savedTheme = localStorage.getItem('ev-reader-theme') || ''; } catch(e) {}
+        try { savedFont = parseInt(localStorage.getItem('ev-reader-font') || '2'); } catch(e) {}
+        if (savedTheme) overlay.className = 'fs-reader-overlay ' + savedTheme;
+        applyFontSize(savedFont);
+        if (fontSlider) fontSlider.value = savedFont;
+        updateThemeButtons();
 
-        currentReadingId = previewId;
-
-        // Show loading state
-        var loadingHtml = '<div class="reader-detail-meta">'
-            + '<span class="reader-detail-tag chapter">' + (lang === 'sk' ? 'Kapitola' : 'Chapter') + '</span>'
-            + '<h1 class="reader-detail-title">' + title + '</h1>'
-            + '<div class="reader-detail-author">' + authorName + '</div>'
-            + '</div>'
-            + '<div class="reader-detail-content" style="text-align:center;padding:60px 0;color:var(--text-muted);">'
-            + '<div style="width:24px;height:24px;border:2px solid var(--text-muted);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>'
-            + (lang === 'sk' ? 'Načítavam...' : 'Loading...')
-            + '</div>';
-
-        readerDetailBody.innerHTML = loadingHtml;
-        readerOverlay.classList.add('open');
-        readerOverlay.scrollTop = 0;
-        document.body.style.overflow = 'hidden';
-
-        if (chapterCache[previewId]) {
-            renderChapter(previewId, chapterCache[previewId], title, authorName);
-            return;
+        function applyFontSize(idx) {
+            var texts = readerContent.querySelectorAll('.fs-chapter-text');
+            texts.forEach(function(t) {
+                t.style.fontSize = fontSizes[idx];
+                t.style.lineHeight = lineHeights[idx];
+            });
         }
 
-        fetch('/' + file)
-            .then(function(r) { return r.text(); })
-            .then(function(html) {
-                chapterCache[previewId] = html;
-                if (currentReadingId === previewId) {
-                    renderChapter(previewId, html, title, authorName);
-                }
-            })
-            .catch(function() {
-                if (currentReadingId === previewId) {
-                    readerDetailBody.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-muted);">'
-                        + (lang === 'sk' ? 'Nepodarilo sa načítať kapitolu.' : 'Failed to load chapter.')
-                        + '</div>';
-                }
+        function updateThemeButtons() {
+            if (!settingsPanel) return;
+            var current = overlay.className.replace('fs-reader-overlay', '').replace('open', '').trim();
+            settingsPanel.querySelectorAll('.fs-theme-btn').forEach(function(btn) {
+                btn.classList.toggle('active', btn.dataset.theme === current);
             });
-    }
+        }
 
-    function renderChapter(previewId, bodyHtml, title, authorName) {
-        var html = '<div class="reader-detail-meta">'
-            + '<span class="reader-detail-tag chapter">' + (lang === 'sk' ? 'Kapitola' : 'Chapter') + '</span>'
-            + '<h1 class="reader-detail-title">' + title + '</h1>'
-            + '<div class="reader-detail-author">' + authorName + '</div>'
-            + '</div>'
-            + '<div class="reader-detail-content">' + bodyHtml + '</div>'
-            + '<div class="reader-detail-end">'
-            + '<div class="reader-detail-end-icon">&#10044;</div>'
-            + '<div class="reader-detail-end-text">' + (T[lang].reader_end || 'End of text') + '</div>'
-            + '</div>';
+        function getScrollPercent() {
+            var scrollTop = overlay.scrollTop;
+            var scrollHeight = overlay.scrollHeight - overlay.clientHeight;
+            if (scrollHeight <= 0) return 100;
+            return Math.round((scrollTop / scrollHeight) * 100);
+        }
 
-        readerDetailBody.innerHTML = html;
-        readerOverlay.scrollTop = 0;
-        updateScrollProgress();
-    }
+        function updateProgress() {
+            var pct = getScrollPercent();
+            if (progressFill) progressFill.style.width = pct + '%';
+            if (pctLabel) pctLabel.textContent = pct + '%';
+        }
 
-    // Attach click handlers to preview rows
-    document.querySelectorAll('.preview-row').forEach(function(row) {
-        var id = row.getAttribute('data-preview-id');
-        if (id && chapterFileMap[id]) {
-            row.style.cursor = 'pointer';
-            row.addEventListener('click', function(e) {
-                if (e.target.closest('.preview-open-btn')) return; // let button handle it
-                openChapterReader(id);
-            });
-            var btn = row.querySelector('.preview-open-btn');
-            if (btn) {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    openChapterReader(id);
+        function savePosition() {
+            if (!currentChapterId) return;
+            var pct = getScrollPercent();
+            try { localStorage.setItem('ev-ch-pos-' + currentChapterId, pct); } catch(e) {}
+            // Also save to ev-reading-progress for the dashboard progress indicators
+            saveReadingProgress(currentChapterId, pct);
+        }
+
+        function restorePosition(chId) {
+            var saved = null;
+            try { saved = localStorage.getItem('ev-ch-pos-' + chId); } catch(e) {}
+            if (saved) {
+                var pct = parseInt(saved);
+                if (pct > 0 && pct < 100) {
+                    requestAnimationFrame(function() {
+                        var scrollHeight = overlay.scrollHeight - overlay.clientHeight;
+                        overlay.scrollTop = (pct / 100) * scrollHeight;
+                        updateProgress();
+                    });
+                }
+            }
+        }
+
+        function getNextChapter(currentId) {
+            var idx = chapterOrder.indexOf(currentId);
+            if (idx >= 0 && idx < chapterOrder.length - 1) {
+                return chapterOrder[idx + 1];
+            }
+            return null;
+        }
+
+        function openChapter(chapterId) {
+            var file = chapterFileMap[chapterId];
+            if (!file) return;
+            currentChapterId = chapterId;
+
+            var titles = chapterTitles[lang] || chapterTitles['en'];
+            var title = titles[chapterId] || chapterId;
+
+            // Update topbar title
+            if (booktitle) booktitle.textContent = (lang === 'sk' ? 'JA \u2013 Evol\u00facia vedomia' : 'I AM \u2013 Evolution of Consciousness');
+
+            // Show loading
+            readerContent.innerHTML = '<div class="fs-chapter" style="text-align:center;padding:80px 0;"><div style="width:24px;height:24px;border:2px solid var(--r-muted);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div><p style="color:var(--r-muted);">' + (lang === 'sk' ? 'Na\u010d\u00edtavam...' : 'Loading...') + '</p></div>';
+
+            overlay.classList.add('open');
+            overlay.scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+            updateProgress();
+
+            if (chapterCache[chapterId]) {
+                renderChapterContent(chapterId, chapterCache[chapterId], title);
+                return;
+            }
+
+            fetch('/' + file)
+                .then(function(r) { return r.text(); })
+                .then(function(html) {
+                    chapterCache[chapterId] = html;
+                    if (currentChapterId === chapterId) {
+                        renderChapterContent(chapterId, html, title);
+                    }
+                })
+                .catch(function() {
+                    readerContent.innerHTML = '<div style="text-align:center;padding:80px;color:var(--r-muted);">' + (lang === 'sk' ? 'Nepodarilo sa na\u010d\u00edta\u0165 kapitolu.' : 'Failed to load chapter.') + '</div>';
+                });
+        }
+
+        function renderChapterContent(chapterId, bodyHtml, title) {
+            var chapterLabel = lang === 'sk' ? 'Kapitola' : 'Chapter';
+            var nextChapter = getNextChapter(chapterId);
+
+            var html = '<div class="fs-chapter">'
+                + '<div class="fs-chapter-label">' + chapterLabel + '</div>'
+                + '<div class="fs-chapter-heading">' + title + '</div>'
+                + '<div class="fs-chapter-text">' + bodyHtml + '</div>'
+                + '</div>';
+
+            // Add next chapter navigation if there is one
+            if (nextChapter) {
+                var nextTitles = chapterTitles[lang] || chapterTitles['en'];
+                var nextTitle = nextTitles[nextChapter] || '';
+                html += '<div class="fs-next-chapter">'
+                    + '<p>' + (lang === 'sk' ? '\u010eal\u0161ia kapitola' : 'Next chapter') + '</p>'
+                    + '<div class="fs-next-chapter-title">' + nextTitle + '</div>'
+                    + '<button class="fs-next-chapter-btn" data-next="' + nextChapter + '">'
+                    + (lang === 'sk' ? 'Pokra\u010dova\u0165 v \u010d\u00edtan\u00ed' : 'Continue reading')
+                    + ' <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>'
+                    + '</button>'
+                    + '</div>';
+            } else {
+                // Last chapter - show end
+                html += '<div class="fs-next-chapter">'
+                    + '<div style="font-size:1.5rem;margin-bottom:12px;">&#10044;</div>'
+                    + '<p>' + (lang === 'sk' ? 'Pre\u010d\u00edtali ste v\u0161etky dostupn\u00e9 kapitoly' : 'You have read all available chapters') + '</p>'
+                    + '</div>';
+            }
+
+            readerContent.innerHTML = html;
+
+            // Apply current font size
+            var currentFont = 2;
+            try { currentFont = parseInt(localStorage.getItem('ev-reader-font') || '2'); } catch(e) {}
+            applyFontSize(currentFont);
+
+            // Restore reading position
+            restorePosition(chapterId);
+
+            // Attach next chapter button handler
+            var nextBtn = readerContent.querySelector('.fs-next-chapter-btn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    var nextId = this.getAttribute('data-next');
+                    openChapter(nextId);
                 });
             }
         }
-    });
 
+        // Open a thought in the reader (reusing the same fullscreen overlay)
+        function openThought(thoughtId) {
+            var dict = thoughtContent[lang] || thoughtContent['en'];
+            var tc = dict[thoughtId];
+            if (!tc) return;
+            currentChapterId = thoughtId;
+
+            // Update topbar
+            if (booktitle) booktitle.textContent = (lang === 'sk' ? 'My\u0161lienky autora' : "Author's thoughts");
+
+            var html = '<div class="fs-chapter">'
+                + '<div class="fs-chapter-label">' + tc.tagLabel + '</div>'
+                + '<div class="fs-chapter-heading">' + tc.title + '</div>'
+                + '<div class="fs-chapter-text">' + tc.body + '</div>'
+                + '</div>'
+                + '<div class="fs-next-chapter">'
+                + '<div style="font-size:1.5rem;margin-bottom:12px;">&#10044;</div>'
+                + '<p>' + (T[lang].reader_end || 'End of text') + '</p>'
+                + '</div>';
+
+            readerContent.innerHTML = html;
+
+            // Apply current font size
+            var currentFont = 2;
+            try { currentFont = parseInt(localStorage.getItem('ev-reader-font') || '2'); } catch(e) {}
+            applyFontSize(currentFont);
+
+            overlay.classList.add('open');
+            overlay.scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+            updateProgress();
+
+            // Restore position
+            restorePosition(thoughtId);
+        }
+
+        function closeReader() {
+            savePosition();
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+            closeSettings();
+            currentChapterId = null;
+        }
+
+        function openSettings() {
+            if (settingsBackdrop) settingsBackdrop.classList.add('open');
+            if (settingsPanel) settingsPanel.classList.add('open');
+        }
+        function closeSettings() {
+            if (settingsBackdrop) settingsBackdrop.classList.remove('open');
+            if (settingsPanel) settingsPanel.classList.remove('open');
+        }
+
+        // Event listeners
+        if (closeBtn) closeBtn.addEventListener('click', closeReader);
+        if (settingsBtn) settingsBtn.addEventListener('click', openSettings);
+        if (settingsBackdrop) settingsBackdrop.addEventListener('click', closeSettings);
+
+        overlay.addEventListener('scroll', function() {
+            updateProgress();
+            savePosition();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (settingsPanel && settingsPanel.classList.contains('open')) closeSettings();
+                else if (overlay.classList.contains('open')) closeReader();
+            }
+        });
+
+        if (fontSlider) {
+            fontSlider.addEventListener('input', function() {
+                var idx = parseInt(this.value);
+                applyFontSize(idx);
+                try { localStorage.setItem('ev-reader-font', idx); } catch(e) {}
+            });
+        }
+
+        if (settingsPanel) {
+            settingsPanel.querySelectorAll('.fs-theme-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var theme = this.dataset.theme;
+                    overlay.className = 'fs-reader-overlay open' + (theme ? ' ' + theme : '');
+                    try { localStorage.setItem('ev-reader-theme', theme); } catch(e) {}
+                    updateThemeButtons();
+                });
+            });
+        }
+
+        // Attach to preview-row clicks (book chapters)
+        document.querySelectorAll('.preview-row').forEach(function(row) {
+            var id = row.getAttribute('data-preview-id');
+            if (id && chapterFileMap[id]) {
+                row.style.cursor = 'pointer';
+                row.addEventListener('click', function(e) {
+                    if (e.target.closest('.preview-open-btn')) return;
+                    openChapter(id);
+                });
+                var btn = row.querySelector('.preview-open-btn');
+                if (btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        openChapter(id);
+                    });
+                }
+            }
+        });
+
+        // Attach click handlers to thought rows
+        document.querySelectorAll('.thought-row').forEach(function(row) {
+            var id = row.getAttribute('data-thought-id');
+            if (id) {
+                row.addEventListener('click', function() {
+                    openThought(id);
+                });
+            }
+        });
+
+        // Expose for external use
+        window.openChapterReader = openChapter;
+        window.openReaderDetail = openThought;
+    })();
     loadReadingProgress();
 })();
 </script>
