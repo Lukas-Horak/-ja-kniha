@@ -5,5 +5,5 @@
   "dependencies": {
     "stripe": "^14.0.0"
   },
-  "deploy_trigger": "spektrum-bg-1773927686"
+  "deploy_trigger": "spektrum-lines-1773927947"
 }
