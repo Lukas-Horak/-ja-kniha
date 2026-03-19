@@ -547,113 +547,7 @@
     .thought-open-btn:hover { opacity: 0.85; }
     .thought-open-btn svg { width: 12px; height: 12px; }
 
-    /* ===== READER SECTION ===== */
-    .reader-grid {
-        display: grid; grid-template-columns: 1fr; gap: 16px;
-    }
-    .reader-promo {
-        background: var(--card);
-        border-radius: 20px;
-        padding: 48px;
-        display: grid; grid-template-columns: auto 1fr;
-        gap: 40px; align-items: center;
-    }
-    .reader-book-visual {
-        width: 180px;
-        aspect-ratio: 3/4;
-        background: linear-gradient(145deg, #2A2A2A 0%, #1a1a1a 100%);
-        border-radius: 8px;
-        display: flex; align-items: center; justify-content: center;
-        box-shadow: 8px 8px 24px rgba(0,0,0,0.15);
-        position: relative;
-        overflow: hidden;
-    }
-    .reader-book-visual::before {
-        content: '';
-        position: absolute; left: 0; top: 0; bottom: 0;
-        width: 12px;
-        background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
-    }
-    .reader-book-visual .book-title {
-        font-size: 1.4rem; font-weight: 300; font-style: italic;
-        color: #fff; text-align: center;
-        padding: 24px; letter-spacing: -0.02em;
-    }
-    .reader-book-visual .book-author {
-        position: absolute; bottom: 20px;
-        font-size: 0.65rem; font-weight: 500; color: rgba(255,255,255,0.4);
-        text-transform: uppercase; letter-spacing: 0.15em;
-    }
-    .reader-info h3 {
-        font-size: 1.5rem; font-weight: 400; font-style: italic;
-        letter-spacing: -0.02em; margin-bottom: 12px;
-    }
-    .reader-info p {
-        font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
-        margin-bottom: 24px;
-    }
-    .reader-chapters {
-        display: flex; flex-direction: column; gap: 0;
-    }
-    .reader-chapter-row {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 14px 0;
-        border-bottom: 1px solid var(--border);
-    }
-    .reader-chapter-row:last-child { border-bottom: none; }
-    .reader-chapter-left {
-        display: flex; align-items: center; gap: 14px;
-    }
-    .reader-chapter-num {
-        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
-        min-width: 24px;
-    }
-    .reader-chapter-name {
-        font-size: 0.95rem; font-weight: 500;
-    }
-    .reader-chapter-row.locked .reader-chapter-name { color: var(--text-muted); }
-    .reader-chapter-right {
-        display: flex; align-items: center; gap: 12px;
-    }
-    .reader-chapter-pages {
-        font-size: 0.75rem; color: var(--text-muted);
-    }
-    .reader-open-btn {
-        display: inline-flex; align-items: center; gap: 6px;
-        padding: 8px 18px;
-        background: var(--dark); color: #fff;
-        border-radius: 100px; font-size: 0.8rem; font-weight: 500;
-        border: none; cursor: pointer; font-family: var(--font);
-        transition: opacity 0.2s;
-    }
-    .reader-open-btn:hover { opacity: 0.85; }
-    .reader-open-btn svg { width: 12px; height: 12px; }
-    .reader-lock-icon {
-        width: 32px; height: 32px;
-        border-radius: 50%;
-        background: rgba(0,0,0,0.04);
-        display: flex; align-items: center; justify-content: center;
-    }
-    .reader-lock-icon svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
 
-    /* Reading progress indicator on chapter rows */
-    .reader-progress-wrap {
-        display: flex; align-items: center; gap: 6px;
-    }
-    .reader-progress-bar {
-        width: 40px; height: 3px; border-radius: 3px;
-        background: var(--border); overflow: hidden;
-    }
-    .reader-progress-fill {
-        height: 100%; border-radius: 3px;
-        background: var(--accent-higher);
-        transition: width 0.3s;
-    }
-    .reader-progress-pct {
-        font-size: 0.7rem; color: var(--text-muted);
-        font-variant-numeric: tabular-nums;
-        min-width: 28px; text-align: right;
-    }
 
     /* ===== PREVIEW / BOOK EXCERPTS SECTION ===== */
     .preview-panel-wrap {
@@ -762,6 +656,120 @@
         50% { opacity: 0.3; }
     }
 
+    /* ===== READER DETAIL OVERLAY ===== */
+    .reader-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 500;
+        background: var(--bg);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .reader-overlay.open {
+        display: block;
+        animation: readerFadeIn 0.35s ease;
+    }
+    @keyframes readerFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .reader-overlay-nav {
+        position: sticky; top: 0; z-index: 10;
+        background: rgba(232, 229, 223, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 16px 48px;
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .reader-back-btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 10px 20px;
+        background: var(--card); border: 1.5px solid var(--border);
+        border-radius: 100px; font-size: 0.85rem; font-weight: 500;
+        color: var(--text); cursor: pointer; font-family: var(--font);
+        transition: border-color 0.2s;
+    }
+    .reader-back-btn:hover { border-color: var(--text-muted); }
+    .reader-back-btn svg { width: 14px; height: 14px; }
+    .reader-scroll-progress {
+        display: flex; align-items: center; gap: 8px;
+    }
+    .reader-scroll-bar {
+        width: 120px; height: 3px; border-radius: 3px;
+        background: var(--border); overflow: hidden;
+    }
+    .reader-scroll-fill {
+        height: 100%; border-radius: 3px;
+        background: var(--accent-higher);
+        width: 0%; transition: width 0.1s;
+    }
+    .reader-scroll-pct {
+        font-size: 0.75rem; color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+        min-width: 32px;
+    }
+    .reader-detail-body {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 64px 32px 120px;
+    }
+    .reader-detail-meta {
+        margin-bottom: 40px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border);
+    }
+    .reader-detail-tag {
+        font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.08em; padding: 4px 12px;
+        border-radius: 100px; display: inline-block;
+        margin-bottom: 16px;
+    }
+    .reader-detail-tag.thought { background: rgba(92, 138, 110, 0.08); color: var(--accent-higher); }
+    .reader-detail-tag.insight { background: rgba(184, 168, 152, 0.08); color: var(--accent-primitive); }
+    .reader-detail-title {
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
+        font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+        margin-bottom: 16px;
+    }
+    .reader-detail-author {
+        font-size: 0.85rem; color: var(--text-muted);
+    }
+    .reader-detail-content {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        color: var(--text);
+    }
+    .reader-detail-content p {
+        margin-bottom: 1.6em;
+    }
+    .reader-detail-content p:last-child {
+        margin-bottom: 0;
+    }
+    .reader-detail-end {
+        text-align: center;
+        margin-top: 64px;
+        padding-top: 32px;
+        border-top: 1px solid var(--border);
+    }
+    .reader-detail-end-icon {
+        font-size: 1.2rem; color: var(--text-muted);
+        margin-bottom: 12px;
+    }
+    .reader-detail-end-text {
+        font-size: 0.85rem; color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+        .reader-overlay-nav { padding: 12px 20px; }
+        .reader-back-btn { padding: 8px 16px; font-size: 0.8rem; }
+        .reader-scroll-bar { width: 80px; }
+        .reader-detail-body { padding: 40px 20px 100px; }
+        .reader-detail-content { font-size: 1rem; line-height: 1.85; }
+    }
+
     /* ===== FOOTER ===== */
     .footer { padding: 0 0 48px; }
     .footer-card {
@@ -816,8 +824,6 @@
         .nav-inner { padding: 16px 32px; }
         .audio-grid { grid-template-columns: 1fr; }
         .thought-snippet { max-width: 300px; }
-        .reader-promo { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-        .reader-info { text-align: left; }
     }
 
     @media (max-width: 768px) {
@@ -869,8 +875,6 @@
         .preview-row-left { flex: 1 1 100%; }
         .preview-row-desc { white-space: normal; }
         .preview-row-right { padding-left: 38px; gap: 8px; }
-        .reader-promo { padding: 28px; grid-template-columns: 1fr; }
-        .reader-book-visual { width: 140px; }
 
         .footer-card {
             flex-direction: column; gap: 16px;
@@ -985,15 +989,6 @@
                 </div>
             </div>
             <div class="login-benefit">
-                <div class="login-benefit-icon reader">
-                    <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-                </div>
-                <div class="login-benefit-text">
-                    <strong data-i18n="benefit_reader">Čítačka</strong>
-                    <span data-i18n="benefit_reader_desc">Ďalšie kapitoly knihy v online čítačke</span>
-                </div>
-            </div>
-            <div class="login-benefit">
                 <div class="login-benefit-icon blog">
                     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                 </div>
@@ -1036,10 +1031,6 @@
         <button class="section-tab" data-tab="blog">
             <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             <span data-i18n="tab_blog">Myšlienky autora</span>
-        </button>
-        <button class="section-tab" data-tab="reader">
-            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-            <span data-i18n="tab_reader">Čítačka</span>
         </button>
         <button class="section-tab" data-tab="preview">
             <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -1291,118 +1282,6 @@
         </div>
     </div>
 
-    <!-- ===== READER TAB ===== -->
-    <div class="tab-panel" id="panel-reader">
-        <div class="reader-grid">
-            <div class="reader-promo">
-                <div class="reader-book-visual">
-                    <div class="book-title">JA</div>
-                    <div class="book-author" data-i18n="reader_author">Lukáš Horák</div>
-                </div>
-                <div class="reader-info">
-                    <h3 data-i18n="reader_title">Online čítačka</h3>
-                    <p data-i18n="reader_desc">Čítajte vybrané kapitoly priamo v prehliadači. Ako člen máte prístup k rozšírenému obsahu, ktorý nie je dostupný vo verejnej ukážke.</p>
-                    <div class="reader-chapters">
-                        <div class="reader-chapter-row">
-                            <div class="reader-chapter-left">
-                                <span class="reader-chapter-num">01</span>
-                                <span class="reader-chapter-name" data-i18n="rch_1">Predhovor autora</span>
-                            </div>
-                            <div class="reader-chapter-right">
-                                <div class="reader-progress-wrap" data-progress-id="reader-1" style="display:none;">
-                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
-                                    <span class="reader-progress-pct">0%</span>
-                                </div>
-                                <span class="reader-chapter-pages" data-i18n="rch_1_pages">12 strán</span>
-                                <button class="reader-open-btn" data-i18n="reader_open">
-                                    Otvoriť
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="reader-chapter-row">
-                            <div class="reader-chapter-left">
-                                <span class="reader-chapter-num">02</span>
-                                <span class="reader-chapter-name" data-i18n="rch_2">Kapitola 1 – Úvod</span>
-                            </div>
-                            <div class="reader-chapter-right">
-                                <div class="reader-progress-wrap" data-progress-id="reader-2" style="display:none;">
-                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
-                                    <span class="reader-progress-pct">0%</span>
-                                </div>
-                                <span class="reader-chapter-pages" data-i18n="rch_2_pages">18 strán</span>
-                                <button class="reader-open-btn" data-i18n="reader_open">
-                                    Otvoriť
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="reader-chapter-row">
-                            <div class="reader-chapter-left">
-                                <span class="reader-chapter-num">03</span>
-                                <span class="reader-chapter-name" data-i18n="rch_3">Kapitola 2 – Biologický mechanizmus</span>
-                            </div>
-                            <div class="reader-chapter-right">
-                                <div class="reader-progress-wrap" data-progress-id="reader-3" style="display:none;">
-                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
-                                    <span class="reader-progress-pct">0%</span>
-                                </div>
-                                <span class="reader-chapter-pages" data-i18n="rch_3_pages">24 strán</span>
-                                <button class="reader-open-btn" data-i18n="reader_open">
-                                    Otvoriť
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="reader-chapter-row">
-                            <div class="reader-chapter-left">
-                                <span class="reader-chapter-num">04</span>
-                                <span class="reader-chapter-name" data-i18n="rch_4">Kapitola 3 – Túžby</span>
-                            </div>
-                            <div class="reader-chapter-right">
-                                <div class="reader-progress-wrap" data-progress-id="reader-4" style="display:none;">
-                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
-                                    <span class="reader-progress-pct">0%</span>
-                                </div>
-                                <span class="reader-chapter-pages" data-i18n="rch_4_pages">28 strán</span>
-                                <button class="reader-open-btn" data-i18n="reader_open">
-                                    Otvoriť
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="reader-chapter-row locked">
-                            <div class="reader-chapter-left">
-                                <span class="reader-chapter-num">05</span>
-                                <span class="reader-chapter-name" data-i18n="rch_5">Kapitola 4 – Hranice ega</span>
-                            </div>
-                            <div class="reader-chapter-right">
-                                <span class="reader-chapter-pages" data-i18n="rch_5_pages">Members only</span>
-                                <button class="reader-open-btn" data-i18n="reader_open">
-                                    Otvoriť
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="reader-chapter-row locked">
-                            <div class="reader-chapter-left">
-                                <span class="reader-chapter-num">06</span>
-                                <span class="reader-chapter-name" data-i18n="rch_6">Kapitola 5 – Hierarchia a moc</span>
-                            </div>
-                            <div class="reader-chapter-right">
-                                <span class="reader-chapter-pages" data-i18n="rch_6_pages">Members only</span>
-                                <button class="reader-open-btn" data-i18n="reader_open">
-                                    Otvoriť
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- ===== PREVIEW TAB ===== -->
     <div class="tab-panel" id="panel-preview">
         <div class="preview-panel-wrap">
@@ -1553,6 +1432,23 @@
 </div>
 </section>
 
+<!-- ===== READER DETAIL OVERLAY ===== -->
+<div class="reader-overlay" id="readerOverlay">
+    <div class="reader-overlay-nav">
+        <button class="reader-back-btn" id="readerBackBtn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4L4 12M4 12h7M4 12V5"/></svg>
+            <span data-i18n="reader_back">Späť</span>
+        </button>
+        <div class="reader-scroll-progress">
+            <div class="reader-scroll-bar"><div class="reader-scroll-fill" id="readerScrollFill"></div></div>
+            <span class="reader-scroll-pct" id="readerScrollPct">0%</span>
+        </div>
+    </div>
+    <div class="reader-detail-body" id="readerDetailBody">
+        <!-- Content is injected by JS -->
+    </div>
+</div>
+
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
     <div class="container">
@@ -1591,8 +1487,6 @@
             login_register_link: 'Zaregistrujte sa',
             benefit_audio: 'Audiokniha',
             benefit_audio_desc: 'Exkluzívne kapitoly v audio formáte',
-            benefit_reader: 'Čítačka',
-            benefit_reader_desc: 'Ďalšie kapitoly knihy v online čítačke',
             benefit_blog: 'Myšlienky autora',
             benefit_blog_desc: 'Krátke úvahy a hlbšie postrehy',
             benefit_preview: 'Ukážky z kníh',
@@ -1601,7 +1495,6 @@
             dashboard_logout: 'Odhlásiť sa',
             tab_audio: 'Audiokniha',
             tab_blog: 'Myšlienky autora',
-            tab_reader: 'Čítačka',
             tab_preview: 'Ukážky z kníh',
             af_now_playing: 'Práve prehráva',
             af_members_only: 'Pre členov',
@@ -1634,16 +1527,10 @@
             thought_5_snippet: 'Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu...',
             thought_6_title: 'Emócie, ktoré ešte nemajú meno',
             thought_6_snippet: 'V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať...',
-            reader_author: 'Lukáš Horák',
-            reader_title: 'Online čítačka',
-            reader_desc: 'Čítajte vybrané kapitoly priamo v prehliadači. Ako člen máte prístup k rozšírenému obsahu, ktorý nie je dostupný vo verejnej ukážke.',
             reader_open: 'Otvoriť',
-            rch_1: 'Predhovor autora', rch_1_pages: '12 strán',
-            rch_2: 'Kapitola 1 – Úvod', rch_2_pages: '18 strán',
-            rch_3: 'Kapitola 2 – Biologický mechanizmus', rch_3_pages: '24 strán',
-            rch_4: 'Kapitola 3 – Túžby', rch_4_pages: '28 strán',
-            rch_5: 'Kapitola 4 – Hranice ega', rch_5_pages: 'Len pre členov',
-            rch_6: 'Kapitola 5 – Hierarchia a moc', rch_6_pages: 'Len pre členov',
+            reader_back: 'Späť',
+            reader_end: 'Koniec textu',
+            reader_author_name: 'Lukáš Horák',
             book_ja_title: 'Evolúcia vedomia – JA',
             book_ja_desc: 'Ukážky z prvej knihy. Vybrané kapitoly, ktoré môžete čítať priamo tu.',
             ja_preview_1_title: 'Predhovor autora',
@@ -1686,8 +1573,6 @@
             login_register_link: 'Register',
             benefit_audio: 'Audiobook',
             benefit_audio_desc: 'Exclusive chapters in audio format',
-            benefit_reader: 'Reader',
-            benefit_reader_desc: 'Additional book chapters in the online reader',
             benefit_blog: 'Author\'s thoughts',
             benefit_blog_desc: 'Short reflections and deeper insights',
             benefit_preview: 'Book excerpts',
@@ -1696,7 +1581,6 @@
             dashboard_logout: 'Sign out',
             tab_audio: 'Audiobook',
             tab_blog: 'Author\'s thoughts',
-            tab_reader: 'Reader',
             tab_preview: 'Book excerpts',
             af_now_playing: 'Now playing',
             af_members_only: 'Members only',
@@ -1729,16 +1613,10 @@
             thought_5_snippet: 'New research shows that meditation literally changes the structure of the brain...',
             thought_6_title: 'Emotions that have no name yet',
             thought_6_snippet: 'In the upcoming book, I explore emotions that most languages cannot name...',
-            reader_author: 'Lukas Horak',
-            reader_title: 'Online reader',
-            reader_desc: 'Read selected chapters directly in your browser. As a member, you have access to extended content not available in the public preview.',
             reader_open: 'Open',
-            rch_1: 'Author\'s foreword', rch_1_pages: '12 pages',
-            rch_2: 'Chapter 1 – Introduction', rch_2_pages: '18 pages',
-            rch_3: 'Chapter 2 – The biological mechanism', rch_3_pages: '24 pages',
-            rch_4: 'Chapter 3 – Desires', rch_4_pages: '28 pages',
-            rch_5: 'Chapter 4 – Boundaries of the ego', rch_5_pages: 'Members only',
-            rch_6: 'Chapter 5 – Hierarchy and power', rch_6_pages: 'Members only',
+            reader_back: 'Back',
+            reader_end: 'End of text',
+            reader_author_name: 'Lukas Horak',
             book_ja_title: 'Evolution of Consciousness – I AM',
             book_ja_desc: 'Excerpts from the first book. Selected chapters you can read right here.',
             ja_preview_1_title: 'Author\'s foreword',
@@ -1909,26 +1787,23 @@
     });
 
     // ===== READING PROGRESS TRACKING =====
-    // Load saved progress from localStorage and display
     function loadReadingProgress() {
         var progress = {};
         try { progress = JSON.parse(localStorage.getItem('ev-reading-progress') || '{}'); } catch(e) {}
 
-        // Update all progress indicators (thoughts + reader + previews)
         document.querySelectorAll('[data-progress-id]').forEach(function(wrap) {
             var id = wrap.getAttribute('data-progress-id');
             var pct = progress[id] || 0;
             if (pct > 0) {
                 wrap.style.display = 'flex';
-                var fill = wrap.querySelector('.thought-progress-fill, .reader-progress-fill');
-                var label = wrap.querySelector('.thought-progress-pct, .reader-progress-pct');
+                var fill = wrap.querySelector('.thought-progress-fill');
+                var label = wrap.querySelector('.thought-progress-pct');
                 if (fill) fill.style.width = pct + '%';
                 if (label) label.textContent = pct + '%';
             }
         });
     }
 
-    // Save progress for a given content ID
     function saveReadingProgress(id, pct) {
         var progress = {};
         try { progress = JSON.parse(localStorage.getItem('ev-reading-progress') || '{}'); } catch(e) {}
@@ -1937,31 +1812,176 @@
         loadReadingProgress();
     }
 
-    // Demo: simulate reading progress on open-btn click
-    // (In production, this would track actual scroll position in the reader view)
-    function simulateProgress(id) {
-        var current = 0;
-        try { current = JSON.parse(localStorage.getItem('ev-reading-progress') || '{}')[id] || 0; } catch(e) {}
-        // If not started, set to a demo value; if started, increment
-        var newPct = current === 0 ? 35 : Math.min(100, current + 20);
-        saveReadingProgress(id, newPct);
+    loadReadingProgress();
+
+    // ===== READER DETAIL OVERLAY =====
+    var readerOverlay = document.getElementById('readerOverlay');
+    var readerBackBtn = document.getElementById('readerBackBtn');
+    var readerDetailBody = document.getElementById('readerDetailBody');
+    var readerScrollFill = document.getElementById('readerScrollFill');
+    var readerScrollPct = document.getElementById('readerScrollPct');
+    var currentReadingId = null;
+
+    // Full content for each thought (demo content)
+    var thoughtContent = {
+        sk: {
+            'thought-1': {
+                tag: 'thought', tagLabel: 'Myšlienka',
+                title: 'O ilúzii oddelenia',
+                author: 'Lukáš Horák',
+                body: '<p>Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle? Čo ak je samotné rozdelenie príčinou väčšiny nášho utrpenia?</p><p>Predstavte si, že stojíte pri jazere. Vidíte odraz stromov na hladine. Viete, že odraz nie je skutočný les – je to len obraz. Ale keď sa pozriete na svet okolo seba, robíte presne to isté. Vaša myseľ vytvára obraz reality a vy si ten obraz zamieňate za realitu samotnú.</p><p>Neurovedecké výskumy posledných dvoch desaťročí ukazujú, že mozog neprijíma realitu pasívne. Aktívne ju konštruuje. To, čo vnímate ako "vonkajší svet", je v skutočnosti model – simulácia vytvorená vašimi neurónmi na základe neúplných senzorických dát.</p><p>Keď si toto uvedomíte – naozaj, hlboko si to uvedomíte, nie len intelektuálne – niečo sa zmení. Hranica medzi "ja" a "svet" sa začne rozplývať. Nie je to strata identity. Je to jej rozšírenie.</p><p>Budhistická tradícia to nazýva "prázdnota" – nie v zmysle, že nič neexistuje, ale v zmysle, že nič neexistuje nezávisle, oddelene od všetkého ostatného. Moderná kvantová fyzika dospela k podobnému záveru: na najhlbšej úrovni je všetko prepojené.</p><p>Ilúzia oddelenia nie je chyba. Je to užitočný nástroj – evolučný mechanizmus, ktorý nám umožnil prežiť. Ale keď si ju zamieňame za absolútnu pravdu, začíname trpieť. Začíname bojovať so svetom, namiesto toho, aby sme s ním spolupracovali.</p><p>Prvý krok k oslobodeniu nie je zmena sveta. Je to zmena spôsobu, akým ho vnímame. A to začína jednoduchou otázkou: Kto je ten, kto pozoruje?</p>'
+            },
+            'thought-2': {
+                tag: 'insight', tagLabel: 'Postreh',
+                title: 'Prečo sa bojíme ticha',
+                author: 'Lukáš Horák',
+                body: '<p>Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene, ktoré siahajú tisíce rokov dozadu.</p><p>Pre našich predkov ticho často znamenalo nebezpečenstvo. Keď vtáky prestali spievať, niečo sa blížilo. Tento primitívny alarm je v nás stále aktívny – len sa transformoval do modernej podoby.</p><p>Dnes sa nebojíme predátorov. Bojíme sa konfrontácie so sebou samým. V tichu sa ozývajú myšlienky, ktoré sme celý deň úspešne potláčali. Objavujú sa otázky, na ktoré nechceme odpovedať. A tak siahame po telefóne, pustíme si hudbu, zapneme televíziu – čokoľvek, len aby sme nemuseli počúvať.</p><p>Paradoxne, práve v tichu sa nachádza to, čo hľadáme. Nie odpovede – ale priestor, v ktorom sa odpovede môžu zrodiť.</p>'
+            },
+            'thought-3': {
+                tag: 'thought', tagLabel: 'Myšlienka',
+                title: 'Paradox sebarozvoja',
+                author: 'Lukáš Horák',
+                body: '<p>Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť. Je to ako snažiť sa zabudnúť na ružového slona – samotná snaha zabudnúť ho udržuje vo vašom vedomí.</p><p>Sebarozvoj sa stal priemyslom za miliardy. Knihy, kurzy, aplikácie – všetky sľubujú lepšiu verziu vás. Ale je v tom hlboký paradox: samotná túžba byť lepší predpokladá, že nie ste dosť dobrí. A tento predpoklad sa stáva sebanaplňujúcim proroctvom.</p><p>Skutočná zmena neprichádza z boja so sebou. Prichádza z porozumenia. Keď naozaj pochopíte, prečo robíte to, čo robíte – nie intelektuálne, ale na úrovni celého vášho bytia – zmena sa stane prirodzenou. Nie je to niečo, čo musíte dosiahnuť. Je to niečo, čo sa stane samo.</p>'
+            },
+            'thought-4': {
+                tag: 'thought', tagLabel: 'Myšlienka',
+                title: 'Čo je skutočná sloboda',
+                author: 'Lukáš Horák',
+                body: '<p>Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť. To je zásadný rozdiel, ktorý väčšina ľudí prehliadne.</p><p>Keď sa rozhodnete jesť zdravo, cvičiť, meditovať – je to sloboda, alebo len ďalšia forma kontroly? Keď si kúpite nové auto, pretože "chcete" – je to vaša túžba, alebo dôsledok rokov marketingu, sociálneho tlaku a biologických impulzov?</p><p>Neurológia nám hovorí, že väčšina našich "rozhodnutí" sa odohráva v mozgu ešte predtým, než si ich uvedomíme. To, čo vnímame ako slobodnú vôľu, je často len racionalizácia – príbeh, ktorý si mozog vytvorí, aby vysvetlil rozhodnutie, ktoré už bolo urobené.</p><p>Skutočná sloboda začína uvedomením si týchto mechanizmov. Nie ich potlačením – to je len ďalšia forma neslobody. Ale ich pozorovaním. Keď pozorujete túžbu bez toho, aby ste na ňu automaticky reagovali, objavíte priestor. A v tom priestore je sloboda.</p>'
+            },
+            'thought-5': {
+                tag: 'insight', tagLabel: 'Postreh',
+                title: 'Neuroplasticita a vedomie',
+                author: 'Lukáš Horák',
+                body: '<p>Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí. Nejde o to, že by meditácia "pridala" niečo nové. Skôr odstraňuje vrstvy naučených reakcií a odhaľuje to, čo tam vždy bolo.</p><p>Štúdie z Harvardskej univerzity ukázali, že osem týždňov pravidelnej meditácie vedie k merateľným zmenám v oblasti amygdaly – časti mozgu zodpovednej za strach a stresové reakcie. Amygdala sa zmenšuje. Nie že by zmizla – ale stáva sa menej dominantnou.</p><p>Zároveň sa posilňujú oblasti prefrontálneho kortexu zodpovedné za pozornosť, empatiu a sebauvedomenie. Mozog sa doslova prestavuje – a robí to v smere väčšej rovnováhy a harmónie.</p><p>To, čo je na tom fascinujúce, nie je samotná zmena. Je to jej smer. Akoby mozog "vedel", kam sa má vyvinúť – a meditácia mu jednoducho dá priestor to urobiť.</p>'
+            },
+            'thought-6': {
+                tag: 'thought', tagLabel: 'Myšlienka',
+                title: 'Emócie, ktoré ešte nemajú meno',
+                author: 'Lukáš Horák',
+                body: '<p>V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi tým, čo cítime, a tým, čo dokážeme vyjadriť slovami.</p><p>Poznáte ten pocit, keď sedíte v kaviarni a pozorujete ľudí okolo seba – a náhle si uvedomíte, že každý z nich žije rovnako bohatý vnútorný život ako vy? Ten záblesk uvedomenia, ktorý trvá len sekundu, ale zmení spôsob, akým sa pozeráte na svet?</p><p>Alebo ten pocit, keď počujete hudbu z detstva a na okamih sa vrátite – nie spomienkou, ale celým telom, celou bytosťou – do momentu, ktorý ste dávno zabudli?</p><p>Tieto emócie nie sú okrajové. Sú to možno tie najdôležitejšie – pretože nás spájajú s niečím väčším, než sme my sami. S niečím, čo jazyky nedokážu zachytiť, ale čo je predsa reálnejšie než čokoľvek, čo by sme mohli povedať.</p>'
+            }
+        },
+        en: {
+            'thought-1': {
+                tag: 'thought', tagLabel: 'Thought',
+                title: 'On the illusion of separation',
+                author: 'Lukas Horak',
+                body: '<p>When you observe the world, you feel separate from it – that there is an observer and that which is observed. But what if this division is just a construct of your mind? What if the division itself is the cause of most of our suffering?</p><p>Imagine standing by a lake. You see the reflection of trees on the surface. You know the reflection is not the real forest – it is just an image. But when you look at the world around you, you do exactly the same thing. Your mind creates an image of reality and you mistake that image for reality itself.</p><p>Neuroscience research over the past two decades shows that the brain does not passively receive reality. It actively constructs it. What you perceive as the "external world" is actually a model – a simulation created by your neurons based on incomplete sensory data.</p><p>When you realize this – truly, deeply realize it, not just intellectually – something changes. The boundary between "I" and "world" begins to dissolve. It is not a loss of identity. It is its expansion.</p><p>The Buddhist tradition calls this "emptiness" – not in the sense that nothing exists, but in the sense that nothing exists independently, separately from everything else. Modern quantum physics has arrived at a similar conclusion: at the deepest level, everything is connected.</p><p>The illusion of separation is not a mistake. It is a useful tool – an evolutionary mechanism that allowed us to survive. But when we mistake it for absolute truth, we begin to suffer. We begin to fight the world instead of cooperating with it.</p><p>The first step toward liberation is not changing the world. It is changing the way we perceive it. And that begins with a simple question: Who is the one who observes?</p>'
+            },
+            'thought-2': {
+                tag: 'insight', tagLabel: 'Insight',
+                title: 'Why we fear silence',
+                author: 'Lukas Horak',
+                body: '<p>Have you noticed how we immediately reach for our phone when silence occurs? This mechanism has deep evolutionary roots that go back thousands of years.</p><p>For our ancestors, silence often meant danger. When birds stopped singing, something was approaching. This primitive alarm is still active in us – it has just transformed into a modern form.</p><p>Today we are not afraid of predators. We are afraid of confrontation with ourselves. In silence, thoughts that we have been successfully suppressing all day make themselves heard. Questions we do not want to answer appear. And so we reach for the phone, play music, turn on the TV – anything so we do not have to listen.</p><p>Paradoxically, it is precisely in silence that what we are looking for can be found. Not answers – but the space in which answers can be born.</p>'
+            },
+            'thought-3': {
+                tag: 'thought', tagLabel: 'Thought',
+                title: 'The paradox of self-improvement',
+                author: 'Lukas Horak',
+                body: '<p>The more you try to change yourself, the more you reinforce the very aspect you want to change. It is like trying to forget a pink elephant – the very effort to forget keeps it in your consciousness.</p><p>Self-improvement has become a multi-billion industry. Books, courses, apps – all promise a better version of you. But there is a deep paradox: the very desire to be better presupposes that you are not good enough. And this assumption becomes a self-fulfilling prophecy.</p><p>Real change does not come from fighting yourself. It comes from understanding. When you truly understand why you do what you do – not intellectually, but at the level of your entire being – change becomes natural. It is not something you have to achieve. It is something that happens on its own.</p>'
+            },
+            'thought-4': {
+                tag: 'thought', tagLabel: 'Thought',
+                title: 'What true freedom is',
+                author: 'Lukas Horak',
+                body: '<p>Freedom is not doing what we want. True freedom is liberation from the mechanisms that make us want. That is a fundamental difference that most people overlook.</p><p>When you decide to eat healthy, exercise, meditate – is that freedom, or just another form of control? When you buy a new car because you "want to" – is that your desire, or the result of years of marketing, social pressure, and biological impulses?</p><p>Neurology tells us that most of our "decisions" happen in the brain before we become aware of them. What we perceive as free will is often just rationalization – a story the brain creates to explain a decision that has already been made.</p><p>True freedom begins with becoming aware of these mechanisms. Not suppressing them – that is just another form of unfreedom. But observing them. When you observe a desire without automatically reacting to it, you discover a space. And in that space is freedom.</p>'
+            },
+            'thought-5': {
+                tag: 'insight', tagLabel: 'Insight',
+                title: 'Neuroplasticity and consciousness',
+                author: 'Lukas Horak',
+                body: '<p>New research shows that meditation literally changes the structure of the brain. But not in the way most people think. It is not that meditation "adds" something new. Rather, it removes layers of learned reactions and reveals what was always there.</p><p>Studies from Harvard University showed that eight weeks of regular meditation leads to measurable changes in the amygdala – the part of the brain responsible for fear and stress responses. The amygdala shrinks. Not that it disappears – but it becomes less dominant.</p><p>At the same time, areas of the prefrontal cortex responsible for attention, empathy, and self-awareness are strengthened. The brain literally rebuilds itself – and it does so in the direction of greater balance and harmony.</p><p>What is fascinating about this is not the change itself. It is its direction. As if the brain "knew" where it should develop – and meditation simply gives it the space to do so.</p>'
+            },
+            'thought-6': {
+                tag: 'thought', tagLabel: 'Thought',
+                title: 'Emotions that have no name yet',
+                author: 'Lukas Horak',
+                body: '<p>In the upcoming book, I explore emotions that most languages cannot name. They exist at the boundary between what we feel and what we can express in words.</p><p>You know that feeling when you are sitting in a cafe observing people around you – and suddenly you realize that each of them lives an equally rich inner life as you? That flash of awareness that lasts only a second but changes the way you look at the world?</p><p>Or that feeling when you hear music from your childhood and for a moment you return – not through memory, but with your entire body, your entire being – to a moment you had long forgotten?</p><p>These emotions are not marginal. They may be the most important ones – because they connect us with something greater than ourselves. With something that languages cannot capture, but which is nevertheless more real than anything we could say.</p>'
+            }
+        }
+    };
+
+    function openReaderDetail(thoughtId) {
+        var dict = thoughtContent[lang] || thoughtContent['en'];
+        var content = dict[thoughtId];
+        if (!content) return;
+
+        currentReadingId = thoughtId;
+
+        var html = '<div class="reader-detail-meta">'
+            + '<span class="reader-detail-tag ' + content.tag + '">' + content.tagLabel + '</span>'
+            + '<h1 class="reader-detail-title">' + content.title + '</h1>'
+            + '<div class="reader-detail-author">' + content.author + '</div>'
+            + '</div>'
+            + '<div class="reader-detail-content">' + content.body + '</div>'
+            + '<div class="reader-detail-end">'
+            + '<div class="reader-detail-end-icon">&#10044;</div>'
+            + '<div class="reader-detail-end-text" data-i18n="reader_end">' + (T[lang].reader_end || 'End of text') + '</div>'
+            + '</div>';
+
+        readerDetailBody.innerHTML = html;
+        readerOverlay.classList.add('open');
+        readerOverlay.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+        updateScrollProgress();
     }
+
+    function closeReaderDetail() {
+        readerOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        // Save final reading progress
+        if (currentReadingId) {
+            var pct = getScrollPercent();
+            saveReadingProgress(currentReadingId, pct);
+        }
+        currentReadingId = null;
+    }
+
+    function getScrollPercent() {
+        var el = readerOverlay;
+        var scrollTop = el.scrollTop;
+        var scrollHeight = el.scrollHeight - el.clientHeight;
+        if (scrollHeight <= 0) return 100;
+        return Math.round((scrollTop / scrollHeight) * 100);
+    }
+
+    function updateScrollProgress() {
+        var pct = getScrollPercent();
+        if (readerScrollFill) readerScrollFill.style.width = pct + '%';
+        if (readerScrollPct) readerScrollPct.textContent = pct + '%';
+    }
+
+    if (readerBackBtn) {
+        readerBackBtn.addEventListener('click', closeReaderDetail);
+    }
+
+    if (readerOverlay) {
+        readerOverlay.addEventListener('scroll', function() {
+            updateScrollProgress();
+            // Auto-save progress as user scrolls
+            if (currentReadingId) {
+                var pct = getScrollPercent();
+                saveReadingProgress(currentReadingId, pct);
+            }
+        });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && readerOverlay.classList.contains('open')) {
+            closeReaderDetail();
+        }
+    });
 
     // Attach click handlers to thought rows
     document.querySelectorAll('.thought-row').forEach(function(row) {
         var id = row.getAttribute('data-thought-id');
         if (id) {
             row.addEventListener('click', function() {
-                simulateProgress(id);
+                openReaderDetail(id);
             });
         }
-    });
-
-    // Attach click handlers to reader open buttons
-    document.querySelectorAll('.reader-chapter-row:not(.locked)').forEach(function(row, i) {
-        row.addEventListener('click', function() {
-            simulateProgress('reader-' + (i + 1));
-        });
     });
 
     loadReadingProgress();
