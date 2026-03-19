@@ -882,7 +882,87 @@
         }
         .footer-center { flex-wrap: wrap; justify-content: center; }
     }
+    
+    /* Auth message */
+    .auth-message {
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        animation: fadeIn 0.3s ease;
+    }
+    .auth-message.error {
+        background: #FEF2F2;
+        color: #991B1B;
+        border: 1px solid #FECACA;
+    }
+    .auth-message.success {
+        background: #F0FDF4;
+        color: #166534;
+        border: 1px solid #BBF7D0;
+    }
+    .auth-message.info {
+        background: #EFF6FF;
+        color: #1E40AF;
+        border: 1px solid #BFDBFE;
+    }
+    .auth-message-close {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: inherit;
+        opacity: 0.6;
+        padding: 0 4px;
+        flex-shrink: 0;
+    }
+    .auth-message-close:hover { opacity: 1; }
+    .auth-message-text { flex: 1; }
+
+    /* Loading state for buttons */
+    .login-submit.loading,
+    .login-google.loading {
+        opacity: 0.7;
+        pointer-events: none;
+        position: relative;
+    }
+    .login-submit.loading::after,
+    .login-google.loading::after {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border: 2px solid transparent;
+        border-top-color: currentColor;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+        right: 16px;
+        top: 50%;
+        margin-top: -9px;
+    }
+    .login-submit.loading svg { opacity: 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+    /* Password reset link */
+    .forgot-password {
+        text-align: right;
+        margin-top: -8px;
+        margin-bottom: 4px;
+    }
+    .forgot-password a {
+        font-size: 13px;
+        color: var(--text-muted);
+        text-decoration: none;
+    }
+    .forgot-password a:hover { color: var(--text); }
+
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -943,6 +1023,14 @@
         </div>
 
         <div class="login-card fade-in">
+            <!-- Auth messages -->
+            <div class="auth-message" id="authMessage" style="display:none;">
+                <span class="auth-message-text" id="authMessageText"></span>
+                <button class="auth-message-close" id="authMessageClose">&times;</button>
+            </div>
+
+            <!-- LOGIN FORM VIEW -->
+            <div id="loginFormView">
             <button class="login-google" id="googleLogin">
                 <svg viewBox="0 0 24 24" fill="none">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -958,13 +1046,16 @@
             <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label class="form-label" data-i18n="login_email_label">Email</label>
-                    <input type="email" class="form-input" placeholder="vas@email.com" data-i18n-placeholder="login_email_placeholder" required>
+                    <input type="email" class="form-input" id="loginEmail" placeholder="vas@email.com" data-i18n-placeholder="login_email_placeholder" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" data-i18n="login_password_label">Heslo</label>
-                    <input type="password" class="form-input" placeholder="••••••••" required>
+                    <input type="password" class="form-input" id="loginPassword" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="login-submit" data-i18n="login_submit">
+                <div class="forgot-password">
+                    <a href="#" id="forgotPassword" data-i18n="login_forgot">Zabudli ste heslo?</a>
+                </div>
+                <button type="submit" class="login-submit" id="loginSubmitBtn" data-i18n="login_submit">
                     Prihlásiť sa
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 12L12 4M12 4H5M12 4v7"/>
@@ -976,6 +1067,48 @@
                 <span data-i18n="login_no_account">Nemáte účet?</span>
                 <a href="#" id="switchToRegister" data-i18n="login_register_link">Zaregistrujte sa</a>
             </p>
+            </div><!-- /loginFormView -->
+
+            <!-- REGISTER FORM VIEW -->
+            <div id="registerFormView" style="display:none;">
+            <button class="login-google" id="googleRegister">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 001 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                <span data-i18n="register_google">Registrovať s Google</span>
+            </button>
+
+            <div class="login-divider" data-i18n="register_or">alebo s emailom</div>
+
+            <form class="login-form" id="registerForm">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="register_name_label">Meno</label>
+                    <input type="text" class="form-input" id="registerName" placeholder="Vaše meno" data-i18n-placeholder="register_name_placeholder">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="register_email_label">Email</label>
+                    <input type="email" class="form-input" id="registerEmail" placeholder="vas@email.com" data-i18n-placeholder="register_email_placeholder" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="register_password_label">Heslo</label>
+                    <input type="password" class="form-input" id="registerPassword" placeholder="Min. 6 znakov" data-i18n-placeholder="register_password_placeholder" required minlength="6">
+                </div>
+                <button type="submit" class="login-submit" id="registerSubmitBtn" data-i18n="register_submit">
+                    Vytvoriť účet
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12L12 4M12 4H5M12 4v7"/>
+                    </svg>
+                </button>
+            </form>
+
+            <p class="login-footer-text">
+                <span data-i18n="register_has_account">Už máte účet?</span>
+                <a href="#" id="switchToLogin" data-i18n="register_login_link">Prihláste sa</a>
+            </p>
+            </div><!-- /registerFormView -->
         </div>
 
         <div class="login-benefits fade-in">
@@ -1015,7 +1148,7 @@
 <section class="dashboard-view" id="dashboardView">
 <div class="container">
     <div class="dashboard-header fade-in">
-        <h1 class="dashboard-greeting" data-i18n-html="dashboard_greeting">Vitajte, <strong>Lukáš</strong></h1>
+        <h1 class="dashboard-greeting" data-i18n-html="dashboard_greeting">Vitajte</h1>
         <div class="dashboard-user">
             <div class="dashboard-avatar">LH</div>
             <button class="dashboard-logout" id="logoutBtn" data-i18n="dashboard_logout">Odhlásiť sa</button>
@@ -1491,7 +1624,7 @@
             benefit_blog_desc: 'Krátke úvahy a hlbšie postrehy',
             benefit_preview: 'Ukážky z kníh',
             benefit_preview_desc: 'Ukážky z oboch kníh',
-            dashboard_greeting: 'Vitajte, <strong>Lukáš</strong>',
+            dashboard_greeting: 'Vitajte',
             dashboard_logout: 'Odhlásiť sa',
             tab_audio: 'Audiokniha',
             tab_blog: 'Myšlienky autora',
@@ -1553,6 +1686,32 @@
             footer_terms: 'Obchodné podmienky',
             footer_privacy: 'Ochrana súkromia',
             footer_contact: 'Kontakt',
+            register_google: 'Registrovať s Google',
+            register_or: 'alebo s emailom',
+            register_name_label: 'Meno',
+            register_name_placeholder: 'Vaše meno',
+            register_email_label: 'Email',
+            register_email_placeholder: 'vas@email.com',
+            register_password_label: 'Heslo',
+            register_password_placeholder: 'Min. 6 znakov',
+            register_submit: 'Vytvoriť účet',
+            register_has_account: 'Už máte účet?',
+            register_login_link: 'Prihláste sa',
+            login_forgot: 'Zabudli ste heslo?',
+            auth_error_generic: 'Niečo sa pokazilo. Skúste to znova.',
+            auth_error_invalid: 'Nesprávny email alebo heslo.',
+            auth_error_email_taken: 'Tento email je už zaregistrovaný.',
+            auth_error_weak_password: 'Heslo musí mať aspoň 6 znakov.',
+            auth_error_email_not_confirmed: 'Najprv potvrďte svoj email. Skontrolujte si schránku.',
+            auth_success_registered: 'Účet vytvorený. Skontrolujte si email a potvrďte registráciu.',
+            auth_success_reset: 'Email na obnovenie hesla bol odoslaný.',
+            auth_loading_login: 'Prihlasujem...',
+            auth_loading_register: 'Registrujem...',
+            auth_google_not_configured: 'Google prihlásenie zatiaľ nie je dostupné.',
+            forgot_title: 'Obnoviť heslo',
+            forgot_subtitle: 'Zadajte email a pošleme vám odkaz na obnovenie hesla.',
+            forgot_submit: 'Odoslať odkaz',
+            forgot_back: 'Späť na prihlásenie',
         },
         en: {
             nav_about: 'About',
@@ -1577,7 +1736,7 @@
             benefit_blog_desc: 'Short reflections and deeper insights',
             benefit_preview: 'Book excerpts',
             benefit_preview_desc: 'Excerpts from both books',
-            dashboard_greeting: 'Welcome, <strong>Lukas</strong>',
+            dashboard_greeting: 'Welcome',
             dashboard_logout: 'Sign out',
             tab_audio: 'Audiobook',
             tab_blog: 'Author\'s thoughts',
@@ -1639,6 +1798,32 @@
             footer_terms: 'Terms & Conditions',
             footer_privacy: 'Privacy Policy',
             footer_contact: 'Contact',
+            register_google: 'Register with Google',
+            register_or: 'or with email',
+            register_name_label: 'Name',
+            register_name_placeholder: 'Your name',
+            register_email_label: 'Email',
+            register_email_placeholder: 'your@email.com',
+            register_password_label: 'Password',
+            register_password_placeholder: 'Min. 6 characters',
+            register_submit: 'Create account',
+            register_has_account: 'Already have an account?',
+            register_login_link: 'Sign in',
+            login_forgot: 'Forgot password?',
+            auth_error_generic: 'Something went wrong. Please try again.',
+            auth_error_invalid: 'Invalid email or password.',
+            auth_error_email_taken: 'This email is already registered.',
+            auth_error_weak_password: 'Password must be at least 6 characters.',
+            auth_error_email_not_confirmed: 'Please confirm your email first. Check your inbox.',
+            auth_success_registered: 'Account created. Check your email to confirm your registration.',
+            auth_success_reset: 'Password reset email has been sent.',
+            auth_loading_login: 'Signing in...',
+            auth_loading_register: 'Registering...',
+            auth_google_not_configured: 'Google sign-in is not yet available.',
+            forgot_title: 'Reset password',
+            forgot_subtitle: 'Enter your email and we will send you a reset link.',
+            forgot_submit: 'Send link',
+            forgot_back: 'Back to sign in',
         }
     };
 
@@ -1718,16 +1903,85 @@
         });
     }
 
-    // ===== DEMO: LOGIN / DASHBOARD TOGGLE =====
+    // ===== SUPABASE AUTH =====
+    var SUPABASE_URL = 'https://hfvhpnmpjfzxzrlqaauu.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhmdmhwbm1wamZ6eHpybHFhYXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTgyNjgsImV4cCI6MjA4OTQ5NDI2OH0.6loYdOJwTdJZCSu8w1bVjoxfRz8m8zvNbPHHGPxF3N0';
+    var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     var loginView = document.getElementById('loginView');
     var dashboardView = document.getElementById('dashboardView');
     var loginForm = document.getElementById('loginForm');
+    var registerForm = document.getElementById('registerForm');
     var googleLogin = document.getElementById('googleLogin');
+    var googleRegister = document.getElementById('googleRegister');
     var logoutBtn = document.getElementById('logoutBtn');
+    var switchToRegister = document.getElementById('switchToRegister');
+    var switchToLogin = document.getElementById('switchToLogin');
+    var loginFormView = document.getElementById('loginFormView');
+    var registerFormView = document.getElementById('registerFormView');
+    var forgotPassword = document.getElementById('forgotPassword');
+    var authMessage = document.getElementById('authMessage');
+    var authMessageText = document.getElementById('authMessageText');
+    var authMessageClose = document.getElementById('authMessageClose');
+    var loginSubmitBtn = document.getElementById('loginSubmitBtn');
+    var registerSubmitBtn = document.getElementById('registerSubmitBtn');
 
-    function showDashboard() {
+    // --- UI helpers ---
+    function showAuthMessage(key, type) {
+        var dict = T[lang] || T['sk'];
+        var text = dict[key] || key;
+        authMessageText.textContent = text;
+        authMessage.className = 'auth-message ' + type;
+        authMessage.style.display = 'flex';
+    }
+
+    function hideAuthMessage() {
+        authMessage.style.display = 'none';
+    }
+
+    function setLoading(btn, loading) {
+        if (!btn) return;
+        if (loading) {
+            btn.classList.add('loading');
+            btn.disabled = true;
+        } else {
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    }
+
+    if (authMessageClose) {
+        authMessageClose.addEventListener('click', hideAuthMessage);
+    }
+
+    function showDashboard(user) {
         loginView.style.display = 'none';
         dashboardView.style.display = 'block';
+        hideAuthMessage();
+
+        // Update greeting with real user info
+        var name = '';
+        if (user) {
+            name = (user.user_metadata && user.user_metadata.full_name) 
+                || (user.user_metadata && user.user_metadata.name)
+                || user.email.split('@')[0];
+        }
+        var greetingEl = document.querySelector('.dashboard-greeting');
+        if (greetingEl && name) {
+            var dict = T[lang] || T['sk'];
+            var greetKey = lang === 'sk' ? 'Vitajte' : 'Welcome';
+            greetingEl.innerHTML = greetKey + ', <strong>' + name + '</strong>';
+        }
+        // Update avatar initials
+        var avatarEl = document.querySelector('.dashboard-avatar');
+        if (avatarEl && name) {
+            var parts = name.trim().split(' ');
+            var initials = parts.length >= 2 
+                ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
+                : name.substring(0,2).toUpperCase();
+            avatarEl.textContent = initials;
+        }
+
         // Trigger fade-in
         setTimeout(function() {
             dashboardView.querySelectorAll('.fade-in').forEach(function(el) {
@@ -1739,24 +1993,174 @@
     function showLogin() {
         dashboardView.style.display = 'none';
         loginView.style.display = 'block';
+        if (loginFormView) loginFormView.style.display = 'block';
+        if (registerFormView) registerFormView.style.display = 'none';
+        hideAuthMessage();
     }
 
+    function showRegisterView() {
+        if (loginFormView) loginFormView.style.display = 'none';
+        if (registerFormView) registerFormView.style.display = 'block';
+        hideAuthMessage();
+    }
+
+    function showLoginView() {
+        if (registerFormView) registerFormView.style.display = 'none';
+        if (loginFormView) loginFormView.style.display = 'block';
+        hideAuthMessage();
+    }
+
+    // --- Error mapping ---
+    function mapAuthError(error) {
+        var msg = (error && error.message) ? error.message.toLowerCase() : '';
+        if (msg.indexOf('invalid login') !== -1 || msg.indexOf('invalid_credentials') !== -1) return 'auth_error_invalid';
+        if (msg.indexOf('already registered') !== -1 || msg.indexOf('already been registered') !== -1 || msg.indexOf('user_already_exists') !== -1) return 'auth_error_email_taken';
+        if (msg.indexOf('password') !== -1 && (msg.indexOf('short') !== -1 || msg.indexOf('weak') !== -1 || msg.indexOf('least') !== -1)) return 'auth_error_weak_password';
+        if (msg.indexOf('email not confirmed') !== -1 || msg.indexOf('not confirmed') !== -1) return 'auth_error_email_not_confirmed';
+        return 'auth_error_generic';
+    }
+
+    // --- Switch views ---
+    if (switchToRegister) {
+        switchToRegister.addEventListener('click', function(e) {
+            e.preventDefault();
+            showRegisterView();
+        });
+    }
+    if (switchToLogin) {
+        switchToLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            showLoginView();
+        });
+    }
+
+    // --- Email Login ---
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            showDashboard();
+            hideAuthMessage();
+            var email = document.getElementById('loginEmail').value.trim();
+            var password = document.getElementById('loginPassword').value;
+            setLoading(loginSubmitBtn, true);
+
+            supabase.auth.signInWithPassword({ email: email, password: password })
+                .then(function(result) {
+                    setLoading(loginSubmitBtn, false);
+                    if (result.error) {
+                        showAuthMessage(mapAuthError(result.error), 'error');
+                    } else {
+                        showDashboard(result.data.user);
+                    }
+                })
+                .catch(function(err) {
+                    setLoading(loginSubmitBtn, false);
+                    showAuthMessage('auth_error_generic', 'error');
+                });
         });
     }
+
+    // --- Email Register ---
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            hideAuthMessage();
+            var name = document.getElementById('registerName').value.trim();
+            var email = document.getElementById('registerEmail').value.trim();
+            var password = document.getElementById('registerPassword').value;
+            setLoading(registerSubmitBtn, true);
+
+            supabase.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: { full_name: name }
+                }
+            }).then(function(result) {
+                setLoading(registerSubmitBtn, false);
+                if (result.error) {
+                    showAuthMessage(mapAuthError(result.error), 'error');
+                } else if (result.data.user && result.data.user.identities && result.data.user.identities.length === 0) {
+                    // Supabase returns user with empty identities if email already exists
+                    showAuthMessage('auth_error_email_taken', 'error');
+                } else {
+                    showAuthMessage('auth_success_registered', 'success');
+                    registerForm.reset();
+                }
+            }).catch(function(err) {
+                setLoading(registerSubmitBtn, false);
+                showAuthMessage('auth_error_generic', 'error');
+            });
+        });
+    }
+
+    // --- Google OAuth ---
+    function handleGoogleLogin() {
+        // Google OAuth is not yet configured in Supabase
+        showAuthMessage('auth_google_not_configured', 'info');
+    }
+
     if (googleLogin) {
-        googleLogin.addEventListener('click', function() {
-            showDashboard();
+        googleLogin.addEventListener('click', handleGoogleLogin);
+    }
+    if (googleRegister) {
+        googleRegister.addEventListener('click', handleGoogleLogin);
+    }
+
+    // --- Forgot password ---
+    if (forgotPassword) {
+        forgotPassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            var email = document.getElementById('loginEmail').value.trim();
+            if (!email) {
+                // Focus the email field
+                document.getElementById('loginEmail').focus();
+                var dict = T[lang] || T['sk'];
+                authMessageText.textContent = lang === 'sk' ? 'Najprv zadajte email.' : 'Enter your email first.';
+                authMessage.className = 'auth-message info';
+                authMessage.style.display = 'flex';
+                return;
+            }
+            hideAuthMessage();
+            supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: window.location.origin + '/members'
+            }).then(function(result) {
+                if (result.error) {
+                    showAuthMessage('auth_error_generic', 'error');
+                } else {
+                    showAuthMessage('auth_success_reset', 'success');
+                }
+            });
         });
     }
+
+    // --- Logout ---
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function() {
-            showLogin();
+            supabase.auth.signOut().then(function() {
+                showLogin();
+            });
         });
     }
+
+    // --- Session persistence: check on page load ---
+    supabase.auth.getSession().then(function(result) {
+        if (result.data.session && result.data.session.user) {
+            showDashboard(result.data.session.user);
+        } else {
+            showLogin();
+        }
+    }).catch(function() {
+        showLogin();
+    });
+
+    // Listen for auth state changes (e.g., OAuth redirect, token refresh)
+    supabase.auth.onAuthStateChange(function(event, session) {
+        if (event === 'SIGNED_IN' && session && session.user) {
+            showDashboard(session.user);
+        } else if (event === 'SIGNED_OUT') {
+            showLogin();
+        }
+    });
 
     // ===== TAB SWITCHING =====
     var tabs = document.querySelectorAll('.section-tab');
