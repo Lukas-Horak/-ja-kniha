@@ -2095,8 +2095,19 @@
 
     // --- Google OAuth ---
     function handleGoogleLogin() {
-        // Google OAuth is not yet configured in Supabase
-        showAuthMessage('auth_google_not_configured', 'info');
+        hideAuthMessage();
+        supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin + '/members'
+            }
+        }).then(function(result) {
+            if (result.error) {
+                showAuthMessage('auth_error_generic', 'error');
+            }
+        }).catch(function() {
+            showAuthMessage('auth_error_generic', 'error');
+        });
     }
 
     if (googleLogin) {
