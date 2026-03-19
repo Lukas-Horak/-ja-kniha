@@ -452,92 +452,100 @@
         font-variant-numeric: tabular-nums;
     }
 
-    /* ===== BLOG SECTION ===== */
-    .blog-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 16px;
-    }
-    .blog-card {
+    /* ===== THOUGHTS SECTION (reader-style list) ===== */
+    .thoughts-panel {
         background: var(--card);
         border-radius: 20px;
-        padding: 32px;
-        display: flex; flex-direction: column;
-        transition: box-shadow 0.2s;
-        cursor: pointer;
+        padding: 48px;
     }
-    .blog-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
-    .blog-card-top {
+    .thoughts-header {
+        margin-bottom: 32px;
+    }
+    .thoughts-label {
+        font-size: 0.7rem; font-weight: 600; color: var(--accent-primitive);
+        text-transform: uppercase; letter-spacing: 0.12em;
+        margin-bottom: 12px;
+    }
+    .thoughts-title {
+        font-size: 1.5rem; font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .thoughts-desc {
+        font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
+        max-width: 600px;
+    }
+    .thoughts-list {
+        display: flex; flex-direction: column; gap: 0;
+    }
+    .thought-row {
         display: flex; align-items: center; justify-content: space-between;
-        margin-bottom: 20px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.15s;
     }
-    .blog-date {
-        font-size: 0.75rem; color: var(--text-muted); font-weight: 400;
+    .thought-row:last-child { border-bottom: none; }
+    .thought-row:hover { background: rgba(0,0,0,0.015); margin: 0 -16px; padding: 16px; border-radius: 12px; border-color: transparent; }
+    .thought-row:hover + .thought-row { border-top-color: transparent; }
+    .thought-left {
+        display: flex; align-items: center; gap: 16px;
+        flex: 1; min-width: 0;
     }
-    .blog-tag {
+    .thought-num {
+        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+        min-width: 24px;
+    }
+    .thought-content {
+        display: flex; flex-direction: column; gap: 2px;
+        min-width: 0;
+    }
+    .thought-name {
+        font-size: 0.95rem; font-weight: 500;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .thought-snippet {
+        font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        max-width: 500px;
+    }
+    .thought-right {
+        display: flex; align-items: center; gap: 12px;
+        flex-shrink: 0;
+    }
+    .thought-tag {
         font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
         letter-spacing: 0.08em; padding: 4px 12px;
         border-radius: 100px;
     }
-    .blog-tag.thought { background: rgba(92, 138, 110, 0.08); color: var(--accent-higher); }
-    .blog-tag.excerpt { background: rgba(140, 126, 114, 0.08); color: var(--accent-rational); }
-    .blog-tag.insight { background: rgba(184, 168, 152, 0.08); color: var(--accent-primitive); }
-    .blog-title {
-        font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em;
-        line-height: 1.4; margin-bottom: 12px;
+    .thought-tag.thought { background: rgba(92, 138, 110, 0.08); color: var(--accent-higher); }
+    .thought-tag.insight { background: rgba(184, 168, 152, 0.08); color: var(--accent-primitive); }
+    .thought-progress-wrap {
+        display: flex; align-items: center; gap: 6px;
     }
-    .blog-excerpt {
-        font-size: 0.9rem; color: var(--text-light); line-height: 1.7;
-        flex: 1;
+    .thought-progress-bar {
+        width: 40px; height: 3px; border-radius: 3px;
+        background: var(--border); overflow: hidden;
     }
-    .blog-read-more {
+    .thought-progress-fill {
+        height: 100%; border-radius: 3px;
+        background: var(--accent-higher);
+        transition: width 0.3s;
+    }
+    .thought-progress-pct {
+        font-size: 0.7rem; color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+        min-width: 28px; text-align: right;
+    }
+    .thought-open-btn {
         display: inline-flex; align-items: center; gap: 6px;
-        margin-top: 20px;
-        font-size: 0.85rem; color: var(--text-muted); font-weight: 500;
+        padding: 8px 18px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
     }
-    .blog-read-more svg { width: 14px; height: 14px; }
-    .blog-card:hover .blog-read-more { color: var(--text); }
-
-    /* Featured blog post */
-    .blog-featured {
-        grid-column: 1 / -1;
-        background: var(--card);
-        border-radius: 20px;
-        padding: 48px;
-        display: grid; grid-template-columns: 1fr 1fr;
-        gap: 40px; align-items: center;
-        margin-bottom: 0;
-    }
-    .blog-featured-visual {
-        background: linear-gradient(135deg, rgba(92,138,110,0.08) 0%, rgba(140,126,114,0.08) 100%);
-        border-radius: 16px;
-        aspect-ratio: 4/3;
-        display: flex; align-items: center; justify-content: center;
-        position: relative; overflow: hidden;
-    }
-    .blog-featured-visual .quote-mark {
-        font-size: 12rem; font-weight: 200; font-style: italic;
-        color: rgba(92, 138, 110, 0.15); line-height: 1;
-        position: absolute; top: -20px; left: 20px;
-    }
-    .blog-featured-visual .quote-text {
-        font-size: 1.2rem; font-style: italic; font-weight: 300;
-        color: var(--text); line-height: 1.6;
-        padding: 40px; text-align: center;
-        max-width: 340px;
-        position: relative; z-index: 1;
-    }
-    .blog-featured-content .blog-tag { margin-bottom: 16px; display: inline-block; }
-    .blog-featured-content .blog-title {
-        font-size: 1.5rem; margin-bottom: 16px;
-    }
-    .blog-featured-content .blog-excerpt {
-        margin-bottom: 24px;
-    }
-    .blog-featured-content .blog-read-more {
-        margin-top: 0;
-        font-size: 0.9rem; font-weight: 500; color: var(--accent-higher);
-    }
+    .thought-open-btn:hover { opacity: 0.85; }
+    .thought-open-btn svg { width: 12px; height: 12px; }
 
     /* ===== READER SECTION ===== */
     .reader-grid {
@@ -628,57 +636,127 @@
     }
     .reader-lock-icon svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
 
-    /* ===== PREVIEW / NEW BOOK SECTION ===== */
-    .preview-section {
+    /* Reading progress indicator on chapter rows */
+    .reader-progress-wrap {
+        display: flex; align-items: center; gap: 6px;
+    }
+    .reader-progress-bar {
+        width: 40px; height: 3px; border-radius: 3px;
+        background: var(--border); overflow: hidden;
+    }
+    .reader-progress-fill {
+        height: 100%; border-radius: 3px;
+        background: var(--accent-higher);
+        transition: width 0.3s;
+    }
+    .reader-progress-pct {
+        font-size: 0.7rem; color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+        min-width: 28px; text-align: right;
+    }
+
+    /* ===== PREVIEW / BOOK EXCERPTS SECTION ===== */
+    .preview-panel-wrap {
+        display: flex; flex-direction: column; gap: 16px;
+    }
+    .book-category {
         background: var(--card);
         border-radius: 20px;
         padding: 48px;
-        text-align: center;
     }
-    .preview-label {
-        font-size: 0.7rem; font-weight: 600; color: var(--accent-higher);
-        text-transform: uppercase; letter-spacing: 0.12em;
-        margin-bottom: 16px;
+    .book-category-header {
+        display: flex; align-items: center; gap: 16px;
+        margin-bottom: 28px;
     }
-    .preview-title {
-        font-size: 1.5rem; font-weight: 400; font-style: italic;
-        letter-spacing: -0.02em; margin-bottom: 12px;
+    .book-mini-cover {
+        width: 48px; height: 64px;
+        border-radius: 6px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 3px 3px 12px rgba(0,0,0,0.1);
+        position: relative; overflow: hidden;
     }
-    .preview-desc {
-        font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
-        max-width: 560px; margin: 0 auto 32px;
+    .book-mini-cover::before {
+        content: '';
+        position: absolute; left: 0; top: 0; bottom: 0;
+        width: 4px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
     }
-    .preview-cards {
-        display: grid; grid-template-columns: 1fr 1fr 1fr;
-        gap: 16px; text-align: left;
+    .book-mini-cover.book-ja {
+        background: linear-gradient(145deg, #2A2A2A 0%, #1a1a1a 100%);
     }
-    .preview-card {
-        background: var(--bg);
-        border-radius: 16px;
-        padding: 28px;
+    .book-mini-cover.book-je {
+        background: linear-gradient(145deg, #3D3A36 0%, #2A2723 100%);
     }
-    .preview-card-num {
-        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
-        text-transform: uppercase; letter-spacing: 0.1em;
-        margin-bottom: 12px;
+    .book-mini-cover span {
+        font-size: 0.7rem; font-weight: 300; font-style: italic;
+        color: #fff; letter-spacing: -0.02em;
     }
-    .preview-card-title {
-        font-size: 1.05rem; font-weight: 500;
-        margin-bottom: 8px;
+    .book-category-info h3 {
+        font-size: 1.25rem; font-weight: 400; font-style: italic;
+        letter-spacing: -0.02em; margin-bottom: 4px;
     }
-    .preview-card-text {
+    .book-category-info p {
         font-size: 0.85rem; color: var(--text-light); line-height: 1.6;
     }
-    .preview-card-status {
-        display: inline-flex; align-items: center; gap: 6px;
-        margin-top: 16px;
-        font-size: 0.75rem; font-weight: 500; color: var(--accent-higher);
+    .preview-list {
+        display: flex; flex-direction: column; gap: 0;
     }
-    .preview-card-status .pulse {
-        width: 6px; height: 6px; border-radius: 50%;
+    .preview-row {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    .preview-row:last-child { border-bottom: none; }
+    .preview-row:hover { background: rgba(0,0,0,0.015); margin: 0 -16px; padding: 16px; border-radius: 12px; border-color: transparent; }
+    .preview-row:hover + .preview-row { border-top-color: transparent; }
+    .preview-row-left {
+        display: flex; align-items: center; gap: 14px;
+        flex: 1; min-width: 0;
+    }
+    .preview-row-num {
+        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+        min-width: 24px;
+    }
+    .preview-row-content {
+        display: flex; flex-direction: column; gap: 2px;
+        min-width: 0;
+    }
+    .preview-row-title {
+        font-size: 0.95rem; font-weight: 500;
+    }
+    .preview-row-desc {
+        font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        max-width: 500px;
+    }
+    .preview-row-right {
+        display: flex; align-items: center; gap: 12px;
+        flex-shrink: 0;
+    }
+    .preview-row-status {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 0.7rem; font-weight: 500; color: var(--accent-higher);
+    }
+    .preview-row-status .pulse {
+        width: 5px; height: 5px; border-radius: 50%;
         background: var(--accent-higher);
         animation: pulse-dot 2s ease-in-out infinite;
     }
+    .preview-row-status.coming-soon { color: var(--text-muted); }
+    .preview-row-status.coming-soon .pulse { background: var(--text-muted); }
+    .preview-open-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 18px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .preview-open-btn:hover { opacity: 0.85; }
+    .preview-open-btn svg { width: 12px; height: 12px; }
     @keyframes pulse-dot {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
@@ -737,10 +815,7 @@
         .container { padding: 0 32px; }
         .nav-inner { padding: 16px 32px; }
         .audio-grid { grid-template-columns: 1fr; }
-        .blog-grid { grid-template-columns: 1fr 1fr; }
-        .blog-featured { grid-template-columns: 1fr; }
-        .blog-featured-visual { display: none; }
-        .preview-cards { grid-template-columns: 1fr 1fr; }
+        .thought-snippet { max-width: 300px; }
         .reader-promo { grid-template-columns: 1fr; justify-items: center; text-align: center; }
         .reader-info { text-align: left; }
     }
@@ -780,12 +855,20 @@
 
         .audio-grid { grid-template-columns: 1fr; }
         .audio-featured { padding: 24px; }
-        .blog-grid { grid-template-columns: 1fr; }
-        .blog-featured { padding: 28px; grid-template-columns: 1fr; }
-        .blog-featured-visual { display: none; }
-        .blog-card { padding: 24px; }
-        .preview-cards { grid-template-columns: 1fr; }
-        .preview-section { padding: 28px; }
+        .thoughts-panel { padding: 28px; }
+        .thought-row { flex-wrap: wrap; gap: 8px; }
+        .thought-row:hover { margin: 0 -8px; padding: 16px 8px; }
+        .thought-left { flex: 1 1 100%; }
+        .thought-snippet { max-width: none; }
+        .thought-right { padding-left: 38px; gap: 8px; }
+        .thought-progress-wrap { order: -1; }
+        .book-category { padding: 28px; }
+        .book-category-header { gap: 12px; }
+        .preview-row { flex-wrap: wrap; gap: 8px; }
+        .preview-row:hover { margin: 0 -8px; padding: 16px 8px; }
+        .preview-row-left { flex: 1 1 100%; }
+        .preview-row-desc { white-space: normal; }
+        .preview-row-right { padding-left: 38px; gap: 8px; }
         .reader-promo { padding: 28px; grid-template-columns: 1fr; }
         .reader-book-visual { width: 140px; }
 
@@ -1077,86 +1160,133 @@
 
     <!-- ===== BLOG TAB ===== -->
     <div class="tab-panel" id="panel-blog">
-        <div class="blog-grid">
-            <div class="blog-featured">
-                <div class="blog-featured-visual">
-                    <div class="quote-mark">"</div>
-                    <div class="quote-text" data-i18n="blog_featured_quote">Najväčšia ilúzia je presvedčenie, že sme oddelení od toho, čo pozorujeme.</div>
-                </div>
-                <div class="blog-featured-content">
-                    <span class="blog-tag thought" data-i18n="tag_thought">Myšlienka</span>
-                    <h3 class="blog-title" data-i18n="blog_featured_title">O ilúzii oddelenia</h3>
-                    <p class="blog-excerpt" data-i18n="blog_featured_excerpt">Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle? Čo ak je samotné rozdelenie príčinou väčšiny nášho utrpenia?</p>
-                    <a href="#" class="blog-read-more" data-i18n="blog_read_more">
-                        Čítať celé
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                    </a>
-                </div>
+        <div class="thoughts-panel">
+            <div class="thoughts-header">
+                <div class="thoughts-label" data-i18n="thoughts_label">Myšlienky &amp; postrehy</div>
+                <h3 class="thoughts-title" data-i18n="thoughts_title">Myšlienky autora</h3>
+                <p class="thoughts-desc" data-i18n="thoughts_desc">Krátke úvahy, postrehy a hlbšie zamyslenia. Čítajte priamo v prehliadači – ako člen máte prístup ku všetkým textom.</p>
             </div>
-
-            <div class="blog-card">
-                <div class="blog-card-top">
-                    <span class="blog-date">14. marca 2026</span>
-                    <span class="blog-tag insight" data-i18n="tag_insight">Postřeh</span>
+            <div class="thoughts-list">
+                <div class="thought-row" data-thought-id="thought-1">
+                    <div class="thought-left">
+                        <span class="thought-num">01</span>
+                        <div class="thought-content">
+                            <span class="thought-name" data-i18n="thought_1_title">O ilúzii oddelenia</span>
+                            <span class="thought-snippet" data-i18n="thought_1_snippet">Keď pozorujete svet, máte pocit, že ste od neho oddelení...</span>
+                        </div>
+                    </div>
+                    <div class="thought-right">
+                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                        <div class="thought-progress-wrap" data-progress-id="thought-1" style="display:none;">
+                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
+                            <span class="thought-progress-pct">0%</span>
+                        </div>
+                        <button class="thought-open-btn" data-i18n="reader_open">
+                            Otvoriť
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                        </button>
+                    </div>
                 </div>
-                <h3 class="blog-title" data-i18n="blog_2_title">Prečo sa bojíme ticha</h3>
-                <p class="blog-excerpt" data-i18n="blog_2_excerpt">Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene...</p>
-                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
-                    Čítať celé
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                </a>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-card-top">
-                    <span class="blog-date">7. marca 2026</span>
-                    <span class="blog-tag excerpt" data-i18n="tag_excerpt">Ukážka z knihy 2</span>
+                <div class="thought-row" data-thought-id="thought-2">
+                    <div class="thought-left">
+                        <span class="thought-num">02</span>
+                        <div class="thought-content">
+                            <span class="thought-name" data-i18n="thought_2_title">Prečo sa bojíme ticha</span>
+                            <span class="thought-snippet" data-i18n="thought_2_snippet">Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho?</span>
+                        </div>
+                    </div>
+                    <div class="thought-right">
+                        <span class="thought-tag insight" data-i18n="tag_insight">Postreh</span>
+                        <div class="thought-progress-wrap" data-progress-id="thought-2" style="display:none;">
+                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
+                            <span class="thought-progress-pct">0%</span>
+                        </div>
+                        <button class="thought-open-btn" data-i18n="reader_open">
+                            Otvoriť
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                        </button>
+                    </div>
                 </div>
-                <h3 class="blog-title" data-i18n="blog_3_title">Emócie, ktoré ešte nemajú meno</h3>
-                <p class="blog-excerpt" data-i18n="blog_3_excerpt">V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi...</p>
-                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
-                    Čítať celé
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                </a>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-card-top">
-                    <span class="blog-date">28. februára 2026</span>
-                    <span class="blog-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                <div class="thought-row" data-thought-id="thought-3">
+                    <div class="thought-left">
+                        <span class="thought-num">03</span>
+                        <div class="thought-content">
+                            <span class="thought-name" data-i18n="thought_3_title">Paradox sebarozvoja</span>
+                            <span class="thought-snippet" data-i18n="thought_3_snippet">Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt...</span>
+                        </div>
+                    </div>
+                    <div class="thought-right">
+                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                        <div class="thought-progress-wrap" data-progress-id="thought-3" style="display:none;">
+                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
+                            <span class="thought-progress-pct">0%</span>
+                        </div>
+                        <button class="thought-open-btn" data-i18n="reader_open">
+                            Otvoriť
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                        </button>
+                    </div>
                 </div>
-                <h3 class="blog-title" data-i18n="blog_4_title">Paradox sebarozvoja</h3>
-                <p class="blog-excerpt" data-i18n="blog_4_excerpt">Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť. Je to ako snažiť sa zabudnúť...</p>
-                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
-                    Čítať celé
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                </a>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-card-top">
-                    <span class="blog-date">20. februára 2026</span>
-                    <span class="blog-tag excerpt" data-i18n="tag_excerpt">Ukážka z knihy 2</span>
+                <div class="thought-row" data-thought-id="thought-4">
+                    <div class="thought-left">
+                        <span class="thought-num">04</span>
+                        <div class="thought-content">
+                            <span class="thought-name" data-i18n="thought_4_title">Čo je skutočná sloboda</span>
+                            <span class="thought-snippet" data-i18n="thought_4_snippet">Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov...</span>
+                        </div>
+                    </div>
+                    <div class="thought-right">
+                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                        <div class="thought-progress-wrap" data-progress-id="thought-4" style="display:none;">
+                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
+                            <span class="thought-progress-pct">0%</span>
+                        </div>
+                        <button class="thought-open-btn" data-i18n="reader_open">
+                            Otvoriť
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                        </button>
+                    </div>
                 </div>
-                <h3 class="blog-title" data-i18n="blog_5_title">Neuroplasticita a vedomie</h3>
-                <p class="blog-excerpt" data-i18n="blog_5_excerpt">Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí...</p>
-                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
-                    Čítať celé
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                </a>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-card-top">
-                    <span class="blog-date">12. februára 2026</span>
-                    <span class="blog-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                <div class="thought-row" data-thought-id="thought-5">
+                    <div class="thought-left">
+                        <span class="thought-num">05</span>
+                        <div class="thought-content">
+                            <span class="thought-name" data-i18n="thought_5_title">Neuroplasticita a vedomie</span>
+                            <span class="thought-snippet" data-i18n="thought_5_snippet">Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu...</span>
+                        </div>
+                    </div>
+                    <div class="thought-right">
+                        <span class="thought-tag insight" data-i18n="tag_insight">Postreh</span>
+                        <div class="thought-progress-wrap" data-progress-id="thought-5" style="display:none;">
+                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
+                            <span class="thought-progress-pct">0%</span>
+                        </div>
+                        <button class="thought-open-btn" data-i18n="reader_open">
+                            Otvoriť
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                        </button>
+                    </div>
                 </div>
-                <h3 class="blog-title" data-i18n="blog_6_title">Čo je skutočná sloboda</h3>
-                <p class="blog-excerpt" data-i18n="blog_6_excerpt">Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť...</p>
-                <a href="#" class="blog-read-more" data-i18n="blog_read_more">
-                    Čítať celé
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                </a>
+                <div class="thought-row" data-thought-id="thought-6">
+                    <div class="thought-left">
+                        <span class="thought-num">06</span>
+                        <div class="thought-content">
+                            <span class="thought-name" data-i18n="thought_6_title">Emócie, ktoré ešte nemajú meno</span>
+                            <span class="thought-snippet" data-i18n="thought_6_snippet">V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať...</span>
+                        </div>
+                    </div>
+                    <div class="thought-right">
+                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
+                        <div class="thought-progress-wrap" data-progress-id="thought-6" style="display:none;">
+                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
+                            <span class="thought-progress-pct">0%</span>
+                        </div>
+                        <button class="thought-open-btn" data-i18n="reader_open">
+                            Otvoriť
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1179,6 +1309,10 @@
                                 <span class="reader-chapter-name" data-i18n="rch_1">Predhovor autora</span>
                             </div>
                             <div class="reader-chapter-right">
+                                <div class="reader-progress-wrap" data-progress-id="reader-1" style="display:none;">
+                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
+                                    <span class="reader-progress-pct">0%</span>
+                                </div>
                                 <span class="reader-chapter-pages" data-i18n="rch_1_pages">12 strán</span>
                                 <button class="reader-open-btn" data-i18n="reader_open">
                                     Otvoriť
@@ -1192,6 +1326,10 @@
                                 <span class="reader-chapter-name" data-i18n="rch_2">Kapitola 1 – Úvod</span>
                             </div>
                             <div class="reader-chapter-right">
+                                <div class="reader-progress-wrap" data-progress-id="reader-2" style="display:none;">
+                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
+                                    <span class="reader-progress-pct">0%</span>
+                                </div>
                                 <span class="reader-chapter-pages" data-i18n="rch_2_pages">18 strán</span>
                                 <button class="reader-open-btn" data-i18n="reader_open">
                                     Otvoriť
@@ -1205,6 +1343,10 @@
                                 <span class="reader-chapter-name" data-i18n="rch_3">Kapitola 2 – Biologický mechanizmus</span>
                             </div>
                             <div class="reader-chapter-right">
+                                <div class="reader-progress-wrap" data-progress-id="reader-3" style="display:none;">
+                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
+                                    <span class="reader-progress-pct">0%</span>
+                                </div>
                                 <span class="reader-chapter-pages" data-i18n="rch_3_pages">24 strán</span>
                                 <button class="reader-open-btn" data-i18n="reader_open">
                                     Otvoriť
@@ -1218,6 +1360,10 @@
                                 <span class="reader-chapter-name" data-i18n="rch_4">Kapitola 3 – Túžby</span>
                             </div>
                             <div class="reader-chapter-right">
+                                <div class="reader-progress-wrap" data-progress-id="reader-4" style="display:none;">
+                                    <div class="reader-progress-bar"><div class="reader-progress-fill" style="width:0%"></div></div>
+                                    <span class="reader-progress-pct">0%</span>
+                                </div>
                                 <span class="reader-chapter-pages" data-i18n="rch_4_pages">28 strán</span>
                                 <button class="reader-open-btn" data-i18n="reader_open">
                                     Otvoriť
@@ -1259,39 +1405,148 @@
 
     <!-- ===== PREVIEW TAB ===== -->
     <div class="tab-panel" id="panel-preview">
-        <div class="preview-section">
-            <div class="preview-label" data-i18n="preview_label">Exkluzívny prístup</div>
-            <h2 class="preview-title" data-i18n="preview_title">Pripravovaná kniha</h2>
-            <p class="preview-desc" data-i18n="preview_desc">Ako člen máte možnosť nahliadnuť do procesu tvorby novej knihy. Zdieľam s vami vybrané časti ešte pred oficiálnym vydaním.</p>
-            <div class="preview-cards">
-                <div class="preview-card">
-                    <div class="preview-card-num" data-i18n="preview_ch_1">Ukážka 1</div>
-                    <div class="preview-card-title" data-i18n="preview_ch_1_title">Kolektívne vedomie</div>
-                    <div class="preview-card-text" data-i18n="preview_ch_1_text">Čo sa stane, keď jednotlivé vedomia začnú spolupracovať? Existuje niečo ako skupinové vedomie a ak áno, ako funguje?</div>
-                    <div class="preview-card-status">
-                        <span class="pulse"></span>
-                        <span data-i18n="preview_available">Dostupné</span>
+        <div class="preview-panel-wrap">
+
+            <!-- Book 1: Evolúcia vedomia – JA -->
+            <div class="book-category">
+                <div class="book-category-header">
+                    <div class="book-mini-cover book-ja"><span>JA</span></div>
+                    <div class="book-category-info">
+                        <h3 data-i18n="book_ja_title">Evolúcia vedomia – JA</h3>
+                        <p data-i18n="book_ja_desc">Ukážky z prvej knihy. Vybrané kapitoly, ktoré môžete čítať priamo tu.</p>
                     </div>
                 </div>
-                <div class="preview-card">
-                    <div class="preview-card-num" data-i18n="preview_ch_2">Ukážka 2</div>
-                    <div class="preview-card-title" data-i18n="preview_ch_2_title">Technológia a vedomie</div>
-                    <div class="preview-card-text" data-i18n="preview_ch_2_text">Ako umelá inteligencia a technológie ovplyvňujú evolúciu ľudského vedomia. Je to hrozba alebo príležitosť?</div>
-                    <div class="preview-card-status">
-                        <span class="pulse"></span>
-                        <span data-i18n="preview_available">Dostupné</span>
+                <div class="preview-list">
+                    <div class="preview-row" data-preview-id="ja-1">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">01</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_preview_1_title">Predhovor autora</span>
+                                <span class="preview-row-desc" data-i18n="ja_preview_1_desc">Prečo som napísal túto knihu a čo v nej nájdete.</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_available">Dostupné</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="preview-card">
-                    <div class="preview-card-num" data-i18n="preview_ch_3">Ukážka 3</div>
-                    <div class="preview-card-title" data-i18n="preview_ch_3_title">Za hranicou mysle</div>
-                    <div class="preview-card-text" data-i18n="preview_ch_3_text">Najnovšie poznatky o tom, čo sa deje s vedomím, keď prekročíme bežné hranice vnímania.</div>
-                    <div class="preview-card-status" style="color: var(--text-muted);">
-                        <span class="pulse" style="background: var(--text-muted);"></span>
-                        <span data-i18n="preview_coming_soon">Pripravuje sa</span>
+                    <div class="preview-row" data-preview-id="ja-2">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">02</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_preview_2_title">Kapitola 3 – Túžby</span>
+                                <span class="preview-row-desc" data-i18n="ja_preview_2_desc">Ukážka z kapitoly o mechanizme túžob a ich vplyve na vedomie.</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_available">Dostupné</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-row" data-preview-id="ja-3">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">03</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_preview_3_title">Kapitola 7 – Vyššie vedomie</span>
+                                <span class="preview-row-desc" data-i18n="ja_preview_3_desc">Záverečná kapitola o prechode k vyššiemu stavu vedomia.</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status coming-soon">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_coming_soon">Pripravuje sa</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open" disabled style="opacity:0.4;cursor:default;">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Book 2: Realita – JE -->
+            <div class="book-category">
+                <div class="book-category-header">
+                    <div class="book-mini-cover book-je"><span>JE</span></div>
+                    <div class="book-category-info">
+                        <h3 data-i18n="book_je_title">Realita – JE</h3>
+                        <p data-i18n="book_je_desc">Pripravovaná kniha. Exkluzívne ukážky ešte pred oficiálnym vydaním.</p>
+                    </div>
+                </div>
+                <div class="preview-list">
+                    <div class="preview-row" data-preview-id="je-1">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">01</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="je_preview_1_title">Kolektívne vedomie</span>
+                                <span class="preview-row-desc" data-i18n="je_preview_1_desc">Čo sa stane, keď jednotlivé vedomia začnú spolupracovať?</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_available">Dostupné</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-row" data-preview-id="je-2">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">02</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="je_preview_2_title">Technológia a vedomie</span>
+                                <span class="preview-row-desc" data-i18n="je_preview_2_desc">Ako umelá inteligencia ovplyvňuje evolúciu ľudského vedomia.</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_available">Dostupné</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-row" data-preview-id="je-3">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">03</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="je_preview_3_title">Za hranicou mysle</span>
+                                <span class="preview-row-desc" data-i18n="je_preview_3_desc">Najnovšie poznatky o tom, čo sa deje s vedomím za hranicami vnímania.</span>
+                            </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-row-status coming-soon">
+                                <span class="pulse"></span>
+                                <span data-i18n="preview_coming_soon">Pripravuje sa</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open" disabled style="opacity:0.4;cursor:default;">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1340,14 +1595,14 @@
             benefit_reader_desc: 'Ďalšie kapitoly knihy v online čítačke',
             benefit_blog: 'Myšlienky autora',
             benefit_blog_desc: 'Krátke úvahy a hlbšie postrehy',
-            benefit_preview: 'Pripravovaná kniha',
-            benefit_preview_desc: 'Ukážky z nového diela ešte pred vydaním',
+            benefit_preview: 'Ukážky z kníh',
+            benefit_preview_desc: 'Ukážky z oboch kníh',
             dashboard_greeting: 'Vitajte, <strong>Lukáš</strong>',
             dashboard_logout: 'Odhlásiť sa',
             tab_audio: 'Audiokniha',
             tab_blog: 'Myšlienky autora',
             tab_reader: 'Čítačka',
-            tab_preview: 'Pripravovaná kniha',
+            tab_preview: 'Ukážky z kníh',
             af_now_playing: 'Práve prehráva',
             af_members_only: 'Pre členov',
             af_chapter_title: 'Kapitola 4 – Hranice ega',
@@ -1362,23 +1617,23 @@
             badge_free: 'Voľný prístup',
             badge_members: 'Members',
             badge_soon: 'Čoskoro',
-            blog_featured_quote: 'Najväčšia ilúzia je presvedčenie, že sme oddelení od toho, čo pozorujeme.',
-            blog_featured_title: 'O ilúzii oddelenia',
-            blog_featured_excerpt: 'Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle?',
-            blog_read_more: 'Čítať celé',
             tag_thought: 'Myšlienka',
-            tag_excerpt: 'Ukážka z knihy 2',
             tag_insight: 'Postreh',
-            blog_2_title: 'Prečo sa bojíme ticha',
-            blog_2_excerpt: 'Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene...',
-            blog_3_title: 'Emócie, ktoré ešte nemajú meno',
-            blog_3_excerpt: 'V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi...',
-            blog_4_title: 'Paradox sebarozvoja',
-            blog_4_excerpt: 'Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť...',
-            blog_5_title: 'Neuroplasticita a vedomie',
-            blog_5_excerpt: 'Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí...',
-            blog_6_title: 'Čo je skutočná sloboda',
-            blog_6_excerpt: 'Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť...',
+            thoughts_label: 'Myšlienky & postrehy',
+            thoughts_title: 'Myšlienky autora',
+            thoughts_desc: 'Krátke úvahy, postrehy a hlbšie zamyslenia. Čítajte priamo v prehliadači – ako člen máte prístup ku všetkým textom.',
+            thought_1_title: 'O ilúzii oddelenia',
+            thought_1_snippet: 'Keď pozorujete svet, máte pocit, že ste od neho oddelení...',
+            thought_2_title: 'Prečo sa bojíme ticha',
+            thought_2_snippet: 'Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho?',
+            thought_3_title: 'Paradox sebarozvoja',
+            thought_3_snippet: 'Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt...',
+            thought_4_title: 'Čo je skutočná sloboda',
+            thought_4_snippet: 'Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov...',
+            thought_5_title: 'Neuroplasticita a vedomie',
+            thought_5_snippet: 'Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu...',
+            thought_6_title: 'Emócie, ktoré ešte nemajú meno',
+            thought_6_snippet: 'V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať...',
             reader_author: 'Lukáš Horák',
             reader_title: 'Online čítačka',
             reader_desc: 'Čítajte vybrané kapitoly priamo v prehliadači. Ako člen máte prístup k rozšírenému obsahu, ktorý nie je dostupný vo verejnej ukážke.',
@@ -1389,15 +1644,22 @@
             rch_4: 'Kapitola 3 – Túžby', rch_4_pages: '28 strán',
             rch_5: 'Kapitola 4 – Hranice ega', rch_5_pages: 'Len pre členov',
             rch_6: 'Kapitola 5 – Hierarchia a moc', rch_6_pages: 'Len pre členov',
-            preview_label: 'Exkluzívny prístup',
-            preview_title: 'Pripravovaná kniha',
-            preview_desc: 'Ako člen máte možnosť nahliadnuť do procesu tvorby novej knihy. Zdieľam s vami vybrané časti ešte pred oficiálnym vydaním.',
-            preview_ch_1: 'Ukážka 1', preview_ch_1_title: 'Kolektívne vedomie',
-            preview_ch_1_text: 'Čo sa stane, keď jednotlivé vedomia začnú spolupracovať? Existuje niečo ako skupinové vedomie a ak áno, ako funguje?',
-            preview_ch_2: 'Ukážka 2', preview_ch_2_title: 'Technológia a vedomie',
-            preview_ch_2_text: 'Ako umelá inteligencia a technológie ovplyvňujú evolúciu ľudského vedomia. Je to hrozba alebo príležitosť?',
-            preview_ch_3: 'Ukážka 3', preview_ch_3_title: 'Za hranicou mysle',
-            preview_ch_3_text: 'Najnovšie poznatky o tom, čo sa deje s vedomím, keď prekročíme bežné hranice vnímania.',
+            book_ja_title: 'Evolúcia vedomia – JA',
+            book_ja_desc: 'Ukážky z prvej knihy. Vybrané kapitoly, ktoré môžete čítať priamo tu.',
+            ja_preview_1_title: 'Predhovor autora',
+            ja_preview_1_desc: 'Prečo som napísal túto knihu a čo v nej nájdete.',
+            ja_preview_2_title: 'Kapitola 3 – Túžby',
+            ja_preview_2_desc: 'Ukážka z kapitoly o mechanizme túžob a ich vplyve na vedomie.',
+            ja_preview_3_title: 'Kapitola 7 – Vyššie vedomie',
+            ja_preview_3_desc: 'Záverečná kapitola o prechode k vyššiemu stavu vedomia.',
+            book_je_title: 'Realita – JE',
+            book_je_desc: 'Pripravovaná kniha. Exkluzívne ukážky ešte pred oficiálnym vydaním.',
+            je_preview_1_title: 'Kolektívne vedomie',
+            je_preview_1_desc: 'Čo sa stane, keď jednotlivé vedomia začnú spolupracovať?',
+            je_preview_2_title: 'Technológia a vedomie',
+            je_preview_2_desc: 'Ako umelá inteligencia ovplyvňuje evolúciu ľudského vedomia.',
+            je_preview_3_title: 'Za hranicou mysle',
+            je_preview_3_desc: 'Najnovšie poznatky o tom, čo sa deje s vedomím za hranicami vnímania.',
             preview_available: 'Dostupné',
             preview_coming_soon: 'Pripravuje sa',
             footer_left: 'JA <span>/ Evolúcia vedomia</span>',
@@ -1428,14 +1690,14 @@
             benefit_reader_desc: 'Additional book chapters in the online reader',
             benefit_blog: 'Author\'s thoughts',
             benefit_blog_desc: 'Short reflections and deeper insights',
-            benefit_preview: 'Upcoming book',
-            benefit_preview_desc: 'Previews of the new work before release',
+            benefit_preview: 'Book excerpts',
+            benefit_preview_desc: 'Excerpts from both books',
             dashboard_greeting: 'Welcome, <strong>Lukas</strong>',
             dashboard_logout: 'Sign out',
             tab_audio: 'Audiobook',
             tab_blog: 'Author\'s thoughts',
             tab_reader: 'Reader',
-            tab_preview: 'Upcoming book',
+            tab_preview: 'Book excerpts',
             af_now_playing: 'Now playing',
             af_members_only: 'Members only',
             af_chapter_title: 'Chapter 4 – Boundaries of the ego',
@@ -1450,23 +1712,23 @@
             badge_free: 'Free access',
             badge_members: 'Members',
             badge_soon: 'Coming soon',
-            blog_featured_quote: 'The greatest illusion is the belief that we are separate from what we observe.',
-            blog_featured_title: 'On the illusion of separation',
-            blog_featured_excerpt: 'When you observe the world, you feel separate from it – that there is an observer and that which is observed. But what if this division is just a construct of your mind?',
-            blog_read_more: 'Read full',
             tag_thought: 'Thought',
-            tag_excerpt: 'Book 2 preview',
             tag_insight: 'Insight',
-            blog_2_title: 'Why we fear silence',
-            blog_2_excerpt: 'Have you noticed how we immediately reach for our phone when silence occurs? This mechanism has deep evolutionary roots...',
-            blog_3_title: 'Emotions that have no name yet',
-            blog_3_excerpt: 'In the upcoming book, I explore emotions that most languages cannot name. They exist at the boundary between...',
-            blog_4_title: 'The paradox of self-improvement',
-            blog_4_excerpt: 'The more you try to change yourself, the more you reinforce the very aspect you want to change...',
-            blog_5_title: 'Neuroplasticity and consciousness',
-            blog_5_excerpt: 'New research shows that meditation literally changes the structure of the brain. But not in the way most people think...',
-            blog_6_title: 'What true freedom is',
-            blog_6_excerpt: 'Freedom is not doing what we want. True freedom is liberation from the mechanisms that make us want...',
+            thoughts_label: 'Thoughts & insights',
+            thoughts_title: 'Author\'s thoughts',
+            thoughts_desc: 'Short reflections, insights, and deeper contemplations. Read directly in your browser – as a member you have access to all texts.',
+            thought_1_title: 'On the illusion of separation',
+            thought_1_snippet: 'When you observe the world, you feel separate from it...',
+            thought_2_title: 'Why we fear silence',
+            thought_2_snippet: 'Have you noticed how we immediately reach for our phone when silence occurs?',
+            thought_3_title: 'The paradox of self-improvement',
+            thought_3_snippet: 'The more you try to change yourself, the more you reinforce the very aspect...',
+            thought_4_title: 'What true freedom is',
+            thought_4_snippet: 'Freedom is not doing what we want. True freedom is liberation from the mechanisms...',
+            thought_5_title: 'Neuroplasticity and consciousness',
+            thought_5_snippet: 'New research shows that meditation literally changes the structure of the brain...',
+            thought_6_title: 'Emotions that have no name yet',
+            thought_6_snippet: 'In the upcoming book, I explore emotions that most languages cannot name...',
             reader_author: 'Lukas Horak',
             reader_title: 'Online reader',
             reader_desc: 'Read selected chapters directly in your browser. As a member, you have access to extended content not available in the public preview.',
@@ -1477,15 +1739,22 @@
             rch_4: 'Chapter 3 – Desires', rch_4_pages: '28 pages',
             rch_5: 'Chapter 4 – Boundaries of the ego', rch_5_pages: 'Members only',
             rch_6: 'Chapter 5 – Hierarchy and power', rch_6_pages: 'Members only',
-            preview_label: 'Exclusive access',
-            preview_title: 'Upcoming book',
-            preview_desc: 'As a member, you can peek into the creation process of the new book. I share selected parts with you before the official release.',
-            preview_ch_1: 'Preview 1', preview_ch_1_title: 'Collective consciousness',
-            preview_ch_1_text: 'What happens when individual consciousnesses begin to cooperate? Is there such a thing as group consciousness, and if so, how does it work?',
-            preview_ch_2: 'Preview 2', preview_ch_2_title: 'Technology and consciousness',
-            preview_ch_2_text: 'How artificial intelligence and technology affect the evolution of human consciousness. Is it a threat or an opportunity?',
-            preview_ch_3: 'Preview 3', preview_ch_3_title: 'Beyond the mind',
-            preview_ch_3_text: 'The latest findings about what happens to consciousness when we go beyond the usual boundaries of perception.',
+            book_ja_title: 'Evolution of Consciousness – I AM',
+            book_ja_desc: 'Excerpts from the first book. Selected chapters you can read right here.',
+            ja_preview_1_title: 'Author\'s foreword',
+            ja_preview_1_desc: 'Why I wrote this book and what you will find in it.',
+            ja_preview_2_title: 'Chapter 3 – Desires',
+            ja_preview_2_desc: 'An excerpt from the chapter on the mechanism of desires and their impact on consciousness.',
+            ja_preview_3_title: 'Chapter 7 – Higher consciousness',
+            ja_preview_3_desc: 'The final chapter on the transition to a higher state of consciousness.',
+            book_je_title: 'Reality – IT IS',
+            book_je_desc: 'Upcoming book. Exclusive previews before the official release.',
+            je_preview_1_title: 'Collective consciousness',
+            je_preview_1_desc: 'What happens when individual consciousnesses begin to cooperate?',
+            je_preview_2_title: 'Technology and consciousness',
+            je_preview_2_desc: 'How artificial intelligence affects the evolution of human consciousness.',
+            je_preview_3_title: 'Beyond the mind',
+            je_preview_3_desc: 'The latest findings about what happens to consciousness beyond the boundaries of perception.',
             preview_available: 'Available',
             preview_coming_soon: 'Coming soon',
             footer_left: 'I AM <span>/ Evolution of Consciousness</span>',
@@ -1638,6 +1907,64 @@
     document.querySelectorAll('.fade-in').forEach(function(el) {
         observer.observe(el);
     });
+
+    // ===== READING PROGRESS TRACKING =====
+    // Load saved progress from localStorage and display
+    function loadReadingProgress() {
+        var progress = {};
+        try { progress = JSON.parse(localStorage.getItem('ev-reading-progress') || '{}'); } catch(e) {}
+
+        // Update all progress indicators (thoughts + reader + previews)
+        document.querySelectorAll('[data-progress-id]').forEach(function(wrap) {
+            var id = wrap.getAttribute('data-progress-id');
+            var pct = progress[id] || 0;
+            if (pct > 0) {
+                wrap.style.display = 'flex';
+                var fill = wrap.querySelector('.thought-progress-fill, .reader-progress-fill');
+                var label = wrap.querySelector('.thought-progress-pct, .reader-progress-pct');
+                if (fill) fill.style.width = pct + '%';
+                if (label) label.textContent = pct + '%';
+            }
+        });
+    }
+
+    // Save progress for a given content ID
+    function saveReadingProgress(id, pct) {
+        var progress = {};
+        try { progress = JSON.parse(localStorage.getItem('ev-reading-progress') || '{}'); } catch(e) {}
+        progress[id] = Math.min(100, Math.max(progress[id] || 0, pct));
+        try { localStorage.setItem('ev-reading-progress', JSON.stringify(progress)); } catch(e) {}
+        loadReadingProgress();
+    }
+
+    // Demo: simulate reading progress on open-btn click
+    // (In production, this would track actual scroll position in the reader view)
+    function simulateProgress(id) {
+        var current = 0;
+        try { current = JSON.parse(localStorage.getItem('ev-reading-progress') || '{}')[id] || 0; } catch(e) {}
+        // If not started, set to a demo value; if started, increment
+        var newPct = current === 0 ? 35 : Math.min(100, current + 20);
+        saveReadingProgress(id, newPct);
+    }
+
+    // Attach click handlers to thought rows
+    document.querySelectorAll('.thought-row').forEach(function(row) {
+        var id = row.getAttribute('data-thought-id');
+        if (id) {
+            row.addEventListener('click', function() {
+                simulateProgress(id);
+            });
+        }
+    });
+
+    // Attach click handlers to reader open buttons
+    document.querySelectorAll('.reader-chapter-row:not(.locked)').forEach(function(row, i) {
+        row.addEventListener('click', function() {
+            simulateProgress('reader-' + (i + 1));
+        });
+    });
+
+    loadReadingProgress();
 })();
 </script>
 </body>
