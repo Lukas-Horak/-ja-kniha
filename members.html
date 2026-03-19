@@ -2698,7 +2698,7 @@
     function saveReadingProgress(id, pct) {
         var progress = {};
         try { progress = JSON.parse(localStorage.getItem('ev-reading-progress') || '{}'); } catch(e) {}
-        progress[id] = Math.min(100, Math.max(progress[id] || 0, pct));
+        progress[id] = Math.min(100, Math.max(0, pct));
         try { localStorage.setItem('ev-reading-progress', JSON.stringify(progress)); } catch(e) {}
         loadReadingProgress();
     }
@@ -2860,7 +2860,7 @@
         function getScrollPercent() {
             var scrollTop = overlay.scrollTop;
             var scrollHeight = overlay.scrollHeight - overlay.clientHeight;
-            if (scrollHeight <= 0) return 100;
+            if (scrollHeight <= 0) return 0;
             return Math.round((scrollTop / scrollHeight) * 100);
         }
 
