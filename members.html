@@ -1024,13 +1024,13 @@
 
     <!-- Section tabs -->
     <div class="section-tabs fade-in">
-        <button class="section-tab active" data-tab="audio">
-            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-            <span data-i18n="tab_audio">Audiokniha</span>
-        </button>
-        <button class="section-tab" data-tab="blog">
+        <button class="section-tab active" data-tab="blog">
             <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             <span data-i18n="tab_blog">Myšlienky autora</span>
+        </button>
+        <button class="section-tab" data-tab="audio">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            <span data-i18n="tab_audio">Audiokniha</span>
         </button>
         <button class="section-tab" data-tab="preview">
             <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -1038,119 +1038,8 @@
         </button>
     </div>
 
-    <!-- ===== AUDIO TAB ===== -->
-    <div class="tab-panel active" id="panel-audio">
-        <div class="audio-grid">
-            <div class="audio-featured">
-                <div class="af-top">
-                    <span class="af-label" data-i18n="af_now_playing">Práve prehráva</span>
-                    <span class="af-badge" data-i18n="af_members_only">Pre členov</span>
-                </div>
-                <div>
-                    <div class="af-title" data-i18n="af_chapter_title">Kapitola 4 – Hranice ega</div>
-                    <div class="af-author" data-i18n="af_read_by">Číta Lukáš Horák</div>
-                </div>
-                <div class="af-controls">
-                    <button class="af-play">
-                        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                    </button>
-                    <div class="af-progress-wrap">
-                        <div class="af-bar"><div class="af-bar-fill"></div></div>
-                        <div class="af-times">
-                            <span>14:22</span>
-                            <span>41:08</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_1">Kapitola 1</span>
-                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_1">Úvod – Prečo táto kniha</div>
-                <div class="audio-chapter-duration">18:24</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 100%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_2">Kapitola 2</span>
-                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_2">Biologický mechanizmus</div>
-                <div class="audio-chapter-duration">32:15</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 60%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_3">Kapitola 3</span>
-                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_3">Túžby</div>
-                <div class="audio-chapter-duration">40:43</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_4">Kapitola 4</span>
-                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_4">Hranice ega</div>
-                <div class="audio-chapter-duration">41:08</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 35%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_5">Kapitola 5</span>
-                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_5">Hierarchia a moc</div>
-                <div class="audio-chapter-duration">38:51</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card locked">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_6">Kapitola 6</span>
-                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_6">Sociálne emócie</div>
-                <div class="audio-chapter-duration">–:––</div>
-            </div>
-
-            <div class="audio-chapter-card locked">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_7">Kapitola 7</span>
-                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_7">Vyššie vedomie</div>
-                <div class="audio-chapter-duration">–:––</div>
-            </div>
-        </div>
-    </div>
-
     <!-- ===== BLOG TAB ===== -->
-    <div class="tab-panel" id="panel-blog">
+    <div class="tab-panel active" id="panel-blog">
         <div class="thoughts-panel">
             <div class="thoughts-header">
                 <div class="thoughts-label" data-i18n="thoughts_label">Myšlienky &amp; postrehy</div>
@@ -1278,6 +1167,117 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== AUDIO TAB ===== -->
+    <div class="tab-panel" id="panel-audio">
+        <div class="audio-grid">
+            <div class="audio-featured">
+                <div class="af-top">
+                    <span class="af-label" data-i18n="af_now_playing">Práve prehráva</span>
+                    <span class="af-badge" data-i18n="af_members_only">Pre členov</span>
+                </div>
+                <div>
+                    <div class="af-title" data-i18n="af_chapter_title">Kapitola 4 – Hranice ega</div>
+                    <div class="af-author" data-i18n="af_read_by">Číta Lukáš Horák</div>
+                </div>
+                <div class="af-controls">
+                    <button class="af-play">
+                        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                    </button>
+                    <div class="af-progress-wrap">
+                        <div class="af-bar"><div class="af-bar-fill"></div></div>
+                        <div class="af-times">
+                            <span>14:22</span>
+                            <span>41:08</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_1">Kapitola 1</span>
+                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_1">Úvod – Prečo táto kniha</div>
+                <div class="audio-chapter-duration">18:24</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 100%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_2">Kapitola 2</span>
+                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_2">Biologický mechanizmus</div>
+                <div class="audio-chapter-duration">32:15</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 60%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_3">Kapitola 3</span>
+                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_3">Túžby</div>
+                <div class="audio-chapter-duration">40:43</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_4">Kapitola 4</span>
+                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_4">Hranice ega</div>
+                <div class="audio-chapter-duration">41:08</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 35%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_5">Kapitola 5</span>
+                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_5">Hierarchia a moc</div>
+                <div class="audio-chapter-duration">38:51</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card locked">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_6">Kapitola 6</span>
+                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_6">Sociálne emócie</div>
+                <div class="audio-chapter-duration">–:––</div>
+            </div>
+
+            <div class="audio-chapter-card locked">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_7">Kapitola 7</span>
+                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_7">Vyššie vedomie</div>
+                <div class="audio-chapter-duration">–:––</div>
             </div>
         </div>
     </div>
