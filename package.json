@@ -5,5 +5,5 @@
   "dependencies": {
     "stripe": "^14.0.0"
   },
-  "deploy_trigger": "legal-pages-1773944691"
+  "deploy_trigger": "chapters-1773949674"
 }
