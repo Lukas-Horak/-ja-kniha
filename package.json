@@ -5,5 +5,5 @@
   "dependencies": {
     "stripe": "^14.0.0"
   },
-  "deploy_trigger": "spektrum-mobile-1773933266"
+  "deploy_trigger": "sticky-tabs-1773936440"
 }
