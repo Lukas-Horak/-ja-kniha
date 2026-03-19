@@ -132,8 +132,12 @@
         font-size: 1.15rem; font-weight: 700; letter-spacing: 0.06em;
         text-transform: uppercase; color: var(--heading); text-align: center; margin-bottom: 20px;
     }
+    .swipe-tabs-wrap {
+        position: sticky; top: 60px; z-index: 50;
+        background: var(--bg); padding: 0 0 12px;
+    }
     .swipe-tabs {
-        display: flex; gap: 0; margin-bottom: 16px;
+        display: flex; gap: 0;
         background: var(--pill-bg); border-radius: 10px; padding: 3px;
     }
     .swipe-tab {
@@ -257,6 +261,7 @@
         <div class="mobile-swipe">
             <div class="mobile-swipe-title" data-i18n="page_title">Spektrum Vedomia</div>
 
+            <div class="swipe-tabs-wrap">
             <div class="swipe-tabs" role="tablist">
                 <button class="swipe-tab active" role="tab" aria-selected="true" data-col="0">
                     <span data-i18n="col_0">Primitívne Ja</span>
@@ -272,6 +277,7 @@
                 </button>
             </div>
 
+            </div>
             <div class="m-swipe-area" id="mSwipeArea">
                 <!-- Panel 0 -->
                 <div class="m-panel active" data-panel="0">
