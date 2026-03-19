@@ -5,5 +5,5 @@
   "dependencies": {
     "stripe": "^14.0.0"
   },
-  "deploy_trigger": "google-oauth-1773943881"
+  "deploy_trigger": "legal-pages-1773944691"
 }
