@@ -841,8 +841,12 @@
         position: fixed;
         bottom: 0; left: 0; right: 0;
         z-index: 10002;
-        background: var(--r-card, #fff);
-        color: var(--r-text, #3D3632);
+        background: #FFFFFF;
+        color: #3D3632;
+        --r-card: #FFFFFF;
+        --r-muted: #8C7E72;
+        --r-border: #DDD6CC;
+        --r-accent: #8C7E72;
         border-radius: 20px 20px 0 0;
         padding: 0 28px 36px;
         transform: translateY(100%);
@@ -1047,27 +1051,26 @@
         background: var(--r-divider);
         transition: background 0.4s;
     }
-    .fs-settings-panel {
-        background: var(--r-card);
-        color: var(--r-text);
-    }
     .fs-settings-panel.theme-dark {
+        background: #2C2C2E;
+        color: #D4D2CE;
         --r-card: #2C2C2E;
-        --r-text: #D4D2CE;
         --r-muted: #8E8E93;
         --r-border: #38383A;
         --r-accent: #A8A29E;
     }
     .fs-settings-panel.theme-sepia {
+        background: #F9F0E0;
+        color: #5B4636;
         --r-card: #F9F0E0;
-        --r-text: #5B4636;
         --r-muted: #8B7355;
         --r-border: #DFD0B8;
         --r-accent: #8B7355;
     }
     .fs-settings-panel.theme-forest {
+        background: #344838;
+        color: #C8D5C0;
         --r-card: #344838;
-        --r-text: #C8D5C0;
         --r-muted: #8BA07E;
         --r-border: #3D5240;
         --r-accent: #8BA07E;
