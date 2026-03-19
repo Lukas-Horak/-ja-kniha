@@ -5,5 +5,5 @@
   "dependencies": {
     "stripe": "^14.0.0"
   },
-  "deploy_trigger": "sticky-tabs-1773936440"
+  "deploy_trigger": "auth-1773940663"
 }
