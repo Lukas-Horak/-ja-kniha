@@ -646,6 +646,11 @@
     }
     .preview-row-status.coming-soon { color: var(--text-muted); }
     .preview-row-status.coming-soon .pulse { background: var(--text-muted); }
+    .preview-row-locked {
+        opacity: 0.45;
+        cursor: default;
+    }
+    .preview-row-locked:hover { background: transparent; margin: 0; padding: 16px 0; border-radius: 0; border-color: var(--border); }
     .preview-progress-wrap {
         display: flex; align-items: center; gap: 6px;
     }
@@ -1809,12 +1814,35 @@
                     </div>
                 </div>
                 <div class="preview-list">
-                    <div class="preview-row" data-preview-id="ja-tuzby">
+                    <div class="preview-row preview-row-locked">
                         <div class="preview-row-left">
                             <span class="preview-row-num">01</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_ch_tuzby_title">Túžby</span>
-                                <span class="preview-row-desc" data-i18n="ja_ch_tuzby_desc">O mechanizme túžob, závislostí a ich vplyve na náš život.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_1_title">Stavy vedomia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">02</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_2_title">Moja energia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">03</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_3_title">Moje "Primitívne ja"</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row" data-preview-id="ja-tuzby">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">04</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_4_title">Túžby</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
@@ -1832,12 +1860,35 @@
                             </button>
                         </div>
                     </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">05</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_5_title">Napĺňanie zámeru</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">06</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_6_title">Odpor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">07</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_7_title">Hnev</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="preview-row" data-preview-id="ja-odpustenie">
                         <div class="preview-row-left">
-                            <span class="preview-row-num">02</span>
+                            <span class="preview-row-num">08</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_ch_odpustenie_title">Odpustenie ako akt sily</span>
-                                <span class="preview-row-desc" data-i18n="ja_ch_odpustenie_desc">Prečo je odpustenie najsilnejším nástrojom vnútornej slobody.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_8_title">Odpustenie ako akt sily</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
@@ -1855,12 +1906,51 @@
                             </button>
                         </div>
                     </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">09</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_9_title">Vina a jej účel</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">10</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_10_title">Moje vnútorné dieťa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">11</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_11_title">Formovanie osobných presvedčení</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">12</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_12_title">Môj strach</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">13</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_13_title">Posun nad "Primitívne ja"</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="preview-row" data-preview-id="ja-rozum-prekazka">
                         <div class="preview-row-left">
-                            <span class="preview-row-num">03</span>
+                            <span class="preview-row-num">14</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_ch_rozum_title">Rozum ako prekážka</span>
-                                <span class="preview-row-desc" data-i18n="ja_ch_rozum_desc">Keď sa rozum z pomocníka stane najväčšou brzdou.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_14_title">Rozum ako prekážka</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
@@ -1878,12 +1968,27 @@
                             </button>
                         </div>
                     </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">15</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_15_title">Môj rozum hodnotí</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">16</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_16_title">Dualistické vnímanie</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="preview-row" data-preview-id="ja-rozum-cas">
                         <div class="preview-row-left">
-                            <span class="preview-row-num">04</span>
+                            <span class="preview-row-num">17</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_ch_cas_title">Môj rozum vníma čas</span>
-                                <span class="preview-row-desc" data-i18n="ja_ch_cas_desc">O ilúzii času a o tom, prečo skutočný život existuje len v prítomnosti.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_17_title">Môj rozum vníma čas</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
@@ -1901,12 +2006,91 @@
                             </button>
                         </div>
                     </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">18</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_18_title">Posun mimo kauzality</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">19</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_19_title">Posun za lineárne myslenie</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">20</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_20_title">Prijatie nelinearity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">21</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_21_title">Prevládajúci emocionálny atraktor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">22</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_22_title">Zmena emocionálneho atraktora</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">23</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_23_title">Posun nad "Rozumové ja"</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">24</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_24_title">Moje "Vyššie ja"</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">25</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_25_title">Energia myšlienok</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">26</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_26_title">Energetický náboj</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">27</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_27_title">Vnútorný stav, vonkajší odraz</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="preview-row" data-preview-id="ja-autenticnost">
                         <div class="preview-row-left">
-                            <span class="preview-row-num">05</span>
+                            <span class="preview-row-num">28</span>
                             <div class="preview-row-content">
-                                <span class="preview-row-title" data-i18n="ja_ch_autenticnost_title">Autentickosť</span>
-                                <span class="preview-row-desc" data-i18n="ja_ch_autenticnost_desc">Jediná cesta, ktorá vedie ku skutočnému šťastiu a slobode.</span>
+                                <span class="preview-row-title" data-i18n="ja_ch_28_title">Autentickosť</span>
                             </div>
                         </div>
                         <div class="preview-row-right">
@@ -1924,6 +2108,80 @@
                             </button>
                         </div>
                     </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">29</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_29_title">Uvedomenie si placebo efektu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">30</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_30_title">Prekročenie nocebo efektu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">31</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_31_title">Kvantový kolaps</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">32</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_32_title">Morfogenetické polia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">33</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_33_title">Karmická rezonancia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">34</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_34_title">Kolektívne vedomie</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">35</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_35_title">Prístup ku kolektívnemu vedomiu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">36</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_36_title">Zvyšovanie úrovne vedomia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-row preview-row-locked">
+                        <div class="preview-row-left">
+                            <span class="preview-row-num">37</span>
+                            <div class="preview-row-content">
+                                <span class="preview-row-title" data-i18n="ja_ch_37_title">Cesta k najvyšším stavom vedomia</span>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
                 </div>
             </div>
 
@@ -2133,16 +2391,43 @@
             fs_settings_title: 'Nastavenia',
             book_ja_title: 'Evolúcia vedomia – JA',
             book_ja_desc: 'Ukážky z prvej knihy. Vybrané kapitoly, ktoré môžete čítať priamo tu.',
-            ja_ch_tuzby_title: 'Túžby',
-            ja_ch_tuzby_desc: 'O mechanizme túžob, závislostí a ich vplyve na náš život.',
-            ja_ch_odpustenie_title: 'Odpustenie ako akt sily',
-            ja_ch_odpustenie_desc: 'Prečo je odpustenie najsilnejším nástrojom vnútornej slobody.',
-            ja_ch_rozum_title: 'Rozum ako prekážka',
-            ja_ch_rozum_desc: 'Keď sa rozum z pomocníka stane najväčšou brzdou.',
-            ja_ch_cas_title: 'Môj rozum vníma čas',
-            ja_ch_cas_desc: 'O ilúzii času a o tom, prečo skutočný život existuje len v prítomnosti.',
-            ja_ch_autenticnost_title: 'Autentickosť',
-            ja_ch_autenticnost_desc: 'Jediná cesta, ktorá vedie ku skutočnému šťastiu a slobode.',
+            ja_ch_1_title: 'Stavy vedomia',
+            ja_ch_2_title: 'Moja energia',
+            ja_ch_3_title: 'Moje "Primitívne ja"',
+            ja_ch_4_title: 'Túžby',
+            ja_ch_5_title: 'Napĺňanie zámeru',
+            ja_ch_6_title: 'Odpor',
+            ja_ch_7_title: 'Hnev',
+            ja_ch_8_title: 'Odpustenie ako akt sily',
+            ja_ch_9_title: 'Vina a jej účel',
+            ja_ch_10_title: 'Moje vnútorné dieťa',
+            ja_ch_11_title: 'Formovanie osobných presvedčení',
+            ja_ch_12_title: 'Môj strach',
+            ja_ch_13_title: 'Posun nad "Primitívne ja"',
+            ja_ch_14_title: 'Rozum ako prekážka',
+            ja_ch_15_title: 'Môj rozum hodnotí',
+            ja_ch_16_title: 'Dualistické vnímanie',
+            ja_ch_17_title: 'Môj rozum vníma čas',
+            ja_ch_18_title: 'Posun mimo kauzality',
+            ja_ch_19_title: 'Posun za lineárne myslenie',
+            ja_ch_20_title: 'Prijatie nelinearity',
+            ja_ch_21_title: 'Prevládajúci emocionálny atraktor',
+            ja_ch_22_title: 'Zmena emocionálneho atraktora',
+            ja_ch_23_title: 'Posun nad "Rozumové ja"',
+            ja_ch_24_title: 'Moje "Vyššie ja"',
+            ja_ch_25_title: 'Energia myšlienok',
+            ja_ch_26_title: 'Energetický náboj',
+            ja_ch_27_title: 'Vnútorný stav, vonkajší odraz',
+            ja_ch_28_title: 'Autentickosť',
+            ja_ch_29_title: 'Uvedomenie si placebo efektu',
+            ja_ch_30_title: 'Prekročenie nocebo efektu',
+            ja_ch_31_title: 'Kvantový kolaps',
+            ja_ch_32_title: 'Morfogenetické polia',
+            ja_ch_33_title: 'Karmická rezonancia',
+            ja_ch_34_title: 'Kolektívne vedomie',
+            ja_ch_35_title: 'Prístup ku kolektívnemu vedomiu',
+            ja_ch_36_title: 'Zvyšovanie úrovne vedomia',
+            ja_ch_37_title: 'Cesta k najvyšším stavom vedomia',
             book_je_title: 'Realita – JE',
             book_je_desc: 'Pripravovaná kniha. Exkluzívne ukážky ešte pred oficiálnym vydaním.',
             je_preview_1_title: 'Kolektívne vedomie',
@@ -2250,16 +2535,43 @@
             fs_settings_title: 'Settings',
             book_ja_title: 'Evolution of Consciousness – I AM',
             book_ja_desc: 'Excerpts from the first book. Selected chapters you can read right here.',
-            ja_ch_tuzby_title: 'Desires',
-            ja_ch_tuzby_desc: 'On the mechanism of desires, addictions, and their impact on our lives.',
-            ja_ch_odpustenie_title: 'Forgiveness as an Act of Strength',
-            ja_ch_odpustenie_desc: 'Why forgiveness is the most powerful tool of inner freedom.',
-            ja_ch_rozum_title: 'Reason as an Obstacle',
-            ja_ch_rozum_desc: 'When reason turns from helper to the biggest brake.',
-            ja_ch_cas_title: 'My Reason Perceives Time',
-            ja_ch_cas_desc: 'On the illusion of time and why true life exists only in the present.',
-            ja_ch_autenticnost_title: 'Authenticity',
-            ja_ch_autenticnost_desc: 'The only path that leads to true happiness and freedom.',
+            ja_ch_1_title: 'States of Consciousness',
+            ja_ch_2_title: 'My Energy',
+            ja_ch_3_title: 'My "Primitive Self"',
+            ja_ch_4_title: 'Desires',
+            ja_ch_5_title: 'Fulfilling Purpose',
+            ja_ch_6_title: 'Resistance',
+            ja_ch_7_title: 'Anger',
+            ja_ch_8_title: 'Forgiveness as an Act of Strength',
+            ja_ch_9_title: 'Guilt and Its Purpose',
+            ja_ch_10_title: 'My Inner Child',
+            ja_ch_11_title: 'Formation of Personal Beliefs',
+            ja_ch_12_title: 'My Fear',
+            ja_ch_13_title: 'Moving Beyond the "Primitive Self"',
+            ja_ch_14_title: 'Reason as an Obstacle',
+            ja_ch_15_title: 'My Mind Judges',
+            ja_ch_16_title: 'Dualistic Perception',
+            ja_ch_17_title: 'My Mind Perceives Time',
+            ja_ch_18_title: 'Moving Beyond Causality',
+            ja_ch_19_title: 'Moving Beyond Linear Thinking',
+            ja_ch_20_title: 'Embracing Nonlinearity',
+            ja_ch_21_title: 'Dominant Emotional Attractor',
+            ja_ch_22_title: 'Changing the Emotional Attractor',
+            ja_ch_23_title: 'Moving Beyond the "Rational Self"',
+            ja_ch_24_title: 'My "Higher Self"',
+            ja_ch_25_title: 'Energy of Thoughts',
+            ja_ch_26_title: 'Energetic Charge',
+            ja_ch_27_title: 'Inner State, Outer Reflection',
+            ja_ch_28_title: 'Authenticity',
+            ja_ch_29_title: 'Awareness of the Placebo Effect',
+            ja_ch_30_title: 'Overcoming the Nocebo Effect',
+            ja_ch_31_title: 'Quantum Collapse',
+            ja_ch_32_title: 'Morphogenetic Fields',
+            ja_ch_33_title: 'Karmic Resonance',
+            ja_ch_34_title: 'Collective Consciousness',
+            ja_ch_35_title: 'Access to Collective Consciousness',
+            ja_ch_36_title: 'Raising the Level of Consciousness',
+            ja_ch_37_title: 'The Path to the Highest States of Consciousness',
             book_je_title: 'Reality – IS',
             book_je_desc: 'Upcoming book. Exclusive previews before the official release.',
             je_preview_1_title: 'Collective consciousness',
