@@ -49,21 +49,33 @@
     img { max-width:100%; height:auto; display:block; }
     a { color:inherit; text-decoration:none; }
 
-    /* ===== NAV ===== */
+    /* ===== NAV — Floating Pill ===== */
     .nav {
-        position: fixed; top:0; left:0; right:0; z-index:100;
+        position: fixed; top: 14px; left: 0; right: 0; z-index: 100;
         display: flex; justify-content: center;
-        background: rgba(232, 229, 223, 0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        padding: 0 20px;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0); opacity: 1;
+        pointer-events: none;
     }
+    .nav-hidden {
+        transform: translateY(-120%); opacity: 0;
+    }
+    .nav-hidden .nav-inner { pointer-events: none; }
     .nav-inner {
         display: grid;
-        grid-template-columns: 1fr auto 1fr;
+        grid-template-columns: auto 1fr auto;
         align-items: center;
         width: 100%;
-        max-width: 1340px;
-        padding: 20px 48px;
+        max-width: 920px;
+        padding: 14px 32px;
+        background: rgba(253, 251, 247, 0.82);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 100px;
+        border: 1px solid rgba(0,0,0,0.05);
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        pointer-events: auto;
     }
     .nav-logo {
         display: flex; align-items: center; gap: 10px;
@@ -72,10 +84,11 @@
     }
     .nav-logo svg { width: 32px; height: 32px; }
     .nav-links {
-        display: flex; align-items: center; gap: 36px;
-        font-size: 0.9rem; font-weight: 400; color: var(--text-light);
+        display: flex; align-items: center; gap: 32px;
+        font-size: 0.875rem; font-weight: 400; color: var(--text-light);
         justify-self: center;
     }
+    .nav-links a { transition: color 0.15s; }
     .nav-links a:hover { color: var(--text); }
     .nav-links .nav-spectrum {
         display: inline-flex; align-items: center; gap: 6px;
@@ -87,30 +100,12 @@
         background: #5C8A6E; flex-shrink: 0;
     }
     .nav-links .nav-spectrum:hover { color: #5C8A6E; }
-    .nav-links .nav-members {
-        display: inline-flex; align-items: center; gap: 6px;
-        color: var(--text); font-weight: 500;
-    }
-    .nav-links .nav-members::before {
-        content: ''; display: block;
-        width: 6px; height: 6px; border-radius: 50%;
-        background: var(--accent-rational); flex-shrink: 0;
-    }
-    .nav-links .nav-members:hover { color: var(--accent-rational); }
     .mobile-lang-toggle { display: none; }
     .nav-right {
-        display: flex; align-items: center; gap: 20px;
+        display: flex; align-items: center; gap: 16px;
         justify-self: end;
     }
-    .nav-cta {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 12px 24px;
-        background: var(--dark); color: #fff;
-        border-radius: 100px; font-size: 0.9rem; font-weight: 500;
-        transition: opacity 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-    .nav-cta svg { width: 14px; height: 14px; }
+    .nav-cta { display: none; }
     .lang-toggle {
         display: flex; align-items: center; gap: 2px;
         background: rgba(0,0,0,0.06); border-radius: 100px;
@@ -131,12 +126,80 @@
         align-items: center; justify-content: center;
         position: relative; z-index: 201;
     }
-    .nav-mobile-toggle svg { width: 24px; height: 24px; stroke: var(--text); stroke-width: 2; fill: none; }
+    .nav-mobile-toggle svg { width: 22px; height: 22px; stroke: var(--text); stroke-width: 2; fill: none; }
+
+    /* ===== Mobile Bottom Sheet ===== */
+    .mobile-sheet-overlay {
+        display: none;
+        position: fixed; inset: 0; z-index: 300;
+        background: rgba(0,0,0,0.3);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .mobile-sheet-overlay.open { display: block; opacity: 1; }
+    .mobile-sheet {
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 301;
+        background: var(--card);
+        border-radius: 24px 24px 0 0;
+        padding: 12px 24px 40px;
+        transform: translateY(100%);
+        transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+    .mobile-sheet.open { transform: translateY(0); }
+    .mobile-sheet-handle {
+        width: 40px; height: 4px; border-radius: 100px;
+        background: var(--border); margin: 0 auto 24px;
+    }
+    .mobile-sheet-user {
+        display: flex; align-items: center; gap: 14px;
+        padding-bottom: 20px; margin-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+    }
+    .mobile-sheet-user-avatar {
+        width: 40px; height: 40px; border-radius: 50%;
+        background: var(--accent-higher); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.8rem; font-weight: 600; flex-shrink: 0;
+        overflow: hidden;
+    }
+    .mobile-sheet-user-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .mobile-sheet-user-name { font-size: 1rem; font-weight: 600; color: var(--text); }
+    .mobile-sheet-user-email { font-size: 0.8rem; color: var(--text-muted); }
+    .mobile-sheet-links {
+        display: flex; flex-direction: column; gap: 0;
+        padding: 8px 0;
+    }
+    .mobile-sheet-links a, .mobile-sheet-links button {
+        display: flex; align-items: center; gap: 12px;
+        padding: 16px 4px;
+        font-size: 1.05rem; font-weight: 500; color: var(--text);
+        background: none; border: none; cursor: pointer;
+        font-family: var(--font); text-align: left; width: 100%;
+        border-radius: 12px; transition: background 0.15s;
+    }
+    .mobile-sheet-links a:hover, .mobile-sheet-links button:hover {
+        background: rgba(0,0,0,0.03);
+    }
+    .mobile-sheet-links .sheet-spectrum {
+        color: #5C8A6E; font-weight: 600;
+    }
+    .mobile-sheet-links .sheet-spectrum::before {
+        content: ''; display: inline-block;
+        width: 7px; height: 7px; border-radius: 50%;
+        background: #5C8A6E; flex-shrink: 0;
+    }
+    .mobile-sheet-footer {
+        padding-top: 16px; margin-top: 8px;
+        border-top: 1px solid var(--border);
+        display: flex; justify-content: center;
+    }
 
     .container { max-width: 1340px; margin: 0 auto; padding: 0 48px; }
 
     /* ===== LOGIN VIEW ===== */
-    .login-view { padding-top: 140px; padding-bottom: 80px; min-height: 100vh; }
+    .login-view { padding-top: 110px; padding-bottom: 80px; min-height: 100vh; }
 
     .login-container {
         max-width: 440px;
@@ -262,7 +325,7 @@
     }
 
     /* ===== DASHBOARD VIEW ===== */
-    .dashboard-view { display: none; padding-top: 120px; padding-bottom: 80px; }
+    .dashboard-view { display: none; padding-top: 100px; padding-bottom: 80px; }
 
     .dashboard-header {
         display: flex; align-items: center; justify-content: space-between;
@@ -1193,31 +1256,7 @@
     .footer-center a:hover { color: var(--text); }
     .footer-right { font-size: 0.85rem; color: var(--text-muted); }
 
-    /* ===== MOBILE NAV OVERLAY ===== */
-    .nav-links.mobile-open {
-        display: flex !important;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        width: 100vw; height: 100vh; height: 100dvh;
-        z-index: 200;
-        flex-direction: column; align-items: center; justify-content: center;
-        gap: 0; background: #E8E5DF;
-        padding: 0; margin: 0;
-    }
-    .nav-links.mobile-open a {
-        font-size: 1.5rem; font-weight: 500; color: var(--text);
-        padding: 20px 0; letter-spacing: -0.01em;
-    }
-    .nav-links.mobile-open .nav-spectrum {
-        display: inline-flex; align-items: center; gap: 8px;
-        color: #5C8A6E; font-weight: 600;
-    }
-    .nav-links.mobile-open .nav-spectrum::before { width: 8px; height: 8px; }
-    .nav-links.mobile-open .nav-members {
-        display: inline-flex; align-items: center; gap: 8px;
-        color: var(--accent-rational); font-weight: 600;
-    }
-    .nav-links.mobile-open .nav-members::before { width: 8px; height: 8px; }
+    /* ===== MOBILE NAV OVERLAY (legacy — replaced by bottom sheet) ===== */
 
     /* ===== ANIMATIONS ===== */
     .fade-in {
@@ -1229,40 +1268,27 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
         .container { padding: 0 32px; }
-        .nav-inner { padding: 16px 32px; }
         .audio-grid { grid-template-columns: 1fr; }
         .thought-snippet { max-width: 300px; }
     }
 
     @media (max-width: 768px) {
         .container { padding: 0 20px; }
+        .nav { top: 10px; padding: 0 12px; }
         .nav-inner {
-            padding: 14px 20px;
+            padding: 12px 20px;
             display: flex; align-items: center; justify-content: space-between;
         }
         .nav-links { display: none; }
         .nav-right { display: none; }
         .nav-mobile-toggle { display: flex; order: 99; }
-        .mobile-lang-toggle {
-            display: flex; align-items: center; gap: 2px;
-            background: rgba(0,0,0,0.06); border-radius: 100px;
-            padding: 6px; border: none; cursor: pointer;
-            font-family: var(--font); font-size: 0.85rem;
-            font-weight: 600; letter-spacing: 0.05em;
-            margin-top: 32px;
-        }
-        .mobile-lang-toggle span {
-            padding: 6px 14px; border-radius: 100px;
-            transition: all 0.2s; color: var(--text-muted);
-        }
-        .mobile-lang-toggle span.active { background: var(--dark); color: #fff; }
 
-        .login-view { padding-top: 100px; padding-bottom: 60px; }
+        .login-view { padding-top: 90px; padding-bottom: 60px; }
         .login-card { padding: 28px; }
         .login-benefits { grid-template-columns: 1fr; }
         .login-title { font-size: 1.5rem; }
 
-        .dashboard-view { padding-top: 90px; }
+        .dashboard-view { padding-top: 80px; }
         .dashboard-header { flex-direction: column; align-items: flex-start; gap: 16px; }
         .section-tabs { gap: 6px; }
         .section-tab { padding: 10px 18px; font-size: 0.8rem; }
@@ -1885,8 +1911,8 @@
 
     /* Mobile adjustments for profile */
     @media (max-width: 768px) {
-        .nav-user-name { display: none; }
-        .nav-user-chevron { display: none; }
+        .nav-user-name { display: none !important; }
+        .nav-user-chevron { display: none !important; }
         .nav-user-dropdown { right: -10px; min-width: 260px; }
         .delete-modal-card { padding: 28px; }
         .profile-form-card { padding: 28px; }
@@ -1900,8 +1926,8 @@
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
-<nav class="nav">
+<!-- ===== NAV — Floating Pill ===== -->
+<nav class="nav" id="mainNav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
         <svg viewBox="0 0 100 100" fill="none">
@@ -1916,17 +1942,14 @@
     </a>
     <div class="nav-links" id="navLinks">
         <a href="/#obsah" data-i18n="nav_about">O knihe</a>
-        <a href="/#recenzie" data-i18n="nav_reviews">Recenzie</a>
         <a href="/#autor" data-i18n="nav_author">Autor</a>
-        <a href="/#faq">FAQ</a>
         <a href="/spektrum-vedomia" class="nav-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
-        <a href="/members" class="nav-members" data-i18n="nav_members">Members</a>
-        <button class="mobile-lang-toggle" id="mobileLangToggle" aria-label="Switch language">
+    </div>
+    <div class="nav-right">
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language">
             <span class="active" data-lang="sk">SK</span>
             <span data-lang="en">EN</span>
         </button>
-    </div>
-    <div class="nav-right">
         <!-- Nav User Area -->
         <div class="nav-user-area" id="navUserArea">
             <!-- When logged out: show person icon -->
@@ -1970,22 +1993,39 @@
                 </div>
             </div>
         </div>
-        <button class="lang-toggle" id="langToggle" aria-label="Switch language">
-            <span class="active" data-lang="sk">SK</span>
-            <span data-lang="en">EN</span>
-        </button>
-        <a href="/#objednat" class="nav-cta" data-i18n="nav_cta">
-            Objednať
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 12L12 4M12 4H5M12 4v7"/>
-            </svg>
-        </a>
     </div>
     <button class="nav-mobile-toggle" id="mobileMenuToggle" aria-label="Menu">
         <svg viewBox="0 0 24 24" id="menuIcon"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
 </nav>
+
+<!-- ===== Mobile Bottom Sheet ===== -->
+<div class="mobile-sheet-overlay" id="mobileSheetOverlay"></div>
+<div class="mobile-sheet" id="mobileSheet">
+    <div class="mobile-sheet-handle"></div>
+    <div class="mobile-sheet-user" id="mobileSheetUser" style="display:none;">
+        <div class="mobile-sheet-user-avatar" id="mobileSheetAvatar"></div>
+        <div>
+            <div class="mobile-sheet-user-name" id="mobileSheetName"></div>
+            <div class="mobile-sheet-user-email" id="mobileSheetEmail"></div>
+        </div>
+    </div>
+    <div class="mobile-sheet-links">
+        <a href="/#obsah" data-i18n="nav_about">O knihe</a>
+        <a href="/#autor" data-i18n="nav_author">Autor</a>
+        <a href="/spektrum-vedomia" class="sheet-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
+        <a href="/members" id="mobileSheetMembers" data-i18n="nav_members">Members</a>
+        <button id="mobileSheetProfile" style="display:none;" data-i18n="nav_my_profile">Môj profil</button>
+        <button id="mobileSheetLogout" style="display:none;" data-i18n="nav_logout">Odhlásiť sa</button>
+    </div>
+    <div class="mobile-sheet-footer">
+        <button class="lang-toggle" id="mobileLangToggle" aria-label="Switch language">
+            <span class="active" data-lang="sk">SK</span>
+            <span data-lang="en">EN</span>
+        </button>
+    </div>
+</div>
 
 <!-- ===== LOGIN VIEW ===== -->
 <section class="login-view" id="loginView">
@@ -3577,31 +3617,100 @@
         });
     });
 
-    // ===== MOBILE MENU =====
+    // ===== NAV AUTO-HIDE ON SCROLL =====
+    var mainNav = document.getElementById('mainNav');
+    var lastScrollY = window.scrollY;
+    var navHidden = false;
+    var scrollTicking = false;
+
+    function updateNavVisibility() {
+        var currentScrollY = window.scrollY;
+        var delta = currentScrollY - lastScrollY;
+
+        if (currentScrollY < 50) {
+            // Near top: always show
+            if (navHidden) {
+                mainNav.classList.remove('nav-hidden');
+                navHidden = false;
+            }
+        } else if (delta > 8 && !navHidden) {
+            // Scrolling down: hide
+            mainNav.classList.add('nav-hidden');
+            navHidden = true;
+        } else if (delta < -8 && navHidden) {
+            // Scrolling up: show
+            mainNav.classList.remove('nav-hidden');
+            navHidden = false;
+        }
+
+        lastScrollY = currentScrollY;
+        scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+            requestAnimationFrame(updateNavVisibility);
+            scrollTicking = true;
+        }
+    }, { passive: true });
+
+    // ===== MOBILE BOTTOM SHEET =====
     var mobileToggle = document.getElementById('mobileMenuToggle');
-    var navLinks = document.getElementById('navLinks');
+    var mobileSheet = document.getElementById('mobileSheet');
+    var mobileSheetOverlay = document.getElementById('mobileSheetOverlay');
     var menuIcon = document.getElementById('menuIcon');
     var menuOpen = false;
 
+    function openSheet() {
+        menuOpen = true;
+        mobileSheetOverlay.classList.add('open');
+        // Force reflow before adding open class for animation
+        mobileSheet.offsetHeight;
+        mobileSheet.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        menuIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+    }
+
+    function closeSheet() {
+        menuOpen = false;
+        mobileSheet.classList.remove('open');
+        mobileSheetOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+    }
+
     if (mobileToggle) {
         mobileToggle.addEventListener('click', function() {
-            menuOpen = !menuOpen;
-            if (menuOpen) {
-                navLinks.classList.add('mobile-open');
-                menuIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
-            } else {
-                navLinks.classList.remove('mobile-open');
-                menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
-            }
+            if (menuOpen) { closeSheet(); } else { openSheet(); }
         });
-        navLinks.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', function() {
-                if (menuOpen) {
-                    menuOpen = false;
-                    navLinks.classList.remove('mobile-open');
-                    menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
-                }
-            });
+    }
+    if (mobileSheetOverlay) {
+        mobileSheetOverlay.addEventListener('click', closeSheet);
+    }
+    // Close sheet when clicking a link
+    if (mobileSheet) {
+        mobileSheet.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', closeSheet);
+        });
+    }
+
+    // Mobile sheet profile/logout wiring
+    var mobileSheetProfile = document.getElementById('mobileSheetProfile');
+    var mobileSheetLogout = document.getElementById('mobileSheetLogout');
+
+    if (mobileSheetProfile) {
+        mobileSheetProfile.addEventListener('click', function() {
+            closeSheet();
+            // Switch to profile tab
+            var tabs = document.querySelectorAll('.section-tab');
+            var panels = document.querySelectorAll('.tab-panel');
+            tabs.forEach(function(t) { t.classList.remove('active'); });
+            panels.forEach(function(p) { p.classList.remove('active'); });
+            var profileTab = document.querySelector('[data-tab="profile"]');
+            var profilePanel = document.getElementById('panel-profile');
+            if (profileTab) profileTab.classList.add('active');
+            if (profilePanel) profilePanel.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
@@ -4388,6 +4497,15 @@
         var profileAvatarBase64 = null;
 
         // --- Nav state management ---
+        var navLinksEl = document.getElementById('navLinks');
+        var mobileSheetUserEl = document.getElementById('mobileSheetUser');
+        var mobileSheetAvatarEl = document.getElementById('mobileSheetAvatar');
+        var mobileSheetNameEl = document.getElementById('mobileSheetName');
+        var mobileSheetEmailEl = document.getElementById('mobileSheetEmail');
+        var mobileSheetMembersEl = document.getElementById('mobileSheetMembers');
+        var mobileSheetProfileBtn = document.getElementById('mobileSheetProfile');
+        var mobileSheetLogoutBtn = document.getElementById('mobileSheetLogout');
+
         function updateNavForLoggedOut() {
             if (navUserIcon) navUserIcon.style.display = 'flex';
             if (navUserAvatar) navUserAvatar.style.display = 'none';
@@ -4395,6 +4513,13 @@
             if (navUserChevron) navUserChevron.style.display = 'none';
             if (navUserDropdown) navUserDropdown.classList.remove('open');
             if (navUserArea) navUserArea.classList.remove('dropdown-open');
+            // Show nav links (logged out on /members)
+            if (navLinksEl) navLinksEl.style.display = '';
+            // Mobile sheet: hide user, show members link, hide profile/logout
+            if (mobileSheetUserEl) mobileSheetUserEl.style.display = 'none';
+            if (mobileSheetMembersEl) mobileSheetMembersEl.style.display = '';
+            if (mobileSheetProfileBtn) mobileSheetProfileBtn.style.display = 'none';
+            if (mobileSheetLogoutBtn) mobileSheetLogoutBtn.style.display = 'none';
         }
 
         function updateNavForLoggedIn(user) {
@@ -4422,6 +4547,9 @@
             }
             if (navUserChevron) navUserChevron.style.display = 'block';
 
+            // Hide center nav links on /members when logged in (dashboard tabs handle navigation)
+            if (navLinksEl) navLinksEl.style.display = 'none';
+
             // Update dropdown header
             if (navDropdownAvatar) {
                 if (meta.avatar_base64) {
@@ -4438,6 +4566,21 @@
             if (navUserDot) {
                 navUserDot.style.display = completeness < 100 ? 'block' : 'none';
             }
+
+            // Update mobile sheet user area
+            if (mobileSheetUserEl) mobileSheetUserEl.style.display = 'flex';
+            if (mobileSheetAvatarEl) {
+                if (meta.avatar_base64) {
+                    mobileSheetAvatarEl.innerHTML = '<img src="' + meta.avatar_base64 + '" alt="">';
+                } else {
+                    mobileSheetAvatarEl.textContent = initials;
+                }
+            }
+            if (mobileSheetNameEl) mobileSheetNameEl.textContent = name;
+            if (mobileSheetEmailEl) mobileSheetEmailEl.textContent = user.email || '';
+            if (mobileSheetMembersEl) mobileSheetMembersEl.style.display = 'none';
+            if (mobileSheetProfileBtn) mobileSheetProfileBtn.style.display = '';
+            if (mobileSheetLogoutBtn) mobileSheetLogoutBtn.style.display = '';
 
             // Fill the profile form
             fillProfileForm(meta);
@@ -4486,6 +4629,17 @@
                 e.stopPropagation();
                 navUserDropdown.classList.remove('open');
                 navUserArea.classList.remove('dropdown-open');
+                supabase.auth.signOut().then(function() {
+                    showLogin();
+                    updateNavForLoggedOut();
+                });
+            });
+        }
+
+        // --- Mobile sheet logout button ---
+        if (mobileSheetLogoutBtn) {
+            mobileSheetLogoutBtn.addEventListener('click', function() {
+                closeSheet();
                 supabase.auth.signOut().then(function() {
                     showLogin();
                     updateNavForLoggedOut();
