@@ -1346,6 +1346,314 @@
     }
     .forgot-password a:hover { color: var(--text); }
 
+    /* ===== NAV USER ICON / AVATAR ===== */
+    .nav-user-area {
+        display: flex; align-items: center; gap: 10px;
+        position: relative;
+        cursor: pointer;
+    }
+    .nav-user-icon {
+        width: 32px; height: 32px;
+        display: flex; align-items: center; justify-content: center;
+        color: var(--text-light);
+        transition: color 0.2s;
+    }
+    .nav-user-icon:hover { color: var(--text); }
+    .nav-user-icon svg { width: 22px; height: 22px; stroke-width: 1.8; }
+    .nav-user-avatar {
+        width: 32px; height: 32px; border-radius: 50%;
+        background: var(--accent-higher);
+        color: #fff; display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; font-weight: 600;
+        position: relative; flex-shrink: 0;
+        overflow: hidden;
+    }
+    .nav-user-avatar img {
+        width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    }
+    .nav-user-name {
+        font-size: 0.85rem; font-weight: 500; color: var(--text);
+        white-space: nowrap;
+    }
+    .nav-user-dot {
+        position: absolute; top: -1px; right: -1px;
+        width: 7px; height: 7px; border-radius: 50%;
+        background: #E8913A;
+        border: 1.5px solid var(--bg);
+        animation: pulse-nav-dot 2s ease-in-out infinite;
+        z-index: 2;
+    }
+    @keyframes pulse-nav-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(0.85); }
+    }
+    .nav-user-dropdown {
+        display: none;
+        position: absolute; top: calc(100% + 10px); right: 0;
+        background: var(--card);
+        border-radius: 16px;
+        padding: 8px;
+        min-width: 200px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06);
+        z-index: 150;
+        animation: dropdownIn 0.2s ease;
+    }
+    .nav-user-dropdown.open { display: block; }
+    @keyframes dropdownIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .nav-user-dropdown-item {
+        display: flex; align-items: center; gap: 10px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-size: 0.85rem; font-weight: 500;
+        color: var(--text);
+        cursor: pointer; border: none; background: none;
+        width: 100%; text-align: left;
+        font-family: var(--font);
+        transition: background 0.15s;
+    }
+    .nav-user-dropdown-item:hover { background: rgba(0,0,0,0.04); }
+    .nav-user-dropdown-item svg {
+        width: 16px; height: 16px; stroke: var(--text-light);
+        stroke-width: 1.8; fill: none;
+    }
+    .nav-user-dropdown-divider {
+        height: 1px; background: var(--border); margin: 4px 12px;
+    }
+    .nav-user-dropdown-item.logout { color: var(--text-muted); }
+    .nav-user-dropdown-item.logout:hover { color: var(--text); }
+
+    /* ===== PROFILE TAB PANEL ===== */
+    .profile-panel {
+        max-width: 640px;
+    }
+    .profile-completion-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+    .profile-completion-top {
+        display: flex; align-items: center; gap: 24px;
+        margin-bottom: 20px;
+    }
+    .profile-completion-ring {
+        position: relative;
+        width: 72px; height: 72px; flex-shrink: 0;
+    }
+    .profile-completion-ring svg {
+        width: 72px; height: 72px;
+        transform: rotate(-90deg);
+    }
+    .profile-completion-ring .ring-bg {
+        fill: none; stroke: var(--border); stroke-width: 5;
+    }
+    .profile-completion-ring .ring-fill {
+        fill: none; stroke: var(--accent-higher); stroke-width: 5;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.6s ease;
+    }
+    .profile-completion-pct {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.95rem; font-weight: 600; color: var(--text);
+    }
+    .profile-completion-info h3 {
+        font-size: 1.05rem; font-weight: 500; margin-bottom: 4px;
+        letter-spacing: -0.01em;
+    }
+    .profile-completion-info p {
+        font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+    }
+    .profile-checklist {
+        display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .profile-checklist-item {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 0.75rem; color: var(--text-muted);
+        padding: 5px 12px;
+        background: rgba(0,0,0,0.025);
+        border-radius: 100px;
+    }
+    .profile-checklist-item.done {
+        color: var(--accent-higher);
+        background: var(--accent-higher-soft);
+    }
+    .profile-checklist-item svg {
+        width: 12px; height: 12px; stroke-width: 2; fill: none;
+    }
+
+    .profile-form-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 40px;
+    }
+    .profile-form-section {
+        margin-bottom: 32px;
+    }
+    .profile-form-section:last-child { margin-bottom: 0; }
+    .profile-form-section-title {
+        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+        text-transform: uppercase; letter-spacing: 0.12em;
+        margin-bottom: 20px;
+    }
+    .profile-avatar-upload {
+        display: flex; align-items: center; gap: 20px;
+        margin-bottom: 24px;
+    }
+    .profile-avatar-circle {
+        width: 80px; height: 80px; border-radius: 50%;
+        background: var(--accent-higher);
+        color: #fff; display: flex; align-items: center; justify-content: center;
+        font-size: 1.5rem; font-weight: 600;
+        cursor: pointer; position: relative;
+        overflow: hidden;
+        transition: opacity 0.2s;
+        flex-shrink: 0;
+    }
+    .profile-avatar-circle:hover { opacity: 0.85; }
+    .profile-avatar-circle img {
+        width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    }
+    .profile-avatar-circle .avatar-overlay {
+        position: absolute; inset: 0;
+        background: rgba(0,0,0,0.4);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; transition: opacity 0.2s;
+        border-radius: 50%;
+    }
+    .profile-avatar-circle:hover .avatar-overlay { opacity: 1; }
+    .profile-avatar-circle .avatar-overlay svg {
+        width: 20px; height: 20px; stroke: #fff; stroke-width: 2; fill: none;
+    }
+    .profile-avatar-hint {
+        font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+    }
+    .profile-avatar-hint strong {
+        display: block; font-size: 0.9rem; color: var(--text); font-weight: 500;
+        margin-bottom: 2px;
+    }
+    .profile-form-row {
+        display: flex; flex-direction: column; gap: 6px;
+        margin-bottom: 20px;
+    }
+    .profile-form-row:last-child { margin-bottom: 0; }
+    .profile-form-label {
+        font-size: 0.8rem; font-weight: 500; color: var(--text-light);
+    }
+    .profile-form-input {
+        padding: 14px 18px;
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        font-size: 0.95rem; font-family: var(--font);
+        background: transparent;
+        transition: border-color 0.2s;
+        color: var(--text);
+    }
+    .profile-form-input:focus {
+        outline: none; border-color: var(--accent-higher);
+    }
+    .profile-form-input::placeholder { color: var(--text-muted); }
+    textarea.profile-form-input {
+        resize: vertical; min-height: 100px;
+    }
+    select.profile-form-input {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        padding-right: 44px;
+        cursor: pointer;
+    }
+    .profile-checkbox-group {
+        display: flex; flex-direction: column; gap: 10px;
+    }
+    .profile-checkbox-label {
+        display: flex; align-items: center; gap: 10px;
+        cursor: pointer;
+        font-size: 0.9rem; color: var(--text);
+        padding: 10px 14px;
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        transition: all 0.2s;
+    }
+    .profile-checkbox-label:hover {
+        border-color: var(--text-muted);
+    }
+    .profile-checkbox-label input[type="checkbox"],
+    .profile-checkbox-label input[type="radio"] {
+        display: none;
+    }
+    .profile-checkbox-label .check-box {
+        width: 20px; height: 20px; border-radius: 6px;
+        border: 1.5px solid var(--border);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.2s;
+    }
+    .profile-checkbox-label .check-box.radio {
+        border-radius: 50%;
+    }
+    .profile-checkbox-label .check-box svg {
+        width: 12px; height: 12px; stroke: #fff; stroke-width: 2.5; fill: none;
+        opacity: 0; transition: opacity 0.15s;
+    }
+    .profile-checkbox-label input:checked + .check-box {
+        background: var(--accent-higher); border-color: var(--accent-higher);
+    }
+    .profile-checkbox-label input:checked + .check-box svg {
+        opacity: 1;
+    }
+    .profile-checkbox-label input:checked ~ .check-text {
+        color: var(--text); font-weight: 500;
+    }
+    .check-text {
+        color: var(--text-light); font-size: 0.88rem;
+        transition: color 0.2s;
+    }
+
+    .profile-save-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+        padding: 16px 40px;
+        background: var(--dark); color: #fff;
+        border-radius: 100px; font-size: 0.95rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+        margin-top: 12px;
+        width: 100%;
+    }
+    .profile-save-btn:hover { opacity: 0.85; }
+    .profile-save-btn.loading {
+        opacity: 0.7; pointer-events: none;
+        position: relative;
+    }
+    .profile-save-btn.loading::after {
+        content: ''; position: absolute;
+        width: 18px; height: 18px;
+        border: 2px solid transparent; border-top-color: #fff;
+        border-radius: 50%; animation: spin 0.6s linear infinite;
+        right: 20px; top: 50%; margin-top: -9px;
+    }
+    .profile-save-msg {
+        text-align: center; margin-top: 12px;
+        font-size: 0.85rem; color: var(--accent-higher);
+        opacity: 0; transition: opacity 0.3s;
+    }
+    .profile-save-msg.visible { opacity: 1; }
+
+    /* Mobile adjustments for profile */
+    @media (max-width: 768px) {
+        .nav-user-name { display: none; }
+        .nav-user-dropdown { right: -10px; min-width: 180px; }
+        .profile-form-card { padding: 28px; }
+        .profile-completion-card { padding: 24px; }
+        .profile-completion-top { gap: 16px; }
+        .profile-avatar-upload { flex-direction: column; text-align: center; }
+    }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -1378,6 +1686,31 @@
         </button>
     </div>
     <div class="nav-right">
+        <!-- Nav User Area -->
+        <div class="nav-user-area" id="navUserArea">
+            <!-- When logged out: show person icon -->
+            <a href="/members" class="nav-user-icon" id="navUserIcon" title="Members">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 00-16 0"/></svg>
+            </a>
+            <!-- When logged in: show avatar + name (hidden by default) -->
+            <div class="nav-user-avatar" id="navUserAvatar" style="display:none;">
+                <span id="navUserAvatarText">LH</span>
+                <div class="nav-user-dot" id="navUserDot" style="display:none;"></div>
+            </div>
+            <span class="nav-user-name" id="navUserName" style="display:none;"></span>
+            <!-- Dropdown -->
+            <div class="nav-user-dropdown" id="navUserDropdown">
+                <button class="nav-user-dropdown-item" id="navDropdownProfile">
+                    <svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 00-16 0"/></svg>
+                    <span data-i18n="nav_my_profile">Môj profil</span>
+                </button>
+                <div class="nav-user-dropdown-divider"></div>
+                <button class="nav-user-dropdown-item logout" id="navDropdownLogout">
+                    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    <span data-i18n="nav_logout">Odhlásiť sa</span>
+                </button>
+            </div>
+        </div>
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">
             <span class="active" data-lang="sk">SK</span>
             <span data-lang="en">EN</span>
@@ -1553,6 +1886,10 @@
         <button class="section-tab" data-tab="preview">
             <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             <span data-i18n="tab_preview">Pripravovaná kniha</span>
+        </button>
+        <button class="section-tab" data-tab="profile">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 00-16 0"/></svg>
+            <span data-i18n="tab_profile">Profil</span>
         </button>
     </div>
 
@@ -2228,6 +2565,171 @@
         </div>
     </div>
 
+    <!-- ===== PROFILE TAB ===== -->
+    <div class="tab-panel" id="panel-profile">
+        <div class="profile-panel">
+            <!-- Completion Progress -->
+            <div class="profile-completion-card">
+                <div class="profile-completion-top">
+                    <div class="profile-completion-ring">
+                        <svg viewBox="0 0 72 72">
+                            <circle class="ring-bg" cx="36" cy="36" r="30"/>
+                            <circle class="ring-fill" id="profileRingFill" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+                        </svg>
+                        <div class="profile-completion-pct" id="profilePctText">0%</div>
+                    </div>
+                    <div class="profile-completion-info">
+                        <h3 id="profileCompletionTitle" data-i18n="profile_completion_title">Váš profil</h3>
+                        <p id="profileCompletionDesc" data-i18n="profile_completion_desc">Doplňte informácie a staňte sa súčasťou komunity.</p>
+                    </div>
+                </div>
+                <div class="profile-checklist" id="profileChecklist"></div>
+            </div>
+
+            <!-- Profile Form -->
+            <div class="profile-form-card">
+                <form id="profileForm">
+                    <!-- Section: Basic info -->
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title" data-i18n="profile_section_basic">Základné informácie</div>
+                        
+                        <div class="profile-avatar-upload">
+                            <div class="profile-avatar-circle" id="profileAvatarCircle">
+                                <span id="profileAvatarInitials">?</span>
+                                <div class="avatar-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                                </div>
+                                <input type="file" id="profileAvatarInput" accept="image/*" style="display:none;">
+                            </div>
+                            <div class="profile-avatar-hint">
+                                <strong data-i18n="profile_photo_label">Profilová fotka</strong>
+                                <span data-i18n="profile_photo_hint">Kliknite pre nahratie fotky</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-form-row">
+                            <label class="profile-form-label" data-i18n="profile_name_label">Celé meno</label>
+                            <input type="text" class="profile-form-input" id="profileName" data-i18n-placeholder="profile_name_placeholder" placeholder="Vaše meno a priezvisko">
+                        </div>
+
+                        <div class="profile-form-row">
+                            <label class="profile-form-label" data-i18n="profile_bio_label">O mne</label>
+                            <textarea class="profile-form-input" id="profileBio" data-i18n-placeholder="profile_bio_placeholder" placeholder="Napíšte pár slov o sebe..."></textarea>
+                        </div>
+
+                        <div class="profile-form-row">
+                            <label class="profile-form-label" data-i18n="profile_city_label">Mesto</label>
+                            <input type="text" class="profile-form-input" id="profileCity" data-i18n-placeholder="profile_city_placeholder" placeholder="Kde bývate?">
+                        </div>
+                    </div>
+
+                    <!-- Section: About you -->
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title" data-i18n="profile_section_about">O váš príbehu</div>
+
+                        <div class="profile-form-row">
+                            <label class="profile-form-label" data-i18n="profile_source_label">Čo ma priviedlo ku knihe</label>
+                            <select class="profile-form-input" id="profileSource">
+                                <option value="" data-i18n="profile_source_placeholder">Vyberte možnosť...</option>
+                                <option value="friend" data-i18n="profile_source_friend">Odporúčanie priateľa</option>
+                                <option value="social" data-i18n="profile_source_social">Sociálne siete</option>
+                                <option value="podcast" data-i18n="profile_source_podcast">Podcast/video</option>
+                                <option value="bookstore" data-i18n="profile_source_bookstore">Kníhkupectvo</option>
+                                <option value="other" data-i18n="profile_source_other">Iné</option>
+                            </select>
+                        </div>
+
+                        <div class="profile-form-row">
+                            <label class="profile-form-label" data-i18n="profile_interests_label">Oblasť záujmu</label>
+                            <div class="profile-checkbox-group" id="profileInterests">
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="interests" value="neuroscience">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="interest_neuroscience">Neurovedu a biológia</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="interests" value="psychology">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="interest_psychology">Psychológia vedomia</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="interests" value="meditation">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="interest_meditation">Meditácia a mindfulness</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="interests" value="growth">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="interest_growth">Osobný rozvoj</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="interests" value="philosophy">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="interest_philosophy">Filozofia existencie</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="profile-form-row">
+                            <label class="profile-form-label" data-i18n="profile_journey_label">Kde sa nachádzam na ceste</label>
+                            <div class="profile-checkbox-group" id="profileJourney">
+                                <label class="profile-checkbox-label">
+                                    <input type="radio" name="journey" value="beginner">
+                                    <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="journey_beginner">Začiatočník – práve objavujem</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="radio" name="journey" value="seeker">
+                                    <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="journey_seeker">Hľadajúci – aktívne sa vzdelávam</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="radio" name="journey" value="practitioner">
+                                    <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="journey_practitioner">Praktik – denne aplikujem</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="radio" name="journey" value="guide">
+                                    <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="journey_guide">Sprievodca – zdieľam s ostatnými</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section: Preferences -->
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title" data-i18n="profile_section_prefs">Komunikácia</div>
+
+                        <div class="profile-form-row">
+                            <label class="profile-form-label" data-i18n="profile_notifications_label">Chcem dostávať</label>
+                            <div class="profile-checkbox-group" id="profileNotifications">
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="notifications" value="chapters">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="notif_chapters">Novinky o nových kapitolách audioknihy</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="notifications" value="events">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="notif_events">Informácie o prednáškach a eventoch</span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="notifications" value="newsletter">
+                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-text" data-i18n="notif_newsletter">Myšlienky autora (newsletter)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="profile-save-btn" id="profileSaveBtn" data-i18n="profile_save">Uložiť profil</button>
+                    <div class="profile-save-msg" id="profileSaveMsg" data-i18n="profile_saved">Profil bol uložený.</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 </section>
 
@@ -2438,6 +2940,56 @@
             forgot_subtitle: 'Zadajte email a pošleme vám odkaz na obnovenie hesla.',
             forgot_submit: 'Odoslať odkaz',
             forgot_back: 'Späť na prihlásenie',
+            // Profile system
+            nav_my_profile: 'Môj profil',
+            nav_logout: 'Odhlásiť sa',
+            tab_profile: 'Profil',
+            profile_completion_title: 'Váš profil',
+            profile_completion_desc: 'Doplňte informácie a staňte sa súčasťou komunity.',
+            profile_section_basic: 'Základné informácie',
+            profile_section_about: 'O vás',
+            profile_section_prefs: 'Komunikácia',
+            profile_photo_label: 'Profilová fotka',
+            profile_photo_hint: 'Kliknite pre nahratie fotky',
+            profile_name_label: 'Celé meno',
+            profile_name_placeholder: 'Vaše meno a priezvisko',
+            profile_bio_label: 'O mne',
+            profile_bio_placeholder: 'Napíšte pár slov o sebe...',
+            profile_city_label: 'Mesto',
+            profile_city_placeholder: 'Kde bývate?',
+            profile_source_label: 'Čo ma priviedlo ku knihe',
+            profile_source_placeholder: 'Vyberte možnosť...',
+            profile_source_friend: 'Odporúčanie priateľa',
+            profile_source_social: 'Sociálne siete',
+            profile_source_podcast: 'Podcast/video',
+            profile_source_bookstore: 'Kníhkupectvo',
+            profile_source_other: 'Iné',
+            profile_interests_label: 'Oblasť záujmu',
+            interest_neuroscience: 'Neurovedu a biológia',
+            interest_psychology: 'Psychológia vedomia',
+            interest_meditation: 'Meditácia a mindfulness',
+            interest_growth: 'Osobný rozvoj',
+            interest_philosophy: 'Filozofia existencie',
+            profile_journey_label: 'Kde sa nachádzam na ceste',
+            journey_beginner: 'Začiatočník – práve objavujem',
+            journey_seeker: 'Hľadajúci – aktívne sa vzdelávam',
+            journey_practitioner: 'Praktik – denne aplikujem',
+            journey_guide: 'Sprievodca – zdieľam s ostatnými',
+            profile_notifications_label: 'Chcem dostávať',
+            notif_chapters: 'Novinky o nových kapitolách audioknihy',
+            notif_events: 'Informácie o prednáškach a eventoch',
+            notif_newsletter: 'Myšlienky autora (newsletter)',
+            profile_save: 'Uložiť profil',
+            profile_saved: 'Profil bol uložený.',
+            profile_save_error: 'Nepodarilo sa uložiť profil.',
+            checklist_photo: 'Fotka',
+            checklist_name: 'Meno',
+            checklist_bio: 'O mne',
+            checklist_city: 'Mesto',
+            checklist_source: 'Zdroj',
+            checklist_interests: 'Záujmy',
+            checklist_journey: 'Cesta',
+            checklist_notifications: 'Notifikácie',
         },
         en: {
             nav_about: 'About',
@@ -2582,6 +3134,56 @@
             forgot_subtitle: 'Enter your email and we will send you a reset link.',
             forgot_submit: 'Send link',
             forgot_back: 'Back to sign in',
+            // Profile system
+            nav_my_profile: 'My profile',
+            nav_logout: 'Sign out',
+            tab_profile: 'Profile',
+            profile_completion_title: 'Your profile',
+            profile_completion_desc: 'Complete your info and become part of the community.',
+            profile_section_basic: 'Basic information',
+            profile_section_about: 'About you',
+            profile_section_prefs: 'Communication',
+            profile_photo_label: 'Profile photo',
+            profile_photo_hint: 'Click to upload a photo',
+            profile_name_label: 'Full name',
+            profile_name_placeholder: 'Your full name',
+            profile_bio_label: 'About me',
+            profile_bio_placeholder: 'Write a few words about yourself...',
+            profile_city_label: 'City',
+            profile_city_placeholder: 'Where do you live?',
+            profile_source_label: 'What brought me to the book',
+            profile_source_placeholder: 'Select an option...',
+            profile_source_friend: 'Friend\'s recommendation',
+            profile_source_social: 'Social media',
+            profile_source_podcast: 'Podcast/video',
+            profile_source_bookstore: 'Bookstore',
+            profile_source_other: 'Other',
+            profile_interests_label: 'Areas of interest',
+            interest_neuroscience: 'Neuroscience and biology',
+            interest_psychology: 'Psychology of consciousness',
+            interest_meditation: 'Meditation and mindfulness',
+            interest_growth: 'Personal development',
+            interest_philosophy: 'Philosophy of existence',
+            profile_journey_label: 'Where I am on the journey',
+            journey_beginner: 'Beginner \u2013 just discovering',
+            journey_seeker: 'Seeker \u2013 actively learning',
+            journey_practitioner: 'Practitioner \u2013 applying daily',
+            journey_guide: 'Guide \u2013 sharing with others',
+            profile_notifications_label: 'I want to receive',
+            notif_chapters: 'New audiobook chapter updates',
+            notif_events: 'Lectures and events info',
+            notif_newsletter: 'Author\'s thoughts (newsletter)',
+            profile_save: 'Save profile',
+            profile_saved: 'Profile saved.',
+            profile_save_error: 'Failed to save profile.',
+            checklist_photo: 'Photo',
+            checklist_name: 'Name',
+            checklist_bio: 'About',
+            checklist_city: 'City',
+            checklist_source: 'Source',
+            checklist_interests: 'Interests',
+            checklist_journey: 'Journey',
+            checklist_notifications: 'Notifications',
         }
     };
 
@@ -3419,6 +4021,372 @@
         window.openReaderDetail = openThought;
     })();
     loadReadingProgress();
+
+    // ===== PROFILE SYSTEM =====
+    (function initProfileSystem() {
+        var navUserIcon = document.getElementById('navUserIcon');
+        var navUserAvatar = document.getElementById('navUserAvatar');
+        var navUserAvatarText = document.getElementById('navUserAvatarText');
+        var navUserName = document.getElementById('navUserName');
+        var navUserDot = document.getElementById('navUserDot');
+        var navUserArea = document.getElementById('navUserArea');
+        var navUserDropdown = document.getElementById('navUserDropdown');
+        var navDropdownProfile = document.getElementById('navDropdownProfile');
+        var navDropdownLogout = document.getElementById('navDropdownLogout');
+        var profileForm = document.getElementById('profileForm');
+        var profileSaveBtn = document.getElementById('profileSaveBtn');
+        var profileSaveMsg = document.getElementById('profileSaveMsg');
+        var profileAvatarCircle = document.getElementById('profileAvatarCircle');
+        var profileAvatarInput = document.getElementById('profileAvatarInput');
+        var profileAvatarInitials = document.getElementById('profileAvatarInitials');
+        var profileRingFill = document.getElementById('profileRingFill');
+        var profilePctText = document.getElementById('profilePctText');
+        var profileChecklist = document.getElementById('profileChecklist');
+
+        var currentProfileUser = null;
+        var profileAvatarBase64 = null;
+
+        // --- Nav state management ---
+        function updateNavForLoggedOut() {
+            if (navUserIcon) navUserIcon.style.display = 'flex';
+            if (navUserAvatar) navUserAvatar.style.display = 'none';
+            if (navUserName) navUserName.style.display = 'none';
+            if (navUserDropdown) navUserDropdown.classList.remove('open');
+        }
+
+        function updateNavForLoggedIn(user) {
+            currentProfileUser = user;
+            var meta = user.user_metadata || {};
+            var name = meta.full_name || meta.name || user.email.split('@')[0];
+            var firstName = name.split(' ')[0];
+            var parts = name.trim().split(' ');
+            var initials = parts.length >= 2
+                ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
+                : name.substring(0,2).toUpperCase();
+
+            if (navUserIcon) navUserIcon.style.display = 'none';
+            if (navUserAvatar) {
+                navUserAvatar.style.display = 'flex';
+                // Check for avatar photo
+                if (meta.avatar_base64) {
+                    navUserAvatarText.innerHTML = '<img src="' + meta.avatar_base64 + '" alt="">';
+                } else {
+                    navUserAvatarText.textContent = initials;
+                }
+            }
+            if (navUserName) {
+                navUserName.style.display = 'inline';
+                navUserName.textContent = firstName;
+            }
+
+            // Update completeness dot
+            var completeness = calculateCompleteness(meta);
+            if (navUserDot) {
+                navUserDot.style.display = completeness < 100 ? 'block' : 'none';
+            }
+
+            // Fill the profile form
+            fillProfileForm(meta);
+            updateCompletenessUI(meta);
+        }
+
+        // --- Dropdown ---
+        if (navUserArea) {
+            navUserArea.addEventListener('click', function(e) {
+                // Only toggle dropdown when logged in
+                if (navUserAvatar && navUserAvatar.style.display !== 'none') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navUserDropdown.classList.toggle('open');
+                }
+            });
+        }
+        document.addEventListener('click', function(e) {
+            if (navUserDropdown && !navUserArea.contains(e.target)) {
+                navUserDropdown.classList.remove('open');
+            }
+        });
+
+        if (navDropdownProfile) {
+            navDropdownProfile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navUserDropdown.classList.remove('open');
+                // Switch to profile tab
+                var tabs = document.querySelectorAll('.section-tab');
+                var panels = document.querySelectorAll('.tab-panel');
+                tabs.forEach(function(t) { t.classList.remove('active'); });
+                panels.forEach(function(p) { p.classList.remove('active'); });
+                var profileTab = document.querySelector('[data-tab="profile"]');
+                var profilePanel = document.getElementById('panel-profile');
+                if (profileTab) profileTab.classList.add('active');
+                if (profilePanel) profilePanel.classList.add('active');
+                // Scroll to top of dashboard
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        if (navDropdownLogout) {
+            navDropdownLogout.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navUserDropdown.classList.remove('open');
+                supabase.auth.signOut().then(function() {
+                    showLogin();
+                    updateNavForLoggedOut();
+                });
+            });
+        }
+
+        // --- Completeness calculation ---
+        function calculateCompleteness(meta) {
+            var fields = [
+                !!(meta.avatar_base64),
+                !!(meta.full_name || meta.name),
+                !!(meta.bio),
+                !!(meta.city),
+                !!(meta.book_source),
+                !!(meta.interests && meta.interests.length > 0),
+                !!(meta.journey_stage),
+                !!(meta.notification_prefs && meta.notification_prefs.length > 0)
+            ];
+            var filled = fields.filter(Boolean).length;
+            return Math.round((filled / fields.length) * 100);
+        }
+
+        function updateCompletenessUI(meta) {
+            var pct = calculateCompleteness(meta);
+            var circumference = 2 * Math.PI * 30; // r=30
+            var offset = circumference - (pct / 100) * circumference;
+
+            if (profileRingFill) {
+                profileRingFill.style.strokeDasharray = circumference;
+                profileRingFill.style.strokeDashoffset = offset;
+            }
+            if (profilePctText) profilePctText.textContent = pct + '%';
+
+            var dict = T[lang] || T['sk'];
+            var checklistItems = [
+                { key: 'checklist_photo', done: !!(meta.avatar_base64) },
+                { key: 'checklist_name', done: !!(meta.full_name || meta.name) },
+                { key: 'checklist_bio', done: !!(meta.bio) },
+                { key: 'checklist_city', done: !!(meta.city) },
+                { key: 'checklist_source', done: !!(meta.book_source) },
+                { key: 'checklist_interests', done: !!(meta.interests && meta.interests.length > 0) },
+                { key: 'checklist_journey', done: !!(meta.journey_stage) },
+                { key: 'checklist_notifications', done: !!(meta.notification_prefs && meta.notification_prefs.length > 0) }
+            ];
+
+            if (profileChecklist) {
+                profileChecklist.innerHTML = checklistItems.map(function(item) {
+                    var label = dict[item.key] || item.key;
+                    var icon = item.done
+                        ? '<svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>'
+                        : '<svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="8"/></svg>';
+                    return '<span class="profile-checklist-item' + (item.done ? ' done' : '') + '">' + icon + label + '</span>';
+                }).join('');
+            }
+
+            // Update nav dot
+            if (navUserDot) {
+                navUserDot.style.display = pct < 100 ? 'block' : 'none';
+            }
+        }
+
+        // --- Fill profile form from metadata ---
+        function fillProfileForm(meta) {
+            var nameInput = document.getElementById('profileName');
+            var bioInput = document.getElementById('profileBio');
+            var cityInput = document.getElementById('profileCity');
+            var sourceInput = document.getElementById('profileSource');
+
+            if (nameInput) nameInput.value = meta.full_name || meta.name || '';
+            if (bioInput) bioInput.value = meta.bio || '';
+            if (cityInput) cityInput.value = meta.city || '';
+            if (sourceInput) sourceInput.value = meta.book_source || '';
+
+            // Profile avatar
+            if (meta.avatar_base64) {
+                profileAvatarBase64 = meta.avatar_base64;
+                if (profileAvatarInitials) {
+                    profileAvatarInitials.innerHTML = '<img src="' + meta.avatar_base64 + '" alt="">';
+                }
+            } else {
+                var name = meta.full_name || meta.name || '?';
+                var parts = name.trim().split(' ');
+                var initials = parts.length >= 2
+                    ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
+                    : name.substring(0,2).toUpperCase();
+                if (profileAvatarInitials) profileAvatarInitials.textContent = initials;
+            }
+
+            // Interests
+            var interests = meta.interests || [];
+            document.querySelectorAll('#profileInterests input[type="checkbox"]').forEach(function(cb) {
+                cb.checked = interests.indexOf(cb.value) !== -1;
+            });
+
+            // Journey
+            var journey = meta.journey_stage || '';
+            document.querySelectorAll('#profileJourney input[type="radio"]').forEach(function(r) {
+                r.checked = r.value === journey;
+            });
+
+            // Notifications
+            var notifs = meta.notification_prefs || [];
+            document.querySelectorAll('#profileNotifications input[type="checkbox"]').forEach(function(cb) {
+                cb.checked = notifs.indexOf(cb.value) !== -1;
+            });
+        }
+
+        // --- Avatar upload ---
+        if (profileAvatarCircle) {
+            profileAvatarCircle.addEventListener('click', function() {
+                if (profileAvatarInput) profileAvatarInput.click();
+            });
+        }
+        if (profileAvatarInput) {
+            profileAvatarInput.addEventListener('change', function(e) {
+                var file = e.target.files[0];
+                if (!file) return;
+                // Limit to 500KB
+                if (file.size > 512000) {
+                    alert(lang === 'sk' ? 'Fotka je pr\u00edli\u0161 ve\u013ek\u00e1 (max 500KB).' : 'Photo is too large (max 500KB).');
+                    return;
+                }
+                var reader = new FileReader();
+                reader.onload = function(ev) {
+                    // Resize to max 200x200
+                    var img = new Image();
+                    img.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        var maxSize = 200;
+                        var w = img.width, h = img.height;
+                        if (w > h) { h = h * maxSize / w; w = maxSize; }
+                        else { w = w * maxSize / h; h = maxSize; }
+                        canvas.width = w; canvas.height = h;
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        profileAvatarBase64 = canvas.toDataURL('image/jpeg', 0.8);
+                        if (profileAvatarInitials) {
+                            profileAvatarInitials.innerHTML = '<img src="' + profileAvatarBase64 + '" alt="">';
+                        }
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // --- Save profile ---
+        if (profileForm) {
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!currentProfileUser) return;
+
+                var interests = [];
+                document.querySelectorAll('#profileInterests input:checked').forEach(function(cb) {
+                    interests.push(cb.value);
+                });
+
+                var journey = '';
+                var journeyChecked = document.querySelector('#profileJourney input:checked');
+                if (journeyChecked) journey = journeyChecked.value;
+
+                var notifs = [];
+                document.querySelectorAll('#profileNotifications input:checked').forEach(function(cb) {
+                    notifs.push(cb.value);
+                });
+
+                var profileData = {
+                    full_name: document.getElementById('profileName').value.trim(),
+                    bio: document.getElementById('profileBio').value.trim(),
+                    city: document.getElementById('profileCity').value.trim(),
+                    book_source: document.getElementById('profileSource').value,
+                    interests: interests,
+                    journey_stage: journey,
+                    notification_prefs: notifs
+                };
+                if (profileAvatarBase64) {
+                    profileData.avatar_base64 = profileAvatarBase64;
+                }
+
+                profileSaveBtn.classList.add('loading');
+                profileSaveBtn.disabled = true;
+
+                supabase.auth.updateUser({ data: profileData })
+                    .then(function(result) {
+                        profileSaveBtn.classList.remove('loading');
+                        profileSaveBtn.disabled = false;
+                        if (result.error) {
+                            profileSaveMsg.textContent = (T[lang] || T['sk']).profile_save_error || 'Error';
+                            profileSaveMsg.style.color = '#991B1B';
+                        } else {
+                            var dict = T[lang] || T['sk'];
+                            profileSaveMsg.textContent = dict.profile_saved || 'Saved';
+                            profileSaveMsg.style.color = 'var(--accent-higher)';
+                            // Update user metadata in memory
+                            if (result.data && result.data.user) {
+                                currentProfileUser = result.data.user;
+                                updateNavForLoggedIn(result.data.user);
+                                // Also update the dashboard greeting/avatar
+                                var meta = result.data.user.user_metadata || {};
+                                var name = meta.full_name || meta.name || result.data.user.email.split('@')[0];
+                                var greetingEl = document.querySelector('.dashboard-greeting');
+                                if (greetingEl && name) {
+                                    var greetKey = lang === 'sk' ? 'Vitajte' : 'Welcome';
+                                    greetingEl.innerHTML = greetKey + ', <strong>' + name + '</strong>';
+                                }
+                                var avatarEl = document.querySelector('.dashboard-avatar');
+                                if (avatarEl && name) {
+                                    var parts = name.trim().split(' ');
+                                    var initials = parts.length >= 2
+                                        ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
+                                        : name.substring(0,2).toUpperCase();
+                                    avatarEl.textContent = initials;
+                                }
+                            }
+                        }
+                        profileSaveMsg.classList.add('visible');
+                        setTimeout(function() {
+                            profileSaveMsg.classList.remove('visible');
+                        }, 3000);
+                    })
+                    .catch(function() {
+                        profileSaveBtn.classList.remove('loading');
+                        profileSaveBtn.disabled = false;
+                        profileSaveMsg.textContent = (T[lang] || T['sk']).profile_save_error || 'Error';
+                        profileSaveMsg.style.color = '#991B1B';
+                        profileSaveMsg.classList.add('visible');
+                        setTimeout(function() {
+                            profileSaveMsg.classList.remove('visible');
+                        }, 3000);
+                    });
+            });
+        }
+
+        // --- Hook into existing auth flow ---
+        var _origShowDashboard = showDashboard;
+        showDashboard = function(user) {
+            _origShowDashboard(user);
+            if (user) updateNavForLoggedIn(user);
+        };
+
+        var _origShowLogin = showLogin;
+        showLogin = function() {
+            _origShowLogin();
+            updateNavForLoggedOut();
+        };
+
+        // Initial check: if already on dashboard, update nav
+        supabase.auth.getSession().then(function(result) {
+            if (result.data.session && result.data.session.user) {
+                updateNavForLoggedIn(result.data.session.user);
+            } else {
+                updateNavForLoggedOut();
+            }
+        }).catch(function() {
+            updateNavForLoggedOut();
+        });
+    })();
+
 })();
 </script>
 </body>
