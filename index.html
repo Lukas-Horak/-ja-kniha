@@ -751,14 +751,39 @@
     }
     .fs-cta {
         text-align: center;
-        padding: 48px 0;
+        padding: 56px 0 48px;
     }
-    .fs-cta p {
-        font-size: 1rem;
-        color: #8C7E72;
-        margin-bottom: 24px;
-        font-style: italic;
+    .fs-cta-heading {
+        font-size: 1.3rem; font-weight: 600; color: var(--r-text, #3D3632);
+        margin-bottom: 8px; letter-spacing: -0.01em;
     }
+    .fs-cta-sub {
+        font-size: 0.92rem; color: #8C7E72; line-height: 1.6;
+        max-width: 400px; margin: 0 auto 32px;
+    }
+    .fs-cta-buttons {
+        display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .fs-cta-btn-primary {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 14px 28px; background: var(--dark, #1A1A1A); color: #fff;
+        border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+        border: none; cursor: pointer; font-family: inherit;
+        text-decoration: none; transition: opacity 0.2s;
+    }
+    .fs-cta-btn-primary:hover { opacity: 0.85; }
+    .fs-cta-btn-primary svg { width: 13px; height: 13px; }
+    .fs-cta-btn-secondary {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 14px 28px;
+        background: transparent; color: var(--r-text, #3D3632);
+        border: 1.5px solid #D5CFC7;
+        border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+        cursor: pointer; font-family: inherit;
+        text-decoration: none; transition: all 0.2s;
+    }
+    .fs-cta-btn-secondary:hover { background: #F0EBE4; border-color: #B8B0A5; }
+    .fs-cta-btn-secondary svg { width: 13px; height: 13px; }
 
 
     /* Reader settings button */
@@ -2269,29 +2294,21 @@
             </div>
         </div>
 
-        <div class="fs-divider"></div>
-
-        <!-- Túžby -->
-        <div class="fs-chapter">
-            <div class="fs-chapter-label" data-i18n="fs_page_62">Strana 62</div>
-            <div class="fs-chapter-heading" data-i18n="fs_heading_5">Túžby</div>
-            <div class="fs-chapter-quote" data-i18n="fs_quote_5">Túžba mať viac, byť lepší, mať pravdu či všetko kontrolovať pochádza zo základných primitívnych mechanizmov prežitia.</div>
-            <div class="fs-chapter-text" data-i18n-html="fs_text_5">
-                <p>Neustále po niečom túžime – po lepšej práci, po ideálnom partnerovi, po exotickejšej dovolenke, po väčšom zážitku, po dlhšom oddychu... A keď to konečne máme, túžime zasa po niečom inom. Túžba nás ráno motivuje vstať z postele, ale aj večer opäť siahnuť po telefóne, aby sme sa pozreli, či náhodou niekto nemá niečo lepšie než to, čo máme my. Vždy sa nám zdá, že predmet našej túžby je hneď za rohom. „Och, keby som len mal viac času, všetko by bolo iné.“, „Keby som zarobil o trochu viac, konečne by som si mohol vydýchnuť.“, „Len čo si nájdem pravého partnera, budem naozaj šťastná.“, „Ešte pár kíl dole a budem sám so sebou spokojný!“ Je to ako naháňať svoj tieň. Myslíme si, že keď spravíme ešte pár krokov, konečne ho chytíme, no on sa vždy posunie o kúsok ďalej.</p>
-                <p>Túžba je jeden z najstarších inštinktov, ktorý sa u ľudí vyvinul do nesmierne sofistikovaného mechanizmu. Túžby sa prejavujú nielen v snahe o zabezpečenie hmateľných potrieb, ako je potrava alebo úkryt, ale tiež v potrebe po uznaní, moci, sociálnom postavení alebo intelektuálnom raste. Samozrejme, základné túžby majú svoje opodstatnenie, ale ak sa stanú prevládajúcim emocionálnym stavom jedinca, zásadne ovplyvňujú to, ako vníma svet, ako sa správa aj ako rozmýšľa.</p>
-                <p>Vyspelé ľudské túžby môžu byť teda chápané ako sofistikované rozšírenie biologických inštinktov, ktoré sú vďaka vyšším kognitívnym schopnostiam dokonca prepojené so schopnosťou myslieť, plánovať, rozhodovať sa alebo vnímať seba samých.</p>
-                <p>Pozrime sa stručne na to, ako sa táto emócia formovala v priebehu evolúcie.</p>
-            </div>
-        </div>
-
         <!-- CTA -->
         <div class="fs-divider"></div>
         <div class="fs-cta">
-            <p data-i18n="fs_cta_text">Pokračovanie nájdete v knihe...</p>
-            <a href="#objednat" class="btn-primary" data-i18n="fs_order_btn" onclick="document.getElementById('fsReaderOverlay').classList.remove('open');document.body.style.overflow='';">
-                Objednať knihu
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-            </a>
+            <div class="fs-cta-heading" data-i18n="fs_cta_heading">Chcete čítať ďalej?</div>
+            <div class="fs-cta-sub" data-i18n="fs_cta_sub">Získajte prístup k celému textu knihy, audioknihe a exkluzívnemu obsahu autora.</div>
+            <div class="fs-cta-buttons">
+                <a href="#objednat" class="fs-cta-btn-primary" data-i18n="fs_cta_order" onclick="document.getElementById('fsReaderOverlay').classList.remove('open');document.body.style.overflow='';">
+                    Objednať knihu
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </a>
+                <a href="/members" class="fs-cta-btn-secondary" data-i18n="fs_cta_members" onclick="document.getElementById('fsReaderOverlay').classList.remove('open');document.body.style.overflow='';">
+                    Členská sekcia
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l6 5-6 5"/></svg>
+                </a>
+            </div>
         </div>
 
     </div>
@@ -3350,12 +3367,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             fs_heading_3: 'Predtým ako začneme...',
             fs_heading_4: 'Stavy vedomia',
             fs_quote_4: 'Vyššie vedomie nie je pripútané k dočasným a povrchným veciam. Svoju pozornosť smeruje k hlbším, nadčasovým a univerzálnym hodnotám.',
-            fs_page_62: 'Strana 62',
-            fs_heading_5: 'Túžby',
-            fs_quote_5: 'Túžba mať viac, byť lepší, mať pravdu či všetko kontrolovať pochádza zo základných primitívnych mechanizmov prežitia.',
-            fs_text_5: '<p>Neustále po niečom túžime \u2013 po lepšej práci, po ideálnom partnerovi, po exotickejšej dovolenke, po väčšom zážitku, po dlhšom oddychu... A keď to konečne máme, túžime zasa po niečom inom. Túžba nás ráno motivuje vstať z postele, ale aj večer opäť siahnuť po telefóne, aby sme sa pozreli, či náhodou niekto nemá niečo lepšie než to, čo máme my.</p><p>Túžba je jeden z najstarších inštinktov, ktorý sa u ľudí vyvinul do nesmierne sofistikovaného mechanizmu. Túžby sa prejavujú nielen v snahe o zabezpečenie hmateľných potrieb, ako je potrava alebo úkryt, ale tiež v potrebe po uznaní, moci, sociálnom postavení alebo intelektuálnom raste.</p><p>Vyspelé ľudské túžby môžu byť teda chápané ako sofistikované rozšírenie biologických inštinktov, ktoré sú vďaka vyšším kognitívnym schopnostiam dokonca prepojené so schopnosťou myslieť, plánovať, rozhodovať sa alebo vnímať seba samých.</p><p>Pozrime sa stručne na to, ako sa táto emócia formovala v priebehu evolúcie.</p>',
-            fs_cta_text: 'Pokračovanie nájdete v knihe...',
-            fs_order_btn: 'Objednať knihu',
+            fs_cta_heading: 'Chcete čítať ďalej?',
+            fs_cta_sub: 'Získajte prístup k celému textu knihy, audioknihe a exkluzívnemu obsahu autora.',
+            fs_cta_order: 'Objednať knihu',
+            fs_cta_members: 'Členská sekcia',
 
             // Reviews
             reviews_eyebrow: '/Ohlasy',
@@ -3527,12 +3542,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             fs_heading_3: 'Before we begin\u2026',
             fs_heading_4: 'States of Consciousness',
             fs_quote_4: 'Higher consciousness is not attached to temporary and superficial things. It directs its attention toward deeper, timeless, and universal values.',
-            fs_page_62: 'Page 62',
-            fs_heading_5: 'Desires',
-            fs_quote_5: 'The desire to have more, to be better, to be right, or to control everything stems from basic primitive survival mechanisms.',
-            fs_text_5: '<p>We constantly desire something\u2014a better job, an ideal partner, an exotic vacation, a greater experience, longer rest\u2014and when we finally have it, we desire something else. Desire motivates us to get out of bed in the morning, but in the evening it drives us to reach for our phones to see if someone else has something better than what we have.</p><p>Desire is one of the oldest instincts that has evolved in humans into an extremely sophisticated mechanism. Desires manifest not only in the effort to meet tangible needs, such as food or shelter, but also in the need for recognition, power, social status, or intellectual growth.</p><p>Advanced human desires can thus be understood as a sophisticated extension of biological instincts, which, thanks to higher cognitive abilities, are even connected to the ability to think, plan, make decisions, or perceive ourselves.</p><p>Let\u2019s look briefly at how this emotion formed during evolution.</p>',
-            fs_cta_text: 'Continue reading in the book\u2026',
-            fs_order_btn: 'Order the book',
+            fs_cta_heading: 'Want to keep reading?',
+            fs_cta_sub: 'Get access to the full book, audiobook, and exclusive content from the author.',
+            fs_cta_order: 'Order the book',
+            fs_cta_members: 'Members section',
 
             // Reviews
             reviews_eyebrow: '/Testimonials',
