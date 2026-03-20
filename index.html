@@ -112,16 +112,7 @@
     }
     .nav-links a { transition: color 0.15s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-links .nav-spectrum {
-        display: inline-flex; align-items: center; gap: 6px;
-        color: var(--text); font-weight: 500;
-    }
-    .nav-links .nav-spectrum::before {
-        content: ''; display: block;
-        width: 6px; height: 6px; border-radius: 50%;
-        background: #5C8A6E; flex-shrink: 0;
-    }
-    .nav-links .nav-spectrum:hover { color: #5C8A6E; }
+    .nav-links .nav-spectrum { }
     .nav-links .nav-members {
         display: inline-flex; align-items: center; gap: 8px;
         color: var(--text-muted); font-weight: 400; font-size: 0.875rem;
@@ -1595,14 +1586,7 @@
         border-radius: 12px; transition: background 0.15s;
     }
     .mobile-sheet-links a:hover { background: rgba(0,0,0,0.03); }
-    .mobile-sheet-links .sheet-spectrum {
-        color: #5C8A6E; font-weight: 600;
-    }
-    .mobile-sheet-links .sheet-spectrum::before {
-        content: ''; display: inline-block;
-        width: 7px; height: 7px; border-radius: 50%;
-        background: #5C8A6E; flex-shrink: 0;
-    }
+    .mobile-sheet-links .sheet-spectrum { }
     .mobile-sheet-footer {
         padding-top: 16px; margin-top: 8px;
         border-top: 1px solid var(--border);
@@ -1643,7 +1627,7 @@
         .nav-links { display: none; }
         .nav-right { display: none; }
         .nav-mobile-toggle { display: flex; order: 99; }
-        .hero { padding-top: 80px; }
+        .hero { padding-top: 96px; }
         .hero-card { padding: 28px; }
         .hero-top { margin-bottom: 32px; }
         .hero-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
@@ -1791,7 +1775,7 @@
         <a href="#obsah" data-i18n="nav_about">O knihe</a>
         <a href="#autor" data-i18n="nav_author">Autor</a>
         <a href="/spektrum-vedomia" class="nav-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
-        <span class="nav-members"><span data-i18n="nav_members">Members</span><span class="nav-members-badge" data-i18n="nav_members_soon">Čoskoro</span></span>
+        <span class="nav-members"><span data-i18n="nav_members">Pre členov</span><span class="nav-members-badge" data-i18n="nav_members_soon">Čoskoro</span></span>
     </div>
     <div class="nav-right">
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">
@@ -1818,7 +1802,7 @@
         <a href="#obsah" data-i18n="nav_about">O knihe</a>
         <a href="#autor" data-i18n="nav_author">Autor</a>
         <a href="/spektrum-vedomia" class="sheet-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
-        <a href="/members" data-i18n="nav_members">Members</a>
+        <a href="/members" data-i18n="nav_members">Pre členov</a>
     </div>
     <div class="mobile-sheet-footer">
         <button class="lang-toggle" id="mobileLangToggle" aria-label="Switch language">
@@ -3262,7 +3246,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             nav_author: 'Autor',
             nav_cta: 'Objednať',
             nav_spectrum: 'Spektrum vedomia',
-            nav_members: 'Members',
+            nav_members: 'Pre členov',
             nav_members_soon: 'Čoskoro',
 
             // Hero
@@ -3435,7 +3419,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             nav_author: 'Author',
             nav_cta: 'Order',
             nav_spectrum: 'Spectrum of Consciousness',
-            nav_members: 'Members',
+            nav_members: 'For Members',
             nav_members_soon: 'Soon',
 
             // Hero

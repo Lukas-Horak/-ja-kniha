@@ -90,16 +90,7 @@
     }
     .nav-links a { transition: color 0.15s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-links .nav-spectrum {
-        display: inline-flex; align-items: center; gap: 6px;
-        color: var(--text); font-weight: 500;
-    }
-    .nav-links .nav-spectrum::before {
-        content: ''; display: block;
-        width: 6px; height: 6px; border-radius: 50%;
-        background: #5C8A6E; flex-shrink: 0;
-    }
-    .nav-links .nav-spectrum:hover { color: #5C8A6E; }
+    .nav-links .nav-spectrum { }
     .nav-links .nav-members {
         display: inline-flex; align-items: center; gap: 6px;
         color: var(--text-muted); font-weight: 400;
@@ -193,14 +184,7 @@
     .mobile-sheet-links a:hover, .mobile-sheet-links button:hover {
         background: rgba(0,0,0,0.03);
     }
-    .mobile-sheet-links .sheet-spectrum {
-        color: #5C8A6E; font-weight: 600;
-    }
-    .mobile-sheet-links .sheet-spectrum::before {
-        content: ''; display: inline-block;
-        width: 7px; height: 7px; border-radius: 50%;
-        background: #5C8A6E; flex-shrink: 0;
-    }
+    .mobile-sheet-links .sheet-spectrum { }
     .mobile-sheet-footer {
         padding-top: 16px; margin-top: 8px;
         border-top: 1px solid var(--border);
@@ -1955,7 +1939,7 @@
         <a href="/#obsah" data-i18n="nav_about">O knihe</a>
         <a href="/#autor" data-i18n="nav_author">Autor</a>
         <a href="/spektrum-vedomia" class="nav-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
-        <span class="nav-members"><span data-i18n="nav_members">Members</span><span class="nav-members-badge" data-i18n="nav_members_soon">Čoskoro</span></span>
+        <span class="nav-members"><span data-i18n="nav_members">Pre členov</span><span class="nav-members-badge" data-i18n="nav_members_soon">Čoskoro</span></span>
     </div>
     <div class="nav-right">
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">
@@ -2027,7 +2011,7 @@
         <a href="/#obsah" data-i18n="nav_about">O knihe</a>
         <a href="/#autor" data-i18n="nav_author">Autor</a>
         <a href="/spektrum-vedomia" class="sheet-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
-        <a href="/members" id="mobileSheetMembers" data-i18n="nav_members">Members</a>
+        <a href="/members" id="mobileSheetMembers" data-i18n="nav_members">Pre členov</a>
         <button id="mobileSheetProfile" style="display:none;" data-i18n="nav_my_profile">Môj profil</button>
         <button id="mobileSheetLogout" style="display:none;" data-i18n="nav_logout">Odhlásiť sa</button>
     </div>
@@ -3176,7 +3160,7 @@
             nav_reviews: 'Recenzie',
             nav_author: 'Autor',
             nav_spectrum: 'Spektrum vedomia',
-            nav_members: 'Members',
+            nav_members: 'Pre členov',
             nav_members_soon: 'Čoskoro',
             nav_cta: 'Objednať',
             members_title: 'Vstúpte do vnútra',
@@ -3381,7 +3365,7 @@
             nav_reviews: 'Reviews',
             nav_author: 'Author',
             nav_spectrum: 'Spectrum of Consciousness',
-            nav_members: 'Members',
+            nav_members: 'For Members',
             nav_members_soon: 'Soon',
             nav_cta: 'Order',
             members_title: 'Step inside',
