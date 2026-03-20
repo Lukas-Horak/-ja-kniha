@@ -67,7 +67,7 @@
         grid-template-columns: auto 1fr auto;
         align-items: center;
         width: 100%;
-        max-width: 920px;
+        max-width: 1340px;
         padding: 14px 32px;
         background: rgba(253, 251, 247, 0.82);
         backdrop-filter: blur(20px);
@@ -1285,7 +1285,7 @@
 
     @media (max-width: 768px) {
         .container { padding: 0 20px; }
-        .nav { top: 10px; padding: 0 12px; }
+        .nav { top: 10px; padding: 0 20px; }
         .nav-inner {
             padding: 12px 20px;
             display: flex; align-items: center; justify-content: space-between;
@@ -4529,11 +4529,17 @@
             if (navUserArea) navUserArea.classList.remove('dropdown-open');
             // Show nav links (logged out on /members)
             if (navLinksEl) navLinksEl.style.display = '';
+            // Show language toggle when logged out
+            var langToggleEl = document.getElementById('langToggle');
+            if (langToggleEl) langToggleEl.style.display = '';
             // Mobile sheet: hide user, show members link, hide profile/logout
             if (mobileSheetUserEl) mobileSheetUserEl.style.display = 'none';
             if (mobileSheetMembersEl) mobileSheetMembersEl.style.display = '';
             if (mobileSheetProfileBtn) mobileSheetProfileBtn.style.display = 'none';
             if (mobileSheetLogoutBtn) mobileSheetLogoutBtn.style.display = 'none';
+            // Show mobile lang toggle when logged out
+            var mobileLangEl = document.getElementById('mobileLangToggle');
+            if (mobileLangEl) mobileLangEl.closest('.mobile-sheet-footer').style.display = '';
         }
 
         function updateNavForLoggedIn(user) {
@@ -4561,8 +4567,12 @@
             }
             if (navUserChevron) navUserChevron.style.display = 'block';
 
-            // Hide center nav links on /members when logged in (dashboard tabs handle navigation)
-            if (navLinksEl) navLinksEl.style.display = 'none';
+            // Keep nav links visible when logged in
+            if (navLinksEl) navLinksEl.style.display = '';
+
+            // Hide language toggle when logged in (member already chose language)
+            var langToggleEl = document.getElementById('langToggle');
+            if (langToggleEl) langToggleEl.style.display = 'none';
 
             // Update dropdown header
             if (navDropdownAvatar) {
@@ -4595,6 +4605,10 @@
             if (mobileSheetMembersEl) mobileSheetMembersEl.style.display = 'none';
             if (mobileSheetProfileBtn) mobileSheetProfileBtn.style.display = '';
             if (mobileSheetLogoutBtn) mobileSheetLogoutBtn.style.display = '';
+
+            // Hide mobile lang toggle when logged in
+            var mobileLangEl = document.getElementById('mobileLangToggle');
+            if (mobileLangEl) mobileLangEl.closest('.mobile-sheet-footer').style.display = 'none';
 
             // Fill the profile form
             fillProfileForm(meta);
