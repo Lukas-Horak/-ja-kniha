@@ -83,6 +83,12 @@
 
     /* ===== CONTENT ===== */
     .content { max-width: 1100px; margin: 0 auto; padding: 24px 32px 120px; }
+    .spectrum-intro {
+        max-width: 780px; margin: 0 auto 32px;
+        font-size: 0.92rem; line-height: 1.75; color: var(--text);
+    }
+    .spectrum-intro p { margin-bottom: 12px; }
+    .spectrum-intro p:last-child { margin-bottom: 0; }
 
     /* ===== DESKTOP TABLE ===== */
     .spectrum-grid { width: 100%; }
@@ -212,6 +218,13 @@
 
     <!-- Content -->
     <main class="content">
+
+        <div class="spectrum-intro">
+            <p data-i18n="intro_1">Spektrum vedomia poskytuje užitočný rámec pre pochopenie troch základných úrovní ľudského vedomia – „Primitívne ja“, „Rozumové ja“ a „Vyššie ja“.</p>
+            <p data-i18n="intro_2">Toto spektrum predstavuje komplexný pohľad na psychologický a evolučný vývoj jedinca od základnej inštinktívnej úrovne po vysoko vedomé stavy bytia. Ukazuje, ako rôzne aspekty jednotlivých úrovní ovplyvňujú naše vnímanie a interakcie so svetom, a zdôrazňuje dôležitosť rozvoja smerom k vyšším úrovniam vedomia.</p>
+            <p data-i18n="intro_3">Spektrum vedomia je mapou a nástrojom, ktoré čitateľom umožnia rozpoznať, z akej úrovne vedomia pristupujú k jednotlivým životným situáciám alebo životu celkovo, a zároveň im poskytuje možnosť vedomého výberu.</p>
+            <p data-i18n="intro_4" style="margin-top: 16px; font-style: italic; color: var(--text-muted); font-size: 0.85rem;">Tento koncept je detailne rozpracovaný v knihe JA – Evolúcia vedomia.</p>
+        </div>
 
         <!-- ===== DESKTOP: Full grid table ===== -->
         <div class="spectrum-grid">
@@ -364,6 +377,10 @@
     (function() {
         var T = {
             sk: {
+            intro_1: 'Spektrum vedomia poskytuje užitočný rámec pre pochopenie troch základných úrovní ľudského vedomia \u2013 \u201ePrimitívne ja\u201c, \u201eRozumové ja\u201c a \u201eVyššie ja\u201c.',
+            intro_2: 'Toto spektrum predstavuje komplexný pohľad na psychologický a evolučný vývoj jedinca od základnej inštinktívnej úrovne po vysoko vedomé stavy bytia. Ukazuje, ako rôzne aspekty jednotlivých úrovní ovplyvňujú naše vnímanie a interakcie so svetom, a zdôrazňuje dôležitosť rozvoja smerom k vyšším úrovniam vedomia.',
+            intro_3: 'Spektrum vedomia je mapou a nástrojom, ktoré čitateľom umožnia rozpoznať, z akej úrovne vedomia pristupujú k jednotlivým životným situáciám alebo životu celkovo, a zároveň im poskytuje možnosť vedomého výberu.',
+            intro_4: 'Tento koncept je detailne rozpracovaný v knihe JA \u2013 Evolúcia vedomia.',
             topbar_title: 'Spektrum vedomia',
             page_title: 'Spektrum Vedomia',
             col_0: 'Primitívne Ja',
@@ -448,6 +465,10 @@
             close_label: 'Zavrieť'
             },
             en: {
+            intro_1: 'The Spectrum of Consciousness provides a useful framework for understanding three fundamental levels of human consciousness\u2014the \u201CPrimitive Self,\u201D the \u201CRational Self,\u201D and the \u201CHigher Self.\u201D',
+            intro_2: 'This spectrum represents a complex view of psychological and evolutionary development from basic instinctive levels to highly conscious states of being. It shows how various aspects of each level influence our perception and interactions with the world, emphasizing the importance of development toward higher levels of consciousness.',
+            intro_3: 'The Spectrum of Consciousness is a map and tool allowing readers to recognize from which level of consciousness they approach individual life situations, while providing the possibility of conscious choice.',
+            intro_4: 'This concept is explored in detail in the book I AM \u2013 The Evolution of Consciousness.',
             topbar_title: 'Spectrum of Consciousness',
             page_title: 'Spectrum of Consciousness',
             col_0: 'Primitive Self',
