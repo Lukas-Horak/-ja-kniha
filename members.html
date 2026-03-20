@@ -4036,6 +4036,7 @@
         var lineHeights = ['1.85', '1.9', '2', '2.1', '2.15'];
 
         var chapterFileMap = {
+        sk: {
         'ja-tuzby': 'chapters/tuzby.html',
         'ja-naplnanie-zameru': 'chapters/naplnanie-zameru.html',
         'ja-odpor': 'chapters/odpor.html',
@@ -4044,6 +4045,17 @@
         'ja-rozum-prekazka': 'chapters/rozum-prekazka.html',
         'ja-rozum-cas': 'chapters/rozum-cas.html',
         'ja-autenticnost': 'chapters/autenticnost.html'
+        },
+        en: {
+        'ja-tuzby': 'chapters/en/tuzby.html',
+        'ja-naplnanie-zameru': 'chapters/en/naplnanie-zameru.html',
+        'ja-odpor': 'chapters/en/odpor.html',
+        'ja-hnev': 'chapters/en/hnev.html',
+        'ja-odpustenie': 'chapters/en/odpustenie.html',
+        'ja-rozum-prekazka': 'chapters/en/rozum-prekazka.html',
+        'ja-rozum-cas': 'chapters/en/rozum-cas.html',
+        'ja-autenticnost': 'chapters/en/autenticnost.html'
+        }
         };
 
         var chapterOrder = ['ja-tuzby', 'ja-naplnanie-zameru', 'ja-odpor', 'ja-hnev', 'ja-odpustenie', 'ja-rozum-prekazka', 'ja-rozum-cas', 'ja-autenticnost'];
@@ -4224,7 +4236,8 @@
         }
 
         function openChapter(chapterId) {
-            var file = chapterFileMap[chapterId];
+            var fileMap = chapterFileMap[lang] || chapterFileMap.sk;
+            var file = fileMap[chapterId];
             if (!file) return;
             currentChapterId = chapterId;
 
@@ -4242,15 +4255,16 @@
             document.body.style.overflow = 'hidden';
             updateProgress();
 
-            if (chapterCache[chapterId]) {
-                renderChapterContent(chapterId, chapterCache[chapterId], title);
+            var cacheKey = lang + ':' + chapterId;
+            if (chapterCache[cacheKey]) {
+                renderChapterContent(chapterId, chapterCache[cacheKey], title);
                 return;
             }
 
             fetch('/' + file)
                 .then(function(r) { return r.text(); })
                 .then(function(html) {
-                    chapterCache[chapterId] = html;
+                    chapterCache[cacheKey] = html;
                     if (currentChapterId === chapterId) {
                         renderChapterContent(chapterId, html, title);
                     }
@@ -4428,7 +4442,7 @@
         // Attach to preview-row clicks (book chapters)
         document.querySelectorAll('.preview-row').forEach(function(row) {
             var id = row.getAttribute('data-preview-id');
-            if (id && chapterFileMap[id]) {
+            if (id && (chapterFileMap.sk[id] || chapterFileMap.en[id])) {
                 row.style.cursor = 'pointer';
                 row.addEventListener('click', function(e) {
                     if (e.target.closest('.preview-open-btn')) return;
