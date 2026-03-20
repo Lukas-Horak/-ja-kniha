@@ -3606,6 +3606,8 @@
         lang = l;
         try { localStorage.setItem('ev-lang', l); } catch(e) {}
         applyLang(l);
+        // Update audio chapter durations for current language
+        if (typeof updateAudioDurations === 'function') updateAudioDurations(l);
     }
 
     // Lang toggles
@@ -5000,12 +5002,35 @@
 
         // Chapter data
         var chapters = [
-            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030587/04_Tuzby_smbzpw.mp3', duration: '40:15', labelSK: 'Kapitola 04', titleSK: 'T\u00fa\u017eby', labelEN: 'Chapter 04', titleEN: 'Desires' },
-            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030583/08_Odpustenie_ako_akt_sily_ibo2xp.mp3', duration: '20:19', labelSK: 'Kapitola 08', titleSK: 'Odpustenie ako akt sily', labelEN: 'Chapter 08', titleEN: 'Forgiveness as an Act of Strength' },
-            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/14_Rozum_ako_prekazka_yaxter.mp3', duration: '22:29', labelSK: 'Kapitola 14', titleSK: 'Rozum ako prek\u00e1\u017eka', labelEN: 'Chapter 14', titleEN: 'Reason as an Obstacle' },
-            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/17_Moj_rozum_vnima_cas_aiisim.mp3', duration: '19:21', labelSK: 'Kapitola 17', titleSK: 'M\u00f4j rozum vn\u00edma \u010das', labelEN: 'Chapter 17', titleEN: 'My Mind Perceives Time' },
-            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030582/28_Autenticnost_eli9gc.mp3', duration: '15:34', labelSK: 'Kapitola 28', titleSK: 'Autenti\u010dnos\u0165', labelEN: 'Chapter 28', titleEN: 'Authenticity' }
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030587/04_Tuzby_smbzpw.mp3', srcEN: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774043216/audiobook_en/04_EN_Desires.mp3', duration: '40:15', durationEN: '67:29', labelSK: 'Kapitola 04', titleSK: 'T\u00fa\u017eby', labelEN: 'Chapter 04', titleEN: 'Desires' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030583/08_Odpustenie_ako_akt_sily_ibo2xp.mp3', srcEN: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774043237/audiobook_en/08_EN_Forgiveness.mp3', duration: '20:19', durationEN: '45:17', labelSK: 'Kapitola 08', titleSK: 'Odpustenie ako akt sily', labelEN: 'Chapter 08', titleEN: 'Forgiveness as an Act of Strength' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/14_Rozum_ako_prekazka_yaxter.mp3', srcEN: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774043237/audiobook_en/14_EN_Intellect_Obstacle.mp3', duration: '22:29', durationEN: '21:36', labelSK: 'Kapitola 14', titleSK: 'Rozum ako prek\u00e1\u017eka', labelEN: 'Chapter 14', titleEN: 'The Intellect as an Obstacle' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/17_Moj_rozum_vnima_cas_aiisim.mp3', srcEN: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774043237/audiobook_en/17_EN_Intellect_Time.mp3', duration: '19:21', durationEN: '18:09', labelSK: 'Kapitola 17', titleSK: 'M\u00f4j rozum vn\u00edma \u010das', labelEN: 'Chapter 17', titleEN: 'My Intellect Perceives Time' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030582/28_Autenticnost_eli9gc.mp3', srcEN: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774043237/audiobook_en/28_EN_Authenticity.mp3', duration: '15:34', durationEN: '15:13', labelSK: 'Kapitola 28', titleSK: 'Autenti\u010dnos\u0165', labelEN: 'Chapter 28', titleEN: 'Authenticity' }
         ];
+
+        // Update audio durations and reload current chapter when language changes
+        window.updateAudioDurations = function(l) {
+            var cards = document.querySelectorAll('.audio-chapter-card[data-chapter-index]');
+            cards.forEach(function(card) {
+                var idx = parseInt(card.getAttribute('data-chapter-index'));
+                if (idx >= 0 && idx < chapters.length) {
+                    var durEl = card.querySelector('.audio-chapter-duration');
+                    if (durEl) durEl.textContent = (l === 'en' && chapters[idx].durationEN) ? chapters[idx].durationEN : chapters[idx].duration;
+                }
+            });
+            // Reload current chapter audio with new language source
+            if (currentChapterIndex >= 0) {
+                var wasPlaying = isPlaying;
+                var currentTime = audioEl.currentTime;
+                audioEl.src = (l === 'en' && chapters[currentChapterIndex].srcEN) ? chapters[currentChapterIndex].srcEN : chapters[currentChapterIndex].src;
+                audioEl.load();
+                var dur = (l === 'en' && chapters[currentChapterIndex].durationEN) ? chapters[currentChapterIndex].durationEN : chapters[currentChapterIndex].duration;
+                if (afTimeTotal) afTimeTotal.textContent = dur;
+            }
+        };
+        // Apply EN durations on initial load if needed
+        if (lang === 'en') updateAudioDurations('en');
 
         // DOM references
         var afPlayBtn = document.getElementById('afPlayBtn');
@@ -5057,11 +5082,12 @@
         function loadChapter(idx, autoplay) {
             if (idx < 0 || idx >= chapters.length) return;
             currentChapterIndex = idx;
-            audioEl.src = chapters[idx].src;
+            audioEl.src = (lang === 'en' && chapters[idx].srcEN) ? chapters[idx].srcEN : chapters[idx].src;
             audioEl.load();
             updateFeaturedTitle(idx);
             if (afTimeCurrent) afTimeCurrent.textContent = '0:00';
-            if (afTimeTotal) afTimeTotal.textContent = chapters[idx].duration;
+            var dur = (lang === 'en' && chapters[idx].durationEN) ? chapters[idx].durationEN : chapters[idx].duration;
+            if (afTimeTotal) afTimeTotal.textContent = dur;
             if (afBarFill) afBarFill.style.width = '0%';
             // Reset all mini progress bars
             chapterCards.forEach(function(card) {
