@@ -372,6 +372,15 @@
     .audio-chapter-badge.soon {
         background: rgba(0,0,0,0.04); color: var(--text-muted);
     }
+    .audio-chapter-badge.sample {
+        background: rgba(92, 138, 110, 0.1); color: var(--accent-higher);
+    }
+    .audio-chapter-card.playing {
+        box-shadow: 0 0 0 2px var(--accent-higher), 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .audio-chapter-card .ch-pause-icon,
+    .audio-chapter-card .ch-play-icon { width: 18px; height: 18px; fill: #fff; stroke: none; }
+    .audio-featured .af-pause-icon { width: 22px; height: 22px; fill: #1a1a1a; }
     .audio-chapter-title {
         font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em;
         margin-bottom: 4px;
@@ -450,7 +459,8 @@
         border-radius: 4px; cursor: pointer; overflow: hidden;
     }
     .audio-featured .af-bar-fill {
-        height: 100%; width: 35%; background: #fff; border-radius: 4px;
+        height: 100%; width: 0%; background: #fff; border-radius: 4px;
+        transition: width 0.15s linear;
     }
     .audio-featured .af-times {
         display: flex; justify-content: space-between;
@@ -678,6 +688,20 @@
     }
     .preview-open-btn:hover { opacity: 0.85; }
     .preview-open-btn svg { width: 12px; height: 12px; }
+    .preview-audio-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 18px;
+        background: transparent; color: var(--accent-higher);
+        border: 1.5px solid var(--accent-higher);
+        border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+        cursor: pointer; font-family: var(--font);
+        transition: background 0.2s, color 0.2s;
+    }
+    .preview-audio-btn:hover {
+        background: var(--accent-higher); color: #fff;
+    }
+    .preview-audio-btn:hover svg { fill: #fff; }
+    .preview-audio-btn svg { width: 10px; height: 12px; fill: var(--accent-higher); transition: fill 0.2s; }
     @keyframes pulse-dot {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
@@ -1387,25 +1411,68 @@
         0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.6; transform: scale(0.85); }
     }
+    .nav-user-chevron {
+        width: 16px; height: 16px;
+        stroke: var(--text-muted); stroke-width: 2; fill: none;
+        transition: transform 0.2s;
+    }
+    .nav-user-area.dropdown-open .nav-user-chevron {
+        transform: rotate(180deg);
+    }
     .nav-user-dropdown {
         display: none;
         position: absolute; top: calc(100% + 10px); right: 0;
         background: var(--card);
         border-radius: 16px;
-        padding: 8px;
-        min-width: 200px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06);
+        padding: 0;
+        min-width: 280px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.12);
         z-index: 150;
-        animation: dropdownIn 0.2s ease;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.15s ease, transform 0.15s ease;
+        overflow: hidden;
     }
-    .nav-user-dropdown.open { display: block; }
-    @keyframes dropdownIn {
-        from { opacity: 0; transform: translateY(-6px); }
-        to { opacity: 1; transform: translateY(0); }
+    .nav-user-dropdown.open {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
     }
-    .nav-user-dropdown-item {
-        display: flex; align-items: center; gap: 10px;
-        padding: 12px 16px;
+    .nav-dropdown-header {
+        display: flex; align-items: center; gap: 14px;
+        padding: 20px 20px 16px;
+    }
+    .nav-dropdown-avatar {
+        width: 48px; height: 48px; min-width: 48px; border-radius: 50%;
+        background: var(--accent-higher);
+        color: #fff; display: flex; align-items: center; justify-content: center;
+        font-size: 1rem; font-weight: 600;
+        overflow: hidden;
+    }
+    .nav-dropdown-avatar img {
+        width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    }
+    .nav-dropdown-info {
+        display: flex; flex-direction: column; gap: 2px;
+        min-width: 0;
+    }
+    .nav-dropdown-name {
+        font-size: 0.95rem; font-weight: 600; color: var(--text);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .nav-dropdown-email {
+        font-size: 0.78rem; color: var(--text-muted);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .nav-dropdown-divider {
+        height: 1px; background: var(--border); margin: 0 16px;
+    }
+    .nav-dropdown-menu {
+        padding: 8px;
+    }
+    .nav-dropdown-item {
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px 14px;
         border-radius: 10px;
         font-size: 0.85rem; font-weight: 500;
         color: var(--text);
@@ -1414,16 +1481,33 @@
         font-family: var(--font);
         transition: background 0.15s;
     }
-    .nav-user-dropdown-item:hover { background: rgba(0,0,0,0.04); }
-    .nav-user-dropdown-item svg {
-        width: 16px; height: 16px; stroke: var(--text-light);
-        stroke-width: 1.8; fill: none;
+    .nav-dropdown-item:hover { background: rgba(0,0,0,0.04); }
+    .nav-dropdown-item svg {
+        width: 18px; height: 18px; stroke: var(--text-light);
+        stroke-width: 1.8; fill: none; flex-shrink: 0;
     }
-    .nav-user-dropdown-divider {
-        height: 1px; background: var(--border); margin: 4px 12px;
+    .nav-dropdown-item .item-badge {
+        margin-left: auto;
+        font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-muted);
+        background: rgba(0,0,0,0.04);
+        padding: 3px 8px;
+        border-radius: 100px;
     }
-    .nav-user-dropdown-item.logout { color: var(--text-muted); }
-    .nav-user-dropdown-item.logout:hover { color: var(--text); }
+    .nav-dropdown-item.disabled {
+        opacity: 0.5; cursor: default;
+    }
+    .nav-dropdown-item.disabled:hover { background: none; }
+    .nav-dropdown-footer {
+        padding: 4px 8px 8px;
+    }
+    .nav-dropdown-item.logout {
+        color: var(--text-muted); font-weight: 400;
+    }
+    .nav-dropdown-item.logout:hover {
+        color: var(--text); background: rgba(0,0,0,0.04);
+    }
 
     /* ===== PROFILE TAB PANEL ===== */
     .profile-panel {
@@ -1644,10 +1728,167 @@
     }
     .profile-save-msg.visible { opacity: 1; }
 
+    /* Profile account section (logout + delete) */
+    .profile-account-section {
+        margin-top: 16px;
+    }
+    .profile-section-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 32px 0;
+    }
+    .profile-logout-btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 10px 0;
+        background: none; border: none;
+        font-size: 0.85rem; font-weight: 400;
+        color: var(--text-muted);
+        cursor: pointer; font-family: var(--font);
+        transition: color 0.2s;
+    }
+    .profile-logout-btn:hover { color: var(--text-light); }
+    .profile-logout-btn svg {
+        width: 16px; height: 16px; stroke: currentColor;
+        stroke-width: 1.8; fill: none;
+    }
+    .profile-danger-zone {
+        margin-top: 32px;
+    }
+    .profile-danger-label {
+        font-size: 0.65rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.12em;
+        color: var(--text-muted);
+        margin-bottom: 10px;
+    }
+    .profile-delete-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 0;
+        background: none; border: none;
+        font-size: 0.82rem; font-weight: 500;
+        color: #D94040;
+        cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .profile-delete-btn:hover { opacity: 0.75; }
+
+    /* Delete account modal */
+    .delete-modal-overlay {
+        display: none;
+        position: fixed; inset: 0;
+        z-index: 10000;
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        align-items: center; justify-content: center;
+        padding: 20px;
+    }
+    .delete-modal-overlay.open {
+        display: flex;
+        animation: modalFadeIn 0.2s ease;
+    }
+    @keyframes modalFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .delete-modal-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        animation: modalSlideUp 0.25s ease;
+    }
+    @keyframes modalSlideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .delete-modal-icon {
+        width: 56px; height: 56px;
+        margin: 0 auto 20px;
+        background: rgba(217, 64, 64, 0.08);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .delete-modal-icon svg {
+        width: 28px; height: 28px;
+        stroke: #D94040; stroke-width: 1.8; fill: none;
+    }
+    .delete-modal-title {
+        font-size: 1.2rem; font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-bottom: 8px;
+        color: var(--text);
+    }
+    .delete-modal-text {
+        font-size: 0.9rem; color: var(--text-light);
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
+    .delete-modal-input-group {
+        display: flex; flex-direction: column; gap: 6px;
+        margin-bottom: 24px;
+        text-align: left;
+    }
+    .delete-modal-label {
+        font-size: 0.8rem; font-weight: 500;
+        color: var(--text-light);
+    }
+    .delete-modal-input {
+        padding: 14px 18px;
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        font-size: 0.95rem; font-family: var(--font);
+        background: transparent;
+        transition: border-color 0.2s;
+        color: var(--text);
+        text-align: center;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+    }
+    .delete-modal-input:focus {
+        outline: none; border-color: #D94040;
+    }
+    .delete-modal-buttons {
+        display: flex; gap: 12px;
+    }
+    .delete-modal-cancel {
+        flex: 1;
+        padding: 14px;
+        border: 1.5px solid var(--border);
+        border-radius: 100px;
+        background: none;
+        font-size: 0.9rem; font-weight: 500;
+        color: var(--text);
+        cursor: pointer; font-family: var(--font);
+        transition: all 0.2s;
+    }
+    .delete-modal-cancel:hover {
+        border-color: var(--text-muted);
+        background: rgba(0,0,0,0.02);
+    }
+    .delete-modal-confirm {
+        flex: 1;
+        padding: 14px;
+        border: none;
+        border-radius: 100px;
+        background: #D94040;
+        font-size: 0.9rem; font-weight: 500;
+        color: #fff;
+        cursor: pointer; font-family: var(--font);
+        transition: opacity 0.2s;
+    }
+    .delete-modal-confirm:hover { opacity: 0.85; }
+    .delete-modal-confirm:disabled {
+        opacity: 0.35; cursor: default;
+    }
+
     /* Mobile adjustments for profile */
     @media (max-width: 768px) {
         .nav-user-name { display: none; }
-        .nav-user-dropdown { right: -10px; min-width: 180px; }
+        .nav-user-chevron { display: none; }
+        .nav-user-dropdown { right: -10px; min-width: 260px; }
+        .delete-modal-card { padding: 28px; }
         .profile-form-card { padding: 28px; }
         .profile-completion-card { padding: 24px; }
         .profile-completion-top { gap: 16px; }
@@ -1698,17 +1939,35 @@
                 <div class="nav-user-dot" id="navUserDot" style="display:none;"></div>
             </div>
             <span class="nav-user-name" id="navUserName" style="display:none;"></span>
-            <!-- Dropdown -->
+            <svg class="nav-user-chevron" id="navUserChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display:none;"><polyline points="6 9 12 15 18 9"/></svg>
+            <!-- Pinterest-style Dropdown -->
             <div class="nav-user-dropdown" id="navUserDropdown">
-                <button class="nav-user-dropdown-item" id="navDropdownProfile">
-                    <svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 00-16 0"/></svg>
-                    <span data-i18n="nav_my_profile">Môj profil</span>
-                </button>
-                <div class="nav-user-dropdown-divider"></div>
-                <button class="nav-user-dropdown-item logout" id="navDropdownLogout">
-                    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                    <span data-i18n="nav_logout">Odhlásiť sa</span>
-                </button>
+                <div class="nav-dropdown-header">
+                    <div class="nav-dropdown-avatar" id="navDropdownAvatar">LH</div>
+                    <div class="nav-dropdown-info">
+                        <div class="nav-dropdown-name" id="navDropdownName"></div>
+                        <div class="nav-dropdown-email" id="navDropdownEmail"></div>
+                    </div>
+                </div>
+                <div class="nav-dropdown-divider"></div>
+                <div class="nav-dropdown-menu">
+                    <button class="nav-dropdown-item" id="navDropdownProfile">
+                        <svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 00-16 0"/></svg>
+                        <span data-i18n="nav_my_profile">Môj profil</span>
+                    </button>
+                    <button class="nav-dropdown-item disabled" id="navDropdownSettings">
+                        <svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001.08 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1.08z"/></svg>
+                        <span data-i18n="nav_settings">Nastavenia</span>
+                        <span class="item-badge" data-i18n="nav_settings_soon">Čoskoro</span>
+                    </button>
+                </div>
+                <div class="nav-dropdown-divider"></div>
+                <div class="nav-dropdown-footer">
+                    <button class="nav-dropdown-item logout" id="navDropdownLogout">
+                        <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        <span data-i18n="nav_logout">Odhlásiť sa</span>
+                    </button>
+                </div>
             </div>
         </div>
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">
@@ -1867,10 +2126,6 @@
 <div class="container">
     <div class="dashboard-header fade-in">
         <h1 class="dashboard-greeting" data-i18n-html="dashboard_greeting">Vitajte</h1>
-        <div class="dashboard-user">
-            <div class="dashboard-avatar">LH</div>
-            <button class="dashboard-logout" id="logoutBtn" data-i18n="dashboard_logout">Odhlásiť sa</button>
-        </div>
     </div>
 
     <!-- Section tabs -->
@@ -2032,107 +2287,90 @@
             <div class="audio-featured">
                 <div class="af-top">
                     <span class="af-label" data-i18n="af_now_playing">Práve prehráva</span>
-                    <span class="af-badge" data-i18n="af_members_only">Pre členov</span>
+                    <span class="af-badge" data-i18n="badge_sample">Ukážka</span>
                 </div>
                 <div>
-                    <div class="af-title" data-i18n="af_chapter_title">Kapitola 4 – Hranice ega</div>
+                    <div class="af-title" data-i18n="af_chapter_title">Kapitola 04 – Túžby</div>
                     <div class="af-author" data-i18n="af_read_by">Číta Lukáš Horák</div>
                 </div>
                 <div class="af-controls">
-                    <button class="af-play">
-                        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                    <button class="af-play" id="afPlayBtn">
+                        <svg class="af-play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        <svg class="af-pause-icon" viewBox="0 0 24 24" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
                     </button>
                     <div class="af-progress-wrap">
-                        <div class="af-bar"><div class="af-bar-fill"></div></div>
+                        <div class="af-bar" id="afBar"><div class="af-bar-fill" id="afBarFill"></div></div>
                         <div class="af-times">
-                            <span>14:22</span>
-                            <span>41:08</span>
+                            <span id="afTimeCurrent">0:00</span>
+                            <span id="afTimeTotal">0:00</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="audio-chapter-card">
+            <div class="audio-chapter-card" data-audio-src="https://res.cloudinary.com/djh3zmzel/video/upload/v1774030587/04_Tuzby_smbzpw.mp3" data-chapter-index="0">
                 <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_1">Kapitola 1</span>
-                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
+                    <span class="audio-chapter-number" data-i18n="ch_label_1">Kapitola 04</span>
+                    <span class="audio-chapter-badge sample" data-i18n="badge_sample">Ukážka</span>
                 </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_1">Úvod – Prečo táto kniha</div>
-                <div class="audio-chapter-duration">18:24</div>
+                <div class="audio-chapter-title" data-i18n="ch_title_1">Túžby</div>
+                <div class="audio-chapter-duration">40:15</div>
                 <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 100%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_2">Kapitola 2</span>
-                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_2">Biologický mechanizmus</div>
-                <div class="audio-chapter-duration">32:15</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 60%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_3">Kapitola 3</span>
-                    <span class="audio-chapter-badge free" data-i18n="badge_free">Voľný prístup</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_3">Túžby</div>
-                <div class="audio-chapter-duration">40:43</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <button class="audio-play-btn"><svg class="ch-play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg><svg class="ch-pause-icon" viewBox="0 0 24 24" style="display:none"><rect x="5" y="3" width="4" height="18" fill="#fff"/><rect x="15" y="3" width="4" height="18" fill="#fff"/></svg></button>
                     <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
                 </div>
             </div>
 
-            <div class="audio-chapter-card">
+            <div class="audio-chapter-card" data-audio-src="https://res.cloudinary.com/djh3zmzel/video/upload/v1774030583/08_Odpustenie_ako_akt_sily_ibo2xp.mp3" data-chapter-index="1">
                 <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_4">Kapitola 4</span>
-                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
+                    <span class="audio-chapter-number" data-i18n="ch_label_2">Kapitola 08</span>
+                    <span class="audio-chapter-badge sample" data-i18n="badge_sample">Ukážka</span>
                 </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_4">Hranice ega</div>
-                <div class="audio-chapter-duration">41:08</div>
+                <div class="audio-chapter-title" data-i18n="ch_title_2">Odpustenie ako akt sily</div>
+                <div class="audio-chapter-duration">20:19</div>
                 <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
-                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 35%"></div></div>
-                </div>
-            </div>
-
-            <div class="audio-chapter-card">
-                <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_5">Kapitola 5</span>
-                    <span class="audio-chapter-badge members" data-i18n="badge_members">Members</span>
-                </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_5">Hierarchia a moc</div>
-                <div class="audio-chapter-duration">38:51</div>
-                <div class="audio-chapter-play">
-                    <button class="audio-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <button class="audio-play-btn"><svg class="ch-play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg><svg class="ch-pause-icon" viewBox="0 0 24 24" style="display:none"><rect x="5" y="3" width="4" height="18" fill="#fff"/><rect x="15" y="3" width="4" height="18" fill="#fff"/></svg></button>
                     <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
                 </div>
             </div>
 
-            <div class="audio-chapter-card locked">
+            <div class="audio-chapter-card" data-audio-src="https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/14_Rozum_ako_prekazka_yaxter.mp3" data-chapter-index="2">
                 <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_6">Kapitola 6</span>
-                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
+                    <span class="audio-chapter-number" data-i18n="ch_label_3">Kapitola 14</span>
+                    <span class="audio-chapter-badge sample" data-i18n="badge_sample">Ukážka</span>
                 </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_6">Sociálne emócie</div>
-                <div class="audio-chapter-duration">–:––</div>
+                <div class="audio-chapter-title" data-i18n="ch_title_3">Rozum ako prekážka</div>
+                <div class="audio-chapter-duration">22:29</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg class="ch-play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg><svg class="ch-pause-icon" viewBox="0 0 24 24" style="display:none"><rect x="5" y="3" width="4" height="18" fill="#fff"/><rect x="15" y="3" width="4" height="18" fill="#fff"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
+                </div>
             </div>
 
-            <div class="audio-chapter-card locked">
+            <div class="audio-chapter-card" data-audio-src="https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/17_Moj_rozum_vnima_cas_aiisim.mp3" data-chapter-index="3">
                 <div class="audio-chapter-top">
-                    <span class="audio-chapter-number" data-i18n="ch_label_7">Kapitola 7</span>
-                    <span class="audio-chapter-badge soon" data-i18n="badge_soon">Čoskoro</span>
+                    <span class="audio-chapter-number" data-i18n="ch_label_4">Kapitola 17</span>
+                    <span class="audio-chapter-badge sample" data-i18n="badge_sample">Ukážka</span>
                 </div>
-                <div class="audio-chapter-title" data-i18n="ch_title_7">Vyššie vedomie</div>
-                <div class="audio-chapter-duration">–:––</div>
+                <div class="audio-chapter-title" data-i18n="ch_title_4">Môj rozum vníma čas</div>
+                <div class="audio-chapter-duration">19:21</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg class="ch-play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg><svg class="ch-pause-icon" viewBox="0 0 24 24" style="display:none"><rect x="5" y="3" width="4" height="18" fill="#fff"/><rect x="15" y="3" width="4" height="18" fill="#fff"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
+                </div>
+            </div>
+
+            <div class="audio-chapter-card" data-audio-src="https://res.cloudinary.com/djh3zmzel/video/upload/v1774030582/28_Autenticnost_eli9gc.mp3" data-chapter-index="4">
+                <div class="audio-chapter-top">
+                    <span class="audio-chapter-number" data-i18n="ch_label_5">Kapitola 28</span>
+                    <span class="audio-chapter-badge sample" data-i18n="badge_sample">Ukážka</span>
+                </div>
+                <div class="audio-chapter-title" data-i18n="ch_title_5">Autentičnosť</div>
+                <div class="audio-chapter-duration">15:34</div>
+                <div class="audio-chapter-play">
+                    <button class="audio-play-btn"><svg class="ch-play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg><svg class="ch-pause-icon" viewBox="0 0 24 24" style="display:none"><rect x="5" y="3" width="4" height="18" fill="#fff"/><rect x="15" y="3" width="4" height="18" fill="#fff"/></svg></button>
+                    <div class="audio-progress-mini"><div class="audio-progress-mini-fill" style="width: 0%"></div></div>
+                </div>
             </div>
         </div>
     </div>
@@ -2187,6 +2425,10 @@
                                 <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
                                 <span class="preview-progress-pct">0%</span>
                             </div>
+                            <button class="preview-audio-btn" data-audio-chapter="0">
+                                <svg viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14"/></svg>
+                                <span data-i18n="preview_play_audio">Prehrať audio</span>
+                            </button>
                             <button class="preview-open-btn" data-i18n="reader_open">
                                 Otvoriť
                                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
@@ -2229,6 +2471,10 @@
                                 <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
                                 <span class="preview-progress-pct">0%</span>
                             </div>
+                            <button class="preview-audio-btn" data-audio-chapter="1">
+                                <svg viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14"/></svg>
+                                <span data-i18n="preview_play_audio">Prehrať audio</span>
+                            </button>
                             <button class="preview-open-btn" data-i18n="reader_open">
                                 Otvoriť
                                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
@@ -2287,6 +2533,10 @@
                                 <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
                                 <span class="preview-progress-pct">0%</span>
                             </div>
+                            <button class="preview-audio-btn" data-audio-chapter="2">
+                                <svg viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14"/></svg>
+                                <span data-i18n="preview_play_audio">Prehrať audio</span>
+                            </button>
                             <button class="preview-open-btn" data-i18n="reader_open">
                                 Otvoriť
                                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
@@ -2321,6 +2571,10 @@
                                 <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
                                 <span class="preview-progress-pct">0%</span>
                             </div>
+                            <button class="preview-audio-btn" data-audio-chapter="3">
+                                <svg viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14"/></svg>
+                                <span data-i18n="preview_play_audio">Prehrať audio</span>
+                            </button>
                             <button class="preview-open-btn" data-i18n="reader_open">
                                 Otvoriť
                                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
@@ -2419,6 +2673,10 @@
                                 <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
                                 <span class="preview-progress-pct">0%</span>
                             </div>
+                            <button class="preview-audio-btn" data-audio-chapter="4">
+                                <svg viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14"/></svg>
+                                <span data-i18n="preview_play_audio">Prehrať audio</span>
+                            </button>
                             <button class="preview-open-btn" data-i18n="reader_open">
                                 Otvoriť
                                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
@@ -2726,6 +2984,21 @@
                     <button type="submit" class="profile-save-btn" id="profileSaveBtn" data-i18n="profile_save">Uložiť profil</button>
                     <div class="profile-save-msg" id="profileSaveMsg" data-i18n="profile_saved">Profil bol uložený.</div>
                 </form>
+
+                <!-- Account section: logout + delete -->
+                <div class="profile-account-section">
+                    <div class="profile-section-divider"></div>
+
+                    <button class="profile-logout-btn" id="profileLogoutBtn">
+                        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        <span data-i18n="profile_logout">Odhlásiť sa</span>
+                    </button>
+
+                    <div class="profile-danger-zone">
+                        <p class="profile-danger-label" data-i18n="profile_danger_zone">Nebezpečná zóna</p>
+                        <button class="profile-delete-btn" id="profileDeleteBtn" data-i18n="profile_delete_account">Vymazať účet</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2778,6 +3051,25 @@
 </div>
 
 
+<!-- Delete Account Modal -->
+<div class="delete-modal-overlay" id="deleteModalOverlay">
+    <div class="delete-modal-card">
+        <div class="delete-modal-icon">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="delete-modal-title" data-i18n="profile_delete_title">Vymazať účet</div>
+        <div class="delete-modal-text" data-i18n="profile_delete_text">Táto akcia je nevratná. Všetky vaše dáta budú natrvalo vymazané.</div>
+        <div class="delete-modal-input-group">
+            <label class="delete-modal-label" data-i18n="profile_delete_confirm_label">Pre potvrdenie napíšte VYMAZAŤ</label>
+            <input type="text" class="delete-modal-input" id="deleteConfirmInput" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="delete-modal-buttons">
+            <button class="delete-modal-cancel" id="deleteModalCancel" data-i18n="profile_delete_cancel">Zrušiť</button>
+            <button class="delete-modal-confirm" id="deleteModalConfirm" disabled data-i18n="profile_delete_account">Vymazať účet</button>
+        </div>
+    </div>
+</div>
+
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
     <div class="container">
@@ -2826,19 +3118,18 @@
             tab_blog: 'Myšlienky autora',
             tab_preview: 'Ukážky z kníh',
             af_now_playing: 'Práve prehráva',
-            af_members_only: 'Pre členov',
-            af_chapter_title: 'Kapitola 4 – Hranice ega',
+            af_chapter_title: 'Kapitola 04 – Túžby',
             af_read_by: 'Číta Lukáš Horák',
-            ch_label_1: 'Kapitola 1', ch_title_1: 'Úvod – Prečo táto kniha',
-            ch_label_2: 'Kapitola 2', ch_title_2: 'Biologický mechanizmus',
-            ch_label_3: 'Kapitola 3', ch_title_3: 'Túžby',
-            ch_label_4: 'Kapitola 4', ch_title_4: 'Hranice ega',
-            ch_label_5: 'Kapitola 5', ch_title_5: 'Hierarchia a moc',
-            ch_label_6: 'Kapitola 6', ch_title_6: 'Sociálne emócie',
-            ch_label_7: 'Kapitola 7', ch_title_7: 'Vyššie vedomie',
+            ch_label_1: 'Kapitola 04', ch_title_1: 'Túžby',
+            ch_label_2: 'Kapitola 08', ch_title_2: 'Odpustenie ako akt sily',
+            ch_label_3: 'Kapitola 14', ch_title_3: 'Rozum ako prekážka',
+            ch_label_4: 'Kapitola 17', ch_title_4: 'Môj rozum vníma čas',
+            ch_label_5: 'Kapitola 28', ch_title_5: 'Autentičnosť',
+            badge_sample: 'Ukážka',
             badge_free: 'Voľný prístup',
             badge_members: 'Members',
             badge_soon: 'Čoskoro',
+            preview_play_audio: 'Prehrať audio',
             tag_thought: 'Myšlienka',
             tag_insight: 'Postreh',
             thoughts_label: 'Myšlienky & postrehy',
@@ -2942,8 +3233,19 @@
             forgot_back: 'Späť na prihlásenie',
             // Profile system
             nav_my_profile: 'Môj profil',
+            nav_settings: 'Nastavenia',
+            nav_settings_soon: 'Čoskoro',
             nav_logout: 'Odhlásiť sa',
             tab_profile: 'Profil',
+            profile_logout: 'Odhlásiť sa',
+            profile_danger_zone: 'Nebezpečná zóna',
+            profile_delete_account: 'Vymazať účet',
+            profile_delete_title: 'Vymazať účet',
+            profile_delete_text: 'Táto akcia je nevratná. Všetky vaše dáta budú natrvalo vymazané.',
+            profile_delete_confirm_label: 'Pre potvrdenie napíšte VYMAZAŤ',
+            profile_delete_confirm_word: 'VYMAZAŤ',
+            profile_delete_cancel: 'Zrušiť',
+            profile_delete_success: 'Účet bol vymazaný. Boli ste odhlásení.',
             profile_completion_title: 'Váš profil',
             profile_completion_desc: 'Doplňte informácie a staňte sa súčasťou komunity.',
             profile_section_basic: 'Základné informácie',
@@ -3020,19 +3322,18 @@
             tab_blog: 'Author\'s thoughts',
             tab_preview: 'Book excerpts',
             af_now_playing: 'Now playing',
-            af_members_only: 'Members only',
-            af_chapter_title: 'Chapter 4 – Boundaries of the ego',
+            af_chapter_title: 'Chapter 04 – Desires',
             af_read_by: 'Read by Lukas Horak',
-            ch_label_1: 'Chapter 1', ch_title_1: 'Introduction – Why this book',
-            ch_label_2: 'Chapter 2', ch_title_2: 'The biological mechanism',
-            ch_label_3: 'Chapter 3', ch_title_3: 'Desires',
-            ch_label_4: 'Chapter 4', ch_title_4: 'Boundaries of the ego',
-            ch_label_5: 'Chapter 5', ch_title_5: 'Hierarchy and power',
-            ch_label_6: 'Chapter 6', ch_title_6: 'Social emotions',
-            ch_label_7: 'Chapter 7', ch_title_7: 'Higher consciousness',
+            ch_label_1: 'Chapter 04', ch_title_1: 'Desires',
+            ch_label_2: 'Chapter 08', ch_title_2: 'Forgiveness as an Act of Strength',
+            ch_label_3: 'Chapter 14', ch_title_3: 'Reason as an Obstacle',
+            ch_label_4: 'Chapter 17', ch_title_4: 'My Mind Perceives Time',
+            ch_label_5: 'Chapter 28', ch_title_5: 'Authenticity',
+            badge_sample: 'Sample',
             badge_free: 'Free access',
             badge_members: 'Members',
             badge_soon: 'Coming soon',
+            preview_play_audio: 'Play audio',
             tag_thought: 'Thought',
             tag_insight: 'Insight',
             thoughts_label: 'Thoughts & insights',
@@ -3136,8 +3437,19 @@
             forgot_back: 'Back to sign in',
             // Profile system
             nav_my_profile: 'My profile',
+            nav_settings: 'Settings',
+            nav_settings_soon: 'Coming soon',
             nav_logout: 'Sign out',
             tab_profile: 'Profile',
+            profile_logout: 'Sign out',
+            profile_danger_zone: 'Danger zone',
+            profile_delete_account: 'Delete account',
+            profile_delete_title: 'Delete account',
+            profile_delete_text: 'This action is irreversible. All your data will be permanently deleted.',
+            profile_delete_confirm_label: 'Type DELETE to confirm',
+            profile_delete_confirm_word: 'DELETE',
+            profile_delete_cancel: 'Cancel',
+            profile_delete_success: 'Account deleted. You have been signed out.',
             profile_completion_title: 'Your profile',
             profile_completion_desc: 'Complete your info and become part of the community.',
             profile_section_basic: 'Basic information',
@@ -3274,7 +3586,6 @@
     var registerForm = document.getElementById('registerForm');
     var googleLogin = document.getElementById('googleLogin');
     var googleRegister = document.getElementById('googleRegister');
-    var logoutBtn = document.getElementById('logoutBtn');
     var switchToRegister = document.getElementById('switchToRegister');
     var switchToLogin = document.getElementById('switchToLogin');
     var loginFormView = document.getElementById('loginFormView');
@@ -3332,16 +3643,6 @@
             var greetKey = lang === 'sk' ? 'Vitajte' : 'Welcome';
             greetingEl.innerHTML = greetKey + ', <strong>' + name + '</strong>';
         }
-        // Update avatar initials
-        var avatarEl = document.querySelector('.dashboard-avatar');
-        if (avatarEl && name) {
-            var parts = name.trim().split(' ');
-            var initials = parts.length >= 2 
-                ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
-                : name.substring(0,2).toUpperCase();
-            avatarEl.textContent = initials;
-        }
-
         // Trigger fade-in
         setTimeout(function() {
             dashboardView.querySelectorAll('.fade-in').forEach(function(el) {
@@ -3500,15 +3801,6 @@
                 } else {
                     showAuthMessage('auth_success_reset', 'success');
                 }
-            });
-        });
-    }
-
-    // --- Logout ---
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            supabase.auth.signOut().then(function() {
-                showLogin();
             });
         });
     }
@@ -4028,11 +4320,21 @@
         var navUserAvatar = document.getElementById('navUserAvatar');
         var navUserAvatarText = document.getElementById('navUserAvatarText');
         var navUserName = document.getElementById('navUserName');
+        var navUserChevron = document.getElementById('navUserChevron');
         var navUserDot = document.getElementById('navUserDot');
         var navUserArea = document.getElementById('navUserArea');
         var navUserDropdown = document.getElementById('navUserDropdown');
+        var navDropdownAvatar = document.getElementById('navDropdownAvatar');
+        var navDropdownName = document.getElementById('navDropdownName');
+        var navDropdownEmail = document.getElementById('navDropdownEmail');
         var navDropdownProfile = document.getElementById('navDropdownProfile');
         var navDropdownLogout = document.getElementById('navDropdownLogout');
+        var profileLogoutBtn = document.getElementById('profileLogoutBtn');
+        var profileDeleteBtn = document.getElementById('profileDeleteBtn');
+        var deleteModalOverlay = document.getElementById('deleteModalOverlay');
+        var deleteConfirmInput = document.getElementById('deleteConfirmInput');
+        var deleteModalCancel = document.getElementById('deleteModalCancel');
+        var deleteModalConfirm = document.getElementById('deleteModalConfirm');
         var profileForm = document.getElementById('profileForm');
         var profileSaveBtn = document.getElementById('profileSaveBtn');
         var profileSaveMsg = document.getElementById('profileSaveMsg');
@@ -4051,7 +4353,9 @@
             if (navUserIcon) navUserIcon.style.display = 'flex';
             if (navUserAvatar) navUserAvatar.style.display = 'none';
             if (navUserName) navUserName.style.display = 'none';
+            if (navUserChevron) navUserChevron.style.display = 'none';
             if (navUserDropdown) navUserDropdown.classList.remove('open');
+            if (navUserArea) navUserArea.classList.remove('dropdown-open');
         }
 
         function updateNavForLoggedIn(user) {
@@ -4067,7 +4371,6 @@
             if (navUserIcon) navUserIcon.style.display = 'none';
             if (navUserAvatar) {
                 navUserAvatar.style.display = 'flex';
-                // Check for avatar photo
                 if (meta.avatar_base64) {
                     navUserAvatarText.innerHTML = '<img src="' + meta.avatar_base64 + '" alt="">';
                 } else {
@@ -4078,6 +4381,18 @@
                 navUserName.style.display = 'inline';
                 navUserName.textContent = firstName;
             }
+            if (navUserChevron) navUserChevron.style.display = 'block';
+
+            // Update dropdown header
+            if (navDropdownAvatar) {
+                if (meta.avatar_base64) {
+                    navDropdownAvatar.innerHTML = '<img src="' + meta.avatar_base64 + '" alt="">';
+                } else {
+                    navDropdownAvatar.textContent = initials;
+                }
+            }
+            if (navDropdownName) navDropdownName.textContent = name;
+            if (navDropdownEmail) navDropdownEmail.textContent = user.email || '';
 
             // Update completeness dot
             var completeness = calculateCompleteness(meta);
@@ -4097,13 +4412,15 @@
                 if (navUserAvatar && navUserAvatar.style.display !== 'none') {
                     e.preventDefault();
                     e.stopPropagation();
-                    navUserDropdown.classList.toggle('open');
+                    var isOpen = navUserDropdown.classList.toggle('open');
+                    navUserArea.classList.toggle('dropdown-open', isOpen);
                 }
             });
         }
         document.addEventListener('click', function(e) {
             if (navUserDropdown && !navUserArea.contains(e.target)) {
                 navUserDropdown.classList.remove('open');
+                if (navUserArea) navUserArea.classList.remove('dropdown-open');
             }
         });
 
@@ -4111,6 +4428,7 @@
             navDropdownProfile.addEventListener('click', function(e) {
                 e.stopPropagation();
                 navUserDropdown.classList.remove('open');
+                navUserArea.classList.remove('dropdown-open');
                 // Switch to profile tab
                 var tabs = document.querySelectorAll('.section-tab');
                 var panels = document.querySelectorAll('.tab-panel');
@@ -4120,7 +4438,6 @@
                 var profilePanel = document.getElementById('panel-profile');
                 if (profileTab) profileTab.classList.add('active');
                 if (profilePanel) profilePanel.classList.add('active');
-                // Scroll to top of dashboard
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
@@ -4129,12 +4446,88 @@
             navDropdownLogout.addEventListener('click', function(e) {
                 e.stopPropagation();
                 navUserDropdown.classList.remove('open');
+                navUserArea.classList.remove('dropdown-open');
                 supabase.auth.signOut().then(function() {
                     showLogin();
                     updateNavForLoggedOut();
                 });
             });
         }
+
+        // --- Profile logout button ---
+        if (profileLogoutBtn) {
+            profileLogoutBtn.addEventListener('click', function() {
+                supabase.auth.signOut().then(function() {
+                    showLogin();
+                    updateNavForLoggedOut();
+                });
+            });
+        }
+
+        // --- Delete account flow ---
+        if (profileDeleteBtn) {
+            profileDeleteBtn.addEventListener('click', function() {
+                if (deleteModalOverlay) {
+                    deleteModalOverlay.classList.add('open');
+                    if (deleteConfirmInput) {
+                        deleteConfirmInput.value = '';
+                        deleteConfirmInput.focus();
+                    }
+                    if (deleteModalConfirm) deleteModalConfirm.disabled = true;
+                }
+            });
+        }
+
+        if (deleteModalCancel) {
+            deleteModalCancel.addEventListener('click', function() {
+                if (deleteModalOverlay) deleteModalOverlay.classList.remove('open');
+            });
+        }
+
+        if (deleteModalOverlay) {
+            deleteModalOverlay.addEventListener('click', function(e) {
+                if (e.target === deleteModalOverlay) {
+                    deleteModalOverlay.classList.remove('open');
+                }
+            });
+        }
+
+        if (deleteConfirmInput) {
+            deleteConfirmInput.addEventListener('input', function() {
+                var dict = T[lang] || T['sk'];
+                var confirmWord = dict.profile_delete_confirm_word || 'VYMAZA\u0164';
+                if (deleteModalConfirm) {
+                    deleteModalConfirm.disabled = deleteConfirmInput.value.trim() !== confirmWord;
+                }
+            });
+        }
+
+        if (deleteModalConfirm) {
+            deleteModalConfirm.addEventListener('click', function() {
+                var dict = T[lang] || T['sk'];
+                var confirmWord = dict.profile_delete_confirm_word || 'VYMAZA\u0164';
+                if (deleteConfirmInput && deleteConfirmInput.value.trim() === confirmWord) {
+                    // Sign out (actual account deletion requires server-side)
+                    supabase.auth.signOut().then(function() {
+                        deleteModalOverlay.classList.remove('open');
+                        showLogin();
+                        updateNavForLoggedOut();
+                        // Show success message
+                        var msg = dict.profile_delete_success || 'Account deleted.';
+                        authMessageText.textContent = msg;
+                        authMessage.className = 'auth-message success';
+                        authMessage.style.display = 'flex';
+                    });
+                }
+            });
+        }
+
+        // Close delete modal on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && deleteModalOverlay && deleteModalOverlay.classList.contains('open')) {
+                deleteModalOverlay.classList.remove('open');
+            }
+        });
 
         // --- Completeness calculation ---
         function calculateCompleteness(meta) {
@@ -4326,21 +4719,13 @@
                             if (result.data && result.data.user) {
                                 currentProfileUser = result.data.user;
                                 updateNavForLoggedIn(result.data.user);
-                                // Also update the dashboard greeting/avatar
+                                // Also update the dashboard greeting
                                 var meta = result.data.user.user_metadata || {};
                                 var name = meta.full_name || meta.name || result.data.user.email.split('@')[0];
                                 var greetingEl = document.querySelector('.dashboard-greeting');
                                 if (greetingEl && name) {
                                     var greetKey = lang === 'sk' ? 'Vitajte' : 'Welcome';
                                     greetingEl.innerHTML = greetKey + ', <strong>' + name + '</strong>';
-                                }
-                                var avatarEl = document.querySelector('.dashboard-avatar');
-                                if (avatarEl && name) {
-                                    var parts = name.trim().split(' ');
-                                    var initials = parts.length >= 2
-                                        ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
-                                        : name.substring(0,2).toUpperCase();
-                                    avatarEl.textContent = initials;
                                 }
                             }
                         }
@@ -4385,6 +4770,208 @@
         }).catch(function() {
             updateNavForLoggedOut();
         });
+    })();
+
+    // ===== AUDIO PLAYER SYSTEM =====
+    (function() {
+        var audioEl = new Audio();
+        audioEl.preload = 'metadata';
+        var currentChapterIndex = -1;
+        var isPlaying = false;
+
+        // Chapter data
+        var chapters = [
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030587/04_Tuzby_smbzpw.mp3', duration: '40:15', labelSK: 'Kapitola 04', titleSK: 'T\u00fa\u017eby', labelEN: 'Chapter 04', titleEN: 'Desires' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030583/08_Odpustenie_ako_akt_sily_ibo2xp.mp3', duration: '20:19', labelSK: 'Kapitola 08', titleSK: 'Odpustenie ako akt sily', labelEN: 'Chapter 08', titleEN: 'Forgiveness as an Act of Strength' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/14_Rozum_ako_prekazka_yaxter.mp3', duration: '22:29', labelSK: 'Kapitola 14', titleSK: 'Rozum ako prek\u00e1\u017eka', labelEN: 'Chapter 14', titleEN: 'Reason as an Obstacle' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030584/17_Moj_rozum_vnima_cas_aiisim.mp3', duration: '19:21', labelSK: 'Kapitola 17', titleSK: 'M\u00f4j rozum vn\u00edma \u010das', labelEN: 'Chapter 17', titleEN: 'My Mind Perceives Time' },
+            { src: 'https://res.cloudinary.com/djh3zmzel/video/upload/v1774030582/28_Autenticnost_eli9gc.mp3', duration: '15:34', labelSK: 'Kapitola 28', titleSK: 'Autenti\u010dnos\u0165', labelEN: 'Chapter 28', titleEN: 'Authenticity' }
+        ];
+
+        // DOM references
+        var afPlayBtn = document.getElementById('afPlayBtn');
+        var afPlayIcon = afPlayBtn ? afPlayBtn.querySelector('.af-play-icon') : null;
+        var afPauseIcon = afPlayBtn ? afPlayBtn.querySelector('.af-pause-icon') : null;
+        var afBarFill = document.getElementById('afBarFill');
+        var afBar = document.getElementById('afBar');
+        var afTimeCurrent = document.getElementById('afTimeCurrent');
+        var afTimeTotal = document.getElementById('afTimeTotal');
+        var afTitle = document.querySelector('.af-title');
+        var chapterCards = document.querySelectorAll('.audio-chapter-card[data-audio-src]');
+
+        function formatTime(sec) {
+            if (!sec || isNaN(sec)) return '0:00';
+            var m = Math.floor(sec / 60);
+            var s = Math.floor(sec % 60);
+            return m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        function updatePlayPauseIcons() {
+            // Featured player icons
+            if (afPlayIcon) afPlayIcon.style.display = isPlaying ? 'none' : 'block';
+            if (afPauseIcon) afPauseIcon.style.display = isPlaying ? 'block' : 'none';
+
+            // Chapter card icons
+            chapterCards.forEach(function(card, idx) {
+                var playIc = card.querySelector('.ch-play-icon');
+                var pauseIc = card.querySelector('.ch-pause-icon');
+                if (idx === currentChapterIndex && isPlaying) {
+                    if (playIc) playIc.style.display = 'none';
+                    if (pauseIc) pauseIc.style.display = 'block';
+                    card.classList.add('playing');
+                } else {
+                    if (playIc) playIc.style.display = 'block';
+                    if (pauseIc) pauseIc.style.display = 'none';
+                    card.classList.remove('playing');
+                }
+            });
+        }
+
+        function updateFeaturedTitle(idx) {
+            if (!afTitle || idx < 0 || idx >= chapters.length) return;
+            var ch = chapters[idx];
+            var label = lang === 'en' ? ch.labelEN : ch.labelSK;
+            var title = lang === 'en' ? ch.titleEN : ch.titleSK;
+            afTitle.textContent = label + ' \u2013 ' + title;
+        }
+
+        function loadChapter(idx, autoplay) {
+            if (idx < 0 || idx >= chapters.length) return;
+            currentChapterIndex = idx;
+            audioEl.src = chapters[idx].src;
+            audioEl.load();
+            updateFeaturedTitle(idx);
+            if (afTimeCurrent) afTimeCurrent.textContent = '0:00';
+            if (afTimeTotal) afTimeTotal.textContent = chapters[idx].duration;
+            if (afBarFill) afBarFill.style.width = '0%';
+            // Reset all mini progress bars
+            chapterCards.forEach(function(card) {
+                var fill = card.querySelector('.audio-progress-mini-fill');
+                if (fill) fill.style.width = '0%';
+            });
+            updatePlayPauseIcons();
+            if (autoplay) {
+                audioEl.play().then(function() {
+                    isPlaying = true;
+                    updatePlayPauseIcons();
+                }).catch(function() {});
+            }
+        }
+
+        function togglePlayPause() {
+            if (currentChapterIndex < 0) {
+                loadChapter(0, true);
+                return;
+            }
+            if (audioEl.paused) {
+                audioEl.play().then(function() {
+                    isPlaying = true;
+                    updatePlayPauseIcons();
+                }).catch(function() {});
+            } else {
+                audioEl.pause();
+                isPlaying = false;
+                updatePlayPauseIcons();
+            }
+        }
+
+        // Featured play button
+        if (afPlayBtn) {
+            afPlayBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePlayPause();
+            });
+        }
+
+        // Chapter card play buttons
+        chapterCards.forEach(function(card, idx) {
+            var playBtn = card.querySelector('.audio-play-btn');
+            if (playBtn) {
+                playBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (currentChapterIndex === idx && !audioEl.paused) {
+                        audioEl.pause();
+                        isPlaying = false;
+                        updatePlayPauseIcons();
+                    } else if (currentChapterIndex === idx && audioEl.paused) {
+                        audioEl.play().then(function() {
+                            isPlaying = true;
+                            updatePlayPauseIcons();
+                        }).catch(function() {});
+                    } else {
+                        loadChapter(idx, true);
+                    }
+                });
+            }
+            // Clicking the card itself also loads
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.audio-play-btn')) return;
+                if (currentChapterIndex === idx) {
+                    togglePlayPause();
+                } else {
+                    loadChapter(idx, true);
+                }
+            });
+        });
+
+        // Progress bar seek (featured)
+        if (afBar) {
+            afBar.addEventListener('click', function(e) {
+                if (!audioEl.duration) return;
+                var rect = afBar.getBoundingClientRect();
+                var pct = (e.clientX - rect.left) / rect.width;
+                audioEl.currentTime = pct * audioEl.duration;
+            });
+        }
+
+        // Time update
+        audioEl.addEventListener('timeupdate', function() {
+            if (!audioEl.duration) return;
+            var pct = (audioEl.currentTime / audioEl.duration) * 100;
+            if (afBarFill) afBarFill.style.width = pct + '%';
+            if (afTimeCurrent) afTimeCurrent.textContent = formatTime(audioEl.currentTime);
+            // Mini progress on active chapter
+            if (currentChapterIndex >= 0 && chapterCards[currentChapterIndex]) {
+                var fill = chapterCards[currentChapterIndex].querySelector('.audio-progress-mini-fill');
+                if (fill) fill.style.width = pct + '%';
+            }
+        });
+
+        // Duration loaded
+        audioEl.addEventListener('loadedmetadata', function() {
+            if (afTimeTotal) afTimeTotal.textContent = formatTime(audioEl.duration);
+        });
+
+        // Auto-advance to next chapter
+        audioEl.addEventListener('ended', function() {
+            isPlaying = false;
+            updatePlayPauseIcons();
+            if (currentChapterIndex < chapters.length - 1) {
+                loadChapter(currentChapterIndex + 1, true);
+            }
+        });
+
+        // Preview tab audio buttons
+        document.querySelectorAll('.preview-audio-btn[data-audio-chapter]').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var idx = parseInt(btn.getAttribute('data-audio-chapter'));
+                // Switch to audio tab
+                var tabs = document.querySelectorAll('.section-tab');
+                var panels = document.querySelectorAll('.tab-panel');
+                tabs.forEach(function(t) { t.classList.remove('active'); });
+                panels.forEach(function(p) { p.classList.remove('active'); });
+                var audioTab = document.querySelector('.section-tab[data-tab="audio"]');
+                var audioPanel = document.getElementById('panel-audio');
+                if (audioTab) audioTab.classList.add('active');
+                if (audioPanel) audioPanel.classList.add('active');
+                // Load and play
+                loadChapter(idx, true);
+                // Scroll to audio panel
+                if (audioPanel) audioPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
     })();
 
 })();
