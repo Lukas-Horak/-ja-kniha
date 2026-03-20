@@ -100,6 +100,17 @@
         background: #5C8A6E; flex-shrink: 0;
     }
     .nav-links .nav-spectrum:hover { color: #5C8A6E; }
+    .nav-links .nav-members {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--text-muted); font-weight: 400;
+        pointer-events: none; position: relative;
+    }
+    .nav-links .nav-members-badge {
+        font-size: 0.55rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.06em; color: var(--text-muted);
+        background: rgba(0,0,0,0.05); padding: 2px 6px;
+        border-radius: 100px; white-space: nowrap;
+    }
     .mobile-lang-toggle { display: none; }
     .nav-right {
         display: flex; align-items: center; gap: 16px;
@@ -1944,6 +1955,7 @@
         <a href="/#obsah" data-i18n="nav_about">O knihe</a>
         <a href="/#autor" data-i18n="nav_author">Autor</a>
         <a href="/spektrum-vedomia" class="nav-spectrum" data-i18n="nav_spectrum">Spektrum vedomia</a>
+        <span class="nav-members"><span data-i18n="nav_members">Members</span><span class="nav-members-badge" data-i18n="nav_members_soon">Čoskoro</span></span>
     </div>
     <div class="nav-right">
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">
@@ -3165,6 +3177,7 @@
             nav_author: 'Autor',
             nav_spectrum: 'Spektrum vedomia',
             nav_members: 'Members',
+            nav_members_soon: 'Čoskoro',
             nav_cta: 'Objednať',
             members_title: 'Vstúpte do vnútra',
             members_subtitle: 'Exkluzívny obsah pre tých, ktorí chcú ísť hlbšie. Audiokniha, myšlienky autora a ukážky z pripravovanej knihy.',
@@ -3369,6 +3382,7 @@
             nav_author: 'Author',
             nav_spectrum: 'Spectrum of Consciousness',
             nav_members: 'Members',
+            nav_members_soon: 'Soon',
             nav_cta: 'Order',
             members_title: 'Step inside',
             members_subtitle: 'Exclusive content for those who want to go deeper. Audiobook, author\'s thoughts, and previews from the upcoming book.',
