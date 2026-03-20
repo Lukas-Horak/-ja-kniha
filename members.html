@@ -4247,18 +4247,18 @@
             profileAvatarInput.addEventListener('change', function(e) {
                 var file = e.target.files[0];
                 if (!file) return;
-                // Limit to 500KB
-                if (file.size > 512000) {
-                    alert(lang === 'sk' ? 'Fotka je pr\u00edli\u0161 ve\u013ek\u00e1 (max 500KB).' : 'Photo is too large (max 500KB).');
+                // Limit to 2MB
+                if (file.size > 2097152) {
+                    alert(lang === 'sk' ? 'Fotka je pr\u00edli\u0161 ve\u013ek\u00e1 (max 2MB).' : 'Photo is too large (max 2MB).');
                     return;
                 }
                 var reader = new FileReader();
                 reader.onload = function(ev) {
-                    // Resize to max 200x200
+                    // Resize to max 400x400
                     var img = new Image();
                     img.onload = function() {
                         var canvas = document.createElement('canvas');
-                        var maxSize = 200;
+                        var maxSize = 400;
                         var w = img.width, h = img.height;
                         if (w > h) { h = h * maxSize / w; w = maxSize; }
                         else { w = w * maxSize / h; h = maxSize; }
