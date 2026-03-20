@@ -2435,28 +2435,58 @@
                             </button>
                         </div>
                     </div>
-                    <div class="preview-row preview-row-locked">
+                    <div class="preview-row" data-preview-id="ja-naplnanie-zameru">
                         <div class="preview-row-left">
                             <span class="preview-row-num">05</span>
                             <div class="preview-row-content">
                                 <span class="preview-row-title" data-i18n="ja_ch_5_title">Napĺňanie zámeru</span>
                             </div>
                         </div>
+                        <div class="preview-row-right">
+                            <div class="preview-progress-wrap" data-progress-id="ja-naplnanie-zameru" style="display:none;">
+                                <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
+                                <span class="preview-progress-pct">0%</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="preview-row preview-row-locked">
+                    <div class="preview-row" data-preview-id="ja-odpor">
                         <div class="preview-row-left">
                             <span class="preview-row-num">06</span>
                             <div class="preview-row-content">
                                 <span class="preview-row-title" data-i18n="ja_ch_6_title">Odpor</span>
                             </div>
                         </div>
+                        <div class="preview-row-right">
+                            <div class="preview-progress-wrap" data-progress-id="ja-odpor" style="display:none;">
+                                <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
+                                <span class="preview-progress-pct">0%</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="preview-row preview-row-locked">
+                    <div class="preview-row" data-preview-id="ja-hnev">
                         <div class="preview-row-left">
                             <span class="preview-row-num">07</span>
                             <div class="preview-row-content">
                                 <span class="preview-row-title" data-i18n="ja_ch_7_title">Hnev</span>
                             </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-progress-wrap" data-progress-id="ja-hnev" style="display:none;">
+                                <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
+                                <span class="preview-progress-pct">0%</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
                         </div>
                     </div>
                     <div class="preview-row" data-preview-id="ja-odpustenie">
@@ -3900,17 +3930,23 @@
 
         var chapterFileMap = {
         'ja-tuzby': 'chapters/tuzby.html',
+        'ja-naplnanie-zameru': 'chapters/naplnanie-zameru.html',
+        'ja-odpor': 'chapters/odpor.html',
+        'ja-hnev': 'chapters/hnev.html',
         'ja-odpustenie': 'chapters/odpustenie.html',
         'ja-rozum-prekazka': 'chapters/rozum-prekazka.html',
         'ja-rozum-cas': 'chapters/rozum-cas.html',
         'ja-autenticnost': 'chapters/autenticnost.html'
         };
 
-        var chapterOrder = ['ja-tuzby', 'ja-odpustenie', 'ja-rozum-prekazka', 'ja-rozum-cas', 'ja-autenticnost'];
+        var chapterOrder = ['ja-tuzby', 'ja-naplnanie-zameru', 'ja-odpor', 'ja-hnev', 'ja-odpustenie', 'ja-rozum-prekazka', 'ja-rozum-cas', 'ja-autenticnost'];
 
         var chapterTitles = {
         sk: {
         'ja-tuzby': 'Túžby',
+        'ja-naplnanie-zameru': 'Napĺňanie zámeru',
+        'ja-odpor': 'Odpor',
+        'ja-hnev': 'Hnev',
         'ja-odpustenie': 'Odpustenie ako akt sily',
         'ja-rozum-prekazka': 'Rozum ako prekážka',
         'ja-rozum-cas': 'Môj rozum vníma čas',
@@ -3918,6 +3954,9 @@
         },
         en: {
         'ja-tuzby': 'Desires',
+        'ja-naplnanie-zameru': 'Fulfilling Purpose',
+        'ja-odpor': 'Resistance',
+        'ja-hnev': 'Anger',
         'ja-odpustenie': 'Forgiveness as an Act of Strength',
         'ja-rozum-prekazka': 'Reason as an Obstacle',
         'ja-rozum-cas': 'My Reason Perceives Time',
