@@ -3719,6 +3719,21 @@
     var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhmdmhwbm1wamZ6eHpybHFhYXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTgyNjgsImV4cCI6MjA4OTQ5NDI2OH0.6loYdOJwTdJZCSu8w1bVjoxfRz8m8zvNbPHHGPxF3N0';
     var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    // ===== ACTIVITY TRACKING =====
+    function trackActivity(eventType, chapterId, chapterTitle, meta) {
+        supabase.auth.getSession().then(function(result) {
+            var session = result.data.session;
+            if (!session || !session.user) return;
+            supabase.from('user_activity').insert({
+                user_id: session.user.id,
+                event_type: eventType,
+                chapter_id: chapterId || null,
+                chapter_title: chapterTitle || null,
+                metadata: meta || {}
+            }).then(function() {}).catch(function() {});
+        }).catch(function() {});
+    }
+
     var loginView = document.getElementById('loginView');
     var dashboardView = document.getElementById('dashboardView');
     var loginForm = document.getElementById('loginForm');
@@ -3768,6 +3783,9 @@
         loginView.style.display = 'none';
         dashboardView.style.display = 'block';
         hideAuthMessage();
+
+        // Track login/session
+        if (user) trackActivity('session_start', null, null, { email: user.email });
 
         // Update greeting with real user info
         var name = '';
@@ -4246,6 +4264,9 @@
             var titles = chapterTitles[lang] || chapterTitles['en'];
             var title = titles[chapterId] || chapterId;
 
+            // Track chapter open
+            trackActivity('chapter_open', chapterId, title, { lang: lang });
+
             // Update topbar title
             if (booktitle) booktitle.textContent = (lang === 'sk' ? 'JA \u2013 Evol\u00facia vedomia' : 'I AM \u2013 Evolution of Consciousness');
 
@@ -4342,6 +4363,9 @@
             var tc = dict[thoughtId];
             if (!tc) return;
             currentChapterId = thoughtId;
+
+            // Track thought open
+            trackActivity('thought_open', thoughtId, tc.title, { lang: lang });
 
             // Update topbar
             if (booktitle) booktitle.textContent = (lang === 'sk' ? 'My\u0161lienky autora' : "Author's thoughts");
@@ -5082,6 +5106,8 @@
         function loadChapter(idx, autoplay) {
             if (idx < 0 || idx >= chapters.length) return;
             currentChapterIndex = idx;
+            var chTitle = (lang === 'en') ? chapters[idx].titleEN : chapters[idx].titleSK;
+            if (autoplay) trackActivity('audio_play', 'audio-ch-' + idx, chTitle, { lang: lang, chapterIndex: idx });
             audioEl.src = (lang === 'en' && chapters[idx].srcEN) ? chapters[idx].srcEN : chapters[idx].src;
             audioEl.load();
             updateFeaturedTitle(idx);
