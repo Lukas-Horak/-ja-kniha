@@ -842,6 +842,64 @@ a, button, input, textarea, select {
     scroll-behavior: auto !important;
   }
 }
+
+/* ── User Detail Panel ── */
+.user-detail-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 200;
+  opacity: 0; transition: opacity 0.2s; pointer-events: none;
+}
+.user-detail-backdrop.open { opacity: 1; pointer-events: auto; }
+.user-detail-panel {
+  position: fixed; top: 0; right: -480px; width: 480px; max-width: 100vw; height: 100vh;
+  background: #FDFBF7; z-index: 201; overflow-y: auto;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+  transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.user-detail-panel.open { right: 0; }
+.ud-header {
+  position: sticky; top: 0; background: #FDFBF7; z-index: 10;
+  padding: 24px 28px 16px; border-bottom: 1px solid #E8E3DC;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ud-header h2 { font-size: 1.05rem; font-weight: 600; color: #1A1A1A; margin: 0; }
+.ud-close {
+  width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #D5CFC7;
+  background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: #8C7E72; transition: all 0.15s;
+}
+.ud-close:hover { background: #F0EBE4; color: #3D3632; }
+.ud-close svg { width: 16px; height: 16px; }
+.ud-body { padding: 24px 28px; }
+.ud-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.ud-stat {
+  background: #fff; border: 1px solid #E8E3DC; border-radius: 12px; padding: 14px 16px; text-align: center;
+}
+.ud-stat-value { font-size: 1.4rem; font-weight: 700; color: #1A1A1A; }
+.ud-stat-label { font-size: 0.72rem; color: #8C7E72; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.ud-section-title {
+  font-size: 0.75rem; font-weight: 600; color: #8C7E72; text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 12px;
+}
+.ud-timeline { display: flex; flex-direction: column; gap: 0; }
+.ud-event {
+  display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F0EBE4;
+}
+.ud-event:last-child { border-bottom: none; }
+.ud-event-icon {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.ud-event-icon.session { background: #E8F5E9; }
+.ud-event-icon.chapter { background: #E3F2FD; }
+.ud-event-icon.audio { background: #FFF3E0; }
+.ud-event-icon.thought { background: #F3E5F5; }
+.ud-event-content { flex: 1; min-width: 0; }
+.ud-event-title { font-size: 0.88rem; font-weight: 500; color: #1A1A1A; }
+.ud-event-meta { font-size: 0.78rem; color: #8C7E72; margin-top: 2px; }
+@media (max-width: 520px) {
+  .user-detail-panel { width: 100vw; right: -100vw; }
+  .ud-stats { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -1022,6 +1080,20 @@ a, button, input, textarea, select {
       </footer>
     </div>
   </main>
+</div>
+
+<!-- User Detail Panel -->
+<div class="user-detail-backdrop" id="udBackdrop"></div>
+<div class="user-detail-panel" id="udPanel">
+  <div class="ud-header">
+    <h2 id="udTitle"></h2>
+    <button class="ud-close" id="udClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="ud-body">
+    <div class="ud-stats" id="udStats"></div>
+    <div class="ud-section-title">História aktivít</div>
+    <div class="ud-timeline" id="udTimeline"></div>
+  </div>
 </div>
 
 <!-- ============================================================
@@ -1361,6 +1433,7 @@ a, button, input, textarea, select {
       const uid = row.user_id;
       if (!users[uid]) {
         users[uid] = {
+          uid: uid,
           email: getEmailFromRow(row),
           lastActivity: row.created_at,
           chapters: 0,
@@ -1388,7 +1461,7 @@ a, button, input, textarea, select {
     });
 
     membersTbody.innerHTML = sorted.map(u => `
-      <tr>
+      <tr data-uid="${escapeHtml(u.uid)}" style="cursor:pointer;" title="Zobraziť detail">
         <td><span class="user-email">${escapeHtml(u.email)}</span></td>
         <td>${formatTime(u.lastActivity)}</td>
         <td class="text-right">${u.chapters}</td>
@@ -1396,6 +1469,13 @@ a, button, input, textarea, select {
         <td class="text-right"><span class="badge badge-muted">${u.total}</span></td>
       </tr>
     `).join('');
+
+    // Attach click handlers
+    membersTbody.querySelectorAll('tr[data-uid]').forEach(function(row) {
+      row.addEventListener('click', function() {
+        openUserDetail(this.getAttribute('data-uid'));
+      });
+    });
   }
 
   // ── Render Activity Feed ──
@@ -1461,6 +1541,75 @@ a, button, input, textarea, select {
       }
     }
   });
+
+  // ── User Detail Panel ──
+  var udBackdrop = document.getElementById('udBackdrop');
+  var udPanel = document.getElementById('udPanel');
+  var udClose = document.getElementById('udClose');
+  var udTitle = document.getElementById('udTitle');
+  var udStats = document.getElementById('udStats');
+  var udTimeline = document.getElementById('udTimeline');
+
+  function closeUserDetail() {
+    udBackdrop.classList.remove('open');
+    udPanel.classList.remove('open');
+  }
+  if (udClose) udClose.addEventListener('click', closeUserDetail);
+  if (udBackdrop) udBackdrop.addEventListener('click', closeUserDetail);
+
+  function openUserDetail(uid) {
+    if (!uid) return;
+    var userEvents = activityData.filter(function(r) { return r.user_id === uid; });
+    if (userEvents.length === 0) return;
+
+    var email = emailCache[uid] || getEmailFromRow(userEvents[0]);
+    var chapters = new Set();
+    var audioPlayed = new Set();
+    var thoughts = new Set();
+    var sessions = 0;
+    var firstSeen = userEvents[userEvents.length - 1].created_at;
+    var lastSeen = userEvents[0].created_at;
+
+    userEvents.forEach(function(r) {
+      if (r.event_type === 'chapter_open' && r.chapter_title) chapters.add(r.chapter_title);
+      if (r.event_type === 'audio_play' && r.chapter_title) audioPlayed.add(r.chapter_title);
+      if (r.event_type === 'thought_open' && r.chapter_title) thoughts.add(r.chapter_title);
+      if (r.event_type === 'session_start') sessions++;
+    });
+
+    udTitle.textContent = email;
+
+    udStats.innerHTML = '\
+      <div class="ud-stat"><div class="ud-stat-value">' + sessions + '</div><div class="ud-stat-label">Prihlásení</div></div>\
+      <div class="ud-stat"><div class="ud-stat-value">' + chapters.size + '</div><div class="ud-stat-label">Kapitoly</div></div>\
+      <div class="ud-stat"><div class="ud-stat-value">' + audioPlayed.size + '</div><div class="ud-stat-label">Audio</div></div>\
+    ';
+
+    var eventIcons = {
+      session_start: { icon: '➚', cls: 'session', label: 'Prihlásenie' },
+      chapter_open: { icon: '❙', cls: 'chapter', label: 'Čítanie' },
+      audio_play: { icon: '♫', cls: 'audio', label: 'Audio' },
+      thought_open: { icon: '✱', cls: 'thought', label: 'Myšlienka' }
+    };
+
+    udTimeline.innerHTML = userEvents.map(function(r) {
+      var info = eventIcons[r.event_type] || { icon: '●', cls: 'session', label: r.event_type };
+      var title = r.chapter_title || info.label;
+      var lang = (r.metadata && r.metadata.lang) || '';
+      if (typeof r.metadata === 'string') { try { lang = JSON.parse(r.metadata).lang || ''; } catch(e) {} }
+      var meta = formatTime(r.created_at) + (lang ? ' · ' + lang.toUpperCase() : '');
+      return '<div class="ud-event">' +
+        '<div class="ud-event-icon ' + info.cls + '">' + info.icon + '</div>' +
+        '<div class="ud-event-content">' +
+          '<div class="ud-event-title">' + escapeHtml(title) + '</div>' +
+          '<div class="ud-event-meta">' + meta + '</div>' +
+        '</div></div>';
+    }).join('');
+
+    udBackdrop.classList.add('open');
+    udPanel.classList.add('open');
+    udPanel.scrollTop = 0;
+  }
 
 })();
 </script>
