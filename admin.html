@@ -1200,6 +1200,7 @@ a, button, input, textarea, select {
         activityData = data || [];
       }
 
+      buildEmailCache();
       renderKPIs();
       renderMembersTable();
       renderActivityFeed();
@@ -1219,6 +1220,20 @@ a, button, input, textarea, select {
     return now.toISOString().slice(0, 10);
   }
 
+  // Cache: user_id -> email (built from all activity rows)
+  var emailCache = {};
+  function buildEmailCache() {
+    emailCache = {};
+    activityData.forEach(function(r) {
+      var email = null;
+      if (r.metadata && r.metadata.email) email = r.metadata.email;
+      else if (typeof r.metadata === 'string') {
+        try { var m = JSON.parse(r.metadata); if (m.email) email = m.email; } catch(e) {}
+      }
+      if (email && r.user_id) emailCache[r.user_id] = email;
+    });
+  }
+
   function getEmailFromRow(row) {
     if (row.metadata && row.metadata.email) return row.metadata.email;
     if (typeof row.metadata === 'string') {
@@ -1227,6 +1242,7 @@ a, button, input, textarea, select {
         if (m.email) return m.email;
       } catch(e) {}
     }
+    if (row.user_id && emailCache[row.user_id]) return emailCache[row.user_id];
     return row.user_id ? row.user_id.slice(0, 8) + '…' : 'Neznámy';
   }
 

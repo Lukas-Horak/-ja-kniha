@@ -3724,12 +3724,14 @@
         supabase.auth.getSession().then(function(result) {
             var session = result.data.session;
             if (!session || !session.user) return;
+            var m = meta || {};
+            if (!m.email) m.email = session.user.email || '';
             supabase.from('user_activity').insert({
                 user_id: session.user.id,
                 event_type: eventType,
                 chapter_id: chapterId || null,
                 chapter_title: chapterTitle || null,
-                metadata: meta || {}
+                metadata: m
             }).then(function() {}).catch(function() {});
         }).catch(function() {});
     }
