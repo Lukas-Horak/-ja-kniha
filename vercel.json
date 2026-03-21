@@ -5,6 +5,7 @@
     { "source": "/spektrum-vedomia", "destination": "/spektrum-vedomia.html" },
     { "source": "/members", "destination": "/members.html" },
     { "source": "/obchodne-podmienky", "destination": "/obchodne-podmienky.html" },
-    { "source": "/ochrana-sukromia", "destination": "/ochrana-sukromia.html" }
+    { "source": "/ochrana-sukromia", "destination": "/ochrana-sukromia.html" },
+    { "source": "/admin", "destination": "/admin.html" }
   ]
 }
