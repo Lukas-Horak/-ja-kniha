@@ -1604,34 +1604,45 @@
         margin-bottom: 20px;
     }
     .profile-avatar-upload {
-        display: flex; align-items: center; gap: 20px;
+        display: flex; align-items: center; gap: 24px;
         margin-bottom: 24px;
     }
     .profile-avatar-circle {
-        width: 80px; height: 80px; border-radius: 50%;
+        width: 88px; height: 88px; border-radius: 50%;
         background: var(--accent-higher);
         color: #fff; display: flex; align-items: center; justify-content: center;
-        font-size: 1.5rem; font-weight: 600;
-        cursor: pointer; position: relative;
+        font-size: 1.6rem; font-weight: 600;
+        position: relative;
         overflow: hidden;
-        transition: opacity 0.2s;
         flex-shrink: 0;
     }
-    .profile-avatar-circle:hover { opacity: 0.85; }
     .profile-avatar-circle img {
         width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
     }
-    .profile-avatar-circle .avatar-overlay {
-        position: absolute; inset: 0;
-        background: rgba(0,0,0,0.4);
-        display: flex; align-items: center; justify-content: center;
-        opacity: 0; transition: opacity 0.2s;
-        border-radius: 50%;
+    .profile-avatar-right {
+        display: flex; flex-direction: column; gap: 6px;
     }
-    .profile-avatar-circle:hover .avatar-overlay { opacity: 1; }
-    .profile-avatar-circle .avatar-overlay svg {
-        width: 20px; height: 20px; stroke: #fff; stroke-width: 2; fill: none;
+    .profile-avatar-right strong {
+        font-size: 0.9rem; color: var(--text); font-weight: 500;
     }
+    .profile-avatar-right .avatar-hint {
+        font-size: 0.78rem; color: var(--text-muted);
+    }
+    .profile-avatar-actions {
+        display: flex; gap: 8px; margin-top: 4px;
+    }
+    .avatar-btn {
+        padding: 7px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 500;
+        font-family: inherit; cursor: pointer; transition: all 0.15s; border: none;
+    }
+    .avatar-btn-upload {
+        background: var(--dark); color: #fff;
+    }
+    .avatar-btn-upload:hover { opacity: 0.85; }
+    .avatar-btn-remove {
+        background: transparent; color: var(--text-muted); border: 1.5px solid var(--border);
+    }
+    .avatar-btn-remove:hover { border-color: #c0a0a0; color: #9a4040; }
     .profile-avatar-hint {
         font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
     }
@@ -2934,14 +2945,15 @@
                         <div class="profile-avatar-upload">
                             <div class="profile-avatar-circle" id="profileAvatarCircle">
                                 <span id="profileAvatarInitials">?</span>
-                                <div class="avatar-overlay">
-                                    <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                                </div>
-                                <input type="file" id="profileAvatarInput" accept="image/*" style="display:none;">
                             </div>
-                            <div class="profile-avatar-hint">
+                            <input type="file" id="profileAvatarInput" accept="image/*" style="display:none;">
+                            <div class="profile-avatar-right">
                                 <strong data-i18n="profile_photo_label">Profilová fotka</strong>
-                                <span data-i18n="profile_photo_hint">Kliknite pre nahratie fotky</span>
+                                <span class="avatar-hint" data-i18n="profile_photo_hint">JPG alebo PNG, max 2 MB</span>
+                                <div class="profile-avatar-actions">
+                                    <button type="button" class="avatar-btn avatar-btn-upload" id="avatarUploadBtn" data-i18n="profile_photo_upload">Nahrať fotku</button>
+                                    <button type="button" class="avatar-btn avatar-btn-remove" id="avatarRemoveBtn" style="display:none;" data-i18n="profile_photo_remove">Odstrániť</button>
+                                </div>
                             </div>
                         </div>
 
@@ -3333,7 +3345,9 @@
             profile_section_about: 'O vás',
             profile_section_prefs: 'Komunikácia',
             profile_photo_label: 'Profilová fotka',
-            profile_photo_hint: 'Kliknite pre nahratie fotky',
+            profile_photo_hint: 'JPG alebo PNG, max 2 MB',
+            profile_photo_upload: 'Nahrať fotku',
+            profile_photo_remove: 'Odstrániť',
             profile_name_label: 'Celé meno',
             profile_name_placeholder: 'Vaše meno a priezvisko',
             profile_bio_label: 'O mne',
@@ -3547,7 +3561,9 @@
             profile_section_about: 'About you',
             profile_section_prefs: 'Communication',
             profile_photo_label: 'Profile photo',
-            profile_photo_hint: 'Click to upload a photo',
+            profile_photo_hint: 'JPG or PNG, max 2 MB',
+            profile_photo_upload: 'Upload photo',
+            profile_photo_remove: 'Remove',
             profile_name_label: 'Full name',
             profile_name_placeholder: 'Your full name',
             profile_bio_label: 'About me',
@@ -4889,6 +4905,7 @@
                     : name.substring(0,2).toUpperCase();
                 if (profileAvatarInitials) profileAvatarInitials.textContent = initials;
             }
+            if (typeof updateAvatarUI === 'function') updateAvatarUI();
 
             // Interests
             var interests = meta.interests || [];
@@ -4910,23 +4927,57 @@
         }
 
         // --- Avatar upload ---
+        var avatarUploadBtn = document.getElementById('avatarUploadBtn');
+        var avatarRemoveBtn = document.getElementById('avatarRemoveBtn');
+
+        function updateAvatarUI() {
+            if (avatarRemoveBtn) {
+                avatarRemoveBtn.style.display = profileAvatarBase64 ? '' : 'none';
+            }
+            if (avatarUploadBtn) {
+                avatarUploadBtn.textContent = profileAvatarBase64
+                    ? (lang === 'sk' ? 'Zmeni\u0165' : 'Change')
+                    : (lang === 'sk' ? 'Nahra\u0165 fotku' : 'Upload photo');
+            }
+        }
+
+        // Upload button triggers file input
+        if (avatarUploadBtn) {
+            avatarUploadBtn.addEventListener('click', function() {
+                if (profileAvatarInput) profileAvatarInput.click();
+            });
+        }
+        // Clicking avatar also triggers upload
         if (profileAvatarCircle) {
+            profileAvatarCircle.style.cursor = 'pointer';
             profileAvatarCircle.addEventListener('click', function() {
                 if (profileAvatarInput) profileAvatarInput.click();
+            });
+        }
+        // Remove button
+        if (avatarRemoveBtn) {
+            avatarRemoveBtn.addEventListener('click', function() {
+                profileAvatarBase64 = null;
+                if (profileAvatarInitials) {
+                    var name = (currentProfileUser && currentProfileUser.user_metadata)
+                        ? (currentProfileUser.user_metadata.full_name || currentProfileUser.user_metadata.name || '')
+                        : '';
+                    var initials = name.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2) || '?';
+                    profileAvatarInitials.textContent = initials;
+                }
+                updateAvatarUI();
             });
         }
         if (profileAvatarInput) {
             profileAvatarInput.addEventListener('change', function(e) {
                 var file = e.target.files[0];
                 if (!file) return;
-                // Limit to 2MB
                 if (file.size > 2097152) {
                     alert(lang === 'sk' ? 'Fotka je pr\u00edli\u0161 ve\u013ek\u00e1 (max 2MB).' : 'Photo is too large (max 2MB).');
                     return;
                 }
                 var reader = new FileReader();
                 reader.onload = function(ev) {
-                    // Resize to max 400x400
                     var img = new Image();
                     img.onload = function() {
                         var canvas = document.createElement('canvas');
@@ -4940,10 +4991,12 @@
                         if (profileAvatarInitials) {
                             profileAvatarInitials.innerHTML = '<img src="' + profileAvatarBase64 + '" alt="">';
                         }
+                        updateAvatarUI();
                     };
                     img.src = ev.target.result;
                 };
                 reader.readAsDataURL(file);
+                e.target.value = '';
             });
         }
 
@@ -4976,9 +5029,7 @@
                     journey_stage: journey,
                     notification_prefs: notifs
                 };
-                if (profileAvatarBase64) {
-                    profileData.avatar_base64 = profileAvatarBase64;
-                }
+                profileData.avatar_base64 = profileAvatarBase64 || null;
 
                 profileSaveBtn.classList.add('loading');
                 profileSaveBtn.disabled = true;
