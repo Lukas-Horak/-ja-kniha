@@ -1677,10 +1677,10 @@
         display: flex; flex-direction: column; gap: 10px;
     }
     .profile-checkbox-label {
-        display: flex; align-items: center; gap: 10px;
+        display: flex; align-items: flex-start; gap: 12px;
         cursor: pointer;
         font-size: 0.9rem; color: var(--text);
-        padding: 10px 14px;
+        padding: 14px 16px;
         border: 1.5px solid var(--border);
         border-radius: 12px;
         transition: all 0.2s;
@@ -1697,6 +1697,7 @@
         border: 1.5px solid var(--border);
         display: flex; align-items: center; justify-content: center;
         flex-shrink: 0;
+        margin-top: 2px;
         transition: all 0.2s;
     }
     .profile-checkbox-label .check-box.radio {
@@ -1718,6 +1719,20 @@
     .check-text {
         color: var(--text-light); font-size: 0.88rem;
         transition: color 0.2s;
+    }
+    .check-content {
+        display: flex; flex-direction: column; gap: 2px; padding-top: 1px;
+    }
+    .check-title {
+        font-size: 0.9rem; font-weight: 500; color: var(--text);
+        transition: color 0.2s;
+    }
+    .check-desc {
+        font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;
+        font-weight: 400;
+    }
+    .profile-checkbox-label input:checked ~ .check-content .check-title {
+        color: var(--text); font-weight: 600;
     }
 
     .profile-save-btn {
@@ -2964,58 +2979,58 @@
                         </div>
 
                         <div class="profile-form-row">
-                            <label class="profile-form-label" data-i18n="profile_interests_label">Oblasť záujmu</label>
+                            <label class="profile-form-label" data-i18n="profile_interests_label">Čo ťa najviac zaujíma?</label>
                             <div class="profile-checkbox-group" id="profileInterests">
                                 <label class="profile-checkbox-label">
-                                    <input type="checkbox" name="interests" value="neuroscience">
+                                    <input type="checkbox" name="interests" value="emotions">
                                     <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="interest_neuroscience">Neurovedu a biológia</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="interest_emotions">Emócie a správanie</span><span class="check-desc" data-i18n="interest_emotions_desc">Prečo robíme to, čo robíme</span></span>
                                 </label>
                                 <label class="profile-checkbox-label">
-                                    <input type="checkbox" name="interests" value="psychology">
+                                    <input type="checkbox" name="interests" value="science">
                                     <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="interest_psychology">Psychológia vedomia</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="interest_science">Veda za vedomím</span><span class="check-desc" data-i18n="interest_science_desc">Neurológia, biológia, evolúcia emócií</span></span>
                                 </label>
                                 <label class="profile-checkbox-label">
-                                    <input type="checkbox" name="interests" value="meditation">
+                                    <input type="checkbox" name="interests" value="practical">
                                     <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="interest_meditation">Meditácia a mindfulness</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="interest_practical">Praktická zmena</span><span class="check-desc" data-i18n="interest_practical_desc">Reálna aplikácia v práci, vzťahoch a každodennosti</span></span>
                                 </label>
                                 <label class="profile-checkbox-label">
-                                    <input type="checkbox" name="interests" value="growth">
+                                    <input type="checkbox" name="interests" value="higher">
                                     <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="interest_growth">Osobný rozvoj</span>
-                                </label>
-                                <label class="profile-checkbox-label">
-                                    <input type="checkbox" name="interests" value="philosophy">
-                                    <span class="check-box"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="interest_philosophy">Filozofia existencie</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="interest_higher">Vyššie stavy vedomia</span><span class="check-desc" data-i18n="interest_higher_desc">Pre tých, čo chcú ísť hlbšie</span></span>
                                 </label>
                             </div>
                         </div>
 
                         <div class="profile-form-row">
-                            <label class="profile-form-label" data-i18n="profile_journey_label">Kde sa nachádzam na ceste</label>
+                            <label class="profile-form-label" data-i18n="profile_journey_label">Kde sa nachádzaš na ceste?</label>
                             <div class="profile-checkbox-group" id="profileJourney">
                                 <label class="profile-checkbox-label">
-                                    <input type="radio" name="journey" value="beginner">
+                                    <input type="radio" name="journey" value="beginning">
                                     <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="journey_beginner">Začiatočník – práve objavujem</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="journey_beginning">Som na začiatku</span><span class="check-desc" data-i18n="journey_beginning_desc">Niečo vo mne sa chce zmeniť, ale neviem čo</span></span>
                                 </label>
                                 <label class="profile-checkbox-label">
-                                    <input type="radio" name="journey" value="seeker">
+                                    <input type="radio" name="journey" value="awareness">
                                     <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="journey_seeker">Hľadajúci – aktívne sa vzdelávam</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="journey_awareness">Fáza uvedomenia</span><span class="check-desc" data-i18n="journey_awareness_desc">Začínam chápať, ako fungujú moje emócie a myseľ</span></span>
                                 </label>
                                 <label class="profile-checkbox-label">
-                                    <input type="radio" name="journey" value="practitioner">
+                                    <input type="radio" name="journey" value="transformation">
                                     <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="journey_practitioner">Praktik – denne aplikujem</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="journey_transformation">Fáza transformácie</span><span class="check-desc" data-i18n="journey_transformation_desc">Aktívne pracujem na zmene vnútorného nastavenia</span></span>
+                                </label>
+                                <label class="profile-checkbox-label">
+                                    <input type="radio" name="journey" value="integration">
+                                    <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                                    <span class="check-content"><span class="check-title" data-i18n="journey_integration">Fáza integrácie</span><span class="check-desc" data-i18n="journey_integration_desc">Prežívam trvalú zmenu a chcem pomáhať iným</span></span>
                                 </label>
                                 <label class="profile-checkbox-label">
                                     <input type="radio" name="journey" value="guide">
                                     <span class="check-box radio"><svg viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                    <span class="check-text" data-i18n="journey_guide">Sprievodca – zdieľam s ostatnými</span>
+                                    <span class="check-content"><span class="check-title" data-i18n="journey_guide">Sprievodca</span><span class="check-desc" data-i18n="journey_guide_desc">Učím alebo sprevádzam iných na tejto ceste</span></span>
                                 </label>
                             </div>
                         </div>
@@ -3333,17 +3348,26 @@
             profile_source_podcast: 'Podcast/video',
             profile_source_bookstore: 'Kníhkupectvo',
             profile_source_other: 'Iné',
-            profile_interests_label: 'Oblasť záujmu',
-            interest_neuroscience: 'Neurovedu a biológia',
-            interest_psychology: 'Psychológia vedomia',
-            interest_meditation: 'Meditácia a mindfulness',
-            interest_growth: 'Osobný rozvoj',
-            interest_philosophy: 'Filozofia existencie',
-            profile_journey_label: 'Kde sa nachádzam na ceste',
-            journey_beginner: 'Začiatočník – práve objavujem',
-            journey_seeker: 'Hľadajúci – aktívne sa vzdelávam',
-            journey_practitioner: 'Praktik – denne aplikujem',
-            journey_guide: 'Sprievodca – zdieľam s ostatnými',
+            profile_interests_label: 'Čo ťa najviac zaujíma?',
+            interest_emotions: 'Emócie a správanie',
+            interest_emotions_desc: 'Prečo robíme to, čo robíme',
+            interest_science: 'Veda za vedomím',
+            interest_science_desc: 'Neurológia, biológia, evolúcia emócií',
+            interest_practical: 'Praktická zmena',
+            interest_practical_desc: 'Reálna aplikácia v práci, vzťahoch a každodennosti',
+            interest_higher: 'Vyššie stavy vedomia',
+            interest_higher_desc: 'Pre tých, čo chcú ísť hlbšie',
+            profile_journey_label: 'Kde sa nachádzaš na ceste?',
+            journey_beginning: 'Som na začiatku',
+            journey_beginning_desc: 'Niečo vo mne sa chce zmeniť, ale neviem čo',
+            journey_awareness: 'Fáza uvedomenia',
+            journey_awareness_desc: 'Začínam chápať, ako fungujú moje emócie a myseľ',
+            journey_transformation: 'Fáza transformácie',
+            journey_transformation_desc: 'Aktívne pracujem na zmene vnútorného nastavenia',
+            journey_integration: 'Fáza integrácie',
+            journey_integration_desc: 'Prežívam trvalú zmenu a chcem pomáhať iným',
+            journey_guide: 'Sprievodca',
+            journey_guide_desc: 'Učím alebo sprevádzam iných na tejto ceste',
             profile_notifications_label: 'Chcem dostávať',
             notif_chapters: 'Novinky o nových kapitolách audioknihy',
             notif_events: 'Informácie o prednáškach a eventoch',
@@ -3538,17 +3562,26 @@
             profile_source_podcast: 'Podcast/video',
             profile_source_bookstore: 'Bookstore',
             profile_source_other: 'Other',
-            profile_interests_label: 'Areas of interest',
-            interest_neuroscience: 'Neuroscience and biology',
-            interest_psychology: 'Psychology of consciousness',
-            interest_meditation: 'Meditation and mindfulness',
-            interest_growth: 'Personal development',
-            interest_philosophy: 'Philosophy of existence',
-            profile_journey_label: 'Where I am on the journey',
-            journey_beginner: 'Beginner \u2013 just discovering',
-            journey_seeker: 'Seeker \u2013 actively learning',
-            journey_practitioner: 'Practitioner \u2013 applying daily',
-            journey_guide: 'Guide \u2013 sharing with others',
+            profile_interests_label: 'What interests you most?',
+            interest_emotions: 'Emotions & behavior',
+            interest_emotions_desc: 'Why we do what we do',
+            interest_science: 'Science of consciousness',
+            interest_science_desc: 'Neurology, biology, evolution of emotions',
+            interest_practical: 'Practical change',
+            interest_practical_desc: 'Real application in work, relationships, and daily life',
+            interest_higher: 'Higher consciousness',
+            interest_higher_desc: 'For those ready to go deeper',
+            profile_journey_label: 'Where are you on the journey?',
+            journey_beginning: 'I\u2019m at the beginning',
+            journey_beginning_desc: 'Something in me wants to change, but I don\u2019t know what',
+            journey_awareness: 'Awareness phase',
+            journey_awareness_desc: 'Starting to understand how my emotions and mind work',
+            journey_transformation: 'Transformation phase',
+            journey_transformation_desc: 'Actively working on changing my inner patterns',
+            journey_integration: 'Integration phase',
+            journey_integration_desc: 'Experiencing lasting change and wanting to help others',
+            journey_guide: 'Guide',
+            journey_guide_desc: 'Teaching or guiding others on this path',
             profile_notifications_label: 'I want to receive',
             notif_chapters: 'New audiobook chapter updates',
             notif_events: 'Lectures and events info',
