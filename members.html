@@ -3311,6 +3311,7 @@
             register_login_link: 'Prihláste sa',
             login_forgot: 'Zabudli ste heslo?',
             auth_error_generic: 'Niečo sa pokazilo. Skúste to znova.',
+            auth_google_slow: 'Prihlásenie cez Google sa nenačítava? Skúste iný prehliadač (Safari, Chrome) alebo použite e-mail a heslo.',
             auth_error_invalid: 'Nesprávny email alebo heslo.',
             auth_error_email_taken: 'Tento email je už zaregistrovaný.',
             auth_error_weak_password: 'Heslo musí mať aspoň 6 znakov.',
@@ -3527,6 +3528,7 @@
             register_login_link: 'Sign in',
             login_forgot: 'Forgot password?',
             auth_error_generic: 'Something went wrong. Please try again.',
+            auth_google_slow: 'Google sign-in not loading? Try a different browser (Safari, Chrome) or use email and password.',
             auth_error_invalid: 'Invalid email or password.',
             auth_error_email_taken: 'This email is already registered.',
             auth_error_weak_password: 'Password must be at least 6 characters.',
@@ -3962,8 +3964,13 @@
     }
 
     // --- Google OAuth ---
+    var googleAuthTimer = null;
     function handleGoogleLogin() {
         hideAuthMessage();
+        // Show fallback message if redirect takes too long
+        googleAuthTimer = setTimeout(function() {
+            showAuthMessage('auth_google_slow', 'info');
+        }, 5000);
         supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
@@ -3971,9 +3978,11 @@
             }
         }).then(function(result) {
             if (result.error) {
+                clearTimeout(googleAuthTimer);
                 showAuthMessage('auth_error_generic', 'error');
             }
         }).catch(function() {
+            clearTimeout(googleAuthTimer);
             showAuthMessage('auth_error_generic', 'error');
         });
     }
