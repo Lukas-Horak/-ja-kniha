@@ -1248,11 +1248,22 @@ a, button, input, textarea, select {
   });
 
   // ── Data Loading ──
+  var allUsers = [];
+
   async function loadData() {
     refreshBtn.classList.add('loading');
 
     try {
-      // Try RPC function first
+      // Load registered users from auth
+      var usersResult = await supabase.rpc('get_all_users');
+      if (usersResult.data) {
+        allUsers = usersResult.data;
+      } else {
+        console.warn('get_all_users failed:', usersResult.error?.message);
+        allUsers = [];
+      }
+
+      // Load activity data
       let data = null;
       let error = null;
 
@@ -1260,9 +1271,8 @@ a, button, input, textarea, select {
       data = rpcResult.data;
       error = rpcResult.error;
 
-      // If RPC doesn't exist, fall back to direct table query
       if (error) {
-        console.warn('RPC get_all_activity not available, trying direct query:', error.message);
+        console.warn('get_all_activity not available, trying direct query:', error.message);
         const directResult = await supabase
           .from('user_activity')
           .select('*')
@@ -1273,7 +1283,7 @@ a, button, input, textarea, select {
       }
 
       if (error) {
-        console.error('Failed to load data:', error);
+        console.error('Failed to load activity:', error);
         activityData = [];
       } else {
         activityData = data || [];
@@ -1393,7 +1403,8 @@ a, button, input, textarea, select {
 
   // ── Render KPIs ──
   function renderKPIs() {
-    const uniqueUsers = new Set(activityData.map(r => r.user_id));
+    // Total = registered users (from auth), not just active
+    var totalMembers = allUsers.length || new Set(activityData.map(r => r.user_id)).size;
     const today = getToday();
     const activeToday = new Set(
       activityData.filter(r => r.created_at && r.created_at.slice(0, 10) === today).map(r => r.user_id)
@@ -1401,7 +1412,7 @@ a, button, input, textarea, select {
     const chapterOpens = activityData.filter(r => r.event_type === 'chapter_open').length;
     const audioPlays = activityData.filter(r => r.event_type === 'audio_play').length;
 
-    animateNumber(kpiMembers, uniqueUsers.size);
+    animateNumber(kpiMembers, totalMembers);
     animateNumber(kpiActive, activeToday.size);
     animateNumber(kpiChapters, chapterOpens);
     animateNumber(kpiAudio, audioPlays);
@@ -1424,7 +1435,64 @@ a, button, input, textarea, select {
 
   // ── Render Members Table ──
   function renderMembersTable() {
-    if (activityData.length === 0) {
+    // Build map of activity per user
+    var activityByUser = {};
+    activityData.forEach(function(row) {
+      var uid = row.user_id;
+      if (!activityByUser[uid]) {
+        activityByUser[uid] = { chapters: 0, audio: 0, total: 0, lastActivity: row.created_at };
+      }
+      var a = activityByUser[uid];
+      if (row.created_at > a.lastActivity) a.lastActivity = row.created_at;
+      if (row.event_type === 'chapter_open') a.chapters++;
+      if (row.event_type === 'audio_play') a.audio++;
+      a.total++;
+    });
+
+    // Merge: start from allUsers (registered), enrich with activity
+    var users = {};
+    allUsers.forEach(function(u) {
+      var act = activityByUser[u.id] || { chapters: 0, audio: 0, total: 0, lastActivity: null };
+      users[u.id] = {
+        uid: u.id,
+        email: u.email || '',
+        name: u.display_name || '',
+        provider: u.provider || 'email',
+        registered: u.created_at,
+        lastSignIn: u.last_sign_in_at,
+        lastActivity: act.lastActivity || u.last_sign_in_at,
+        chapters: act.chapters,
+        audio: act.audio,
+        total: act.total
+      };
+    });
+
+    // Also add any activity-only users not in auth (shouldn't happen, but just in case)
+    activityData.forEach(function(row) {
+      if (!users[row.user_id]) {
+        var a = activityByUser[row.user_id];
+        users[row.user_id] = {
+          uid: row.user_id,
+          email: getEmailFromRow(row),
+          name: '',
+          provider: '',
+          registered: null,
+          lastSignIn: null,
+          lastActivity: a ? a.lastActivity : row.created_at,
+          chapters: a ? a.chapters : 0,
+          audio: a ? a.audio : 0,
+          total: a ? a.total : 0
+        };
+      }
+    });
+
+    var sorted = Object.values(users).sort(function(a, b) {
+      var aDate = a.lastActivity || a.registered || '';
+      var bDate = b.lastActivity || b.registered || '';
+      return bDate.localeCompare(aDate);
+    });
+
+    if (sorted.length === 0) {
       membersTbody.innerHTML = '';
       membersEmpty.classList.remove('hidden');
       document.querySelector('.table-wrapper .table-scroll').style.display = 'none';
@@ -1434,48 +1502,17 @@ a, button, input, textarea, select {
     membersEmpty.classList.add('hidden');
     document.querySelector('.table-wrapper .table-scroll').style.display = '';
 
-    // Aggregate by user
-    const users = {};
-    activityData.forEach(row => {
-      const uid = row.user_id;
-      if (!users[uid]) {
-        users[uid] = {
-          uid: uid,
-          email: getEmailFromRow(row),
-          lastActivity: row.created_at,
-          chapters: 0,
-          audio: 0,
-          total: 0
-        };
-      }
-      const u = users[uid];
-      if (row.created_at > u.lastActivity) {
-        u.lastActivity = row.created_at;
-        // Update email in case metadata is more recent
-        const e = getEmailFromRow(row);
-        if (e && !e.includes('…')) u.email = e;
-      }
-      if (row.event_type === 'chapter_open') u.chapters++;
-      if (row.event_type === 'audio_play') u.audio++;
-      u.total++;
-    });
-
-    // Sort by last activity descending
-    const sorted = Object.values(users).sort((a, b) => {
-      if (!a.lastActivity) return 1;
-      if (!b.lastActivity) return -1;
-      return b.lastActivity.localeCompare(a.lastActivity);
-    });
-
-    membersTbody.innerHTML = sorted.map(u => `
-      <tr data-uid="${escapeHtml(u.uid)}" style="cursor:pointer;" title="Zobraziť detail">
-        <td><span class="user-email">${escapeHtml(u.email)}</span></td>
-        <td>${formatTime(u.lastActivity)}</td>
-        <td class="text-right">${u.chapters}</td>
-        <td class="text-right">${u.audio}</td>
-        <td class="text-right"><span class="badge badge-muted">${u.total}</span></td>
-      </tr>
-    `).join('');
+    membersTbody.innerHTML = sorted.map(function(u) {
+      var nameHtml = u.name ? '<div style="font-size:0.78rem;color:#8C7E72;">' + escapeHtml(u.name) + '</div>' : '';
+      var providerIcon = u.provider === 'google' ? '<span style="font-size:0.7rem;color:#8C7E72;" title="Google">🌐</span> ' : '';
+      return '<tr data-uid="' + escapeHtml(u.uid) + '" style="cursor:pointer;" title="Zobrazi\u0165 detail">'
+        + '<td>' + providerIcon + '<span class="user-email">' + escapeHtml(u.email) + '</span>' + nameHtml + '</td>'
+        + '<td>' + formatTime(u.lastActivity || u.registered) + '</td>'
+        + '<td class="text-right">' + u.chapters + '</td>'
+        + '<td class="text-right">' + u.audio + '</td>'
+        + '<td class="text-right"><span class="badge badge-muted">' + u.total + '</span></td>'
+        + '</tr>';
+    }).join('');
 
     // Attach click handlers
     membersTbody.querySelectorAll('tr[data-uid]').forEach(function(row) {
@@ -1567,15 +1604,18 @@ a, button, input, textarea, select {
   function openUserDetail(uid) {
     if (!uid) return;
     var userEvents = activityData.filter(function(r) { return r.user_id === uid; });
-    if (userEvents.length === 0) return;
 
-    var email = emailCache[uid] || getEmailFromRow(userEvents[0]);
+    // Find user from auth data
+    var authUser = allUsers.find(function(u) { return u.id === uid; });
+    var email = (authUser && authUser.email) || emailCache[uid] || (userEvents.length > 0 ? getEmailFromRow(userEvents[0]) : uid.slice(0, 8) + '…');
+
+    if (userEvents.length === 0 && !authUser) return;
     var chapters = new Set();
     var audioPlayed = new Set();
     var thoughts = new Set();
     var sessions = 0;
-    var firstSeen = userEvents[userEvents.length - 1].created_at;
-    var lastSeen = userEvents[0].created_at;
+    var firstSeen = userEvents.length > 0 ? userEvents[userEvents.length - 1].created_at : null;
+    var lastSeen = userEvents.length > 0 ? userEvents[0].created_at : null;
 
     userEvents.forEach(function(r) {
       if (r.event_type === 'chapter_open' && r.chapter_title) chapters.add(r.chapter_title);
@@ -1584,13 +1624,27 @@ a, button, input, textarea, select {
       if (r.event_type === 'session_start') sessions++;
     });
 
-    udTitle.textContent = email;
+    // Title: name + email
+    var displayName = (authUser && authUser.display_name) ? authUser.display_name : '';
+    udTitle.textContent = displayName || email;
 
-    udStats.innerHTML = '\
+    // Auth info line
+    var authInfoHtml = '';
+    if (authUser) {
+      var regDate = authUser.created_at ? new Date(authUser.created_at).toLocaleDateString('sk-SK') : '';
+      var provider = authUser.provider === 'google' ? '🌐 Google' : '✉ Email';
+      authInfoHtml = '<div style="font-size:0.82rem;color:#8C7E72;margin-bottom:20px;">' 
+        + (displayName ? escapeHtml(email) + ' &middot; ' : '')
+        + provider + ' &middot; Registrácia: ' + regDate
+        + '</div>';
+    }
+
+    udStats.innerHTML = authInfoHtml + '\
+      <div class="ud-stats">\
       <div class="ud-stat"><div class="ud-stat-value">' + sessions + '</div><div class="ud-stat-label">Prihlásení</div></div>\
       <div class="ud-stat"><div class="ud-stat-value">' + chapters.size + '</div><div class="ud-stat-label">Kapitoly</div></div>\
       <div class="ud-stat"><div class="ud-stat-value">' + audioPlayed.size + '</div><div class="ud-stat-label">Audio</div></div>\
-    ';
+      </div>';
 
     var eventIcons = {
       session_start: { icon: '➚', cls: 'session', label: 'Prihlásenie' },
