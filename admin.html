@@ -1109,7 +1109,7 @@ a, button, input, textarea, select {
 
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: {
-      flowType: 'implicit',
+      flowType: 'pkce',
       detectSessionInUrl: true,
       autoRefreshToken: true,
       persistSession: true
