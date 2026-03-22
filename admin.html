@@ -1107,7 +1107,14 @@ a, button, input, textarea, select {
   const SUPABASE_URL = 'https://hfvhpnmpjfzxzrlqaauu.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhmdmhwbm1wamZ6eHpybHFhYXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTgyNjgsImV4cCI6MjA4OTQ5NDI2OH0.6loYdOJwTdJZCSu8w1bVjoxfRz8m8zvNbPHHGPxF3N0';
 
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      flowType: 'implicit',
+      detectSessionInUrl: true,
+      autoRefreshToken: true,
+      persistSession: true
+    }
+  });
 
   // ── DOM Elements ──
   const loginScreen = document.getElementById('login-screen');

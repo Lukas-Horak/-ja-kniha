@@ -3767,7 +3767,14 @@
     // ===== SUPABASE AUTH =====
     var SUPABASE_URL = 'https://hfvhpnmpjfzxzrlqaauu.supabase.co';
     var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhmdmhwbm1wamZ6eHpybHFhYXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTgyNjgsImV4cCI6MjA4OTQ5NDI2OH0.6loYdOJwTdJZCSu8w1bVjoxfRz8m8zvNbPHHGPxF3N0';
-    var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+            flowType: 'implicit',
+            detectSessionInUrl: true,
+            autoRefreshToken: true,
+            persistSession: true
+        }
+    });
 
     // ===== ACTIVITY TRACKING =====
     function trackActivity(eventType, chapterId, chapterTitle, meta) {
@@ -4022,11 +4029,16 @@
     }
 
     // --- Session persistence: check on page load ---
+    // getSession() also picks up OAuth hash fragments (#access_token=...)
     supabase.auth.getSession().then(function(result) {
         if (result.data.session && result.data.session.user) {
             showDashboard(result.data.session.user);
         } else {
             showLogin();
+        }
+        // Clean up hash fragment after session is resolved
+        if (window.location.hash && window.location.hash.includes('access_token')) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
         }
     }).catch(function() {
         showLogin();
