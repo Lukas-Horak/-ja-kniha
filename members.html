@@ -4259,6 +4259,11 @@
                 el.classList.add('visible');
             });
         }, 100);
+
+        // Load thoughts from Supabase
+        if (typeof window.loadThoughtsFromSupabase === 'function') {
+            window.loadThoughtsFromSupabase();
+        }
     }
 
     function showLogin() {
@@ -4585,6 +4590,86 @@
 
         var thoughtContent = { sk: {}, en: {} };
 
+        var tagLabels = {
+            sk: { thought: 'Postreh', insight: 'Poznanie' },
+            en: { thought: 'Insight', insight: 'Knowing' }
+        };
+
+        function stripHtml(html) {
+            var tmp = document.createElement('div');
+            tmp.innerHTML = html || '';
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        function loadThoughtsFromSupabase() {
+            supabase.rpc('get_published_thoughts').then(function(result) {
+                if (result.error || !result.data) { console.error('loadThoughts:', result.error); return; }
+                var thoughts = result.data;
+                var listEl = document.getElementById('thoughts-list');
+                var emptyEl = document.getElementById('thoughts-empty');
+
+                // Populate thoughtContent for the reader
+                thoughtContent = { sk: {}, en: {} };
+                thoughts.forEach(function(t) {
+                    var key = 'thought-' + t.id;
+                    var labels = tagLabels[lang] || tagLabels['sk'];
+                    thoughtContent.sk[key] = {
+                        tag: t.tag, tagLabel: (tagLabels.sk[t.tag] || t.tag),
+                        title: t.title_sk || '', body: t.body_sk || '', author: t.author || ''
+                    };
+                    thoughtContent.en[key] = {
+                        tag: t.tag, tagLabel: (tagLabels.en[t.tag] || t.tag),
+                        title: t.title_en || t.title_sk || '', body: t.body_en || t.body_sk || '', author: t.author || ''
+                    };
+                });
+
+                if (!thoughts.length) {
+                    if (listEl) listEl.innerHTML = '';
+                    if (emptyEl) emptyEl.style.display = '';
+                    return;
+                }
+                if (emptyEl) emptyEl.style.display = 'none';
+
+                var currentLang = lang || 'sk';
+                var html = thoughts.map(function(t, i) {
+                    var key = 'thought-' + t.id;
+                    var title = currentLang === 'en' ? (t.title_en || t.title_sk) : t.title_sk;
+                    var bodyText = stripHtml(currentLang === 'en' ? (t.body_en || t.body_sk) : t.body_sk);
+                    var snippet = bodyText.length > 80 ? bodyText.substring(0, 80) + '...' : bodyText;
+                    var labels = tagLabels[currentLang] || tagLabels['sk'];
+                    var tagLabel = labels[t.tag] || t.tag;
+                    var num = String(i + 1).padStart(2, '0');
+
+                    return '<div class="thought-row" data-thought-id="' + key + '">'
+                        + '<div class="thought-left">'
+                        + '<span class="thought-num">' + num + '</span>'
+                        + '<div class="thought-content">'
+                        + '<span class="thought-name">' + (title || '') + '</span>'
+                        + '<span class="thought-snippet">' + snippet + '</span>'
+                        + '</div></div>'
+                        + '<div class="thought-right">'
+                        + '<span class="thought-tag ' + t.tag + '">' + tagLabel + '</span>'
+                        + '<button class="thought-open-btn" data-i18n="reader_open">'
+                        + (currentLang === 'en' ? 'Open' : 'Otvoriť')
+                        + ' <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>'
+                        + '</button>'
+                        + '</div></div>';
+                }).join('');
+
+                if (listEl) listEl.innerHTML = html;
+
+                // Attach click handlers to dynamically rendered rows
+                document.querySelectorAll('.thought-row').forEach(function(row) {
+                    var id = row.getAttribute('data-thought-id');
+                    if (id) {
+                        row.addEventListener('click', function() {
+                            openThought(id);
+                        });
+                    }
+                });
+            });
+        }
+
         // Load saved settings (shared with homepage)
         var savedTheme = '';
         var savedFont = 2;
@@ -4897,6 +4982,7 @@
         // Expose for external use
         window.openChapterReader = openChapter;
         window.openReaderDetail = openThought;
+        window.loadThoughtsFromSupabase = loadThoughtsFromSupabase;
     })();
     loadReadingProgress();
 
