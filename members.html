@@ -2911,18 +2911,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="preview-row preview-row-locked">
+                    <div class="preview-row" data-preview-id="je-odovzdajme-kontrolu">
                         <div class="preview-row-left">
                             <div class="preview-row-content">
                                 <span class="preview-row-title" data-i18n="je_ch_odovzdajme">Odovzdajme kontrolu vesmíru</span>
                             </div>
                         </div>
+                        <div class="preview-row-right">
+                            <div class="preview-progress-wrap" data-progress-id="je-odovzdajme-kontrolu" style="display:none;">
+                                <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
+                                <span class="preview-progress-pct">0%</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="preview-row preview-row-locked">
+                    <div class="preview-row" data-preview-id="je-aktualizacia-potencialov">
                         <div class="preview-row-left">
                             <div class="preview-row-content">
                                 <span class="preview-row-title" data-i18n="je_ch_aktualizacia">Aktualizácia potenciálov</span>
                             </div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-progress-wrap" data-progress-id="je-aktualizacia-potencialov" style="display:none;">
+                                <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
+                                <span class="preview-progress-pct">0%</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
                         </div>
                     </div>
 
@@ -2965,9 +2985,19 @@
                     <div class="preview-section-header">
                         <span data-i18n="je_sec_2">Rozvoj vedomia</span>
                     </div>
-                    <div class="preview-row preview-row-locked">
+                    <div class="preview-row" data-preview-id="je-uvod-rozvoj-vedomia">
                         <div class="preview-row-left">
                             <div class="preview-row-content"><span class="preview-row-title" data-i18n="je_ch_rozvoj_uvod">Krátky úvod k rozvoju vedomia</span></div>
+                        </div>
+                        <div class="preview-row-right">
+                            <div class="preview-progress-wrap" data-progress-id="je-uvod-rozvoj-vedomia" style="display:none;">
+                                <div class="preview-progress-bar"><div class="preview-progress-fill" style="width:0%"></div></div>
+                                <span class="preview-progress-pct">0%</span>
+                            </div>
+                            <button class="preview-open-btn" data-i18n="reader_open">
+                                Otvoriť
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                            </button>
                         </div>
                     </div>
                     <div class="preview-row preview-row-locked">
@@ -4583,7 +4613,10 @@
         'ja-odpustenie': 'chapters/odpustenie.html',
         'ja-rozum-prekazka': 'chapters/rozum-prekazka.html',
         'ja-rozum-cas': 'chapters/rozum-cas.html',
-        'ja-autenticnost': 'chapters/autenticnost.html'
+        'ja-autenticnost': 'chapters/autenticnost.html',
+        'je-odovzdajme-kontrolu': 'chapters/je/odovzdajme-kontrolu.html',
+        'je-aktualizacia-potencialov': 'chapters/je/aktualizacia-potencialov.html',
+        'je-uvod-rozvoj-vedomia': 'chapters/je/uvod-rozvoj-vedomia.html'
         },
         en: {
         'ja-tuzby': 'chapters/en/tuzby.html',
@@ -4593,11 +4626,14 @@
         'ja-odpustenie': 'chapters/en/odpustenie.html',
         'ja-rozum-prekazka': 'chapters/en/rozum-prekazka.html',
         'ja-rozum-cas': 'chapters/en/rozum-cas.html',
-        'ja-autenticnost': 'chapters/en/autenticnost.html'
+        'ja-autenticnost': 'chapters/en/autenticnost.html',
+        'je-odovzdajme-kontrolu': 'chapters/je/en/odovzdajme-kontrolu.html',
+        'je-aktualizacia-potencialov': 'chapters/je/en/aktualizacia-potencialov.html',
+        'je-uvod-rozvoj-vedomia': 'chapters/je/en/uvod-rozvoj-vedomia.html'
         }
         };
 
-        var chapterOrder = ['ja-tuzby', 'ja-naplnanie-zameru', 'ja-odpor', 'ja-hnev', 'ja-odpustenie', 'ja-rozum-prekazka', 'ja-rozum-cas', 'ja-autenticnost'];
+        var chapterOrder = ['ja-tuzby', 'ja-naplnanie-zameru', 'ja-odpor', 'ja-hnev', 'ja-odpustenie', 'ja-rozum-prekazka', 'ja-rozum-cas', 'ja-autenticnost', 'je-odovzdajme-kontrolu', 'je-aktualizacia-potencialov', 'je-uvod-rozvoj-vedomia'];
 
         var chapterTitles = {
         sk: {
@@ -4608,7 +4644,10 @@
         'ja-odpustenie': 'Odpustenie ako akt sily',
         'ja-rozum-prekazka': 'Rozum ako prekážka',
         'ja-rozum-cas': 'Môj rozum vníma čas',
-        'ja-autenticnost': 'Autentickosť'
+        'ja-autenticnost': 'Autentickosť',
+        'je-odovzdajme-kontrolu': 'Odovzdajme kontrolu vesmíru',
+        'je-aktualizacia-potencialov': 'Aktualizácia potenciálov',
+        'je-uvod-rozvoj-vedomia': 'Krátky úvod k rozvoju vedomia'
         },
         en: {
         'ja-tuzby': 'Desires',
@@ -4618,7 +4657,10 @@
         'ja-odpustenie': 'Forgiveness as an Act of Strength',
         'ja-rozum-prekazka': 'Reason as an Obstacle',
         'ja-rozum-cas': 'My Reason Perceives Time',
-        'ja-autenticnost': 'Authenticity'
+        'ja-autenticnost': 'Authenticity',
+        'je-odovzdajme-kontrolu': 'Let us surrender control to the universe',
+        'je-aktualizacia-potencialov': 'Actualisation of potentials',
+        'je-uvod-rozvoj-vedomia': 'A brief introduction to consciousness development'
         }
         };
 
