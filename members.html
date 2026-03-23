@@ -608,8 +608,10 @@
         letter-spacing: 0.08em; padding: 4px 12px;
         border-radius: 100px;
     }
-    .thought-tag.thought { background: rgba(92, 138, 110, 0.08); color: var(--accent-higher); }
-    .thought-tag.insight { background: rgba(184, 168, 152, 0.08); color: var(--accent-primitive); }
+    .thought-tag.emotions { background: rgba(180, 120, 100, 0.1); color: #8B5E3C; }
+    .thought-tag.science { background: rgba(59, 111, 160, 0.1); color: #3B6FA0; }
+    .thought-tag.practical { background: rgba(92, 138, 110, 0.1); color: #4A7C3F; }
+    .thought-tag.higher { background: rgba(139, 115, 85, 0.1); color: #8B7355; }
     .thought-progress-wrap {
         display: flex; align-items: center; gap: 6px;
     }
@@ -3487,8 +3489,10 @@
             badge_members: 'Members',
             badge_soon: 'Čoskoro',
             preview_play_audio: 'Prehrať audio',
-            tag_thought: 'Myšlienka',
-            tag_insight: 'Postreh',
+            tag_emotions: 'Emócie a správanie',
+            tag_science: 'Veda za vedomím',
+            tag_practical: 'Praktická zmena',
+            tag_higher: 'Vyššie stavy',
             thoughts_label: 'Poznanie & postrehy',
             thoughts_title: 'Postrehy z vedomia',
             thoughts_desc: 'Krátke postrehy a hlbšie poznanie vychádzajúce z vedomia. Čítajte priamo v prehliadači – ako člen máte prístup ku všetkým textom.',
@@ -3769,8 +3773,10 @@
             badge_members: 'Members',
             badge_soon: 'Coming soon',
             preview_play_audio: 'Play audio',
-            tag_thought: 'Thought',
-            tag_insight: 'Insight',
+            tag_emotions: 'Emotions & behavior',
+            tag_science: 'Science of consciousness',
+            tag_practical: 'Practical change',
+            tag_higher: 'Higher consciousness',
             thoughts_label: 'Knowing & insights',
             thoughts_title: 'Insights from Consciousness',
             thoughts_desc: 'Short insights and deeper knowing arising from consciousness. Read directly in your browser – as a member you have access to all texts.',
@@ -4591,8 +4597,8 @@
         var thoughtContent = { sk: {}, en: {} };
 
         var tagLabels = {
-            sk: { thought: 'Postreh', insight: 'Poznanie' },
-            en: { thought: 'Insight', insight: 'Knowing' }
+            sk: { emotions: 'Emócie a správanie', science: 'Veda za vedomím', practical: 'Praktická zmena', higher: 'Vyššie stavy' },
+            en: { emotions: 'Emotions & behavior', science: 'Science of consciousness', practical: 'Practical change', higher: 'Higher consciousness' }
         };
 
         function stripHtml(html) {
@@ -4613,12 +4619,15 @@
                 thoughts.forEach(function(t) {
                     var key = 'thought-' + t.id;
                     var labels = tagLabels[lang] || tagLabels['sk'];
+                    var tagsArr = Array.isArray(t.tags) ? t.tags : [];
+                    var skTagStr = tagsArr.map(function(tg) { return tagLabels.sk[tg] || tg; }).join(', ');
+                    var enTagStr = tagsArr.map(function(tg) { return tagLabels.en[tg] || tg; }).join(', ');
                     thoughtContent.sk[key] = {
-                        tag: t.tag, tagLabel: (tagLabels.sk[t.tag] || t.tag),
+                        tags: tagsArr, tagLabel: skTagStr,
                         title: t.title_sk || '', body: t.body_sk || '', author: t.author || ''
                     };
                     thoughtContent.en[key] = {
-                        tag: t.tag, tagLabel: (tagLabels.en[t.tag] || t.tag),
+                        tags: tagsArr, tagLabel: enTagStr,
                         title: t.title_en || t.title_sk || '', body: t.body_en || t.body_sk || '', author: t.author || ''
                     };
                 });
@@ -4636,8 +4645,11 @@
                     var title = currentLang === 'en' ? (t.title_en || t.title_sk) : t.title_sk;
                     var bodyText = stripHtml(currentLang === 'en' ? (t.body_en || t.body_sk) : t.body_sk);
                     var snippet = bodyText.length > 80 ? bodyText.substring(0, 80) + '...' : bodyText;
+                    var tagsArr2 = Array.isArray(t.tags) ? t.tags : [];
                     var labels = tagLabels[currentLang] || tagLabels['sk'];
-                    var tagLabel = labels[t.tag] || t.tag;
+                    var tagBadges = tagsArr2.map(function(tg) {
+                        return '<span class="thought-tag ' + tg + '">' + (labels[tg] || tg) + '</span>';
+                    }).join('');
                     var num = String(i + 1).padStart(2, '0');
 
                     return '<div class="thought-row" data-thought-id="' + key + '">'
@@ -4648,7 +4660,7 @@
                         + '<span class="thought-snippet">' + snippet + '</span>'
                         + '</div></div>'
                         + '<div class="thought-right">'
-                        + '<span class="thought-tag ' + t.tag + '">' + tagLabel + '</span>'
+                        + tagBadges
                         + '<button class="thought-open-btn" data-i18n="reader_open">'
                         + (currentLang === 'en' ? 'Open' : 'Otvoriť')
                         + ' <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>'

@@ -805,6 +805,22 @@ a, button, input, textarea, select {
 .form-textarea:focus {
   outline: none; border-color: var(--color-accent);
 }
+.tag-checkboxes {
+  display: flex; flex-wrap: wrap; gap: var(--space-2);
+}
+.tag-check {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  font-size: var(--text-sm); cursor: pointer;
+  transition: all var(--transition); user-select: none;
+}
+.tag-check:hover {
+  border-color: var(--color-accent-light); background: var(--color-surface);
+}
+.tag-check input { margin: 0; accent-color: var(--color-accent); }
+.tag-check input:checked + span { font-weight: 600; color: var(--color-text); }
+.tag-check span { color: var(--color-text-muted); }
 .btn-editor-cancel {
   padding: var(--space-2) var(--space-4);
   background: transparent; border: 1px solid var(--color-border);
@@ -1185,13 +1201,15 @@ a, button, input, textarea, select {
             <button class="btn-editor-cancel hidden" id="editor-cancel">Zrušiť</button>
           </div>
           <form id="thought-form" autocomplete="off">
-            <div class="editor-row">
-              <div class="editor-field" style="flex:0 0 160px;">
-                <label class="form-label">Tag</label>
-                <select class="form-input" id="tf-tag">
-                  <option value="thought">Postreh</option>
-                  <option value="insight">Poznanie</option>
-                </select>
+            <div class="editor-row" style="align-items:flex-start;">
+              <div class="editor-field" style="flex:1;">
+                <label class="form-label">Kategórie</label>
+                <div class="tag-checkboxes" id="tf-tags">
+                  <label class="tag-check"><input type="checkbox" value="emotions"><span>Emócie a správanie</span></label>
+                  <label class="tag-check"><input type="checkbox" value="science"><span>Veda za vedomím</span></label>
+                  <label class="tag-check"><input type="checkbox" value="practical"><span>Praktická zmena</span></label>
+                  <label class="tag-check"><input type="checkbox" value="higher"><span>Vyššie stavy vedomia</span></label>
+                </div>
               </div>
               <div class="editor-field" style="flex:0 0 140px;">
                 <label class="form-label">Status</label>
@@ -1847,7 +1865,7 @@ a, button, input, textarea, select {
 
   // ── Thoughts CRUD ──
   const tfForm = document.getElementById('thought-form');
-  const tfTag = document.getElementById('tf-tag');
+  const tfTagsContainer = document.getElementById('tf-tags');
   const tfStatus = document.getElementById('tf-status');
   const tfTitleSk = document.getElementById('tf-title-sk');
   const tfTitleEn = document.getElementById('tf-title-en');
@@ -1887,18 +1905,19 @@ a, button, input, textarea, select {
     }
     thoughtsEmpty.classList.add('hidden');
 
-    const tagLabels = { thought: 'Postreh', insight: 'Poznanie' };
+    const tagLabels = { emotions: 'Emócie', science: 'Veda', practical: 'Prax', higher: 'Vyššie stavy' };
     const statusLabels = { draft: 'Draft', published: 'Publikované' };
 
     thoughtsListBody.innerHTML = allThoughts.map(function(t) {
       const date = new Date(t.created_at).toLocaleDateString('sk-SK', { day: 'numeric', month: 'short', year: 'numeric' });
-      const tag = tagLabels[t.tag] || t.tag;
+      var tagsArr = Array.isArray(t.tags) ? t.tags : [];
+      var tagStr = tagsArr.map(function(tg) { return tagLabels[tg] || tg; }).join(', ') || '—';
       const status = statusLabels[t.status] || t.status;
       return '<div class="thought-card" data-id="' + t.id + '">'
         + '<div class="thought-card-top">'
         + '<div class="thought-card-info">'
         + '<span class="thought-card-title">' + escapeHtml(t.title_sk || '') + '</span>'
-        + '<span class="thought-card-meta">' + tag + ' · ' + status + ' · ' + date + '</span>'
+        + '<span class="thought-card-meta">' + tagStr + ' · ' + status + ' · ' + date + '</span>'
         + '</div>'
         + '<div class="thought-card-actions">'
         + '<button class="btn-edit" title="Upraviť">✎</button>'
@@ -1932,8 +1951,12 @@ a, button, input, textarea, select {
     tfSubmit.disabled = true;
     tfSubmit.classList.add('loading');
 
+    var selectedTags = [];
+    tfTagsContainer.querySelectorAll('input[type="checkbox"]:checked').forEach(function(cb) {
+      selectedTags.push(cb.value);
+    });
     const payload = {
-      tag: tfTag.value,
+      tags: selectedTags,
       status: tfStatus.value,
       title_sk: tfTitleSk.value.trim(),
       title_en: tfTitleEn.value.trim(),
@@ -1977,7 +2000,11 @@ a, button, input, textarea, select {
     const t = allThoughts.find(function(x) { return String(x.id) === String(id); });
     if (!t) return;
     tfId.value = t.id;
-    tfTag.value = t.tag || 'thought';
+    // Set tag checkboxes
+    var tagsArr = Array.isArray(t.tags) ? t.tags : [];
+    tfTagsContainer.querySelectorAll('input[type="checkbox"]').forEach(function(cb) {
+      cb.checked = tagsArr.indexOf(cb.value) !== -1;
+    });
     tfStatus.value = t.status || 'draft';
     tfTitleSk.value = t.title_sk || '';
     tfTitleEn.value = t.title_en || '';
