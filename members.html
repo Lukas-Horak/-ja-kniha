@@ -551,6 +551,23 @@
     .thoughts-list {
         display: flex; flex-direction: column; gap: 0;
     }
+    .thoughts-empty {
+        display: flex; flex-direction: column; align-items: center;
+        text-align: center; padding: 64px 24px 72px;
+    }
+    .thoughts-empty-icon {
+        width: 64px; height: 64px; color: var(--text-muted);
+        margin-bottom: 20px; opacity: 0.5;
+    }
+    .thoughts-empty-icon svg { width: 100%; height: 100%; }
+    .thoughts-empty h4 {
+        font-size: 1.1rem; font-weight: 500; color: var(--text);
+        margin-bottom: 8px; letter-spacing: -0.01em;
+    }
+    .thoughts-empty p {
+        font-size: 0.88rem; color: var(--text-light); line-height: 1.6;
+        max-width: 32ch;
+    }
     .thought-row {
         display: flex; align-items: center; justify-content: space-between;
         padding: 16px 0;
@@ -2229,127 +2246,22 @@
                 <h3 class="thoughts-title" data-i18n="thoughts_title">Postrehy z vedomia</h3>
                 <p class="thoughts-desc" data-i18n="thoughts_desc">Krátke úvahy, postrehy a hlbšie zamyslenia. Čítajte priamo v prehliadači – ako člen máte prístup ku všetkým textom.</p>
             </div>
-            <div class="thoughts-list">
-                <div class="thought-row" data-thought-id="thought-1">
-                    <div class="thought-left">
-                        <span class="thought-num">01</span>
-                        <div class="thought-content">
-                            <span class="thought-name" data-i18n="thought_1_title">O ilúzii oddelenia</span>
-                            <span class="thought-snippet" data-i18n="thought_1_snippet">Keď pozorujete svet, máte pocit, že ste od neho oddelení...</span>
-                        </div>
-                    </div>
-                    <div class="thought-right">
-                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
-                        <div class="thought-progress-wrap" data-progress-id="thought-1" style="display:none;">
-                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
-                            <span class="thought-progress-pct">0%</span>
-                        </div>
-                        <button class="thought-open-btn" data-i18n="reader_open">
-                            Otvoriť
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                        </button>
-                    </div>
+            <div class="thoughts-list" id="thoughts-list">
+                <!-- Dynamically loaded from Supabase -->
+            </div>
+            <div class="thoughts-empty" id="thoughts-empty">
+                <div class="thoughts-empty-icon">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="28" r="18" stroke="currentColor" stroke-width="1.2" opacity="0.18"/>
+                        <path d="M32 18v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.5"/>
+                        <path d="M28 22c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+                        <circle cx="32" cy="32" r="1.5" fill="currentColor" opacity="0.4"/>
+                        <path d="M20 46c3-4 7-6 12-6s9 2 12 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.12"/>
+                    </svg>
                 </div>
-                <div class="thought-row" data-thought-id="thought-2">
-                    <div class="thought-left">
-                        <span class="thought-num">02</span>
-                        <div class="thought-content">
-                            <span class="thought-name" data-i18n="thought_2_title">Prečo sa bojíme ticha</span>
-                            <span class="thought-snippet" data-i18n="thought_2_snippet">Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho?</span>
-                        </div>
-                    </div>
-                    <div class="thought-right">
-                        <span class="thought-tag insight" data-i18n="tag_insight">Postreh</span>
-                        <div class="thought-progress-wrap" data-progress-id="thought-2" style="display:none;">
-                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
-                            <span class="thought-progress-pct">0%</span>
-                        </div>
-                        <button class="thought-open-btn" data-i18n="reader_open">
-                            Otvoriť
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="thought-row" data-thought-id="thought-3">
-                    <div class="thought-left">
-                        <span class="thought-num">03</span>
-                        <div class="thought-content">
-                            <span class="thought-name" data-i18n="thought_3_title">Paradox sebarozvoja</span>
-                            <span class="thought-snippet" data-i18n="thought_3_snippet">Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt...</span>
-                        </div>
-                    </div>
-                    <div class="thought-right">
-                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
-                        <div class="thought-progress-wrap" data-progress-id="thought-3" style="display:none;">
-                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
-                            <span class="thought-progress-pct">0%</span>
-                        </div>
-                        <button class="thought-open-btn" data-i18n="reader_open">
-                            Otvoriť
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="thought-row" data-thought-id="thought-4">
-                    <div class="thought-left">
-                        <span class="thought-num">04</span>
-                        <div class="thought-content">
-                            <span class="thought-name" data-i18n="thought_4_title">Čo je skutočná sloboda</span>
-                            <span class="thought-snippet" data-i18n="thought_4_snippet">Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov...</span>
-                        </div>
-                    </div>
-                    <div class="thought-right">
-                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
-                        <div class="thought-progress-wrap" data-progress-id="thought-4" style="display:none;">
-                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
-                            <span class="thought-progress-pct">0%</span>
-                        </div>
-                        <button class="thought-open-btn" data-i18n="reader_open">
-                            Otvoriť
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="thought-row" data-thought-id="thought-5">
-                    <div class="thought-left">
-                        <span class="thought-num">05</span>
-                        <div class="thought-content">
-                            <span class="thought-name" data-i18n="thought_5_title">Neuroplasticita a vedomie</span>
-                            <span class="thought-snippet" data-i18n="thought_5_snippet">Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu...</span>
-                        </div>
-                    </div>
-                    <div class="thought-right">
-                        <span class="thought-tag insight" data-i18n="tag_insight">Postreh</span>
-                        <div class="thought-progress-wrap" data-progress-id="thought-5" style="display:none;">
-                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
-                            <span class="thought-progress-pct">0%</span>
-                        </div>
-                        <button class="thought-open-btn" data-i18n="reader_open">
-                            Otvoriť
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="thought-row" data-thought-id="thought-6">
-                    <div class="thought-left">
-                        <span class="thought-num">06</span>
-                        <div class="thought-content">
-                            <span class="thought-name" data-i18n="thought_6_title">Emócie, ktoré ešte nemajú meno</span>
-                            <span class="thought-snippet" data-i18n="thought_6_snippet">V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať...</span>
-                        </div>
-                    </div>
-                    <div class="thought-right">
-                        <span class="thought-tag thought" data-i18n="tag_thought">Myšlienka</span>
-                        <div class="thought-progress-wrap" data-progress-id="thought-6" style="display:none;">
-                            <div class="thought-progress-bar"><div class="thought-progress-fill" style="width:0%"></div></div>
-                            <span class="thought-progress-pct">0%</span>
-                        </div>
-                        <button class="thought-open-btn" data-i18n="reader_open">
-                            Otvoriť
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-                        </button>
-                    </div>
-                </div>
+                <h4 data-i18n="thoughts_empty_title">Zatiaľ ticho</h4>
+                <p data-i18n="thoughts_empty_desc">Prvé postrehy z vedomia sa čoskoro objavia. Sledujte tento priestor.</p>
+            </div>
             </div>
         </div>
     </div>
@@ -3580,6 +3492,8 @@
             thoughts_label: 'Poznanie & postrehy',
             thoughts_title: 'Postrehy z vedomia',
             thoughts_desc: 'Krátke postrehy a hlbšie poznanie vychádzajúce z vedomia. Čítajte priamo v prehliadači – ako člen máte prístup ku všetkým textom.',
+            thoughts_empty_title: 'Zatiaľ ticho',
+            thoughts_empty_desc: 'Prvé postrehy z vedomia sa čoskoro objavia. Sledujte tento priestor.',
             thought_1_title: 'O ilúzii oddelenia',
             thought_1_snippet: 'Keď pozorujete svet, máte pocit, že ste od neho oddelení...',
             thought_2_title: 'Prečo sa bojíme ticha',
@@ -3860,6 +3774,8 @@
             thoughts_label: 'Knowing & insights',
             thoughts_title: 'Insights from Consciousness',
             thoughts_desc: 'Short insights and deeper knowing arising from consciousness. Read directly in your browser – as a member you have access to all texts.',
+            thoughts_empty_title: 'Silence for now',
+            thoughts_empty_desc: 'The first insights from consciousness will appear here soon. Stay tuned.',
             thought_1_title: 'On the illusion of separation',
             thought_1_snippet: 'When you observe the world, you feel separate from it...',
             thought_2_title: 'Why we fear silence',
@@ -4667,84 +4583,7 @@
         var chapterCache = {};
         var currentChapterId = null;
 
-        var thoughtContent = {
-        sk: {
-        'thought-1': {
-        tag: 'thought', tagLabel: 'Myšlienka',
-        title: 'O ilúzii oddelenia',
-        author: 'Lukáš Horák',
-        body: '<p>Keď pozorujete svet, máte pocit, že ste od neho oddelení – že existuje pozorovateľ a to, čo je pozorované. Ale čo ak je toto rozdelenie len konštrukcia vašej mysle? Čo ak je samotné rozdelenie príčinou väčšiny nášho utrpenia?</p><p>Predstavte si, že stojíte pri jazere. Vidíte odraz stromov na hladine. Viete, že odraz nie je skutočný les – je to len obraz. Ale keď sa pozriete na svet okolo seba, robíte presne to isté. Vaša myseľ vytvára obraz reality a vy si ten obraz zamieňate za realitu samotnú.</p><p>Neurovedecké výskumy posledných dvoch desaťročí ukazujú, že mozog neprijíma realitu pasívne. Aktívne ju konštruuje. To, čo vnímate ako "vonkajší svet", je v skutočnosti model – simulácia vytvorená vašimi neurónmi na základe neúplných senzorických dát.</p><p>Keď si toto uvedomíte – naozaj, hlboko si to uvedomíte, nie len intelektuálne – niečo sa zmení. Hranica medzi "ja" a "svet" sa začne rozplývať. Nie je to strata identity. Je to jej rozšírenie.</p><p>Budhistická tradícia to nazýva "prázdnota" – nie v zmysle, že nič neexistuje, ale v zmysle, že nič neexistuje nezávisle, oddelene od všetkého ostatného. Moderná kvantová fyzika dospela k podobnému záveru: na najhlbšej úrovni je všetko prepojené.</p><p>Ilúzia oddelenia nie je chyba. Je to užitočný nástroj – evolučný mechanizmus, ktorý nám umožnil prežiť. Ale keď si ju zamieňame za absolútnu pravdu, začíname trpieť. Začíname bojovať so svetom, namiesto toho, aby sme s ním spolupracovali.</p><p>Prvý krok k oslobodeniu nie je zmena sveta. Je to zmena spôsobu, akým ho vnímame. A to začína jednoduchou otázkou: Kto je ten, kto pozoruje?</p>'
-        },
-        'thought-2': {
-        tag: 'insight', tagLabel: 'Postreh',
-        title: 'Prečo sa bojíme ticha',
-        author: 'Lukáš Horák',
-        body: '<p>Všimli ste si, ako okamžite siahame po telefóne, keď nastane ticho? Tento mechanizmus má hlboké evolučné korene, ktoré siahajú tisíce rokov dozadu.</p><p>Pre našich predkov ticho často znamenalo nebezpečenstvo. Keď vtáky prestali spievať, niečo sa blížilo. Tento primitívny alarm je v nás stále aktívny – len sa transformoval do modernej podoby.</p><p>Dnes sa nebojíme predátorov. Bojíme sa konfrontácie so sebou samým. V tichu sa ozývajú myšlienky, ktoré sme celý deň úspešne potláčali. Objavujú sa otázky, na ktoré nechceme odpovedať. A tak siahame po telefóne, pustíme si hudbu, zapneme televíziu – čokoľvek, len aby sme nemuseli počúvať.</p><p>Paradoxne, práve v tichu sa nachádza to, čo hľadáme. Nie odpovede – ale priestor, v ktorom sa odpovede môžu zrodiť.</p>'
-        },
-        'thought-3': {
-        tag: 'thought', tagLabel: 'Myšlienka',
-        title: 'Paradox sebarozvoja',
-        author: 'Lukáš Horák',
-        body: '<p>Čím viac sa snažíte zmeniť sami seba, tým viac posilňujete ten aspekt seba, ktorý chcete zmeniť. Je to ako snažiť sa zabudnúť na ružového slona – samotná snaha zabudnúť ho udržuje vo vašom vedomí.</p><p>Sebarozvoj sa stal priemyslom za miliardy. Knihy, kurzy, aplikácie – všetky sľubujú lepšiu verziu vás. Ale je v tom hlboký paradox: samotná túžba byť lepší predpokladá, že nie ste dosť dobrí. A tento predpoklad sa stáva sebanaplňujúcim proroctvom.</p><p>Skutočná zmena neprichádza z boja so sebou. Prichádza z porozumenia. Keď naozaj pochopíte, prečo robíte to, čo robíte – nie intelektuálne, ale na úrovni celého vášho bytia – zmena sa stane prirodzenou. Nie je to niečo, čo musíte dosiahnuť. Je to niečo, čo sa stane samo.</p>'
-        },
-        'thought-4': {
-        tag: 'thought', tagLabel: 'Myšlienka',
-        title: 'Čo je skutočná sloboda',
-        author: 'Lukáš Horák',
-        body: '<p>Sloboda nie je robiť čo chceme. Skutočná sloboda je oslobodenie od mechanizmov, ktoré nás nútia chcieť. To je zásadný rozdiel, ktorý väčšina ľudí prehliadne.</p><p>Keď sa rozhodnete jesť zdravo, cvičiť, meditovať – je to sloboda, alebo len ďalšia forma kontroly? Keď si kúpite nové auto, pretože "chcete" – je to vaša túžba, alebo dôsledok rokov marketingu, sociálneho tlaku a biologických impulzov?</p><p>Neurológia nám hovorí, že väčšina našich "rozhodnutí" sa odohráva v mozgu ešte predtým, než si ich uvedomíme. To, čo vnímame ako slobodnú vôľu, je často len racionalizácia – príbeh, ktorý si mozog vytvorí, aby vysvetlil rozhodnutie, ktoré už bolo urobené.</p><p>Skutočná sloboda začína uvedomením si týchto mechanizmov. Nie ich potlačením – to je len ďalšia forma neslobody. Ale ich pozorovaním. Keď pozorujete túžbu bez toho, aby ste na ňu automaticky reagovali, objavíte priestor. A v tom priestore je sloboda.</p>'
-        },
-        'thought-5': {
-        tag: 'insight', tagLabel: 'Postreh',
-        title: 'Neuroplasticita a vedomie',
-        author: 'Lukáš Horák',
-        body: '<p>Nové výskumy ukazujú, že meditácia doslova mení štruktúru mozgu. Ale nie tak, ako si väčšina ľudí myslí. Nejde o to, že by meditácia "pridala" niečo nové. Skôr odstraňuje vrstvy naučených reakcií a odhaľuje to, čo tam vždy bolo.</p><p>Štúdie z Harvardskej univerzity ukázali, že osem týždňov pravidelnej meditácie vedie k merateľným zmenám v oblasti amygdaly – časti mozgu zodpovednej za strach a stresové reakcie. Amygdala sa zmenšuje. Nie že by zmizla – ale stáva sa menej dominantnou.</p><p>Zároveň sa posilňujú oblasti prefrontálneho kortexu zodpovedné za pozornosť, empatiu a sebauvedomenie. Mozog sa doslova prestavuje – a robí to v smere väčšej rovnováhy a harmónie.</p><p>To, čo je na tom fascinujúce, nie je samotná zmena. Je to jej smer. Akoby mozog "vedel", kam sa má vyvinúť – a meditácia mu jednoducho dá priestor to urobiť.</p>'
-        },
-        'thought-6': {
-        tag: 'thought', tagLabel: 'Myšlienka',
-        title: 'Emócie, ktoré ešte nemajú meno',
-        author: 'Lukáš Horák',
-        body: '<p>V pripravovanej knihe sa venujem emóciám, ktoré väčšina jazykov nedokáže pomenovať. Existujú na rozhraní medzi tým, čo cítime, a tým, čo dokážeme vyjadriť slovami.</p><p>Poznáte ten pocit, keď sedíte v kaviarni a pozorujete ľudí okolo seba – a náhle si uvedomíte, že každý z nich žije rovnako bohatý vnútorný život ako vy? Ten záblesk uvedomenia, ktorý trvá len sekundu, ale zmení spôsob, akým sa pozeráte na svet?</p><p>Alebo ten pocit, keď počujete hudbu z detstva a na okamih sa vrátite – nie spomienkou, ale celým telom, celou bytosťou – do momentu, ktorý ste dávno zabudli?</p><p>Tieto emócie nie sú okrajové. Sú to možno tie najdôležitejšie – pretože nás spájajú s niečím väčším, než sme my sami. S niečím, čo jazyky nedokážu zachytiť, ale čo je predsa reálnejšie než čokoľvek, čo by sme mohli povedať.</p>'
-        }
-        },
-        en: {
-        'thought-1': {
-        tag: 'thought', tagLabel: 'Thought',
-        title: 'On the illusion of separation',
-        author: 'Lukas Horak',
-        body: '<p>When you observe the world, you feel separate from it – that there is an observer and that which is observed. But what if this division is just a construct of your mind? What if the division itself is the cause of most of our suffering?</p><p>Imagine standing by a lake. You see the reflection of trees on the surface. You know the reflection is not the real forest – it is just an image. But when you look at the world around you, you do exactly the same thing. Your mind creates an image of reality and you mistake that image for reality itself.</p><p>Neuroscience research over the past two decades shows that the brain does not passively receive reality. It actively constructs it. What you perceive as the "external world" is actually a model – a simulation created by your neurons based on incomplete sensory data.</p><p>When you realize this – truly, deeply realize it, not just intellectually – something changes. The boundary between "I" and "world" begins to dissolve. It is not a loss of identity. It is its expansion.</p><p>The Buddhist tradition calls this "emptiness" – not in the sense that nothing exists, but in the sense that nothing exists independently, separately from everything else. Modern quantum physics has arrived at a similar conclusion: at the deepest level, everything is connected.</p><p>The illusion of separation is not a mistake. It is a useful tool – an evolutionary mechanism that allowed us to survive. But when we mistake it for absolute truth, we begin to suffer. We begin to fight the world instead of cooperating with it.</p><p>The first step toward liberation is not changing the world. It is changing the way we perceive it. And that begins with a simple question: Who is the one who observes?</p>'
-        },
-        'thought-2': {
-        tag: 'insight', tagLabel: 'Insight',
-        title: 'Why we fear silence',
-        author: 'Lukas Horak',
-        body: '<p>Have you noticed how we immediately reach for our phone when silence occurs? This mechanism has deep evolutionary roots that go back thousands of years.</p><p>For our ancestors, silence often meant danger. When birds stopped singing, something was approaching. This primitive alarm is still active in us – it has just transformed into a modern form.</p><p>Today we are not afraid of predators. We are afraid of confrontation with ourselves. In silence, thoughts that we have been successfully suppressing all day make themselves heard. Questions we do not want to answer appear. And so we reach for the phone, play music, turn on the TV – anything so we do not have to listen.</p><p>Paradoxically, it is precisely in silence that what we are looking for can be found. Not answers – but the space in which answers can be born.</p>'
-        },
-        'thought-3': {
-        tag: 'thought', tagLabel: 'Thought',
-        title: 'The paradox of self-improvement',
-        author: 'Lukas Horak',
-        body: '<p>The more you try to change yourself, the more you reinforce the very aspect you want to change. It is like trying to forget a pink elephant – the very effort to forget keeps it in your consciousness.</p><p>Self-improvement has become a multi-billion industry. Books, courses, apps – all promise a better version of you. But there is a deep paradox: the very desire to be better presupposes that you are not good enough. And this assumption becomes a self-fulfilling prophecy.</p><p>Real change does not come from fighting yourself. It comes from understanding. When you truly understand why you do what you do – not intellectually, but at the level of your entire being – change becomes natural. It is not something you have to achieve. It is something that happens on its own.</p>'
-        },
-        'thought-4': {
-        tag: 'thought', tagLabel: 'Thought',
-        title: 'What true freedom is',
-        author: 'Lukas Horak',
-        body: '<p>Freedom is not doing what we want. True freedom is liberation from the mechanisms that make us want. That is a fundamental difference that most people overlook.</p><p>When you decide to eat healthy, exercise, meditate – is that freedom, or just another form of control? When you buy a new car because you "want to" – is that your desire, or the result of years of marketing, social pressure, and biological impulses?</p><p>Neurology tells us that most of our "decisions" happen in the brain before we become aware of them. What we perceive as free will is often just rationalization – a story the brain creates to explain a decision that has already been made.</p><p>True freedom begins with becoming aware of these mechanisms. Not suppressing them – that is just another form of unfreedom. But observing them. When you observe a desire without automatically reacting to it, you discover a space. And in that space is freedom.</p>'
-        },
-        'thought-5': {
-        tag: 'insight', tagLabel: 'Insight',
-        title: 'Neuroplasticity and consciousness',
-        author: 'Lukas Horak',
-        body: '<p>New research shows that meditation literally changes the structure of the brain. But not in the way most people think. It is not that meditation "adds" something new. Rather, it removes layers of learned reactions and reveals what was always there.</p><p>Studies from Harvard University showed that eight weeks of regular meditation leads to measurable changes in the amygdala – the part of the brain responsible for fear and stress responses. The amygdala shrinks. Not that it disappears – but it becomes less dominant.</p><p>At the same time, areas of the prefrontal cortex responsible for attention, empathy, and self-awareness are strengthened. The brain literally rebuilds itself – and it does so in the direction of greater balance and harmony.</p><p>What is fascinating about this is not the change itself. It is its direction. As if the brain "knew" where it should develop – and meditation simply gives it the space to do so.</p>'
-        },
-        'thought-6': {
-        tag: 'thought', tagLabel: 'Thought',
-        title: 'Emotions that have no name yet',
-        author: 'Lukas Horak',
-        body: '<p>In the upcoming book, I explore emotions that most languages cannot name. They exist at the boundary between what we feel and what we can express in words.</p><p>You know that feeling when you are sitting in a cafe observing people around you – and suddenly you realize that each of them lives an equally rich inner life as you? That flash of awareness that lasts only a second but changes the way you look at the world?</p><p>Or that feeling when you hear music from your childhood and for a moment you return – not through memory, but with your entire body, your entire being – to a moment you had long forgotten?</p><p>These emotions are not marginal. They may be the most important ones – because they connect us with something greater than ourselves. With something that languages cannot capture, but which is nevertheless more real than anything we could say.</p>'
-        }
-        }
-        };
+        var thoughtContent = { sk: {}, en: {} };
 
         // Load saved settings (shared with homepage)
         var savedTheme = '';
