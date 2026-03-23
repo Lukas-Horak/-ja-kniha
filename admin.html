@@ -1031,6 +1031,7 @@ a, button, input, textarea, select {
       <div class="tabs" role="tablist">
         <button class="tab-btn active" role="tab" aria-selected="true" data-tab="members">Členovia</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="activity">Aktivita</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="thoughts">Myšlienky</button>
       </div>
 
       <!-- Members Tab -->
@@ -1071,6 +1072,76 @@ a, button, input, textarea, select {
           </div>
           <h3>Žiadna aktivita</h3>
           <p>Keď členovia začnú používať Evolvium, ich aktivita sa zobrazí tu.</p>
+        </div>
+      </div>
+
+      <!-- Thoughts Tab -->
+      <div class="tab-panel" id="panel-thoughts" role="tabpanel">
+        <!-- Editor Form -->
+        <div class="thoughts-editor" id="thoughts-editor">
+          <div class="editor-header">
+            <h3 class="editor-title" id="editor-title">Nová myšlienka</h3>
+            <button class="btn-editor-cancel hidden" id="editor-cancel">Zrušiť</button>
+          </div>
+          <form id="thought-form" autocomplete="off">
+            <div class="editor-row">
+              <div class="editor-field" style="flex:0 0 160px;">
+                <label class="form-label">Tag</label>
+                <select class="form-input" id="tf-tag">
+                  <option value="thought">Myšlienka</option>
+                  <option value="insight">Postreh</option>
+                </select>
+              </div>
+              <div class="editor-field" style="flex:0 0 140px;">
+                <label class="form-label">Status</label>
+                <select class="form-input" id="tf-status">
+                  <option value="draft">Draft</option>
+                  <option value="published">Publikované</option>
+                </select>
+              </div>
+            </div>
+            <div class="editor-row">
+              <div class="editor-field" style="flex:1;">
+                <label class="form-label">Názov (SK)</label>
+                <input class="form-input" type="text" id="tf-title-sk" required placeholder="Napr. O ilúzii oddelenia">
+              </div>
+              <div class="editor-field" style="flex:1;">
+                <label class="form-label">Názov (EN)</label>
+                <input class="form-input" type="text" id="tf-title-en" placeholder="On the illusion of separation">
+              </div>
+            </div>
+            <div class="editor-field">
+              <label class="form-label">Text (SK) — HTML povolené</label>
+              <textarea class="form-input form-textarea" id="tf-body-sk" required rows="8" placeholder="<p>Vaša myšlienka...</p>"></textarea>
+            </div>
+            <div class="editor-field">
+              <label class="form-label">Text (EN) — HTML povolené</label>
+              <textarea class="form-input form-textarea" id="tf-body-en" rows="8" placeholder="<p>Your thought...</p>"></textarea>
+            </div>
+            <div class="editor-actions">
+              <button type="submit" class="btn-primary" id="tf-submit" style="width:auto;padding:var(--space-3) var(--space-8);">
+                <span id="tf-submit-text">Uložiť</span>
+              </button>
+              <span class="editor-msg" id="tf-msg"></span>
+            </div>
+            <input type="hidden" id="tf-id" value="">
+          </form>
+        </div>
+
+        <!-- Thoughts List -->
+        <div class="thoughts-admin-list">
+          <div class="thoughts-list-header">
+            <h3 style="font-size:var(--text-base);font-weight:600;">Všetky myšlienky</h3>
+            <span class="thoughts-count" id="thoughts-count"></span>
+          </div>
+          <div id="thoughts-list-body"></div>
+          <div class="empty-state hidden" id="thoughts-empty">
+            <div class="empty-state-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <h3>Zatiaľ žiadne myšlienky</h3>
+            <p>Použite formulár vyššie na pridávanie nových myšlienok.</p>
+          </div>
         </div>
       </div>
 
