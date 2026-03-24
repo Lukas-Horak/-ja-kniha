@@ -394,6 +394,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
+        padding: 48px;
     }
     .audio-chapter-card {
         background: var(--card);
@@ -645,6 +646,7 @@
     /* ===== PREVIEW / BOOK EXCERPTS SECTION ===== */
     .preview-panel-wrap {
         display: flex; flex-direction: column; gap: 64px;
+        padding: 48px;
     }
     .book-category {
         background: var(--card);
@@ -1294,7 +1296,9 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
         .container { padding: 0 32px; }
-        .audio-grid { grid-template-columns: 1fr; }
+        .audio-grid { grid-template-columns: 1fr; padding: 32px; }
+        .preview-panel-wrap { padding: 32px; }
+        .profile-panel { padding: 32px; }
         .thought-snippet { max-width: 300px; }
     }
 
@@ -1319,17 +1323,19 @@
         .section-tabs { gap: 6px; }
         .section-tab { padding: 10px 18px; font-size: 0.8rem; }
 
-        .audio-grid { grid-template-columns: 1fr; }
+        .audio-grid { grid-template-columns: 1fr; padding: 0; }
         .audio-featured { padding: 24px; }
         .thoughts-panel { padding: 28px; }
         .thought-row { flex-wrap: wrap; gap: 8px; }
         .thought-row:hover { margin: 0 -8px; padding: 16px 8px; }
         .thought-left { flex: 1 1 100%; }
         .thought-snippet { max-width: none; }
-        .thought-right { padding-left: 38px; gap: 8px; flex-wrap: wrap; flex-shrink: 1; width: 100%; }
+        .thought-right { padding-left: 38px; gap: 8px; flex-wrap: wrap; flex-shrink: 1; width: 100%; margin-top: 12px; }
         .thought-progress-wrap { order: -1; }
 
         .book-category { padding: 28px; }
+        .preview-panel-wrap { padding: 0; }
+        .profile-panel { padding: 0; }
         .book-category-header { gap: 12px; }
         .preview-row { flex-wrap: wrap; gap: 8px; }
         .preview-row:hover { margin: 0 -8px; padding: 16px 8px; }
@@ -1564,6 +1570,7 @@
 
     /* ===== PROFILE TAB PANEL ===== */
     .profile-panel {
+        padding: 48px;
     }
     .profile-completion-card {
         background: var(--card);
