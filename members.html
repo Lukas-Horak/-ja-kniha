@@ -191,7 +191,7 @@
         display: flex; justify-content: center;
     }
 
-    .container { max-width: 1340px; margin: 0 auto; padding: 0 48px; }
+    .container { max-width: 1340px; margin: 0 auto; padding: 0 32px; }
 
     /* ===== LOGIN VIEW ===== */
     .login-view { padding-top: 110px; padding-bottom: 80px; min-height: 100vh; }
@@ -394,7 +394,6 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
-        padding: 48px;
     }
     .audio-chapter-card {
         background: var(--card);
@@ -531,7 +530,7 @@
     .thoughts-panel {
         background: var(--card);
         border-radius: 20px;
-        padding: 48px;
+        padding: 32px 0;
     }
     .thoughts-header {
         margin-bottom: 32px;
@@ -646,12 +645,11 @@
     /* ===== PREVIEW / BOOK EXCERPTS SECTION ===== */
     .preview-panel-wrap {
         display: flex; flex-direction: column; gap: 64px;
-        padding: 48px;
     }
     .book-category {
         background: var(--card);
         border-radius: 20px;
-        padding: 48px;
+        padding: 32px 0;
     }
     .book-category-header {
         display: flex; align-items: center; gap: 16px;
@@ -1323,7 +1321,7 @@
 
         .audio-grid { grid-template-columns: 1fr; }
         .audio-featured { padding: 24px; }
-        .thoughts-panel { padding: 28px; }
+        .thoughts-panel { padding: 20px 0; }
         .thought-row { flex-wrap: wrap; gap: 8px; }
         .thought-row:hover { margin: 0 -8px; padding: 16px 8px; }
         .thought-left { flex: 1 1 100%; }
@@ -1331,7 +1329,7 @@
         .thought-right { padding-left: 38px; gap: 8px; flex-wrap: wrap; flex-shrink: 1; width: 100%; margin-top: 12px; }
         .thought-progress-wrap { order: -1; }
 
-        .book-category { padding: 28px; }
+        .book-category { padding: 20px 0; }
 
         .book-category-header { gap: 12px; }
         .preview-row { flex-wrap: wrap; gap: 8px; }
@@ -1567,7 +1565,6 @@
 
     /* ===== PROFILE TAB PANEL ===== */
     .profile-panel {
-        padding: 48px;
     }
     .profile-completion-card {
         background: var(--card);
