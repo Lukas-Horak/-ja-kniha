@@ -583,8 +583,8 @@
         flex: 1; min-width: 0;
     }
     .thought-num {
-        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
-        min-width: 24px;
+        font-size: 0.7rem; font-weight: 500; color: var(--text-muted);
+        min-width: 56px; white-space: nowrap;
     }
     .thought-content {
         display: flex; flex-direction: column; gap: 2px;
@@ -600,8 +600,11 @@
         max-width: 500px;
     }
     .thought-right {
-        display: flex; align-items: center; gap: 12px;
+        display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
         flex-shrink: 0;
+    }
+    .thought-tags-row {
+        display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end;
     }
     .thought-tag {
         font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
@@ -1326,8 +1329,8 @@
         .thought-row:hover { margin: 0 -8px; padding: 16px 8px; }
         .thought-left { flex: 1 1 100%; }
         .thought-snippet { max-width: none; }
-        .thought-right { padding-left: 38px; gap: 8px; flex-wrap: wrap; flex-shrink: 1; width: 100%; margin-top: 12px; }
-        .thought-open-btn { flex-basis: auto; margin-top: 8px; }
+        .thought-right { padding-left: 38px; gap: 10px; flex-shrink: 1; width: 100%; margin-top: 8px; align-items: flex-start; }
+        .thought-tags-row { justify-content: flex-start; }
         .thought-progress-wrap { order: -1; }
 
         .book-category { padding: 24px; }
@@ -4642,6 +4645,30 @@
                 if (emptyEl) emptyEl.style.display = 'none';
 
                 var currentLang = lang || 'sk';
+
+                function timeAgo(dateStr, lng) {
+                    var now = new Date();
+                    var d = new Date(dateStr);
+                    var diff = Math.floor((now - d) / 1000);
+                    if (diff < 60) return lng === 'en' ? 'Just now' : 'Práve teraz';
+                    var mins = Math.floor(diff / 60);
+                    if (mins < 60) return lng === 'en' ? mins + ' min ago' : 'pred ' + mins + ' min';
+                    var hrs = Math.floor(mins / 60);
+                    if (hrs < 24) return lng === 'en' ? hrs + 'h ago' : 'pred ' + hrs + 'h';
+                    var days = Math.floor(hrs / 24);
+                    if (days === 1) return lng === 'en' ? 'Yesterday' : 'Včera';
+                    if (days < 7) return lng === 'en' ? days + ' days ago' : 'pred ' + days + ' dňami';
+                    var weeks = Math.floor(days / 7);
+                    if (weeks === 1) return lng === 'en' ? 'A week ago' : 'Pred týždňom';
+                    if (weeks < 5) return lng === 'en' ? weeks + ' weeks ago' : 'pred ' + weeks + ' týždňami';
+                    var months = Math.floor(days / 30);
+                    if (months === 1) return lng === 'en' ? 'A month ago' : 'Pred mesiacom';
+                    if (months < 12) return lng === 'en' ? months + ' months ago' : 'pred ' + months + ' mesiacmi';
+                    var years = Math.floor(days / 365);
+                    if (years === 1) return lng === 'en' ? 'A year ago' : 'Pred rokom';
+                    return lng === 'en' ? years + ' years ago' : 'pred ' + years + ' rokmi';
+                }
+
                 var html = thoughts.map(function(t, i) {
                     var key = 'thought-' + t.id;
                     var title = currentLang === 'en' ? (t.title_en || t.title_sk) : t.title_sk;
@@ -4652,18 +4679,18 @@
                     var tagBadges = tagsArr2.map(function(tg) {
                         return '<span class="thought-tag ' + tg + '">' + (labels[tg] || tg) + '</span>';
                     }).join('');
-                    var num = String(i + 1).padStart(2, '0');
+                    var ago = timeAgo(t.created_at, currentLang);
 
                     return '<div class="thought-row" data-thought-id="' + key + '">'
                         + '<div class="thought-left">'
-                        + '<span class="thought-num">' + num + '</span>'
+                        + '<span class="thought-num">' + ago + '</span>'
                         + '<div class="thought-content">'
                         + '<span class="thought-name">' + (title || '') + '</span>'
                         + '<span class="thought-snippet">' + snippet + '</span>'
                         + '</div></div>'
                         + '<div class="thought-right">'
-                        + tagBadges
-                        + '<button class="thought-open-btn" data-i18n="reader_open">'
+                        + '<div class="thought-tags-row">' + tagBadges + '</div>'
+                        + '<button class="thought-open-btn">'
                         + (currentLang === 'en' ? 'Read article' : 'Otvoriť článok')
                         + ' <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>'
                         + '</button>'
