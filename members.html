@@ -570,7 +570,7 @@
     }
     .thought-row {
         display: flex; align-items: center; justify-content: space-between;
-        padding: 16px 0;
+        padding: 24px 0;
         border-bottom: 1px solid var(--border);
         cursor: pointer;
         transition: background 0.15s;
@@ -583,12 +583,15 @@
         flex: 1; min-width: 0;
     }
     .thought-num {
-        font-size: 0.7rem; font-weight: 500; color: var(--text-muted);
-        min-width: 56px; white-space: nowrap;
+        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+        min-width: 24px;
     }
     .thought-content {
-        display: flex; flex-direction: column; gap: 2px;
+        display: flex; flex-direction: column; gap: 3px;
         min-width: 0;
+    }
+    .thought-date {
+        font-size: 0.72rem; color: var(--text-muted); font-weight: 400;
     }
     .thought-name {
         font-size: 0.95rem; font-weight: 500;
@@ -4680,11 +4683,13 @@
                         return '<span class="thought-tag ' + tg + '">' + (labels[tg] || tg) + '</span>';
                     }).join('');
                     var ago = timeAgo(t.created_at, currentLang);
+                    var num = String(thoughts.length - i).padStart(2, '0');
 
                     return '<div class="thought-row" data-thought-id="' + key + '">'
                         + '<div class="thought-left">'
-                        + '<span class="thought-num">' + ago + '</span>'
+                        + '<span class="thought-num">' + num + '</span>'
                         + '<div class="thought-content">'
+                        + '<span class="thought-date">' + ago + '</span>'
                         + '<span class="thought-name">' + (title || '') + '</span>'
                         + '<span class="thought-snippet">' + snippet + '</span>'
                         + '</div></div>'
