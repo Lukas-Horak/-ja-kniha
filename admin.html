@@ -880,6 +880,15 @@ a, button, input, textarea, select {
 .thought-card-actions .btn-edit:hover { border-color: var(--color-accent); color: var(--color-accent); }
 .thought-card-actions .btn-delete:hover { border-color: var(--color-error); color: var(--color-error); }
 
+.btn-confirm-email {
+  display: inline-block; margin-left: 8px; padding: 4px 12px;
+  background: var(--color-success); color: #fff; border: none;
+  border-radius: var(--radius-md); font-size: var(--text-xs);
+  font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.btn-confirm-email:hover { opacity: 0.85; }
+.editor-msg.info { color: var(--color-info); }
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -1236,6 +1245,12 @@ a, button, input, textarea, select {
             <div class="editor-field">
               <label class="form-label">Text (EN) — HTML povolené</label>
               <textarea class="form-input form-textarea" id="tf-body-en" rows="8" placeholder="<p>Your thought...</p>"></textarea>
+            </div>
+            <div class="editor-field" id="email-notify-field" style="display:none;">
+              <label class="tag-check" style="padding:8px 16px;">
+                <input type="checkbox" id="tf-send-email">
+                <span>Odoslať email členom</span>
+              </label>
             </div>
             <div class="editor-actions">
               <button type="submit" class="btn-primary" id="tf-submit" style="width:auto;padding:var(--space-3) var(--space-8);">
@@ -1882,6 +1897,16 @@ a, button, input, textarea, select {
   const thoughtsCount = document.getElementById('thoughts-count');
 
   var allThoughts = [];
+  var pendingEmailThoughtId = null;
+  var pendingEmailCount = 0;
+  const tfSendEmail = document.getElementById('tf-send-email');
+  const emailNotifyField = document.getElementById('email-notify-field');
+
+  // Show/hide email checkbox based on status
+  tfStatus.addEventListener('change', function() {
+    emailNotifyField.style.display = this.value === 'published' ? '' : 'none';
+    if (this.value !== 'published') tfSendEmail.checked = false;
+  });
 
   async function loadThoughts() {
     try {
@@ -1913,11 +1938,15 @@ a, button, input, textarea, select {
       var tagsArr = Array.isArray(t.tags) ? t.tags : [];
       var tagStr = tagsArr.map(function(tg) { return tagLabels[tg] || tg; }).join(', ') || '—';
       const status = statusLabels[t.status] || t.status;
+      var emailInfo = '';
+      if (t.email_sent) {
+        emailInfo = ' · ✉ Odoslaný ' + new Date(t.email_sent_at).toLocaleDateString('sk-SK') + ' (' + t.email_recipients + ')';
+      }
       return '<div class="thought-card" data-id="' + t.id + '">'
         + '<div class="thought-card-top">'
         + '<div class="thought-card-info">'
         + '<span class="thought-card-title">' + escapeHtml(t.title_sk || '') + '</span>'
-        + '<span class="thought-card-meta">' + tagStr + ' · ' + status + ' · ' + date + '</span>'
+        + '<span class="thought-card-meta">' + tagStr + ' · ' + status + ' · ' + date + emailInfo + '</span>'
         + '</div>'
         + '<div class="thought-card-actions">'
         + '<button class="btn-edit" title="Upraviť">✎</button>'
@@ -1965,14 +1994,20 @@ a, button, input, textarea, select {
       author: currentUser ? currentUser.email : ''
     };
 
+    var sendEmail = tfSendEmail.checked && tfStatus.value === 'published';
+    var savedThoughtId = tfId.value || null;
+
     try {
       let error;
       if (tfId.value) {
         // Update
         ({ error } = await supabase.from('thoughts').update(payload).eq('id', tfId.value));
+        savedThoughtId = tfId.value;
       } else {
-        // Insert
-        ({ error } = await supabase.from('thoughts').insert([payload]));
+        // Insert — use .select() to get the new ID
+        const insertResult = await supabase.from('thoughts').insert([payload]).select();
+        error = insertResult.error;
+        if (insertResult.data && insertResult.data[0]) savedThoughtId = insertResult.data[0].id;
       }
 
       if (error) {
@@ -1981,8 +2016,41 @@ a, button, input, textarea, select {
       } else {
         tfMsg.textContent = tfId.value ? 'Postreh aktualizovaný.' : 'Postreh uložený.';
         tfMsg.className = 'editor-msg success';
+        var wasEditing = !!tfId.value;
         resetThoughtForm();
         await loadThoughts();
+
+        // Email notification flow
+        if (sendEmail && savedThoughtId) {
+          try {
+            const { data: subs } = await supabase.rpc('get_newsletter_subscribers');
+            if (subs && subs.length > 0) {
+              var emails = subs.map(function(s) { return s.email; }).filter(Boolean);
+              var thoughtTitle = payload.title_sk;
+              var bodyText = (payload.body_sk || '').replace(/<[^>]*>/g, '').substring(0, 300);
+              var subject = encodeURIComponent('Nový postreh: ' + thoughtTitle);
+              var body = encodeURIComponent(
+                thoughtTitle + '\n\n'
+                + bodyText + '...\n\n'
+                + '→ Čítať celý článok: https://evolvium.com/members\n\n'
+                + '---\n'
+                + 'Evolvium – Postrehy z vedomia\n'
+                + 'Tento email dostávate, pretože máte aktivovaný newsletter v profile na evolvium.com'
+              );
+              var bcc = encodeURIComponent(emails.join(','));
+
+              window.open('https://mail.google.com/mail/?view=cm&fs=1&to=&bcc=' + bcc + '&su=' + subject + '&body=' + body + '&from=' + encodeURIComponent('info@evolvium.com'), '_blank');
+
+              pendingEmailThoughtId = savedThoughtId;
+              pendingEmailCount = emails.length;
+              showEmailConfirmation(emails.length);
+              return; // Skip the auto-clear timeout
+            }
+          } catch (emailErr) {
+            console.error('Email flow error:', emailErr);
+          }
+        }
+
         setTimeout(function() { tfMsg.textContent = ''; }, 3000);
       }
     } catch (err) {
@@ -2012,6 +2080,8 @@ a, button, input, textarea, select {
     tfBodyEn.value = t.body_en || '';
     editorTitle.textContent = 'Upraviť postreh';
     editorCancel.classList.remove('hidden');
+    emailNotifyField.style.display = (t.status === 'published') ? '' : 'none';
+    tfSendEmail.checked = false;
     document.getElementById('thoughts-editor').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -2026,6 +2096,8 @@ a, button, input, textarea, select {
     editorTitle.textContent = 'Nový postreh';
     editorCancel.classList.add('hidden');
     tfMsg.textContent = '';
+    tfSendEmail.checked = false;
+    emailNotifyField.style.display = 'none';
   }
 
   // Delete
@@ -2042,6 +2114,33 @@ a, button, input, textarea, select {
       alert('Chyba: ' + err.message);
     }
   }
+
+  // Email confirmation
+  function showEmailConfirmation(count) {
+    tfMsg.innerHTML = 'Gmail sa otvoril s ' + count + ' príjemcami. <button onclick="window.confirmEmailSent()" class="btn-confirm-email">Potvrdiť odoslanie</button>';
+    tfMsg.className = 'editor-msg info';
+  }
+
+  window.confirmEmailSent = async function() {
+    if (!pendingEmailThoughtId) return;
+    try {
+      await supabase.from('thoughts').update({
+        email_sent: true,
+        email_sent_at: new Date().toISOString(),
+        email_recipients: pendingEmailCount
+      }).eq('id', pendingEmailThoughtId);
+
+      tfMsg.textContent = '✓ Email označený ako odoslaný (' + pendingEmailCount + ')';
+      tfMsg.className = 'editor-msg success';
+      pendingEmailThoughtId = null;
+      pendingEmailCount = 0;
+      await loadThoughts();
+      setTimeout(function() { tfMsg.textContent = ''; }, 3000);
+    } catch (err) {
+      tfMsg.textContent = 'Chyba: ' + err.message;
+      tfMsg.className = 'editor-msg error';
+    }
+  };
 
 })();
 </script>
