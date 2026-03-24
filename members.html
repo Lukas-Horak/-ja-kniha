@@ -569,45 +569,44 @@
         max-width: 32ch;
     }
     .thought-row {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 24px 0;
+        display: grid;
+        grid-template-columns: 32px 1fr auto;
+        gap: 0 16px;
+        padding: 28px 0;
         border-bottom: 1px solid var(--border);
         cursor: pointer;
         transition: background 0.15s;
+        align-items: start;
     }
     .thought-row:last-child { border-bottom: none; }
-    .thought-row:hover { background: rgba(0,0,0,0.015); margin: 0 -16px; padding: 16px; border-radius: 12px; border-color: transparent; }
+    .thought-row:hover { background: rgba(0,0,0,0.015); margin: 0 -16px; padding: 28px 16px; border-radius: 12px; border-color: transparent; }
     .thought-row:hover + .thought-row { border-top-color: transparent; }
-    .thought-left {
-        display: flex; align-items: center; gap: 16px;
-        flex: 1; min-width: 0;
-    }
     .thought-num {
-        font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
-        min-width: 24px;
+        font-size: 0.72rem; font-weight: 600; color: var(--text-muted);
+        padding-top: 22px;
     }
     .thought-content {
-        display: flex; flex-direction: column; gap: 3px;
+        display: flex; flex-direction: column; gap: 6px;
         min-width: 0;
+        grid-column: 2;
     }
     .thought-date {
         font-size: 0.72rem; color: var(--text-muted); font-weight: 400;
     }
     .thought-name {
-        font-size: 0.95rem; font-weight: 500;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        font-size: 1rem; font-weight: 600; line-height: 1.4;
     }
     .thought-snippet {
-        font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        max-width: 500px;
-    }
-    .thought-right {
-        display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
-        flex-shrink: 0;
+        font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;
+        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     .thought-tags-row {
-        display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end;
+        display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;
+    }
+    .thought-right {
+        grid-column: 3; grid-row: 1;
+        padding-top: 22px;
     }
     .thought-tag {
         font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
@@ -1328,12 +1327,10 @@
         .audio-grid { grid-template-columns: 1fr; }
         .audio-featured { padding: 24px; }
         .thoughts-panel { padding: 24px; }
-        .thought-row { flex-wrap: wrap; gap: 8px; }
-        .thought-row:hover { margin: 0 -8px; padding: 16px 8px; }
-        .thought-left { flex: 1 1 100%; }
-        .thought-snippet { max-width: none; }
-        .thought-right { padding-left: 38px; gap: 10px; flex-shrink: 1; width: 100%; margin-top: 8px; align-items: flex-start; }
-        .thought-tags-row { justify-content: flex-start; }
+        .thought-row { grid-template-columns: 28px 1fr; padding: 20px 0; }
+        .thought-row:hover { padding: 20px 12px; margin: 0 -12px; }
+        .thought-num { padding-top: 18px; }
+        .thought-right { grid-column: 2; grid-row: auto; padding-top: 12px; }
         .thought-progress-wrap { order: -1; }
 
         .book-category { padding: 24px; }
@@ -4676,7 +4673,7 @@
                     var key = 'thought-' + t.id;
                     var title = currentLang === 'en' ? (t.title_en || t.title_sk) : t.title_sk;
                     var bodyText = stripHtml(currentLang === 'en' ? (t.body_en || t.body_sk) : t.body_sk);
-                    var snippet = bodyText.length > 80 ? bodyText.substring(0, 80) + '...' : bodyText;
+                    var snippet = bodyText.length > 200 ? bodyText.substring(0, 200) + '...' : bodyText;
                     var tagsArr2 = Array.isArray(t.tags) ? t.tags : [];
                     var labels = tagLabels[currentLang] || tagLabels['sk'];
                     var tagBadges = tagsArr2.map(function(tg) {
@@ -4686,15 +4683,14 @@
                     var num = String(thoughts.length - i).padStart(2, '0');
 
                     return '<div class="thought-row" data-thought-id="' + key + '">'
-                        + '<div class="thought-left">'
                         + '<span class="thought-num">' + num + '</span>'
                         + '<div class="thought-content">'
                         + '<span class="thought-date">' + ago + '</span>'
                         + '<span class="thought-name">' + (title || '') + '</span>'
                         + '<span class="thought-snippet">' + snippet + '</span>'
-                        + '</div></div>'
-                        + '<div class="thought-right">'
                         + '<div class="thought-tags-row">' + tagBadges + '</div>'
+                        + '</div>'
+                        + '<div class="thought-right">'
                         + '<button class="thought-open-btn">'
                         + (currentLang === 'en' ? 'Read article' : 'Otvoriť článok')
                         + ' <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>'
