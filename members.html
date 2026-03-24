@@ -531,6 +531,7 @@
         background: var(--card);
         border-radius: 20px;
         padding: 48px;
+        overflow: hidden;
     }
     .thoughts-header {
         margin-bottom: 32px;
@@ -1326,7 +1327,7 @@
         .thought-row:hover { margin: 0 -8px; padding: 16px 8px; }
         .thought-left { flex: 1 1 100%; }
         .thought-snippet { max-width: none; }
-        .thought-right { padding-left: 38px; gap: 8px; }
+        .thought-right { padding-left: 38px; gap: 8px; flex-wrap: wrap; }
         .thought-progress-wrap { order: -1; }
         .book-category { padding: 28px; }
         .book-category-header { gap: 12px; }
