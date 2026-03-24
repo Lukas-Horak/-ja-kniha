@@ -386,7 +386,7 @@
     }
 
     /* Tab panels */
-    .tab-panel { display: none; }
+    .tab-panel { display: none; background: var(--card); border-radius: 20px; padding: 48px; }
     .tab-panel.active { display: block; }
 
     /* ===== AUDIOBOOK SECTION ===== */
@@ -528,9 +528,6 @@
 
     /* ===== THOUGHTS SECTION (reader-style list) ===== */
     .thoughts-panel {
-        background: var(--card);
-        border-radius: 20px;
-        padding: 48px;
         overflow: hidden;
     }
     .thoughts-header {
@@ -648,9 +645,6 @@
         display: flex; flex-direction: column; gap: 64px;
     }
     .book-category {
-        background: var(--card);
-        border-radius: 20px;
-        padding: 48px;
     }
     .book-category-header {
         display: flex; align-items: center; gap: 16px;
@@ -1295,6 +1289,7 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
         .container { padding: 0 32px; }
+        .tab-panel { padding: 36px; }
         .audio-grid { grid-template-columns: 1fr; }
         .thought-snippet { max-width: 300px; }
     }
@@ -1322,14 +1317,14 @@
 
         .audio-grid { grid-template-columns: 1fr; }
         .audio-featured { padding: 24px; }
-        .thoughts-panel { padding: 28px; }
+        .tab-panel { padding: 20px; border-radius: 16px; }
         .thought-row { flex-wrap: wrap; gap: 8px; }
         .thought-row:hover { margin: 0 -8px; padding: 16px 8px; }
         .thought-left { flex: 1 1 100%; }
         .thought-snippet { max-width: none; }
         .thought-right { padding-left: 38px; gap: 8px; flex-wrap: wrap; }
         .thought-progress-wrap { order: -1; }
-        .book-category { padding: 28px; }
+
         .book-category-header { gap: 12px; }
         .preview-row { flex-wrap: wrap; gap: 8px; }
         .preview-row:hover { margin: 0 -8px; padding: 16px 8px; }
