@@ -4832,7 +4832,7 @@
             // Extract first <p> as a quote
             var quoteHtml = '';
             var restHtml = bodyHtml;
-            var firstP = bodyHtml.match(/^\s*<p>(.*?)<\/p>/);
+            var firstP = bodyHtml.match(/^\s*<p[^>]*>(.*?)<\/p>/);
             if (firstP) {
                 quoteHtml = firstP[1];
                 restHtml = bodyHtml.substring(firstP[0].length);
