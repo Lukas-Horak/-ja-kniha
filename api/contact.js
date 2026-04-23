@@ -50,8 +50,8 @@ module.exports = async (req, res) => {
         console.log(`Message: ${message}`);
         console.log('===============================');
 
-        // Send via Resend
-        const RESEND_KEY = process.env.RESEND_API_KEY || 're_HM6ujas4_KGD5YgaMN4hDeeG6f7CFWaZW';
+        // Send via Resend (key must be set as Vercel env var RESEND_API_KEY)
+        const RESEND_KEY = process.env.RESEND_API_KEY;
         if (RESEND_KEY) {
             try {
                 console.log('Resend: sending email...');
